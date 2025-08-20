@@ -14,6 +14,7 @@ import { AuthService } from '../services/auth.service';
 })
 
 export class CadastroPage {
+  nome: string = '';
   email: string = '';
   password: string = '';
   errorMessage: string = ''; // ← adiciona isso
