@@ -7,8 +7,18 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthService {
   constructor(private afAuth: AngularFireAuth) {}
 
-  register(email: string, password: string) {
-    return this.afAuth.createUserWithEmailAndPassword(email, password);
+  // Cadastro com nome
+  async register(email: string, password: string, nome?: string) {
+    const userCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
+
+    const user = userCredential.user; // pode ser null
+    if (user && nome) {
+      await user.updateProfile({
+        displayName: nome
+      });
+    }
+
+    return userCredential;
   }
 
   login(email: string, password: string) {
@@ -23,3 +33,4 @@ export class AuthService {
     return this.afAuth.authState;
   }
 }
+
