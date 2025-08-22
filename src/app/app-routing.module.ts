@@ -30,7 +30,17 @@ const routes: Routes = [
   {
     path: 'codigo',
     loadChildren: () => import('./codigo/codigo.module').then( m => m.CodigoPageModule)
+  },
+  {
+    path: 'video',
+    loadChildren: () => import('./video/video.module').then( m => m.VideoPageModule)
+  },
+    
+  {
+    path: '',
+    loadChildren: () => import('./video/video.module').then( m => m.VideoPageModule)
   }
+
 ];
 
 @NgModule({
