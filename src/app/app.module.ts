@@ -21,4 +21,6 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
+
+
 export class AppModule {}
