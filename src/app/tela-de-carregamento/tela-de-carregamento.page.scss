@@ -1,0 +1,57 @@
+.logo {
+    width: 412px;
+    height: 347.313px;
+    display: flex;
+    justify-content: center;
+    margin-top: 57.6719px;
+    margin-bottom: 41.1875px;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.logo.show {
+  opacity: 1;
+}
+
+.logo-img {
+    width: 341.953px;
+    height: 347.313px;
+    background: #9C3FC3 50% / cover no-repeat;
+}
+
+.texto-principal {
+    color: #FFF;
+    text-align: center;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.42);
+    font-family: "Rubik Puddles";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 300px;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.texto-principal.show {
+  opacity: 1;
+}
+
+.memoriaviva-texto {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.memoriaviva-texto.show {
+  opacity: 1;
+}
