@@ -11,12 +11,25 @@
 </ion-button>
 
   <div class="form-container">
-    <ion-input></ion-input>
-  <ion-input class="custom-input" fill="outline" placeholder="E-mail" type="email"></ion-input>
+    <ion-input class="custom-input" fill="outline"
+      type="email" 
+      label="Digite seu e-mail" 
+      labelPlacement="floating" 
+      [(ngModel)]="email">
+    </ion-input>
 
-    <div class="btn-entrar">
-  <ion-button fill="clear" class="custom-outline">Enviar Código</ion-button>
+    <div class="btn-enivar">
+      <ion-button fill="clear" class="custom-outline"  (click)="onResetPassword()">Enviar <br/> e-mail</ion-button>
+    </div>
+    
+<div class="error-box" *ngIf="errorMessage">
+    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
+    <span class="error-message">{{ errorMessage }}</span>
   </div>
+
+    <div class="btn-voltar">
+      <ion-button fill="clear" class="custom-outline" href="/login">Voltar</ion-button>
+    </div>
   </div>
 
   <div class="app-footer">Memória Viva</div>
