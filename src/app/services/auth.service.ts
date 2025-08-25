@@ -5,11 +5,16 @@ import firebase from 'firebase/compat/app';
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { app } from '../firebase.config';
 
+import { FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   constructor(private afAuth: AngularFireAuth) {}
+
+  
 
   // Login com Google
   async loginWithGoogle() {
@@ -87,4 +92,17 @@ export class AuthService {
       return { success: false, message: errorMessage };
     }
   }
+
+  async loginWithFacebook() {
+  try {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    const result = await this.afAuth.signInWithPopup(provider);
+    // result.user contém o usuário logado
+    return result;
+  } catch (error) {
+    console.error('Erro ao autenticar com Facebook:', error);
+    throw error;
+  }
+}
+  
 }
