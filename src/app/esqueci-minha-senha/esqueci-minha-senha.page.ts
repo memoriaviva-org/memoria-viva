@@ -3,6 +3,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-esqueci-minha-senha',
@@ -18,14 +19,15 @@ export class EsqueciMinhaSenhaPage {
 
   constructor(
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router
   ) {}
 
   async onResetPassword() {
     this.errorMessage = ''; // limpa erro anterior
 
     if (!this.email) {
-      this.errorMessage = 'Digite um e-mail válido.'; // O Firebase, por segurança, não retorna erro de “usuário não encontrado” no sendPasswordResetEmail. Ele sempre responde que “o e-mail foi enviado” para evitar que alguém descubra quais e-mails existem ou não no sistema. 
+      this.errorMessage = 'Digite um e-mail válido.'; // O Firebase, por segurança, não retorna erro de “usuário não encontrado” no sendPasswordResetEmail para evitar que alguém descubra quais e-mails existem ou não no sistema. 
       return;
     }
 
@@ -35,14 +37,24 @@ export class EsqueciMinhaSenhaPage {
       if (result.success) {
         const toast = await this.toastController.create({
           message: result.message,
-          duration: 4000,
+          duration: 3000,
           color: 'success',
           position: 'top'
         });
         await toast.present();
 
-        // limpa o campo após sucesso
-        this.email = '';
+        this.email = ''; // limpa campo
+
+        
+
+        // só redireciona após o toast sumir (sem precisar setTimeout)
+        await toast.onDidDismiss();
+        
+        // tira o foco do botão atual
+        (document.activeElement as HTMLElement)?.blur();
+
+        this.router.navigate(['/login']);
+
       } else {
         this.errorMessage = result.message;
       }
