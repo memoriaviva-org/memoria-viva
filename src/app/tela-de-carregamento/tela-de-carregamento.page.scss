@@ -1,3 +1,7 @@
+ion-content {
+  --background: #9C3FC3;
+}
+
 .logo {
     width: 412px;
     height: 347.313px;
@@ -42,7 +46,6 @@
 .memoriaviva-texto {
     color: #FFF;
     font-family: Inter;
-    font-size: 30px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -54,4 +57,8 @@
 
 .memoriaviva-texto.show {
   opacity: 1;
+}
+
+h4 {
+  font-size: 30px;
 }
