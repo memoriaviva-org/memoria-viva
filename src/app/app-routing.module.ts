@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'video-introdutorio',
     loadChildren: () => import('./video-introdutorio/video-introdutorio.module').then( m => m.VideoIntrodutorioPageModule)
   },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
     
   {
     path: '',
