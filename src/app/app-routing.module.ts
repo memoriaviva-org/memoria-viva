@@ -43,6 +43,10 @@ const routes: Routes = [
     path: 'tela-de-carregamento',
     loadChildren: () => import('./tela-de-carregamento/tela-de-carregamento.module').then( m => m.TelaDeCarregamentoPageModule)
   },
+  {
+    path: 'video-introdutorio',
+    loadChildren: () => import('./video-introdutorio/video-introdutorio.module').then( m => m.VideoIntrodutorioPageModule)
+  },
     
   {
     path: '',
