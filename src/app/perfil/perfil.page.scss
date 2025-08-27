@@ -1,9 +1,11 @@
 .perfil-container {
     display: flex;
+    flex-direction: column;
     height: 500px;
     width: 412px;
     justify-content: center;
-    margin-top: 135px;
+    align-items: center;
+    margin-top: 50px;
 }
 
 .user-info {
@@ -90,4 +92,19 @@
     font-weight: 700;
 }
 
-
+.premium-btn {
+  width: 246px;
+  height: 70px;
+  border-radius: 20px;
+  background-color: #DB6326;
+  margin-top: 55px;
+  display: flex;
+  justify-content: center;
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
