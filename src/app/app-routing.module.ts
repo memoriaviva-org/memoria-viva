@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'atualizar-perfil',
+    loadChildren: () => import('./atualizar-perfil/atualizar-perfil.module').then( m => m.AtualizarPerfilPageModule)
+  },
     
   {
     path: '',
