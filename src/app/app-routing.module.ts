@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'atualizar-perfil',
     loadChildren: () => import('./atualizar-perfil/atualizar-perfil.module').then( m => m.AtualizarPerfilPageModule)
   },
+  {
+    path: 'premium',
+    loadChildren: () => import('./premium/premium.module').then( m => m.PremiumPageModule)
+  },
     
   {
     path: '',
