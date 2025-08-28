@@ -18,7 +18,7 @@
     stroke-width: 1px;
     stroke: #9C3FC3;
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
-    margin-top: 135px;
+    margin-top: 108px;
     color: #000;
     font-family: Inter;
     font-style: normal;
@@ -70,24 +70,53 @@
     font-weight: 700;
 }
 
-.secao-email {
+.secao-cpf {
     display: flex;
     width: 308px;
     height: 80px;
     padding-left: 25px
 }
 
-.user-email {
+.user-cpf {
     font-size: 25px;
     height: 30px;
     width: 80px;
 }
 
-.email {
+.cpf {
     width: 178px;
     height: 55px;
     margin-left: 10px;
     margin-top: 29.5px;
     font-size: 20px;
     font-weight: 700;
+}
+
+.salvar-atualizacoes-btn {
+    width: 246px;
+    height: 70px;
+    margin-top: 120px;
+    background-color: #127253;
+    stroke-width: 1px;
+    stroke: #DB6326;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 20px;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.salvar-atualizacoes-svg {
+    margin-right: 34px;
+}
+
+.salvar-atualizacoes-text {
+    margin-right: 46px;
 }
