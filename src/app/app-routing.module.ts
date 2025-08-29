@@ -59,6 +59,10 @@ const routes: Routes = [
     path: 'premium',
     loadChildren: () => import('./premium/premium.module').then( m => m.PremiumPageModule)
   },
+  {
+    path: 'config',
+    loadChildren: () => import('./config/config.module').then( m => m.ConfigPageModule)
+  },
     
   {
     path: '',
