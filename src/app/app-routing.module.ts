@@ -63,6 +63,10 @@ const routes: Routes = [
     path: 'config',
     loadChildren: () => import('./config/config.module').then( m => m.ConfigPageModule)
   },
+  {
+    path: 'audio-config',
+    loadChildren: () => import('./audio-config/audio-config.module').then( m => m.AudioConfigPageModule)
+  },
     
   {
     path: '',

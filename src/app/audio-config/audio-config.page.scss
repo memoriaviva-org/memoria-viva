@@ -1,0 +1,23 @@
+.audio-config-svg {
+    position: absolute;
+    top: 45%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.audio-config-text {
+    position: absolute;
+    top: 32%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: #FFF;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
+    font-family: "Open Sans";
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
