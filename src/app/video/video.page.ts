@@ -18,7 +18,7 @@ import { ElementRef } from '@angular/core';
 })
 
   export class VideoPage {
-    @ViewChild('videoPlayer', { static: false }) videoPlayer!: ElementRef<HTMLVideoElement>;
+  @ViewChild('videoPlayer', { static: false }) videoPlayer!: ElementRef<HTMLVideoElement>;
 
   showPlay = false;
   videoStarted = false;
