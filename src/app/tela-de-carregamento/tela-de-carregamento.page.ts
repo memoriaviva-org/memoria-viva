@@ -31,7 +31,7 @@ export class TelaDeCarregamentoPage {
     }, 1000);
     setTimeout(() => {
       this.router.navigateByUrl('/home', { replaceUrl: true });
-    }, 3500);
+    }, 4000);
   }
 
   
