@@ -4,9 +4,23 @@
 
 <ion-content fullscreen>
 
-    <div class="video-representacao">
-      <img src="assets/play.png" class="play-img" [class.show]="showPlay">
+    <div class="video-representacao" *ngIf="!videoStarted">
+      <img 
+        src="assets/play.png" 
+        class="play-img" 
+        [class.show]="showPlay"
+        (click)="playVideo()" />
     </div>
+
+    <video 
+      #videoPlayer 
+      class="video-player" 
+      width="308" 
+      height="162" 
+      controls 
+      *ngIf="videoStarted">
+      <source src="assets/video.mp4" type="video/mp4" />
+    </video>
 
     <ion-button class="audio-btn" fill="solid">
       <ion-icon name="volume-high" slot="icon-only"></ion-icon>

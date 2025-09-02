@@ -18,10 +18,11 @@ import { ElementRef } from '@angular/core';
 })
 
   export class AudioConfigPage {
-  @ViewChild('videoPlayer', { static: false }) videoPlayer!: ElementRef<HTMLVideoElement>;
+  videoStarted = false;
+
+  @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 
   showPlay = false;
-  videoStarted = false;
 
   constructor() {}
 
@@ -32,8 +33,9 @@ import { ElementRef } from '@angular/core';
   }
 
   playVideo() {
-    this.videoPlayer.nativeElement.play();
     this.videoStarted = true;
-    this.showPlay = false; // remove classe .show se quiser sumir com botão instantâneo
+    setTimeout(() => {
+      this.videoPlayer?.nativeElement.play();
+    }, 100); // pequeno delay p/ garantir renderização
   }
 }
