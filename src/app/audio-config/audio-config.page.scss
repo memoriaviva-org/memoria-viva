@@ -39,7 +39,7 @@
   align-items: center;
   background-color: #9C3FC3;
   margin: auto;
-  width: 308px; 
+  width: 308px;
   height: 162px;
   margin-top: 140px;
 }
@@ -111,7 +111,7 @@
 .btn-salvar {
     background-color: #9C3FC3;
     border-radius: 10px;
-    width: 185px;   
+    width: 185px;
     height: 56px;
     margin-top: 24px;
     z-index: -1;
@@ -120,6 +120,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .salvar-text {
