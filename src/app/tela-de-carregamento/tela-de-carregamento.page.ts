@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-de-carregamento',
@@ -16,7 +17,7 @@ export class TelaDeCarregamentoPage {
   showTextoPrincipal = false;
   showMemoriaVivaTexto = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -28,5 +29,10 @@ export class TelaDeCarregamentoPage {
     setTimeout(() => {
       this.showMemoriaVivaTexto = true;
     }, 1000);
+    setTimeout(() => {
+      this.router.navigateByUrl('/cadastro', { replaceUrl: true });
+    }, 3500);
   }
+
+  
 }
