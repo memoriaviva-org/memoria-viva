@@ -5,19 +5,19 @@
 <ion-content fullscreen>
 
     <div class="video-representacao" *ngIf="!videoStarted">
-      <img 
-        src="assets/play.png" 
-        class="play-img" 
+      <img
+        src="assets/play.png"
+        class="play-img"
         [class.show]="showPlay"
         (click)="playVideo()" />
     </div>
 
-    <video 
-      #videoPlayer 
-      class="video-player" 
-      width="308" 
-      height="162" 
-      controls 
+    <video
+      #videoPlayer
+      class="video-player"
+      width="308"
+      height="162"
+      controls
       *ngIf="videoStarted">
       <source src="assets/video.mp4" type="video/mp4" />
     </video>
@@ -27,24 +27,24 @@
     </ion-button>
 
     <div class="video-container">
-      <button class="btn-sim">
+      <ion-button class="btn-sim">
         <svg xmlns="http://www.w3.org/2000/svg" width="47" height="100" viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="20" r="20" fill="#127253"/>
         </svg>
         <p>Sim, gostaria que o áudio fosse<br>acionado automaticamente</p>
-      </button>
+      </ion-button>
 
-      <button class="btn-nao">
+      <ion-button class="btn-nao">
         <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47" viewBox="0 0 36 30" fill="none">
           <path d="M18 0L35.3205 30H0.679491L18 0Z" fill="#FF0303"/>
         </svg>
         <p>Não, eu gostaria de acionar o<br>áudio manualmente</p>
-      </button>
+      </ion-button>
     </div>
 
     <div class="app-footer">
       Memória Viva
     </div>
-      
+
 </ion-content>
- 
+
