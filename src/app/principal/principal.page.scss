@@ -30,45 +30,77 @@
   margin-top: 130px;
 }
 
-.minhas-memorias-btn {
+.minhas-memorias-btn-div {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  height: 113px;
+  width: 113px;
+  padding-top: 10px;
+}
+
+ion-button.minhas-memorias-btn {
+    all: unset;
     height: 113px;
     width: 113px;
-    background-color: #9C3FC3;
+    --background: #9C3FC3;
     color: white;
-    border-radius: 20px;
+    --border-radius: 20px;
     margin-right: 35px;
     margin-bottom: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+    --padding-top: 0px;
 }
 
-.meu-dia-btn {
+.meu-dia-btn-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: transparent;
+  height: 113px;
+  width: 113px;
+  padding-top: 2px;
+}
+
+ion-button.meu-dia-btn {
+    all: unset;
     height: 113px;
     width: 113px;
-    background-color: #FAC946;
+    --background: #FAC946;
     color: white;
-    border-radius: 20px;
+    --border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+    --padding-top: 0px;
+}
+
+.contatos-btn-div {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
-}
-
-.contatos-btn {
+    background-color: transparent;
     height: 113px;
     width: 113px;
-    background-color: #DB6326;
+}
+
+ion-button.contatos-btn {
+    all: unset;
+    height: 113px;
+    width: 113px;
+    --background: #DB6326;
     color: white;
-    border-radius: 20px;
+    --border-radius: 20px;
     margin-right: 148.313px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
 
@@ -118,16 +150,27 @@ p {
   height: 91.3906px;
 }
 
-.perfil-btn {
-  width: 82.3906px;
-  height: 91.375px;
+.perfil-btn-div {
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 82.3906px;
+  height: 91.375px;
+}
+
+ion-button.perfil-btn {
+  all: unset;
+  width: 82.3906px;
+  height: 91.375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 24.7188px;
   margin-right: 130px;
-  background-color: transparent;
+  --background: transparent;
+  --box-shadow: transparent;
 }
 
 .perfil-svg {
@@ -149,18 +192,29 @@ p {
   display: flex;
   justify-content: center;
   color: #737373;
-  margin-top: 3px;
+  margin-top: 6px;
 }
 
-.mais-btn {
+.mais-btn-div {
   width: 82.3906px;
   height: 91.375px;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+ion-button.mais-btn {
+  all: unset;
+  width: 82.3906px;
+  height: 91.375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 24.7188px;
-  background-color: transparent;
+  --background: transparent;
+  --box-shadow: transparent;
 }
 
 .mais-svg {
