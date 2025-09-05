@@ -223,3 +223,47 @@ ion-input {
   font-weight: 500;
   line-height: 1.4;
 }
+
+ion-button.mais-btn1 {
+    all: unset;
+    width: 82.3906px;
+    height: 91.375px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24.7188px;
+    --background: transparent;
+    --box-shadow: transparent;
+
+
+  .mais-btn-div {
+    width: 82.3906px;
+    height: 91.375px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mais-svg {
+    height: 48px;
+    width: 82.375px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mais-texto {
+    font-family: Inter;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    width: 82.375px;
+    height: 91.375px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    color: #737373;
+  }
+}

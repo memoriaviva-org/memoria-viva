@@ -30,7 +30,8 @@
     display: flex;
     width: 308px;
     height: 68px;
-    padding-left: 25px
+    padding-left: 25px;
+    margin-top: 21px;
 }
 
 .user-nome {
@@ -43,7 +44,6 @@
     width: 178px;
     height: 55px;
     margin-left: 12px;
-    margin-top: 25px;
     font-size: 20px;
     font-weight: 700;
 }
@@ -65,7 +65,7 @@
     width: 178px;
     height: 55px;
     margin-left: 12px;
-    margin-top: 29.5px;
+    margin-top: 5.5px;
     font-size: 20px;
     font-weight: 700;
 }
@@ -87,19 +87,21 @@
     width: 178px;
     height: 55px;
     margin-left: 10px;
-    margin-top: 29.5px;
+    margin-top: 5px;
     font-size: 20px;
     font-weight: 700;
 }
 
-.premium-btn {
+ion-button.premium-btn {
+  all: unset;
   width: 246px;
   height: 70px;
-  border-radius: 20px;
-  background-color: #DB6326;
+  --border-radius: 20px;
+  --background: #DB6326;
   margin-top: 45px;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: #FFF;
   text-align: center;
   font-family: Inter;
@@ -116,16 +118,19 @@
 
 .premium-text {
     margin-right: 15px;
+    margin-top: 5px;
 }
 
-.atualizar-informacoes-btn {
+ion-button.atualizar-informacoes-btn {
+  all: unset;
   width: 246px;
   height: 70px;
-  border-radius: 20px;
-  background-color: #DB6326;
+  --border-radius: 20px;
+  --background: #DB6326;
   margin-top: 35px;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: #FFF;
   text-align: center;
   font-family: Inter;
@@ -142,6 +147,7 @@
 
 .atualizar-informacoes-text {
     margin-right: 19px;
+    margin-top: 5px;
 }
 
 .perfil-footer {
@@ -156,78 +162,52 @@
   height: 91.3906px;
 }
 
-.inicio-btn {
+ion-button.inicio-btn {
+  all: unset;
   width: 82.3906px;
   height: 91.375px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 24.7188px;
   margin-right: 130px;
-  background-color: transparent;
-}
+  --background: transparent;
+  --box-shadow: transparent;
 
-.inicio-svg {
+  .inicio-btn-div {
+    width: 82.3906px;
+    height: 91.375px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inicio-svg {
   height: 48px;
   width: 91.375px;
   display: flex;
   justify-content: center;
   align-items: center;
+  }
+
+  .inicio-texto {
+    font-family: Inter;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    width: 82.375px;
+    height: 91.375px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    color: #737373;
+    margin-top: 3px;
+  }
 }
 
-.inicio-texto {
-  font-family: Inter;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  width: 82.375px;
-  height: 91.375px;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  color: #737373;
-  margin-top: 3px;
-}
-
-.mais-btn {
-  width: 82.3906px;
-  height: 91.375px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 24.7188px;
-  background-color: transparent;
-}
-
-.mais-svg {
-  height: 48px;
-  width: 82.375px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.mais-texto {
-  font-family: Inter;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  width: 82.375px;
-  height: 91.375px;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  color: #737373;
-}
-
-.inicio {
+p {
   margin: 0;
   margin-bottom: 5px;
-}
-
-.mais {
-    margin: 0;
-    margin-bottom: 5px;
 }
