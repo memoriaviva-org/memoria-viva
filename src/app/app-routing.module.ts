@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'add',
     loadChildren: () => import('./add/add.module').then( m => m.AddPageModule)
   },
+  {
+    path: 'meu-dia',
+    loadChildren: () => import('./meu-dia/meu-dia.module').then( m => m.MeuDiaPageModule)
+  },
 
   {
     path: '',

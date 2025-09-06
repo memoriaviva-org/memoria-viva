@@ -1,0 +1,84 @@
+.meu-dia-svg {
+  position: absolute;
+  top: 45%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.add-text {
+  position: absolute;
+  top: 45%;
+  left: 44%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: #FFF;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  font-family: "Open Sans";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+p {
+  margin: 0;
+}
+
+.meu-dia-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #D9D9D9;
+  width: 412px;
+  height: 91.3906px;
+}
+
+ion-button.inicio-btn {
+  all: unset;
+  width: 82.3906px;
+  height: 91.375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24.7188px;
+  margin-right: 130px;
+  --background: transparent;
+  --box-shadow: transparent;
+
+  .inicio-btn-div {
+    width: 82.3906px;
+    height: 91.375px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inicio-svg {
+  height: 48px;
+  width: 91.375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+  .inicio-texto {
+    font-family: Inter;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    width: 82.375px;
+    height: 91.375px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    color: #737373;
+    margin-top: 3px;
+  }
+}
