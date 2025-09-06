@@ -1,4 +1,4 @@
-.meu-dia-svg {
+.meu-dia-registros-svg {
   position: absolute;
   top: 45%;
   left: 18%;
@@ -6,7 +6,7 @@
   z-index: 1;
 }
 
-.meu-dia-text {
+.meu-dia-registros-text {
   position: absolute;
   top: 45%;
   left: 44%;
@@ -26,42 +26,7 @@ p {
   margin: 0;
 }
 
-.menina-amarelo {
-    margin-top: 135px
-}
-
-.adicionar-meu-dia-btn {
-    all: unset;
-    --background: transparent;
-    --box-shadow: transparent;
-    position: absolute;
-    top: 77%;
-    left: 78%;
-    transform: translate(-50%, -50%);
-}
-
-.icone-mais-branco-svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.meu-dia-texto-explicativo {
-    width: 233px;
-    color: #000;
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    position: absolute;
-    top: 47.85%;
-    left: 52.5%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.meu-dia-footer {
+.meu-dia-registros-footer {
   position: fixed;
   bottom: 0;
   left: 0;

@@ -75,6 +75,10 @@ const routes: Routes = [
     path: 'meu-dia',
     loadChildren: () => import('./meu-dia/meu-dia.module').then( m => m.MeuDiaPageModule)
   },
+  {
+    path: 'meu-dia-registros',
+    loadChildren: () => import('./meu-dia-registros/meu-dia-registros.module').then( m => m.MeuDiaRegistrosPageModule)
+  },
 
   {
     path: '',
