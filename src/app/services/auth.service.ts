@@ -34,6 +34,12 @@ export class AuthService {
       });
     }
 
+     if (user && nome) {
+    await user.updateProfile({ displayName: nome });
+    await user.reload(); // <-- reflete o nome atualizado
+  }
+
+
     return userCredential;
   }
 

@@ -12,13 +12,27 @@
 <br>
 <br>
   <div class="form-container">
-  <ion-input class="custom-input" fill="outline" placeholder="E-mail" type="email"></ion-input>
-  <ion-input class="custom-input" fill="outline" placeholder="Senha" type="password"></ion-input>
+<ion-input 
+  class="custom-input" 
+  fill="outline" 
+  placeholder="E-mail" 
+  type="email"
+  [(ngModel)]="email">
+</ion-input>
+
+<ion-input 
+  class="custom-input" 
+  fill="outline" 
+  placeholder="Senha" 
+  type="password"
+  [(ngModel)]="senha">
+</ion-input>
+
       <a href="/esqueci-minha-senha" class="link-senha">Esqueci minha senha</a>
 
 
     <div class="btn-entrar">
-  <ion-button fill="clear" class="custom-outline">Entrar</ion-button>
+  <ion-button fill="clear" class="custom-outline" (click)="login()">Entrar</ion-button>
   </div>
     <a href="/cadastro" class="link-cadastro">Não tem uma conta?</a>
   </div>
