@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 
@@ -18,7 +18,9 @@ import { firebaseConfig } from '../firebase.config';
 })
 export class HomePage {
 
-  constructor() {
+  constructor(
+    private router: Router,
+  ) {
     initializeApp(firebaseConfig); // inicializa o Firebase
   }
 
@@ -26,6 +28,7 @@ export class HomePage {
     try {
       const result = await FirebaseAuthentication.signInWithGoogle();
       console.log('Usuário logado:', result);
+      this.router.navigateByUrl('/principal');
     } catch (error: any) {
       console.error('Erro no login:', error);
     }

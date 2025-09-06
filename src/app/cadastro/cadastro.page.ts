@@ -41,14 +41,6 @@ export class CadastroPage {
   
       const user = userCredential.user as User; // Ensure correct type
 
-      // Atualiza o nome no perfil do usuário Firebase
-      if (user) {
-        await updateProfile(user, {
-        displayName: this.nome // será usado no "Olá, {{ user.displayName }}!" do app
-      });
-    } else {
-      throw new Error('Usuário não encontrado após cadastro.');
-    }
 
       console.log('Usuário cadastrado:', user);
 
