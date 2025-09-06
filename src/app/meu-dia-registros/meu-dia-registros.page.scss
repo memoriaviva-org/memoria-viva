@@ -30,24 +30,31 @@ p {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  color: #000;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .dia-da-semana-titulo {
   display: flex;
   justify-content: center;
-  color: #000;
-  font-family: Inter;
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
   margin-top: 145px;
+  font-size: 25px;
 }
 
 .registros {
   display: flex;
+  height: 900px;
+  flex-direction: column;
+}
+
+.secao-registros {
+  display: flex;
   justify-content: center;
-  height: 1000px;
+  margin-bottom: 25px;
 }
 
 .dia-registro {
@@ -60,6 +67,64 @@ p {
   border: 3px solid black;
   margin-right: 15px;
   margin-left: 15px;
+}
+
+.video-foto {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.video-foto-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+}
+
+ion-button.video-foto-btn::part(native) {
+  --margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.dia-registro-titulo {
+  margin-top: 10px;
+  margin-left: 13px;
+  width: 87px;
+  height: 32px;
+}
+
+.dia-registro-horario {
+  width: 50px;
+  margin-left: 15px;
+  margin-top: 14px;
+}
+
+.dia-registro-editar-btn-posicao {
+    width: 50px;
+    height: 50px;
+    margin-left: 81px;
+    margin-top: -45px;
+}
+
+ion-button.dia-registro-editar-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+  display: flex;
+  width: 50px;
+  height: 50px;
+}
+
+.dia-registro-editar-btn-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.dia-registro-editar-btn-svg {
+  margin-bottom: 5px;
 }
 
 .adicionar-meu-dia-btn {
