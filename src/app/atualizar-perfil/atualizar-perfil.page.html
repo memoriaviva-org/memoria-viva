@@ -12,26 +12,27 @@
   </ion-button>
 
   <div class="perfil-container">
+  <div class="user-info">
 
-    <div class="user-info">
-
-      <div class="secao-nome">
-        <p class="user-nome">Nome:</p>
-        <p class="nome">Maria De Jesus</p>
-      </div>
-
-      <div class="secao-idade">
-        <p class="user-idade">Idade:</p>
-        <p class="idade">60</p>
-      </div>
-
-      <div class="secao-cpf">
-        <p class="user-cpf">CPF:</p>
-        <p class="cpf">123.345.678-90</p>
-      </div>
+    <div class="secao-nome">
+      <p class="user-nome">Nome:</p>
+      <ion-input class="nome" [(ngModel)]="nome" placeholder="Digite seu nome"></ion-input>
     </div>
 
-    <ion-button class="salvar-atualizacoes-btn">
+    <div class="secao-idade">
+      <p class="user-idade">Idade:</p>
+      <ion-input class="idade" [(ngModel)]="idade" type="number" placeholder="Digite sua idade"></ion-input>
+    </div>
+
+    <div class="secao-cpf">
+      <p class="user-cpf">E-mail:</p>
+      <ion-input class="cpf" [(ngModel)]="email" type="email" placeholder="Digite seu e-mail"></ion-input>
+    </div>
+
+
+  </div>
+
+  <ion-button class="salvar-atualizacoes-btn" (click)="atualizarDados()">
       <svg class="salvar-atualizacoes-svg" fill="#ffffff" width="35px" height="64px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"                        xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#ffffff">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Approved"> <g> <path d="M16,1C7.729,1,1,7.729,1,16s6.729,15,15,15s15-6.729,15-15S24.271,1,16,1z M16,29C8.832,29,3,23.168,3,16S8.832,3,16,3 s13,5.832,13,13S23.168,29,16,29z"></path> <path d="M23.317,10.27l-10.004,9.36l-4.629-4.332c-0.403-0.377-1.035-0.356-1.413,0.047c-0.377,0.403-0.356,1.036,0.047,1.413 l5.313,4.971c0.192,0.18,0.438,0.27,0.683,0.27s0.491-0.09,0.683-0.27l10.688-10c0.403-0.377,0.424-1.01,0.047-1.413 C24.353,9.913,23.719,9.892,23.317,10.27z"></path> </g> </g> <g id="Approved_1_"></g> <g id="File_Approve"></g> <g id="Folder_Approved"></g> <g id="Security_Approved"></g> <g id="Certificate_Approved"></g> <g id="User_Approved"></g> <g id="ID_Card_Approved"></g> <g id="Android_Approved"></g> <g id="Privacy_Approved"></g> <g id="Approved_2_"></g> <g id="Message_Approved"></g> <g id="Upload_Approved"></g> <g id="Download_Approved"></g> <g id="Email_Approved"></g> <g id="Data_Approved"></g> </g>
       </svg>

@@ -4,12 +4,16 @@ import firebase from 'firebase/compat/app';
 
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { app } from '../firebase.config';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth) {}
+  constructor(
+    private afAuth: AngularFireAuth,   
+    private firestore: AngularFirestore
+) {}
 
   // Login com Google
   async loginWithGoogle() {
@@ -93,4 +97,72 @@ export class AuthService {
       return { success: false, message: errorMessage };
     }
   }
+
+  async updateUserData(nome: string, idade: number) {
+  const currentUser = await this.afAuth.currentUser;
+
+  if (!currentUser) {
+    throw new Error('Usuário não autenticado');
+  }
+
+  // Atualiza o displayName
+  await currentUser.updateProfile({ displayName: nome });
+
+
+  // Salvar idade e outros dados no Firestore
+  const uid = currentUser.uid;
+
+  return this.firestore.collection('users').doc(uid).set({
+    nome,
+    idade,
+    email: currentUser.email
+  }, { merge: true }); // merge evita sobrescrever dados antigos
+}
+
+async updateUserEmail(newEmail: string, password?: string) {
+  const currentUser = await this.afAuth.currentUser;
+
+  if (!currentUser) {
+    throw new Error('Usuário não autenticado');
+  }
+
+  try {
+    // Reautenticação se necessário
+    if (password) {
+      const credential = firebase.auth.EmailAuthProvider.credential(
+        currentUser.email || '',
+        password
+      );
+      await currentUser.reauthenticateWithCredential(credential);
+    }
+
+    // Atualiza o email
+    await currentUser.updateEmail(newEmail);
+
+    // Atualiza também no Firestore se quiser manter o registro atualizado
+    const uid = currentUser.uid;
+    await this.firestore.collection('users').doc(uid).set({
+      email: newEmail
+    }, { merge: true });
+
+    return { success: true, message: 'Email atualizado com sucesso!' };
+  } catch (error: any) {
+    let errorMessage = 'Erro ao atualizar o email.';
+    switch (error.code) {
+      case 'auth/email-already-in-use':
+        errorMessage = 'Este email já está em uso.';
+        break;
+      case 'auth/invalid-email':
+        errorMessage = 'O email informado é inválido.';
+        break;
+      case 'auth/requires-recent-login':
+        errorMessage = 'Para atualizar o email, faça login novamente.';
+        break;
+      default:
+        if (error.message) errorMessage = error.message;
+    }
+    return { success: false, message: errorMessage };
+  }
+}
+
 }

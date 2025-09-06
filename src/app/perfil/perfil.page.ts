@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -15,8 +17,28 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 
-  export class PerfilPage {
 
-  constructor() {}
+export class PerfilPage implements OnInit {
+  nome: string = '';
+  email: string = '';
+  idade: number = 0;
 
+  constructor(
+    private authService: AuthService,
+  ) {}
+
+  ngOnInit() {
+    this.authService.getCurrentUser().subscribe(async user => {
+      if (user) {
+        await user.reload();
+        this.nome = user.displayName ?? 'Usuário';
+        this.email = user.email ?? 'Email não disponível';
+        this.idade = this.idade ?? 'Idade não disponível'; 
+      } else {
+        this.nome = 'Não autenticado';
+        this.email = 'Email não disponível';
+        this.idade = 0;
+      }
+    });
+  }
 }
