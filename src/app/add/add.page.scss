@@ -137,6 +137,28 @@ p {
   margin-right: 10px;
 }
 
+.secao-salvar-excluir {
+  width: 412px;
+  height: 134px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-excluir {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+  height: 110px;
+  width: 110px;
+}
+
+.excluir-icone {
+  color: red;
+  height: 80px;
+  width: 80px;
+}
+
 .btn-salvar {
   all: unset;
   --background: #9C3FC3;
@@ -144,7 +166,6 @@ p {
   border-radius: 10px;
   width: 185px;
   height: 56px;
-  margin-top: 49px;
   --border-color: black;
   border: 2.5px solid black;
   display: flex;
