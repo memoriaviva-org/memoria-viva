@@ -30,7 +30,7 @@ export class TelaDeCarregamentoPage {
       this.showMemoriaVivaTexto = true;
     }, 1000);
     setTimeout(() => {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/video-introdutorio', { replaceUrl: true });
     }, 4000);
   }
 
