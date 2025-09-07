@@ -28,5 +28,11 @@ export class PrincipalPage implements OnInit {
       }
     });
   }
+
+  speakText() {
+    const utterance = new SpeechSynthesisUtterance("Olá, este é um teste de acessibilidade.");
+    utterance.lang = "pt-BR"; 
+    speechSynthesis.speak(utterance);
+  }
 }
 
