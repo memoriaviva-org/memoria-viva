@@ -24,12 +24,11 @@
         <ion-input class="idade" [(ngModel)]="idade" type="number" placeholder="Digite sua idade"></ion-input>
       </div>
 
-      <div class="secao-cpf">
-        <p class="user-cpf">E-mail:</p>
-        <ion-input class="cpf" [(ngModel)]="email" type="email" placeholder="Digite seu e-mail"></ion-input>
+      <div class="secao-email">
+        <p class="user-email">E-mail:</p>
+        <ion-input class="email" [(ngModel)]="email" type="email" placeholder="Digite seu e-mail"></ion-input>
       </div>
-
-    </div>
+</div>
 
     <ion-button class="salvar-atualizacoes-btn" (click)="atualizarDados()">
       <svg class="salvar-atualizacoes-svg" fill="#ffffff" width="35px" height="64px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"                        xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#ffffff">
@@ -39,6 +38,12 @@
     </ion-button>
 
   </div>
+
+  <!-- LOGOUT Provisório -->
+<ion-button class="logout" expand="full" color="danger" (click)="logout()">
+  Sair
+</ion-button>
+
 
   <div class="app-footer">
       Memória Viva

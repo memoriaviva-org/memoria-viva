@@ -23,11 +23,18 @@
 <ion-input 
   class="custom-input" 
   fill="outline" 
+  [type]="mostrarSenha ? 'text' : 'password'"
   placeholder="Senha" 
   type="password"
   [(ngModel)]="senha">
+<ion-icon
+    [name]="mostrarSenha ? 'eye' : 'eye-off'"
+    slot="end"
+    (click)="togglePassword()"
+    style="cursor: pointer;">
+  </ion-icon>
 </ion-input>
-
+   
       <a href="/esqueci-minha-senha" class="link-senha">Esqueci minha senha</a>
 
 

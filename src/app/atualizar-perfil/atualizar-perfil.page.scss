@@ -70,20 +70,20 @@
     font-weight: 700;
 }
 
-.secao-cpf {
+.secao-email {
     display: flex;
     width: 308px;
     height: 80px;
     padding-left: 25px
 }
 
-.user-cpf {
+.user-email {
     font-size: 25px;
     height: 30px;
     width: 80px;
 }
 
-.cpf {
+.email {
     width: 178px;
     height: 55px;
     margin-left: 10px;
@@ -120,4 +120,8 @@
 
 .salvar-atualizacoes-text {
     margin-right: 41px;
+}
+
+.logout {
+    margin-top: 40px;
 }

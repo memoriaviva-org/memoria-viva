@@ -15,30 +15,44 @@
 <ion-content fullscreen>
 
   <div class="add-container">
-
-    <ion-input placeholder="Dia da Semana" class="dia-da-semana-label">
+    
+    <div class="dia-da-semana-label">
       <ion-button class="add-dia-da-semana-btn">
         <img src="assets/icone-de-mais-laranja.png">
       </ion-button>
-    </ion-input>
 
-    <ion-input placeholder="Título" class="titulo-label">
+      <ion-select placeholder="Dia da Semana" interface="popover" [(ngModel)]="diaSemana">
+        <ion-select-option value="segunda">Segunda-feira</ion-select-option>
+        <ion-select-option value="terca">Terça-feira</ion-select-option>
+        <ion-select-option value="quarta">Quarta-feira</ion-select-option>
+        <ion-select-option value="quinta">Quinta-feira</ion-select-option>
+        <ion-select-option value="sexta">Sexta-feira</ion-select-option>
+        <ion-select-option value="sabado">Sábado</ion-select-option>
+        <ion-select-option value="domingo">Domingo</ion-select-option>
+      </ion-select>
+    </div>
+
+
+    <ion-input placeholder="Título" class="titulo-label" [(ngModel)]="titulo">
       <ion-button class="add-titulo-btn">
         <img src="assets/icone-de-mais-azul.png">
       </ion-button>
     </ion-input>
 
-    <ion-input placeholder="Horário" class="horario-label">
+    <ion-input placeholder="Horário"  type="time" class="horario-label"  [(ngModel)]="horario">
       <ion-button class="add-horario-btn">
         <img src="assets/icone-de-mais-verde.png">
       </ion-button>
     </ion-input>
+
 
     <ion-input placeholder="Vídeo ou Foto" class="video-foto-label">
       <ion-button class="add-video-foto-btn">
         <img src="assets/icone-de-mais-amarelo.png">
       </ion-button>
     </ion-input>
+
+  </div>
 
     <div class="secao-salvar-excluir">
       <ion-button class="btn-salvar">
@@ -49,9 +63,6 @@
         <ion-icon class="excluir-icone" name="trash-outline"></ion-icon>
       </ion-button>
     </div>
-
-  </div>
-
   <ion-footer class="add-footer">
 
     <ion-button class="voltar-btn">

@@ -15,8 +15,8 @@ import { ToastController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class LoginPage  {
-
-   email = '';
+  mostrarSenha: boolean = false;
+  email = '';
   senha = '';
 
   constructor(
@@ -24,6 +24,10 @@ export class LoginPage  {
     private router: Router,
     private toastController: ToastController
   ) {}
+
+  togglePassword() {
+    this.mostrarSenha = !this.mostrarSenha;
+  }
 
  async login() {
   try {

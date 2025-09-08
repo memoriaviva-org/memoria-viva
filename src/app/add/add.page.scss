@@ -33,7 +33,7 @@ p {
   margin: 0;
 }
 
-.dia-da-semana-label {
+.dia-da-semana-label{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,6 +57,10 @@ p {
   --background: transparent;
   --box-shadow: transparent;
   margin-right: 10px;
+}
+
+img {
+    max-width: fit-content;
 }
 
 .titulo-label {
