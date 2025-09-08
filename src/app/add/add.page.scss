@@ -157,6 +157,65 @@ img {
   width: 110px;
 }
 
+.alerta-confirmacao {
+  position: absolute;
+  top: 67%;
+  left: 61%;
+  transform: translate(-50%, -50%);
+  background-color: #FAC946;
+  width: 282.217px;
+  height: 82px;
+  border-radius: 38px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.alerta-confirmacao-texto {
+  font-size: 16px;
+  height: 18.5px;
+  margin-top: 12px;
+}
+
+.alerta-confirmacao-btns {
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 8px;
+}
+
+.alerta-confirmacao-sim-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+  margin-right: 41px;
+}
+
+.alerta-confirmacao-nao-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+}
+
+.alerta-confirmacao-sucesso {
+  width: 274.563px;
+  height: 67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  position: absolute;
+  top: 67%;
+  left: 61%;
+  transform: translate(-50%, -50%);
+  background-color: #FAC946;
+  border-radius: 38px;
+  z-index: 2;
+  visibility: hidden;
+}
+
 .excluir-icone {
   color: red;
   height: 80px;

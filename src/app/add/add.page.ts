@@ -16,6 +16,10 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 })
 export class AddPage {
 
+
+  mostrarConfirmacao = false;
+  mostrarMensagemSucesso = false;
+
   // Dados do formulário
   diaSemana: string = '';
   titulo: string = '';
@@ -29,6 +33,10 @@ export class AddPage {
   carregando = false;
 
   constructor(private firestore: AngularFirestore) {}
+
+  mostrarAlertaConfirmacao() {
+    this.mostrarConfirmacao = true;
+  }
 
   // Quando o usuário escolhe uma mídia
 handleFileInput(event: any) {
@@ -78,7 +86,7 @@ tipoValido(nomeArquivo: string): boolean {
 
     if (this.arquivoSelecionado) {
         this.midiaUrlFinal = await this.salvarNoFirebaseStorage();
-        this.fotoSelecionadaUrl = this.midiaUrlFinal;  
+        this.fotoSelecionadaUrl = this.midiaUrlFinal;
     }
 
     const dados = {
@@ -111,5 +119,5 @@ tipoValido(nomeArquivo: string): boolean {
     this.midiaUrlFinal = '';
   }
 
-  
+
 }
