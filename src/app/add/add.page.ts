@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { ToastController } from '@ionic/angular';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -16,10 +16,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 })
 export class AddPage {
 
-
-  mostrarConfirmacao = false;
-  mostrarMensagemSucesso = false;
-
   // Dados do formulário
   diaSemana: string = '';
   titulo: string = '';
@@ -27,101 +23,51 @@ export class AddPage {
 
   // Mídia
   arquivoSelecionado: File | null = null;
-  fotoSelecionadaUrl: string = ''; // preview local
+  fotoSelecionadaUrl: string = ''; // preview local (imagem ou vídeo)
   midiaUrlFinal: string = '';      // url depois do upload
 
+  maxSizeMB = 10;
   carregando = false;
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private toastController: ToastController) {}
 
-  mostrarAlertaConfirmacao() {
-    this.mostrarConfirmacao = true;
-  }
+  async onFileSelected(event: any) {
+    const file: File = event.target.files[0]; // pega só 1 arquivo
 
-  naoExcluir() {
-    this.mostrarConfirmacao = false;
-  }
-
-  // Quando o usuário escolhe uma mídia
-handleFileInput(event: any) {
-  const file: File = event.target.files[0];
-  if (file && this.tipoValido(file.name)) {
-    this.arquivoSelecionado = file;
-    this.fotoSelecionadaUrl = this.midiaUrlFinal = URL.createObjectURL(file);
-  } else {
-    alert('Tipo de arquivo não suportado.');
-  }
-}
-
-tipoValido(nomeArquivo: string): boolean {
-  return /\.(jpg|jpeg|png|gif|webp|mp4|mov|webm|avi)$/i.test(nomeArquivo);
-}
-
-
-  // Verifica se é imagem
-  ehImagem(url: string): boolean {
-    return /\.(jpg|jpeg|png|gif|webp)$/i.test(url);
-  }
-
-  // Verifica se é vídeo
-  ehVideo(url: string): boolean {
-    return /\.(mp4|mov|webm|avi)$/i.test(url);
-  }
-
-  // ⚡ Faz upload no Firebase Storage e retorna a URL
-  async salvarNoFirebaseStorage(): Promise<string> {
-    if (!this.arquivoSelecionado) throw new Error('Nenhum arquivo selecionado');
-
-    const storage = getStorage();
-    const nomeArquivo = `${Date.now()}-${this.arquivoSelecionado.name}`;
-    const storageRef = ref(storage, `midia/${nomeArquivo}`);
-
-    // Faz upload
-    await uploadBytes(storageRef, this.arquivoSelecionado);
-
-    // Retorna URL pública
-    return await getDownloadURL(storageRef);
-  }
-
-  // ⚡ Salva os dados no Firestore
-  async salvarNoFirestore() {
-  try {
-    this.carregando = true;  // começa o loading
-
-    if (this.arquivoSelecionado) {
-        this.midiaUrlFinal = await this.salvarNoFirebaseStorage();
-        this.fotoSelecionadaUrl = this.midiaUrlFinal;
+    if (!file) {
+      return; // se o usuário cancelar seleção
     }
 
-    const dados = {
-      diaSemana: this.diaSemana,
-      titulo: this.titulo,
-      horario: this.horario,
-      midiaUrl: this.midiaUrlFinal || '',
-      criadoEm: new Date()
-    };
+    const sizeMB = file.size / (1024 * 1024);
+    if (sizeMB > this.maxSizeMB) {
+      await this.showToast(`O arquivo "${file.name}" é muito grande (${sizeMB.toFixed(2)} MB). Limite: ${this.maxSizeMB} MB.`);
+      event.target.value = ''; // limpa seleção para forçar reenvio correto
+      return;
+    }
 
-    await this.firestore.collection('meu-dia').add(dados);
+    this.arquivoSelecionado = file;
 
-    alert('Dados salvos com sucesso!');
-    this.resetarFormulario();
-  } catch (erro) {
-    console.error('Erro ao salvar:', erro);
-    alert('Erro ao salvar. Tente novamente.');
-  } finally {
-    this.carregando = false;  // termina o loading
-  }
-}
+    // Gerar preview para imagens e vídeos
+    if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.fotoSelecionadaUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.fotoSelecionadaUrl = ''; // não gera preview para áudio
+    }
 
-  // ⚡ Limpa campos depois de salvar
-  resetarFormulario() {
-    this.diaSemana = '';
-    this.titulo = '';
-    this.horario = '';
-    this.arquivoSelecionado = null;
-    this.fotoSelecionadaUrl = '';
-    this.midiaUrlFinal = '';
+    console.log('Arquivo válido:', file);
   }
 
-
+  async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 3000,
+      color: 'danger',
+      position: 'bottom',
+    });
+    toast.present();
+  }
 }

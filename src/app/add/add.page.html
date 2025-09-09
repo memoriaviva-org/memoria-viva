@@ -46,11 +46,19 @@
     </ion-input>
 
 
-    <ion-input placeholder="Vídeo ou Foto" class="video-foto-label">
-      <ion-button class="add-video-foto-btn">
+    <div placeholder="Vídeo ou Foto" class="video-foto-label">
+       <ion-button class="add-video-foto-btn">
         <img src="assets/icone-de-mais-amarelo.png">
       </ion-button>
-    </ion-input>
+
+      <ion-label class="midia-label">Vídeo ou Foto</ion-label>
+      <input
+      type="file"
+      accept="image/*,video/*,audio/*"
+      (change)="onFileSelected($event)"
+      class="input-file"
+    />
+    </div>
 
   </div>
 
@@ -59,28 +67,9 @@
         <p class="salvar-text">Salvar</p>
       </ion-button>
 
-      <ion-button (click)="mostrarAlertaConfirmacao()" class="btn-excluir">
+      <ion-button class="btn-excluir">
         <ion-icon class="excluir-icone" name="trash-outline"></ion-icon>
       </ion-button>
-
-      <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
-        <div class="alerta-confirmacao-texto">
-          Tem certeza que deseja excluir?
-        </div>
-        <div class="alerta-confirmacao-btns">
-          <ion-button class="alerta-confirmacao-sim-btn">
-            SIM
-          </ion-button>
-          <ion-button (click)="naoExcluir()" class="alerta-confirmacao-nao-btn">
-            NÃO
-          </ion-button>
-        </div>
-      </div>
-
-      <div *ngIf="mostrarMensagemSucesso" class="alerta-confirmacao-sucesso">
-        Exclusão feita com sucesso
-      </div>
-
     </div>
   <ion-footer class="add-footer">
 
