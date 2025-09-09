@@ -267,3 +267,63 @@ ion-button.mais-btn-1 {
     color: #737373;
   }
 }
+
+.janela-mais-opcoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #9C3FC3;
+  width: 412px;
+  height: 130px;
+  border-radius: 20px;
+  position: absolute;
+  top: 89%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  color: #FFF;
+  text-align: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  .janela-mais-config-btn {
+    all: unset;
+    --background: transparent;
+    --box-shadow: transparent;
+  }
+
+  .janela-mais-config-btn-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+  }
+
+  .janela-mais-site-btn {
+    all: unset;
+    --background: transparent;
+    --box-shadow: transparent;
+  }
+
+  .janela-mais-site-btn-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 11px;
+  }
+
+  .janela-mais-config-btn-texto {
+    margin-top: 10px;
+  }
+
+  .janela-mais-site-btn-texto {
+    margin-top: 16px;
+  }
+}
