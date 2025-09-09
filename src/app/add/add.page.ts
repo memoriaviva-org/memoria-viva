@@ -38,6 +38,10 @@ export class AddPage {
     this.mostrarConfirmacao = true;
   }
 
+  naoExcluir() {
+    this.mostrarConfirmacao = false;
+  }
+
   // Quando o usuário escolhe uma mídia
 handleFileInput(event: any) {
   const file: File = event.target.files[0];
