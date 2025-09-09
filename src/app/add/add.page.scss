@@ -1,111 +1,69 @@
+.form-page {
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.form-wrapper {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* Distância do topo */
+  margin-top: 150px; /* ajusta para subir ou descer os inputs */
+}
+
 .add-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* largura máxima do formulário */
+    margin: 0 auto;   /* centraliza horizontalmente */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .meu-dia-add-svg {
-position: absolute;
-top: 45%;
-left: 18%;
-transform: translate(-50%, -50%);
-z-index: 1;
+  position: absolute;
+  top: 45%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .add-text {
-position: absolute;
-top: 45%;
-left: 44%;
-transform: translate(-50%, -50%);
-z-index: 1;
-color: #FFF;
--webkit-text-stroke-width: 1px;
--webkit-text-stroke-color: #000;
-font-family: "Open Sans";
-font-size: 25px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+  position: absolute;
+  top: 45%;
+  left: 44%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: #FFF;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  font-family: "Open Sans";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 p {
-margin: 0;
-}
-
-.dia-da-semana-label{
-display: flex;
-justify-content: center;
-align-items: center;
-border-radius: 5px;
-background: #D9D9D9;
-color: black;
-width: 275px;
-height: 39px;
-margin-top: 145px;
-color: #000;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-padding-right: 75px;
-}
-
-.add-dia-da-semana-btn {
-all: unset;
---background: transparent;
---box-shadow: transparent;
-margin-right: 10px;
+  margin: 0;
 }
 
 img {
-  max-width: fit-content;
+    max-width: fit-content;
 }
 
-.titulo-label {
-display: flex;
-justify-content: center;
-align-items: center;
-border-radius: 5px;
-background: #D9D9D9;
-color: black;
-width: 275px;
-height: 39px;
-margin-top: 56px;
-color: #000;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-padding-right: 143px;
-}
+.input-item {
+  border-radius: 12px;
+  --background: #f7f7f7;
+  --padding-start: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 
-.add-titulo-btn {
-all: unset;
---background: transparent;
---box-shadow: transparent;
-margin-right: 10px;
-}
-
-.horario-label {
-display: flex;
-justify-content: center;
-align-items: center;
-border-radius: 5px;
-background: #D9D9D9;
-color: black;
-width: 275px;
-height: 39px;
-margin-top: 56px;
-color: #000;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-padding-right: 130px;
+  .icon-input.yellow { color: #FFD700; }
+  .icon-input.blue   { color: #3498db; }
+  .icon-input.green  { color: #2ecc71; }
+  .icon-input.orange { color: #f39c12; }
+  .icon-input.purple { color: #9b59b6; }
 }
 
 .add-horario-btn {

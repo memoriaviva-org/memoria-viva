@@ -14,36 +14,34 @@
 
 <ion-content fullscreen>
 
+<div class="form-page">
+<div class="form-wrapper">
+
   <div class="add-container">
 
-    <div class="dia-da-semana-label">
-      <ion-button class="add-dia-da-semana-btn">
-        <img src="assets/icone-de-mais-laranja.png">
-      </ion-button>
-
-      <ion-select placeholder="Dia da Semana" interface="popover" [(ngModel)]="diaSemana">
-        <ion-select-option value="segunda">Segunda-feira</ion-select-option>
-        <ion-select-option value="terca">Terça-feira</ion-select-option>
-        <ion-select-option value="quarta">Quarta-feira</ion-select-option>
-        <ion-select-option value="quinta">Quinta-feira</ion-select-option>
-        <ion-select-option value="sexta">Sexta-feira</ion-select-option>
+    <ion-item class="input-item">
+      <ion-icon slot="start" name="add-circle" class="icon-input yellow"></ion-icon>
+      <ion-select placeholder="Selecione o Dia da Semana">
+        <ion-select-option value="segunda">Segunda-Feira</ion-select-option>
+        <ion-select-option value="terca">Terça-Feira</ion-select-option>
+        <ion-select-option value="quarta">Quarta-Feira</ion-select-option>
+        <ion-select-option value="quinta">Quinta-Feira</ion-select-option>
+        <ion-select-option value="sexta">Sexta-Feira</ion-select-option>
         <ion-select-option value="sabado">Sábado</ion-select-option>
         <ion-select-option value="domingo">Domingo</ion-select-option>
       </ion-select>
-    </div>
+    </ion-item>
 
 
-    <ion-input placeholder="Título" class="titulo-label" [(ngModel)]="titulo">
-      <ion-button class="add-titulo-btn">
-        <img src="assets/icone-de-mais-azul.png">
-      </ion-button>
-    </ion-input>
+    <ion-item class="input-item">
+        <ion-icon slot="start" name="add-circle" class="icon-input blue"></ion-icon>
+        <ion-input placeholder="Digite o Título"></ion-input>
+    </ion-item>
 
-    <ion-input placeholder="Horário"  type="time" class="horario-label"  [(ngModel)]="horario">
-      <ion-button class="add-horario-btn">
-        <img src="assets/icone-de-mais-verde.png">
-      </ion-button>
-    </ion-input>
+    <ion-item class="input-item">
+        <ion-icon slot="start" name="add-circle" class="icon-input green"></ion-icon>
+        <ion-input placeholder="Horário"  type="time" class="input-item"  [(ngModel)]="horario"></ion-input>
+    </ion-item>
 
 
     <div placeholder="Vídeo ou Foto" class="video-foto-label">
@@ -114,4 +112,3 @@
 
   </ion-footer>
 
-</ion-content>
