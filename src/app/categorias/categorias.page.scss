@@ -1,0 +1,233 @@
+.logo-header-img {
+    position: absolute;
+    top: 45%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.logo-header-text {
+  position: absolute;
+  top: 32%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: #FFF;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  font-family: "Open Sans", sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+
+.btn-extra-container {
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 40px;               /* espaço entre os dois botões */
+  margin-top: 125px;
+  margin-bottom: 30px;
+}
+
+.btn-extra-item {
+  display: flex;
+  flex-direction: column; /* mantém botão em cima, texto embaixo */
+  align-items: center;    /* centraliza horizontalmente */
+  text-align: center;     /* centraliza o texto */
+  gap: 6px;               /* espaço entre botão e texto */
+}
+
+.btn-extra-item span {
+  color: #737373;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.btn-extra {
+  --background: #9C3FC3;
+  --color: #fff;
+  --background-activated: #822ea9;
+  --background-hover: #a650cf;
+
+  height: 70px;
+  width: 90px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid #000; /* Borda preta */
+  border-radius: 8px;     /* (opcional) deixa os cantos arredondados */
+}
+
+
+.btn-extra .btn-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-extra img {
+  width: 60px;
+  height: auto;
+}
+
+/* Estilo para o título "Categorias" */
+.title {
+  color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center; /* centraliza o texto horizontalmente */
+}
+
+
+/* Texto dos botões extras no topo */
+.text-btn {
+  color: #737373;
+  text-align: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: block;       /* garante que o span ocupe linha inteira abaixo do botão */
+  margin-top: 8px;      /* distancia entre o botão e o texto */
+}
+
+/* Grid de categorias */
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto); /* 2 colunas */
+  gap: 20px; 
+  justify-content: center; /* centraliza as colunas */
+  padding: 20px;
+}
+
+.btn-pill {
+  --background: #9C3FC3;
+  --color: #fff;
+  --background-activated: #822ea9;
+  --background-hover: #a650cf;
+
+  height: 185px;     
+  width: 143px;
+
+  border: 3px solid #000; /* Borda preta */
+  border-radius: 8px;     /* (opcional) deixa os cantos arredondados */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.btn-pill .btn-content {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+}
+
+.btn-pill img {
+  width: 90px; 
+  height: auto;
+}
+
+.perfil-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #D9D9D9;
+  width: 412px;
+  height: 91.3906px;
+}
+
+.inicio-btn {
+  width: 82.3906px;
+  height: 91.375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24.7188px;
+  margin-right: 130px;
+  background-color: transparent;
+}
+
+.inicio-svg {
+  height: 48px;
+  width: 91.375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inicio-texto {
+  font-family: Inter;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  width: 82.375px;
+  height: 91.375px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  color: #737373;
+  margin-top: 3px;
+}
+
+.mais-btn {
+  width: 82.3906px;
+  height: 91.375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24.7188px;
+  background-color: transparent;
+}
+
+.mais-svg {
+  height: 48px;
+  width: 82.375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mais-texto {
+  font-family: Inter;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  width: 82.375px;
+  height: 91.375px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  color: #737373;
+}
+
+.inicio {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.mais {
+    margin: 0;
+    margin-bottom: 5px;
+}

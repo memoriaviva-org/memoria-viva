@@ -1,0 +1,142 @@
+<ion-content fullscreen>
+  <div class="header-svg-container">
+    <svg xmlns="http://www.w3.org/2000/svg" width="412" height="365" viewBox="0 0 412 365" fill="none">
+      <path d="M-35 -18H621V365C433.901 115.251 174.347 172.943 -35 365V-18Z" fill="#9C3FC3"/>
+    </svg>
+
+  <!-- Aqui entra a imagem da categoria -->
+<img [src]="categoriaImagem" alt="Categoria" class="categoria-header-img" />
+
+<!-- Texto opcional mostrando o nome da categoria -->
+<p class="categoria-header-text">{{ categoriaTexto }}</p>
+  </div>
+
+  <ion-button class="audio-btn" fill="solid">
+    <ion-icon name="volume-high" slot="icon-only"></ion-icon>
+  </ion-button>
+
+  <div class="flashcard" [class.flip]="mostrarResposta">
+    <div class="flashcard-inner">
+      <!-- Frente -->
+      <div class="flashcard-front">
+        <ion-button class="editar-btn" fill="clear">
+          <img src="../../assets/img/gerenciar_flashcards.png" alt="Editar">
+          <span>Editar</span>
+        </ion-button>
+        <div class="flashcard-conteudo">
+          <img *ngIf="tipoMidia === 'imagem'" src="../../assets/img/exemplo.jpg" alt="Imagem escolhida">
+          <video *ngIf="tipoMidia === 'video'" controls>
+            <source src="../../assets/videos/exemplo.mp4" type="video/mp4">
+          </video>
+          <audio *ngIf="tipoMidia === 'audio'" controls>
+            <source src="../../assets/audios/exemplo.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="flashcard-audio">
+          <audio controls>
+            <source src="../../assets/audios/pergunta.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
+      <!-- Verso -->
+      <div class="flashcard-back">
+        <ion-button class="editar-btn" fill="clear">
+          <img src="../../assets/img/gerenciar_flashcards.png" alt="Editar">
+          <span>Editar</span>
+        </ion-button>
+        <div class="flashcard-conteudo">
+          <img *ngIf="tipoMidia === 'imagem'" src="../../assets/img/exemplo_resposta.jpg" alt="Imagem resposta">
+          <video *ngIf="tipoMidia === 'video'" controls>
+            <source src="../../assets/videos/exemplo_resposta.mp4" type="video/mp4">
+          </video>
+          <audio *ngIf="tipoMidia === 'audio'" controls>
+            <source src="../../assets/audios/exemplo_resposta.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+
+         <div class="curiosidade-btn-container">
+    <ion-button class="curiosidade-btn" fill="clear" (click)="abrirCuriosidade()">
+      <span class="material-icons">maps_ugc</span>
+    </ion-button>
+    <p class="curiosidade-texto">Curiosidade</p>
+  </div>
+
+<div class="curiosidade-tela" *ngIf="mostrarCuriosidade">
+  <div class="curiosidade-conteudo">
+    <p>{{ curiosidadeTexto }}</p>
+    <ion-button class="fechar-curiosidade-btn" fill="solid" (click)="fecharCuriosidade()">Voltar</ion-button>
+  </div>
+</div>
+
+        <div class="flashcard-audio">
+          <audio controls>
+            <source src="../../assets/audios/resposta.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="botoes-container">
+    <div class="botao-com-texto">
+      <ion-button class="btn-circular" (click)="verResposta()">
+        <img [src]="mostrarResposta ? '../../assets/img/redo-btn.png' : '../../assets/img/ver-resposta-btn.png'"
+             [alt]="mostrarResposta ? 'Repetir' : 'Ver resposta'">
+      </ion-button>
+      <p *ngIf="!mostrarResposta">Resposta</p>
+      <p *ngIf="mostrarResposta">Repetir</p>
+    </div>
+
+    <div class="botao-com-texto">
+      <ion-button class="btn-retangular" (click)="deletar()">
+        <img src="../../assets/img/delete-btn.png" alt="Deletar">
+      </ion-button>
+      <p>Deletar</p>
+    </div>
+
+    <div class="botao-com-texto">
+      <ion-button class="btn-circular" (click)="proximo()">
+        <img src="../../assets/img/foward-btn.png" alt="Próximo">
+      </ion-button>
+      <p>Próximo</p>
+    </div>
+  </div>
+
+    <ion-footer class="premium-footer">
+    
+    <button class="voltar-btn">
+      <div class="voltar-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M15.65 26L26.85 37.2L24 40L8 24L24 8L26.85 10.8L15.65 22H40V26H15.65Z" fill="#737373"/>
+        </svg>
+      </div>
+      <div class="voltar-texto">
+        <p class="voltar">Voltar</p>
+      </div>
+    </button>
+
+    <button class="inicio-btn">
+      <div class="inicio-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M10 40V21.7L4.4 26L2 22.8L24 6L32 12.1V8H38V16.7L46 22.8L43.6 26L38 21.7V40H26V28H22V40H10ZM14 36H18V24H30V36H34V18.65L24 11.05L14 18.65V36ZM20 20.05H28C28 18.9833 27.6 18.1083 26.8 17.425C26 16.7417 25.0667 16.4 24 16.4C22.9333 16.4 22 16.7417 21.2 17.425C20.4 18.1083 20 18.9833 20 20.05Z" fill="#737373"/>
+        </svg>
+      </div>
+      <div class="inicio-texto">
+        <p class="inicio">Início</p>
+      </div>
+    </button>
+
+    <button class="mais-btn">
+      <div class="mais-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M12 28C10.9 28 9.95833 27.6083 9.175 26.825C8.39167 26.0417 8 25.1 8 24C8 22.9 8.39167 21.9583 9.175 21.175C9.95833 20.3917 10.9 20 12 20C13.1 20 14.0417 20.3917 14.825 21.175C15.6083 21.9583 16 22.9 16 24C16 25.1 15.6083 26.0417 14.825 26.825C14.0417 27.6083 13.1 28 12 28ZM24 28C22.9 28 21.9583 27.6083 21.175 26.825C20.3917 26.0417 20 25.1 20 24C20 22.9 20.3917 21.9583 21.175 21.175C21.9583 20.3917 22.9 20 24 20C25.1 20 26.0417 20.3917 26.825 21.175C27.6083 21.9583 28 22.9 28 24C28 25.1 27.6083 26.0417 26.825 26.825C26.0417 27.6083 25.1 28 24 28ZM36 28C34.9 28 33.9583 27.6083 33.175 26.825C32.3917 26.0417 32 25.1 32 24C32 22.9 32.3917 21.9583 33.175 21.175C33.9583 20.3917 34.9 20 36 20C37.1 20 38.0417 20.3917 38.825 21.175C39.6083 21.9583 40 22.9 40 24C40 25.1 39.6083 26.0417 38.825 26.825C38.0417 27.6083 37.1 28 36 28Z" fill="#737373"/>
+        </svg>
+      </div>
+      <div class="mais-texto">
+        <p class="mais">Mais</p>
+      </div>
+    </button>
+
+  </ion-footer>
+</ion-content>

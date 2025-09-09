@@ -83,7 +83,23 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./video/video.module').then( m => m.VideoPageModule)
+  },  {
+    path: 'categorias',
+    loadChildren: () => import('./categorias/categorias.module').then( m => m.CategoriasPageModule)
+  },
+  {
+    path: 'criar-flashcard',
+    loadChildren: () => import('./criar-flashcard/criar-flashcard.module').then( m => m.CriarFlashcardPageModule)
+  },
+  {
+    path: 'func-categoria',
+    loadChildren: () => import('./func-categoria/func-categoria.module').then( m => m.FuncCategoriaPageModule)
+  },
+  {
+    path: 'flashcard',
+    loadChildren: () => import('./flashcard/flashcard.module').then( m => m.FlashcardPageModule)
   }
+
 
 ];
 
