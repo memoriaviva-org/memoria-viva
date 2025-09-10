@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [CommonModule, FormsModule, IonicModule],
 })
 export class FlashcardPage {
+
+  mostrarJanela = false
   tipoMidia: 'imagem' | 'video' | 'audio' = 'imagem';
   mostrarResposta: boolean = false;
 
@@ -107,5 +109,9 @@ export class FlashcardPage {
 
   fecharCuriosidade() {
     this.mostrarCuriosidade = false;
+  }
+
+  mostrarJanelaMais() {
+    this.mostrarJanela = !this.mostrarJanela;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,10 +14,10 @@ import { AuthService } from '../services/auth.service';
 
 export class PrincipalPage implements OnInit {
   mostrarJanela = false;
-  
+
   nome: string = '';
 
-  constructor(private authService: AuthService, private eRef: ElementRef) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe(async user => {
@@ -32,15 +32,8 @@ export class PrincipalPage implements OnInit {
 
   speakText() {
     const utterance = new SpeechSynthesisUtterance("Olá, este é um teste de acessibilidade.");
-    utterance.lang = "pt-BR"; 
+    utterance.lang = "pt-BR";
     speechSynthesis.speak(utterance);
-  }
-
-  @HostListener('document:click', ['$event'])
-  clickout(event: Event) {
-    if (this.mostrarJanela && !this.eRef.nativeElement.contains(event.composedPath())) {
-      this.mostrarJanela = false;
-    }
   }
 
   mostrarJanelaMais() {
