@@ -19,4 +19,10 @@ import { FormsModule } from '@angular/forms';
 
   constructor() {}
 
+  mostrarJanela = false
+
+  mostrarJanelaMais() {
+    this.mostrarJanela = !this.mostrarJanela
+  }
+
 }
