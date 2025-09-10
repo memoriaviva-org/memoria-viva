@@ -19,6 +19,8 @@ import { AuthService } from '../services/auth.service';
 
 
 export class PerfilPage implements OnInit {
+  mostrarJanela = false
+
   nome: string = '';
   email: string = '';
   idade: number = 0;
@@ -33,12 +35,16 @@ export class PerfilPage implements OnInit {
         await user.reload();
         this.nome = user.displayName ?? 'Usuário';
         this.email = user.email ?? 'Email não disponível';
-        this.idade = this.idade ?? 'Idade não disponível'; 
+        this.idade = this.idade ?? 'Idade não disponível';
       } else {
         this.nome = 'Não autenticado';
         this.email = 'Email não disponível';
         this.idade = 0;
       }
     });
+  }
+
+  mostrarJanelaMais() {
+    this.mostrarJanela = !this.mostrarJanela
   }
 }
