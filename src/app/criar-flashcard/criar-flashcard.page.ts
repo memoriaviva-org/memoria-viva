@@ -13,4 +13,12 @@ import { IonicModule } from '@ionic/angular';
     IonicModule
   ]
 })
-export class CriarFlashcardPage {}
+export class CriarFlashcardPage {
+
+  mostrarJanela = false
+
+  mostrarJanelaMais() {
+    this.mostrarJanela = !this.mostrarJanela;
+  }
+
+}
