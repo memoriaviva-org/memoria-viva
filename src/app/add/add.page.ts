@@ -16,6 +16,9 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 })
 export class AddPage {
 
+  mostrarConfirmacao = false;
+  mostrarMensagemSucesso = false;
+
   mostrarJanela = false;
 
   // Dados do formulário
@@ -75,5 +78,13 @@ export class AddPage {
 
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
+  }
+
+  mostrarAlertaConfirmacao() {
+    this.mostrarConfirmacao = true;
+  }
+
+  naoExcluir() {
+    this.mostrarConfirmacao = false;
   }
 }
