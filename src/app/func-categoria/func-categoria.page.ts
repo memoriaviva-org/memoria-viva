@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [CommonModule, IonicModule]
 })
 export class FuncCategoriaPage {
+  mostrarJanela = false
+
   categoria: string = '';
   categoriaImg: string = '';
 
@@ -60,5 +62,9 @@ export class FuncCategoriaPage {
   // Botão início
   inicio() {
     this.router.navigate(['/home']);
+  }
+
+  mostrarJanelaMais() {
+    this.mostrarJanela = !this.mostrarJanela;
   }
 }
