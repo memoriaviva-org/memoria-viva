@@ -16,6 +16,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 })
 export class AddPage {
 
+  mostrarJanela = false;
+
   // Dados do formulário
   diaSemana: string = '';
   titulo: string = '';
@@ -69,5 +71,9 @@ export class AddPage {
       position: 'bottom',
     });
     toast.present();
+  }
+
+  mostrarJanelaMais() {
+    this.mostrarJanela = !this.mostrarJanela;
   }
 }

@@ -108,7 +108,7 @@
 .btn-grid {
   display: grid;
   grid-template-columns: repeat(2, auto); /* 2 colunas */
-  gap: 20px; 
+  gap: 20px;
   justify-content: center; /* centraliza as colunas */
   padding: 20px;
 }
@@ -119,7 +119,7 @@
   --background-activated: #822ea9;
   --background-hover: #a650cf;
 
-  height: 185px;     
+  height: 185px;
   width: 143px;
 
   border: 3px solid #000; /* Borda preta */
@@ -133,18 +133,18 @@
 
 .btn-pill .btn-content {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px; 
+  gap: 8px;
 }
 
 .btn-pill img {
-  width: 90px; 
+  width: 90px;
   height: auto;
 }
 
-.perfil-footer {
+.categorias-footer {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -156,78 +156,51 @@
   height: 91.3906px;
 }
 
-.inicio-btn {
+ion-button.inicio-btn {
+  all: unset;
   width: 82.3906px;
   height: 91.375px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 24.7188px;
   margin-right: 130px;
-  background-color: transparent;
-}
+  --background: transparent;
+  --box-shadow: transparent;
 
-.inicio-svg {
+  .inicio-btn-div {
+    width: 82.3906px;
+    height: 91.375px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inicio-svg {
   height: 48px;
   width: 91.375px;
   display: flex;
   justify-content: center;
   align-items: center;
+  }
+
+  .inicio-texto {
+    font-family: Inter;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    width: 82.375px;
+    height: 91.375px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    color: #737373;
+    margin-top: 3px;
+  }
 }
 
-.inicio-texto {
-  font-family: Inter;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  width: 82.375px;
-  height: 91.375px;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  color: #737373;
-  margin-top: 3px;
-}
-
-.mais-btn {
-  width: 82.3906px;
-  height: 91.375px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 24.7188px;
-  background-color: transparent;
-}
-
-.mais-svg {
-  height: 48px;
-  width: 82.375px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.mais-texto {
-  font-family: Inter;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  width: 82.375px;
-  height: 91.375px;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  color: #737373;
-}
-
-.inicio {
+p {
   margin: 0;
-  margin-bottom: 5px;
-}
-
-.mais {
-    margin: 0;
-    margin-bottom: 5px;
 }

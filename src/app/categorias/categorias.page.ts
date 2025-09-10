@@ -13,6 +13,18 @@ import { Router } from '@angular/router';
 export class CategoriasPage {
   constructor(private router: Router) {}
 
+  mostrarJanela = false;
+
   abrirCategoria(nomeCategoria: string) {
     this.router.navigate(['/func-categoria'], { queryParams: { categoria: nomeCategoria } });
-  }}
+  }
+
+  mostrarJanelaMais() {
+    this.mostrarJanela = !this.mostrarJanela;
+  }
+
+}
+
+
+
+
