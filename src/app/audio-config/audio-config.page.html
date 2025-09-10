@@ -15,25 +15,25 @@
 <ion-content fullscreen>
 
   <div class="video-representacao" *ngIf="!videoStarted">
-    <img 
-      src="assets/play.png" 
-      class="play-img" 
+    <img
+      src="assets/play.png"
+      class="play-img"
       [class.show]="showPlay"
       (click)="playVideo()" />
   </div>
 
-  <video 
-    #videoPlayer 
-    class="video-player" 
-    width="308" 
-    height="162" 
-    controls 
+  <video
+    #videoPlayer
+    class="video-player"
+    width="308"
+    height="162"
+    controls
     *ngIf="videoStarted">
     <source src="assets/video.mp4" type="video/mp4" />
   </video>
 
   <div class="audio-config-container">
-      
+
     <ion-button class="btn-sim">
       <svg xmlns="http://www.w3.org/2000/svg" width="47" height="100" viewBox="0 0 40 40" fill="none">
         <circle cx="20" cy="20" r="20" fill="#127253"/>
@@ -51,12 +51,12 @@
     <ion-button class="btn-salvar">
       <p class="salvar-text">Salvar</p>
     </ion-button>
-    
+
   </div>
 
   <ion-footer class="config-footer">
-    
-    <ion-button class="voltar-btn">
+
+    <ion-button class="voltar-btn" href="config">
       <div class="voltar-btn-div">
         <div class="voltar-svg">
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -69,7 +69,7 @@
       </div>
     </ion-button>
 
-    <ion-button class="inicio-btn">
+    <ion-button class="inicio-btn" href="principal">
       <div class="inicio-btn-div">
         <div class="inicio-svg">
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
