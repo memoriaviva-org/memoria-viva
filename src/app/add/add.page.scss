@@ -82,7 +82,7 @@ margin-right: 10px;
 
 /* remove aparência nativa */
 .input-file {
-  position: absolute;    
+  position: absolute;
   opacity: 0;
   -webkit-appearance: none;
   appearance: none;
@@ -97,6 +97,7 @@ height: 134px;
 display: flex;
 justify-content: center;
 align-items: center;
+margin-top: 38px;
 }
 
 .btn-excluir {
