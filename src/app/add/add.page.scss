@@ -73,31 +73,23 @@ all: unset;
 margin-right: 10px;
 }
 
-.video-foto-label {
-display: flex;
-justify-content: center;
-align-items: center;
-border-radius: 5px;
-background: #D9D9D9;
-color: black;
-width: 275px;
-height: 39px;
-margin-top: 56px;
-color: #000;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-padding-right: 82px;
-}
-
 .add-video-foto-btn {
 all: unset;
 --background: transparent;
 --box-shadow: transparent;
 margin-right: 10px;
 }
+
+/* remove aparência nativa */
+.input-file {
+  position: absolute;    
+  opacity: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+}
+
 
 .secao-salvar-excluir {
 width: 412px;
