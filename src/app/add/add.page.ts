@@ -3,9 +3,8 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { RegistroService, Registro } from '../services/registro.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -26,45 +25,88 @@ export class AddPage {
   titulo: string = '';
   horario: string = '';
 
-  // Mídia
+  // variáveis no component
   arquivoSelecionado: File | null = null;
-  fotoSelecionadaUrl: string = ''; // preview local (imagem ou vídeo)
-  midiaUrlFinal: string = '';      // url depois do upload
-
-  maxSizeMB = 10;
+  fotoSelecionadaUrl: string = '';
   carregando = false;
 
-  constructor(private firestore: AngularFirestore, private toastController: ToastController) {}
+  constructor( 
+  private toastController: ToastController,  
+  private registroService: RegistroService,
+  private router: Router) {}
 
-  async onFileSelected(event: any) {
-    const file: File = event.target.files[0]; // pega só 1 arquivo
+  // Função chamada no input file
+async onFileSelected(event: any) {
+  const file: File = event.target.files[0];
+  if (!file) return;
 
-    if (!file) {
-      return; // se o usuário cancelar seleção
-    }
-
-    const sizeMB = file.size / (1024 * 1024);
-    if (sizeMB > this.maxSizeMB) {
-      await this.showToast(`O arquivo "${file.name}" é muito grande (${sizeMB.toFixed(2)} MB). Limite: ${this.maxSizeMB} MB.`);
-      event.target.value = ''; // limpa seleção para forçar reenvio correto
-      return;
-    }
-
-    this.arquivoSelecionado = file;
-
-    // Gerar preview para imagens e vídeos
-    if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.fotoSelecionadaUrl = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      this.fotoSelecionadaUrl = ''; // não gera preview para áudio
-    }
-
-    console.log('Arquivo válido:', file);
+  const sizeMB = file.size / (1024 * 1024);
+  if (sizeMB > 10) { // limite de 10MB
+    alert(`O arquivo "${file.name}" é muito grande (${sizeMB.toFixed(2)} MB).`);
+    event.target.value = '';
+    return;
   }
+
+  this.arquivoSelecionado = file;
+
+  // preview de imagem ou vídeo
+  if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => this.fotoSelecionadaUrl = e.target.result;
+    reader.readAsDataURL(file);
+  } else {
+    this.fotoSelecionadaUrl = '';
+  }
+}
+
+// Função de upload
+async uploadArquivo() {
+  if (!this.arquivoSelecionado) {
+    alert('Selecione um arquivo primeiro.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', this.arquivoSelecionado);
+
+  this.carregando = true;
+  try {
+    const response = await fetch('https://f59f54ced25c.ngrok-free.app/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) throw new Error('Erro no upload');
+
+    const data = await response.json();
+    console.log('Upload concluído:', data);
+
+    // Adiciona no serviço para que a página de registros possa mostrar
+    const novoRegistro: Registro = {
+      titulo: this.titulo,
+      horario: this.horario,
+      arquivoUrl: `https://f59f54ced25c.ngrok-free.app/files/${data.file.filename}`
+    };
+    this.registroService.adicionarRegistro(novoRegistro);
+
+    alert('Upload concluído com sucesso!');
+
+    // Limpa o formulário
+    this.titulo = '';
+    this.horario = '';
+    this.arquivoSelecionado = null;
+    this.fotoSelecionadaUrl = '';
+
+    this.router.navigate(['/meu-dia-registros']);
+
+  } catch (error) {
+    console.error(error);
+    alert('Falha no upload.');
+  } finally {
+    this.carregando = false;
+  }
+}
+
 
   async showToast(message: string) {
     const toast = await this.toastController.create({

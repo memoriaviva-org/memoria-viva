@@ -44,16 +44,57 @@
     </ion-item>
 
 
-    <ion-item class="input-item">
-       <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
-      <ion-label class="midia-label">Vídeo ou Foto</ion-label>
-      <input
-      type="file"
-      accept="image/*,video/*,audio/*"
-      (change)="onFileSelected($event)"
-      class="input-file"
-    />
-    </ion-item>
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
+  <ion-label class="midia-label">Vídeo ou Foto</ion-label>
+  <input
+    type="file"
+    accept="image/*,video/*,audio/*"
+    (change)="onFileSelected($event)"
+    class="input-file"
+  />
+  <!-- preview da mídia selecionada -->
+<img *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('image/')" 
+     [src]="fotoSelecionadaUrl" 
+     alt="Preview" style="max-width: 50px; max-height: 50px;">
+<video *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('video/')" 
+       [src]="fotoSelecionadaUrl" 
+       controls style="max-width: 50px; max-height: 50px;">
+</video>
+
+</ion-item>
+
+
+
+  <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
+      <div class="alerta-confirmacao-texto">
+        Tem certeza que deseja excluir?
+      </div>
+      <div class="alerta-confirmacao-btns">
+        <ion-button class="alerta-confirmacao-sim-btn">
+          SIM
+        </ion-button>
+        <ion-button (click)="naoExcluir()" class="alerta-confirmacao-nao-btn">
+          NÃO
+        </ion-button>
+      </div>
+    </div>
+
+    <div *ngIf="mostrarMensagemSucesso" class="alerta-confirmacao-sucesso">
+      Exclusão feita com sucesso
+    </div>
+
+  </div>
+
+    <div class="secao-salvar-excluir">
+      <ion-button class="btn-salvar" (click)="uploadArquivo()" [disabled]="carregando">
+        <p class="salvar-text"> {{ carregando ? 'Carregando...' : 'Salvar' }} </p>
+      </ion-button>
+
+      <ion-button (click)="mostrarAlertaConfirmacao()" class="btn-excluir">
+        <ion-icon class="excluir-icone" name="trash-outline"></ion-icon>
+      </ion-button>
+    </div>
 
     <div *ngIf="mostrarJanela" class="janela-mais-opcoes">
       <ion-button class="janela-mais-config-btn" href="config">
@@ -79,35 +120,7 @@
       </ion-button>
     </div>
 
-    <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
-      <div class="alerta-confirmacao-texto">
-        Tem certeza que deseja excluir?
-      </div>
-      <div class="alerta-confirmacao-btns">
-        <ion-button class="alerta-confirmacao-sim-btn">
-          SIM
-        </ion-button>
-        <ion-button (click)="naoExcluir()" class="alerta-confirmacao-nao-btn">
-          NÃO
-        </ion-button>
-      </div>
-    </div>
 
-    <div *ngIf="mostrarMensagemSucesso" class="alerta-confirmacao-sucesso">
-      Exclusão feita com sucesso
-    </div>
-
-  </div>
-
-    <div class="secao-salvar-excluir">
-      <ion-button class="btn-salvar">
-        <p class="salvar-text">Salvar</p>
-      </ion-button>
-
-      <ion-button (click)="mostrarAlertaConfirmacao()" class="btn-excluir">
-        <ion-icon class="excluir-icone" name="trash-outline"></ion-icon>
-      </ion-button>
-    </div>
   <ion-footer class="add-footer">
 
     <ion-button class="voltar-btn" href="meu-dia-registros">

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RegistroService, Registro } from '../services/registro.service';
 
 @Component({
   selector: 'app-meu-dia-registros',
@@ -14,15 +15,19 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
 })
+export class MeuDiaRegistrosPage implements OnInit {
 
-  export class MeuDiaRegistrosPage {
+  registros: Registro[] = [];
+  mostrarJanela = false;
 
-  constructor() {}
+  constructor(private registroService: RegistroService) {}
 
-  mostrarJanela = false
-
-  mostrarJanelaMais() {
-    this.mostrarJanela = !this.mostrarJanela
+  ngOnInit() {
+    // Carrega os registros do serviço quando a página inicia
+    this.registros = this.registroService.listarRegistros();
   }
 
+  mostrarJanelaMais() {
+    this.mostrarJanela = !this.mostrarJanela;
+  }
 }
