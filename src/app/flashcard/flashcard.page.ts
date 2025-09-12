@@ -14,6 +14,8 @@ import { NavController } from '@ionic/angular';
 })
 export class FlashcardPage {
 
+  mostrarConfirmacao = false;
+  mostrarMensagemSucesso = false;
   mostrarJanela = false
   tipoMidia: 'imagem' | 'video' | 'audio' = 'imagem';
   mostrarResposta: boolean = false;
@@ -87,8 +89,11 @@ export class FlashcardPage {
     console.log('Próximo flashcard');
   }
 
-  deletar() {
-    console.log('Flashcard deletado');
+  mostrarAlertaConfirmacao() {
+    this.mostrarConfirmacao = true;
+  }
+  naoExcluir() {
+    this.mostrarConfirmacao = false;
   }
 
   editar() {

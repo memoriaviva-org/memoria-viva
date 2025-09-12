@@ -89,7 +89,7 @@
     </div>
 
     <div class="botao-com-texto">
-      <ion-button class="btn-retangular" (click)="deletar()">
+      <ion-button class="btn-retangular" (click)="mostrarAlertaConfirmacao()">
         <img src="../../assets/img/delete-btn.png" alt="Deletar">
       </ion-button>
       <p>Deletar</p>
@@ -126,6 +126,24 @@
       </div>
     </ion-button>
   </div>
+
+  <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
+      <div class="alerta-confirmacao-texto">
+        Tem certeza que deseja excluir?
+      </div>
+      <div class="alerta-confirmacao-btns">
+        <ion-button class="alerta-confirmacao-sim-btn">
+          SIM
+        </ion-button>
+        <ion-button (click)="naoExcluir()" class="alerta-confirmacao-nao-btn">
+          NÃO
+        </ion-button>
+      </div>
+    </div>
+
+    <div *ngIf="mostrarMensagemSucesso" class="alerta-confirmacao-sucesso">
+      Exclusão feita com sucesso
+    </div>
 
 <ion-footer class="flashcard-footer">
 
