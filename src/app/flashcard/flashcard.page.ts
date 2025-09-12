@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-flashcard',
@@ -25,7 +26,7 @@ export class FlashcardPage {
   mostrarCuriosidade: boolean = false;
   curiosidadeTexto: string = 'Aqui vai a curiosidade que o usuário colocar';
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private navCtrl: NavController) {
     // captura a categoria da rota
     this.route.paramMap.subscribe(params => {
       const cat = params.get('categoria');
@@ -113,5 +114,9 @@ export class FlashcardPage {
 
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
+  }
+
+  voltar2() {
+    this.navCtrl.back();
   }
 }
