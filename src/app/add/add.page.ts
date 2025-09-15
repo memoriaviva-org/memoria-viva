@@ -30,8 +30,8 @@ export class AddPage {
   fotoSelecionadaUrl: string = '';
   carregando = false;
 
-  constructor( 
-  private toastController: ToastController,  
+  constructor(
+  private toastController: ToastController,
   private registroService: RegistroService,
   private router: Router) {}
 
@@ -120,6 +120,10 @@ async uploadArquivo() {
 
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
+  }
+
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
   }
 
   mostrarAlertaConfirmacao() {

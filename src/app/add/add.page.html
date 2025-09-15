@@ -54,11 +54,11 @@
     class="input-file"
   />
   <!-- preview da mídia selecionada -->
-<img *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('image/')" 
-     [src]="fotoSelecionadaUrl" 
+<img *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('image/')"
+     [src]="fotoSelecionadaUrl"
      alt="Preview" style="max-width: 50px; max-height: 50px;">
-<video *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('video/')" 
-       [src]="fotoSelecionadaUrl" 
+<video *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('video/')"
+       [src]="fotoSelecionadaUrl"
        controls style="max-width: 50px; max-height: 50px;">
 </video>
 
@@ -96,7 +96,9 @@
       </ion-button>
     </div>
 
-    <div *ngIf="mostrarJanela" class="janela-mais-opcoes">
+    <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
+
+    <div *ngIf="mostrarJanela" class="janela-mais-opcoes" (click)="$event.stopPropagation()">
       <ion-button class="janela-mais-config-btn" href="config">
         <div class="janela-mais-config-btn-div">
           <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">

@@ -1,3 +1,4 @@
+// import { firebase } from 'firebase/compat/app';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -47,4 +48,9 @@ export class PerfilPage implements OnInit {
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela
   }
+
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
+  }
+
 }

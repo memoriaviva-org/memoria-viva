@@ -30,4 +30,8 @@ export class MeuDiaRegistrosPage implements OnInit {
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
   }
+
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
+  }
 }

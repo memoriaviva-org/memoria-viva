@@ -23,6 +23,10 @@ export class CategoriasPage {
     this.mostrarJanela = !this.mostrarJanela;
   }
 
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
+  }
+
 }
 
 

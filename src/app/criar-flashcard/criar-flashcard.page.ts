@@ -21,4 +21,8 @@ export class CriarFlashcardPage {
     this.mostrarJanela = !this.mostrarJanela;
   }
 
+  fecharJanelaMais () {
+    this.mostrarJanela = false;
+  }
+
 }

@@ -121,6 +121,10 @@ export class FlashcardPage {
     this.mostrarJanela = !this.mostrarJanela;
   }
 
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
+  }
+
   voltar2() {
     this.navCtrl.back();
   }

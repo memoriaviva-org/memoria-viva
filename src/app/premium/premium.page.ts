@@ -25,4 +25,8 @@ import { FormsModule } from '@angular/forms';
     this.mostrarJanela = !this.mostrarJanela
   }
 
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
+  }
+
 }

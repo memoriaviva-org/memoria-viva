@@ -67,4 +67,8 @@ export class FuncCategoriaPage {
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
   }
+
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
+  }
 }
