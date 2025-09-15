@@ -121,7 +121,7 @@
   font-size: 16px;
   height: 18.5px;
   margin-top: 12px;
-  COLOR: WHITE;
+  color: white;
 }
 
 .alerta-confirmacao-btns {
@@ -136,12 +136,14 @@
   --background: transparent;
   --box-shadow: transparent;
   margin-right: 41px;
+  color: white;
 }
 
 .alerta-confirmacao-nao-btn {
   all: unset;
   --background: transparent;
   --box-shadow: transparent;
+  color: white;
 }
 
 .alerta-confirmacao-sucesso {
