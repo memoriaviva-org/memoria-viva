@@ -5,25 +5,25 @@
   <ion-button class="audio-btn" fill="solid">
     <ion-icon name="volume-high" slot="icon-only"></ion-icon>
   </ion-button>
-  
+
 <ion-content fullscreen>
 
     <div class="video-representacao" *ngIf="!videoStarted">
-      <img 
-        src="assets/play.png" 
-        class="play-img" 
+      <img
+        src="assets/play.png"
+        class="play-img"
         [class.show]="showPlay"
         (click)="playVideo()" />
     </div>
 
-    <video 
-      #videoPlayer 
-      class="video-player" 
-      width="308" 
-      height="162" 
-      controls 
+    <video
+      #videoPlayer
+      class="video-player"
+      width="308"
+      height="162"
+      controls
       *ngIf="videoStarted">
-      <source src="assets/video.mp4" type="video/mp4" />
+      <source src="assets/video-teste.mp4" type="video/mp4" />
     </video>
 
     <div class="video-container">
@@ -33,6 +33,6 @@
     <div class="app-footer">
       Memória Viva
     </div>
-      
+
 </ion-content>
- 
+
