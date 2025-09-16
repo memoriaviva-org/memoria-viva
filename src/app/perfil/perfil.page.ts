@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 
 import { AuthService } from '../services/auth.service';
 
@@ -28,6 +29,7 @@ export class PerfilPage implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {
@@ -51,6 +53,10 @@ export class PerfilPage implements OnInit {
 
   fecharJanelaMais() {
     this.mostrarJanela = false;
+  }
+
+  voltar() {
+    this.navCtrl.back();
   }
 
 }
