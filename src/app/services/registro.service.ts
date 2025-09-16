@@ -1,24 +1,21 @@
 import { Injectable } from '@angular/core';
-
-export interface Registro {
-  titulo: string;
-  horario: string;
-  arquivoUrl: string;
-}
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistroService {
-  private registros: Registro[] = [];
 
-  constructor() {}
+  constructor(private firestore: AngularFirestore) {}
 
-  adicionarRegistro(registro: Registro) {
-    this.registros.push(registro);
-  }
-
-  listarRegistros(): Registro[] {
-    return this.registros;
+  salvarRegistro(titulo: string, diaSemana: string, horario: string): Promise<void> {
+    const id = this.firestore.createId();
+    const registro = {
+      titulo,
+      diaSemana,
+      horario,
+      criadoEm: new Date()
+    };
+    return this.firestore.collection('registros').doc(id).set(registro);
   }
 }

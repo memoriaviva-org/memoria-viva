@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { updateProfile, User } from 'firebase/auth';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
@@ -20,7 +22,8 @@ export class CadastroPage {
 
   constructor(
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router
   ) {}
 
   async register() {
@@ -51,6 +54,7 @@ export class CadastroPage {
         color: 'success'
       });
       await toast.present();
+      this.router.navigate(['/login']);
 
       // Limpa formulário
       this.nome = '';
