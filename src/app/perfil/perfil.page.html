@@ -76,7 +76,20 @@
 
   <ion-footer class="perfil-footer">
 
-    <ion-button class="inicio-btn" href="/principal">
+    <ion-button class="voltar-btn" (click)="voltar()">
+      <div class="voltar-btn-div">
+        <div class="voltar-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M15.65 26L26.85 37.2L24 40L8 24L24 8L26.85 10.8L15.65 22H40V26H15.65Z" fill="#737373"/>
+          </svg>
+        </div>
+        <div class="voltar-texto">
+          <p class="voltar">Voltar</p>
+        </div>
+      </div>
+    </ion-button>
+
+    <ion-button class="inicio-btn" href="principal">
       <div class="inicio-btn-div">
         <div class="inicio-svg">
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">

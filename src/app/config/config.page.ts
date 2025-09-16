@@ -20,7 +20,7 @@ import { NavController } from '@ionic/angular';
 
   constructor(private navCtrl: NavController) {}
 
-  voltar() {
+  voltar1() {
     this.navCtrl.back();
   }
 
