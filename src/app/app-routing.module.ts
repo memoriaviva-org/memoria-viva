@@ -98,6 +98,14 @@ const routes: Routes = [
   {
     path: 'flashcard',
     loadChildren: () => import('./flashcard/flashcard.module').then( m => m.FlashcardPageModule)
+  },
+  {
+    path: 'expl-flashcard',
+    loadChildren: () => import('./expl-flashcard/expl-flashcard.module').then( m => m.ExplFlashcardPageModule)
+  },
+  {
+    path: 'expl-contatos',
+    loadChildren: () => import('./contato/expl-contatos/expl-contatos.module').then( m => m.ExplContatosPageModule)
   }
 
 
