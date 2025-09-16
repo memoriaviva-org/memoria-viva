@@ -29,10 +29,10 @@ export class TelaDeCarregamentoPage {
     setTimeout(() => {
       this.showMemoriaVivaTexto = true;
     }, 1000);
-    setTimeout(() => {
-      this.router.navigateByUrl('/video-introdutorio', { replaceUrl: true });
-    }, 4000);
+    // setTimeout(() => {
+    //   this.router.navigateByUrl('/video-introdutorio', { replaceUrl: true });
+    // }, 4000);
   }
 
-  
+
 }
