@@ -20,6 +20,14 @@
   box-sizing: border-box;
 }
 
+[vw] {
+  position: fixed !important;
+  bottom: 90px !important;
+  right: 20px !important;
+  z-index: 99999 !important;
+}
+
+
 body {
   margin-bottom: 60px;
 }

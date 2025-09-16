@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,8 @@ import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../firebase.config';
 
+declare var Vlibras: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -16,12 +18,20 @@ import { firebaseConfig } from '../firebase.config';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class HomePage {
+export class HomePage implements AfterViewInit {
 
   constructor(
     private router: Router,
   ) {
     initializeApp(firebaseConfig); // inicializa o Firebase
+  }
+
+  ngAfterViewInit() {
+    if (typeof Vlibras !== 'undefined') {
+      new Vlibras.Widget('https://vlibras.gov.br/app');
+    } else {
+      console.warn('VLibras não carregado ainda');
+    }
   }
 
   async loginGoogle() {
