@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,20 +18,12 @@ declare var Vlibras: any;
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class HomePage implements AfterViewInit {
+export class HomePage {
 
   constructor(
     private router: Router,
   ) {
     initializeApp(firebaseConfig); // inicializa o Firebase
-  }
-
-  ngAfterViewInit() {
-    if (typeof Vlibras !== 'undefined') {
-      new Vlibras.Widget('https://vlibras.gov.br/app');
-    } else {
-      console.warn('VLibras não carregado ainda');
-    }
   }
 
   async loginGoogle() {
