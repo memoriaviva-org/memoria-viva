@@ -23,4 +23,8 @@ export class ExplFlashcardPage {
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela
   }
+
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
+  }
 }
