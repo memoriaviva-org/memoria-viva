@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,8 @@ import { AuthService } from '../services/auth.service';
 })
 
 export class PrincipalPage implements OnInit {
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
 
   mostrarJanela = false;
 
@@ -31,18 +33,28 @@ export class PrincipalPage implements OnInit {
     });
   }
 
-  speakText() {
-      const utterance = new SpeechSynthesisUtterance("Olá, este é um teste de acessibilidade.");
-      utterance.lang = "pt-BR";
-      speechSynthesis.speak(utterance);
-    }
-
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
   }
 
   fecharJanelaMais() {
     this.mostrarJanela = false;
+  }
+
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+
+    if (audio.paused) {
+      audio.style.display = 'block'; // mostra controles
+      audio.play();
+    } else {
+      audio.pause();
+    }
+
+    // Esconder player quando terminar
+    audio.onended = () => {
+      audio.style.display = 'none';
+    };
   }
 
 }
