@@ -23,4 +23,8 @@ export class ExplContatosPage {
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela
   }
+
+  fecharJanelaMais() {
+    this.mostrarJanela = false;
+  }
 }
