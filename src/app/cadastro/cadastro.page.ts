@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  standalone: false
 })
 export class CadastroPage {
   nome: string = '';
@@ -40,7 +39,7 @@ export class CadastroPage {
   }
 
     try {
-      const userCredential = await this.authService.register(this.email,   this.password, this.nome);
+      const userCredential = await this.authService.register(this.email, this.password, this.nome);
   
       const user = userCredential.user as User; // Ensure correct type
 

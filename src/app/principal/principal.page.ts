@@ -1,15 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  standalone: false
 })
 
 export class PrincipalPage implements OnInit {
@@ -25,7 +21,7 @@ export class PrincipalPage implements OnInit {
   ngOnInit() {
     this.authService.getCurrentUser().subscribe(async user => {
       if (user) {
-        await user.reload(); // <- Garante que o displayName está atualizado
+        await user.reload(); 
         this.nome = user.displayName ?? 'Usuário';
       } else {
         this.nome = 'Não autenticado';

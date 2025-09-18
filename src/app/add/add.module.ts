@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { AddPageRoutingModule } from './add-routing.module';
+import { RouterModule } from '@angular/router';
 
 import { AddPage } from './add.page';
 
 @NgModule({
+  declarations: [AddPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddPageRoutingModule,
-    AddPage
-  ],
+    RouterModule.forChild([{ path: '', component: AddPage }])
+  ]
 })
 export class AddPageModule {}

@@ -1,27 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RegistroService } from '../services/registro.service';
+import { RegistroService, MeuDia } from '../services/registro.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-meu-dia-registros',
   templateUrl: './meu-dia-registros.page.html',
   styleUrls: ['./meu-dia-registros.page.scss'],
-  standalone: true,
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule
-  ],
+  standalone: false
 })
 export class MeuDiaRegistrosPage implements OnInit {
-
+  registros$!: Observable<MeuDia[]>;
   mostrarJanela = false;
-
+  mostrarConfirmacao = false;
+  
   constructor(private registroService: RegistroService) {}
 
   ngOnInit() {
+    this.registros$ = this.registroService.verMeuDia();
   }
 
   mostrarJanelaMais() {
@@ -30,5 +25,13 @@ export class MeuDiaRegistrosPage implements OnInit {
 
   fecharJanelaMais() {
     this.mostrarJanela = false;
+  }
+
+  mostrarAlertaConfirmacao() {
+    this.mostrarConfirmacao = true;
+  }
+
+  naoExcluir() {
+    this.mostrarConfirmacao = false;
   }
 }

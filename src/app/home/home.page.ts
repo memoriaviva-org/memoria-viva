@@ -1,31 +1,40 @@
-import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
+import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth'; 
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../app/services/auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  standalone: false
 })
 export class HomePage {
 
-constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  constructor(    
+    private authService: AuthService,
+    private router: Router,
+    private toastController: ToastController) {}
 
   async loginGoogle() {
   try {
-    const result = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    console.log('Usuário logado:', result);
+    await this.authService.loginWithGoogle();
     this.router.navigateByUrl('/principal');
-  } catch (error) {
-    console.error('Erro no login:', error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      this.presentToast('Erro ao logar com Google: ' + error.message, 'danger');
+    } else {
+      this.presentToast('Erro desconhecido ao logar com Google.', 'danger');
+    }
   }
 }
+  async presentToast(mensagem: string, cor: string) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      color: cor,
+      duration: 2000
+    });
+    toast.present();
+  }
 }

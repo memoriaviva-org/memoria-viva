@@ -3,6 +3,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 
@@ -11,17 +12,13 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './atualizar-perfil.page.html',
   styleUrls: ['./atualizar-perfil.page.scss'],
   standalone: true,
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule
-  ],
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class AtualizarPerfilPage implements OnInit {
-  nome: string = '';
-  email: string = '';
-  idade: number = 0;
-  password: string = ''; // só se precisar reautenticar para mudar email
+  nome = '';
+  email = '';
+  idade = 0;
+  password = '';
 
   constructor(
     private authService: AuthService,
@@ -29,27 +26,31 @@ export class AtualizarPerfilPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.authService.getCurrentUser().subscribe(async user => {
-      if (user) {
-        await user.reload();
-        this.nome = user.displayName ?? '';
-        this.email = user.email ?? '';
-        // idade vem do Firestore :(
-      } else {
-        this.nome = '';
-        this.email = '';
-        this.idade = 0;
+  async ngOnInit() {
+    try {
+      // Pega o usuário atual como Promise
+      const user = await firstValueFrom(this.authService.getCurrentUser());
+      if (!user) return;
+
+      await user.reload();
+      this.email = user.email ?? '';
+      this.nome = user.displayName ?? '';
+
+      // Busca dados adicionais no Firestore
+      const userData = await this.authService.getUserData(user.uid);
+      if (userData) {
+        this.idade = userData['idade'] ?? 0;
+        this.nome = userData['nome'] ?? this.nome;
       }
-    });
+    } catch (err) {
+      console.error('Erro ao carregar dados do usuário:', err);
+    }
   }
 
   async atualizarDados() {
     try {
-      // Atualiza nome e idade no Firestore
       await this.authService.updateUserData(this.nome, this.idade);
 
-      // Atualiza email no Firebase Auth e Firestore
       if (this.email) {
         const res = await this.authService.updateUserEmail(this.email, this.password);
         if (!res.success) throw new Error(res.message);
@@ -60,28 +61,26 @@ export class AtualizarPerfilPage implements OnInit {
         duration: 2000,
         color: 'success'
       });
-      await toast.present();
+      toast.present();
     } catch (error: any) {
       const toast = await this.toastController.create({
         message: error.message || 'Erro ao atualizar dados.',
         duration: 2000,
         color: 'danger'
       });
-      await toast.present();
+      toast.present();
       console.error('Erro ao atualizar dados:', error);
     }
   }
 
   async logout() {
     await this.authService.logout();
-
     const toast = await this.toastController.create({
       message: 'Você saiu da conta.',
       duration: 2000,
       color: 'medium'
     });
-    await toast.present();
-
+    toast.present();
     this.router.navigateByUrl('/home');
   }
 }

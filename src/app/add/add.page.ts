@@ -1,61 +1,44 @@
-import { Component } from '@angular/core';
-import { IonicModule, ToastController } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RegistroService } from '../services/registro.service';
+import { Component, OnInit } from '@angular/core';
+import { RegistroService, MeuDia } from '../services/registro.service';
+import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.page.html',
   styleUrls: ['./add.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  standalone: false
 })
 export class AddPage {
 
-  mostrarConfirmacao = false;
-  mostrarMensagemSucesso = false;
-
   mostrarJanela = false;
+  mostrarMensagemSucesso = false;
+  mostrarConfirmacao = false;
 
-  // Dados do formulário
-  diaSemana: string = '';
   titulo: string = '';
+  diaSemana: string = '';
   horario: string = '';
 
-  // variáveis no component
-  arquivoSelecionado: File | null = null;
-  fotoSelecionadaUrl: string = '';
   carregando = false;
-  
+
   constructor(
     private registroService: RegistroService,
-    private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private toastController: ToastController
   ) {}
 
   async salvarRegistro() {
-    if (!this.titulo || !this.titulo.trim() || !this.diaSemana || !this.diaSemana.trim() || !this.horario || !this.horario.trim()) {
-      this.showToast('Por favor, preencha todos os campos');
-      return;
-    }
-
-
-    this.carregando = true;
+    const item: MeuDia = {
+      titulo: this.titulo,
+      diaSemana: this.diaSemana,
+      horario: Number(this.horario)
+    };
 
     try {
-      await this.registroService.salvarRegistro(this.titulo, this.diaSemana, this.horario);
-      this.mostrarMensagemSucesso = true;
-      this.limparFormulario();
-      // Se quiser redirecionar:
-      // this.router.navigate(['/home']);
+      await this.registroService.addItem(item);
+      this.router.navigateByUrl('/meu-dia-registros');
     } catch (error) {
-      console.error(error);
-      this.showToast('Erro ao salvar registro. Tente novamente.');
-    } finally {
-      this.carregando = false;
-      setTimeout(() => this.mostrarMensagemSucesso = false, 3000);
+      console.error('Erro ao adicionar item:', error);
     }
   }
 
@@ -65,12 +48,12 @@ export class AddPage {
     this.horario = '';
   }
 
-  async showToast(message: string) {
+  async showToast(msg: string) {
     const toast = await this.toastController.create({
-      message,
+      message: msg,
       duration: 3000,
       color: 'danger',
-      position: 'bottom',
+      position: 'bottom'
     });
     toast.present();
   }
@@ -83,7 +66,7 @@ export class AddPage {
     this.mostrarJanela = false;
   }
 
-  mostrarAlertaConfirmacao() {
+    mostrarAlertaConfirmacao() {
     this.mostrarConfirmacao = true;
   }
 
@@ -91,3 +74,5 @@ export class AddPage {
     this.mostrarConfirmacao = false;
   }
 }
+
+

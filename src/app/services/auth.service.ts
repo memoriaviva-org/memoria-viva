@@ -1,62 +1,97 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat/app';
+import {
+  Auth,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  updateProfile,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  updateEmail,
+  User,
+  signInWithRedirect,
+  user as authUser,
+  signInWithPopup
+} from '@angular/fire/auth';
+
+import {
+  Firestore,
+  doc,
+  setDoc,
+  getDoc
+} from '@angular/fire/firestore';
+
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(
-    private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore
-  ) {}
-  
 
-  // Login com Google
-  async loginWithGoogle() {
-    try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const result = await this.afAuth.signInWithPopup(provider);
-      return result;
-    } catch (error) {
-      console.error('Erro ao autenticar com Google:', error);
-      throw error;
-    }
+  constructor(
+    private auth: Auth,
+    private firestore: Firestore
+  ) {}
+
+  // Login com email e senha
+  login(email: string, senha: string) {
+    return signInWithEmailAndPassword(this.auth, email, senha);
   }
 
-  // Cadastro com nome
-  async register(email: string, password: string, nome?: string) {
-    const userCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
-    const user = userCredential.user;
+  // Cadastro de usuário
+  async register(email: string, senha: string, nome: string) {
+    const userCredential = await createUserWithEmailAndPassword(this.auth, email, senha);
 
-    if (user && nome) {
-      await user.updateProfile({ displayName: nome });
-      await user.reload();
+    if (userCredential.user) {
+      // Atualiza o displayName
+      await updateProfile(userCredential.user, { displayName: nome });
+
+      // Salva os dados no Firestore
+      const uid = userCredential.user.uid;
+      await setDoc(doc(this.firestore, `users/${uid}`), {
+        nome,
+        email
+      }, { merge: true });
     }
 
     return userCredential;
   }
 
-  // Login com email/senha
-  login(email: string, password: string) {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
-  }
-
   // Logout
   logout() {
-    return this.afAuth.signOut();
+    return signOut(this.auth);
   }
 
-  // Usuário atual (observable)
-  getCurrentUser() {
-    return this.afAuth.authState;
+  // Login com Google
+  loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(this.auth, provider);
+    
   }
+
+  // Observable do usuário atual
+  getCurrentUser(): Observable<User | null> {
+    return authUser(this.auth);
+  }
+
+  // Buscar dados do usuário no Firestore
+async getUserData(uid: string) {
+  // userRef e getDoc agora usam this.firestore, que é injetado
+  const userRef = doc(this.firestore, `users/${uid}`);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    return userSnap.data();
+  }
+  return null;
+}
 
   // Resetar senha
   async resetPassword(email: string) {
     try {
-      await this.afAuth.sendPasswordResetEmail(email);
+      await sendPasswordResetEmail(this.auth, email);
       return { success: true, message: 'Um link para redefinir sua senha foi enviado ao seu e-mail.' };
     } catch (error: any) {
       let errorMessage = 'Ocorreu um erro ao redefinir a senha.';
@@ -76,69 +111,42 @@ export class AuthService {
         case 'auth/too-many-requests':
           errorMessage = 'Muitas tentativas realizadas. Aguarde um pouco.';
           break;
-        default:
-          if (error.message) errorMessage = error.message;
       }
       return { success: false, message: errorMessage };
     }
   }
 
-  // Atualizar nome + idade no Firestore
+  // Atualizar nome e idade do usuário
   async updateUserData(nome: string, idade: number) {
-    const currentUser = await this.afAuth.currentUser;
+    const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
 
-   await currentUser.updateProfile({ displayName: nome });
+    await updateProfile(currentUser, { displayName: nome });
+
     const uid = currentUser.uid;
-    return this.firestore.collection('users').doc(uid).set({
+    return setDoc(doc(this.firestore, `users/${uid}`), {
       nome,
       idade,
       email: currentUser.email
     }, { merge: true });
-
   }
 
   // Atualizar email do usuário
   async updateUserEmail(newEmail: string, password?: string) {
-    const currentUser = await this.afAuth.currentUser;
+    const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
 
-    try {
-      // Reautenticação se senha for passada
-      if (password) {
-        const credential = firebase.auth.EmailAuthProvider.credential(
-          currentUser.email || '',
-          password
-        );
-        await currentUser.reauthenticateWithCredential(credential);
-      }
-
-      // Atualiza email no Firebase Auth
-      await currentUser.updateEmail(newEmail);
-
-      // Atualiza também no Firestore
-      const uid = currentUser.uid;
-      await this.firestore.collection('users').doc(uid).set({
-        email: newEmail
-      }, { merge: true });
-
-      return { success: true, message: 'Email atualizado com sucesso!' };
-    } catch (error: any) {
-      let errorMessage = 'Erro ao atualizar o email.';
-      switch (error.code) {
-        case 'auth/email-already-in-use':
-          errorMessage = 'Este email já está em uso.';
-          break;
-        case 'auth/invalid-email':
-          errorMessage = 'O email informado é inválido.';
-          break;
-        case 'auth/requires-recent-login':
-          errorMessage = 'Para atualizar o email, faça login novamente.';
-          break;
-        default:
-          if (error.message) errorMessage = error.message;
-      }
-      return { success: false, message: errorMessage };
+    if (password) {
+      const credential = EmailAuthProvider.credential(currentUser.email || '', password);
+      await reauthenticateWithCredential(currentUser, credential);
     }
+
+    await updateEmail(currentUser, newEmail);
+
+    // Atualiza também no Firestore
+    const uid = currentUser.uid;
+    await setDoc(doc(this.firestore, `users/${uid}`), { email: newEmail }, { merge: true });
+
+    return { success: true, message: 'Email atualizado com sucesso!' };
   }
 }
