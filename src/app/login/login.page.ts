@@ -45,7 +45,7 @@ export class LoginPage  {
  async loginGoogle() {
   try {
     await this.authService.loginWithGoogle();
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/principal');
   } catch (error: unknown) {
     if (error instanceof Error) {
       this.presentToast('Erro ao logar com Google: ' + error.message, 'danger');

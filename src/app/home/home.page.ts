@@ -5,11 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
-
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '../firebase.config';
-
-declare var Vlibras: any;
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-home',
@@ -20,19 +17,15 @@ declare var Vlibras: any;
 })
 export class HomePage {
 
-  constructor(
-    private router: Router,
-  ) {
-    initializeApp(firebaseConfig); // inicializa o Firebase
-  }
+constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
   async loginGoogle() {
-    try {
-      const result = await FirebaseAuthentication.signInWithGoogle();
-      console.log('Usuário logado:', result);
-      this.router.navigateByUrl('/principal');
-    } catch (error: any) {
-      console.error('Erro no login:', error);
-    }
+  try {
+    const result = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    console.log('Usuário logado:', result);
+    this.router.navigateByUrl('/principal');
+  } catch (error) {
+    console.error('Erro no login:', error);
   }
+}
 }

@@ -11,6 +11,7 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore
   ) {}
+  
 
   // Login com Google
   async loginWithGoogle() {
@@ -87,14 +88,14 @@ export class AuthService {
     const currentUser = await this.afAuth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
 
-    await currentUser.updateProfile({ displayName: nome });
-
+   await currentUser.updateProfile({ displayName: nome });
     const uid = currentUser.uid;
     return this.firestore.collection('users').doc(uid).set({
       nome,
       idade,
       email: currentUser.email
     }, { merge: true });
+
   }
 
   // Atualizar email do usuário
