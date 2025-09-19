@@ -3,13 +3,18 @@ import { Firestore, collection, collectionData, doc, addDoc, updateDoc, deleteDo
 import { Auth, user } from '@angular/fire/auth';
 import { Observable, of, switchMap } from 'rxjs';
 
+export type TipoMidia = 'imagem' | 'video' | 'audio' | null;
+
 export interface MeuDia {
+  tipoMidia: TipoMidia;
   id?: string;
   titulo: string;
   diaSemana: string;
-  horario: number;
+  horario: string;
   createdAt?: number;
+  midiaUrl?: string;
 }
+
 
 @Injectable({
   providedIn: 'root'

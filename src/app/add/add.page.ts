@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { TipoMidia } from './../services/registro.service';
+import { Component } from '@angular/core';
 import { RegistroService, MeuDia } from '../services/registro.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -18,6 +19,10 @@ export class AddPage {
   titulo: string = '';
   diaSemana: string = '';
   horario: string = '';
+  tipoMidia: TipoMidia | null = null; // Corrigido
+
+  arquivoSelecionado: File | null = null;
+  fotoSelecionadaUrl: string | null = null;
 
   carregando = false;
 
@@ -28,10 +33,21 @@ export class AddPage {
   ) {}
 
   async salvarRegistro() {
+    // Detecta tipo de mídia
+    if (this.arquivoSelecionado) {
+      if (this.arquivoSelecionado.type.startsWith('image/')) this.tipoMidia = 'imagem';
+      else if (this.arquivoSelecionado.type.startsWith('video/')) this.tipoMidia = 'video';
+      else if (this.arquivoSelecionado.type.startsWith('audio/')) this.tipoMidia = 'audio';
+    } else {
+      this.tipoMidia = null;
+    }
+
     const item: MeuDia = {
       titulo: this.titulo,
       diaSemana: this.diaSemana,
-      horario: Number(this.horario)
+      horario: this.horario,
+      midiaUrl: this.fotoSelecionadaUrl || '',
+      tipoMidia: this.tipoMidia
     };
 
     try {
@@ -39,6 +55,20 @@ export class AddPage {
       this.router.navigateByUrl('/meu-dia-registros');
     } catch (error) {
       console.error('Erro ao adicionar item:', error);
+      this.showToast('Erro ao salvar registro');
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.arquivoSelecionado = input.files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.fotoSelecionadaUrl = reader.result as string;
+      };
+      reader.readAsDataURL(this.arquivoSelecionado);
     }
   }
 
@@ -46,6 +76,9 @@ export class AddPage {
     this.titulo = '';
     this.diaSemana = '';
     this.horario = '';
+    this.tipoMidia = null;
+    this.arquivoSelecionado = null;
+    this.fotoSelecionadaUrl = null;
   }
 
   async showToast(msg: string) {
@@ -66,7 +99,7 @@ export class AddPage {
     this.mostrarJanela = false;
   }
 
-    mostrarAlertaConfirmacao() {
+  mostrarAlertaConfirmacao() {
     this.mostrarConfirmacao = true;
   }
 
@@ -74,5 +107,3 @@ export class AddPage {
     this.mostrarConfirmacao = false;
   }
 }
-
-

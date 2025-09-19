@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistroService, MeuDia } from '../services/registro.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-meu-dia-registros',
@@ -9,14 +9,23 @@ import { Observable } from 'rxjs';
   standalone: false
 })
 export class MeuDiaRegistrosPage implements OnInit {
-  registros$!: Observable<MeuDia[]>;
+  registrosAgrupados$!: Observable<{ [dia: string]: MeuDia[] }>;
   mostrarJanela = false;
   mostrarConfirmacao = false;
-  
+
   constructor(private registroService: RegistroService) {}
 
   ngOnInit() {
-    this.registros$ = this.registroService.verMeuDia();
+    this.registrosAgrupados$ = this.registroService.verMeuDia().pipe(
+      map(registros => {
+        const grupos: { [dia: string]: MeuDia[] } = {};
+        for (const r of registros) {
+          if (!grupos[r.diaSemana]) grupos[r.diaSemana] = [];
+          grupos[r.diaSemana].push(r);
+        }
+        return grupos;
+      })
+    );
   }
 
   mostrarJanelaMais() {
@@ -34,4 +43,8 @@ export class MeuDiaRegistrosPage implements OnInit {
   naoExcluir() {
     this.mostrarConfirmacao = false;
   }
+
+
 }
+
+

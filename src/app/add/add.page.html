@@ -43,27 +43,27 @@
         <ion-input placeholder="Horário"  type="time" class="input-item"  [(ngModel)]="horario"></ion-input>
     </ion-item>
 
-<!--
-<ion-item class="input-item">
-  <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
-  <ion-label class="midia-label">Vídeo ou Foto</ion-label>
-  <input
-    type="file"
-    accept="image/*,video/*,audio/*"
-    (change)="onFileSelected($event)"
-    class="input-file"
-  />
 
-<img *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('image/')"
-     [src]="fotoSelecionadaUrl"
-     alt="Preview" style="max-width: 50px; max-height: 50px;">
-<video *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('video/')"
-       [src]="fotoSelecionadaUrl"
-       controls style="max-width: 50px; max-height: 50px;">
-</video>
+  <ion-item class="input-item">
+    <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
+    <ion-label class="midia-label">Vídeo ou Foto</ion-label>
+    <input
+      type="file"
+      accept="image/*,video/*,audio/*"
+      (change)="onFileSelected($event)"
+      class="input-file"
+    />
 
-</ion-item>
--->
+  <img *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('image/')"
+      [src]="fotoSelecionadaUrl"
+      alt="Preview" style="max-width: 50px; max-height: 50px;">
+  <video *ngIf="fotoSelecionadaUrl && arquivoSelecionado?.type?.startsWith('video/')"
+        [src]="fotoSelecionadaUrl"
+        controls style="max-width: 50px; max-height: 50px;">
+  </video>
+
+  </ion-item>
+
 
 
   <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
