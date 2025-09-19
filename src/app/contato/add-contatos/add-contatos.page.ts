@@ -10,29 +10,62 @@ import { FormsModule } from '@angular/forms';
   imports: [
     IonicModule,
     CommonModule,
-    FormsModule ],
+    FormsModule
+  ],
 })
 export class AddContatosPage {
 
- constructor() {}
+  telefone: string = '';
 
- mostrarJanela = false;
- mostrarMensagemSucesso = false;
- mostrarConfirmacao = false;
- 
+  constructor() {}
+
+  mostrarJanela = false;
+  mostrarMensagemSucesso = false;
+  mostrarConfirmacao = false;
+
   mostrarJanelaMais() {
-    this.mostrarJanela = !this.mostrarJanela
+    this.mostrarJanela = !this.mostrarJanela;
   }
 
   fecharJanelaMais() {
     this.mostrarJanela = false;
   }
 
-    mostrarAlertaConfirmacao() {
+  mostrarAlertaConfirmacao() {
     this.mostrarConfirmacao = true;
   }
 
   naoExcluir() {
     this.mostrarConfirmacao = false;
+  }
+
+  maskPhone(event: any) {
+    const input = event.target;
+    let value: string = input.value.replace(/\D/g, ''); // Só números
+
+    if (value.length > 11) {
+      value = value.slice(0, 11);
+    }
+
+    if (value.length <= 10) {
+      if (value.length > 6) {
+        value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+      } else if (value.length > 2) {
+        value = value.replace(/^(\d{2})(\d{0,4})/, '($1) $2');
+      } else if (value.length > 0) {
+        value = value.replace(/^(\d{0,2})/, '($1');
+      }
+    } else {
+      if (value.length > 7) {
+        value = value.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+      } else if (value.length > 2) {
+        value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+      } else if (value.length > 0) {
+        value = value.replace(/^(\d{0,2})/, '($1');
+      }
+    }
+
+    input.value = value;
+    this.telefone = value; // Atualiza a variável com o valor formatado
   }
 }

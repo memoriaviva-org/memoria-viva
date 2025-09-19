@@ -32,12 +32,13 @@
 
   <div class="form-page">
     <div class="form-wrapper">
-
       <div class="add-container">
 
   <ion-item class="input-item">
     <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
-    <ion-input placeholder="Digite o nome"></ion-input>
+    <ion-input  placeholder="Digite o nome"
+    maxlength="50"
+    pattern="[A-Za-zÀ-ÿ ]+"></ion-input>
 </ion-item>
 
 <ion-item class="input-item">
@@ -52,10 +53,17 @@
       <ion-select-option value="amigo">Amigo</ion-select-option>
     </ion-select></ion-item>
 
-<ion-item class="input-item">
-  <ion-icon slot="start" name="add-circle" class="icon-input green"></ion-icon>
-  <ion-input placeholder="Digite o telefone"></ion-input>
-</ion-item>
+    <ion-item class="input-item">
+      <ion-icon slot="start" name="add-circle" class="icon-input green"></ion-icon>
+      <ion-input
+        placeholder="(99) 99999-9999"
+        maxlength="15"
+        inputmode="tel"
+        type="tel"
+        [(ngModel)]="telefone"
+        (input)="maskPhone($event)"
+      ></ion-input>
+    </ion-item>
 
 <ion-item class="input-item">
   <ion-icon slot="start" name="add-circle" class="icon-input purple"></ion-icon>
