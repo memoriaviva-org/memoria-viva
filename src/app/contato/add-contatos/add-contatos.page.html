@@ -30,25 +30,79 @@
 
 <ion-content fullscreen>
 
-  <div class="contatos-container">
-    <img class="menina-laranja" src="assets/img/menina-laranja.png">
+  <div class="form-page">
+    <div class="form-wrapper">
 
-    <p class="contatos-texto-explicativo">
-      Nessa tela, você pode adicionar <br>
-      os contatos das pessoas <br>
-      importantes para você. Para <br>
-      adicionar, clique no botão roxo <br>
-      abaixo e registre suas informações.
-    </p>
+      <div class="add-container">
 
-    <ion-button class="adicionar-contato-btn" href="/add-contatos">
-      <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
-        <circle cx="35" cy="35" r="35" fill="#9C3FC3"/>
-      </svg>
+  <ion-item class="input-item">
+    <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
+    <ion-input placeholder="Digite o nome"></ion-input>
+</ion-item>
 
-      <ion-icon class="icone-mais" name="add-outline"></ion-icon>
-    </ion-button>
+<ion-item class="input-item">
+    <ion-icon slot="start" name="add-circle" class="icon-input blue"></ion-icon>
+    <ion-select placeholder="Selecione a relação com o contato" >
+      <ion-select-option value="mae">Mãe</ion-select-option>
+      <ion-select-option value="pai">Pai</ion-select-option>
+      <ion-select-option value="filho">Filho</ion-select-option>
+      <ion-select-option value="filha">Filha</ion-select-option>
+      <ion-select-option value="sobrinho">Sobrinho</ion-select-option>
+      <ion-select-option value="sobrinha">Sobrinha</ion-select-option>
+      <ion-select-option value="amigo">Amigo</ion-select-option>
+    </ion-select></ion-item>
 
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input green"></ion-icon>
+  <ion-input placeholder="Digite o telefone"></ion-input>
+</ion-item>
+
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input purple"></ion-icon>
+  <ion-input placeholder="Digite o endereço"></ion-input>
+</ion-item>
+
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input yellow"></ion-icon>
+  <ion-input placeholder="Adicione a foto"></ion-input>
+</ion-item>
+
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input red"></ion-icon>
+  <ion-input placeholder="Adicione o áudio"></ion-input>
+</ion-item>
+
+      </div>
+    </div>
+  </div>
+
+<div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
+      <div class="alerta-confirmacao-texto">
+        Tem certeza que deseja excluir?
+      </div>
+      <div class="alerta-confirmacao-btns">
+        <ion-button class="alerta-confirmacao-sim-btn">
+          SIM
+        </ion-button>
+        <ion-button (click)="naoExcluir()" class="alerta-confirmacao-nao-btn">
+          NÃO
+        </ion-button>
+      </div>
+    </div>
+
+    <div *ngIf="mostrarMensagemSucesso" class="alerta-confirmacao-sucesso">
+      Exclusão feita com sucesso
+    </div>
+
+    <div class="secao-salvar-excluir">
+      <ion-button class="btn-salvar">
+        <p class="salvar-text">Salvar</p>
+      </ion-button>
+
+      <ion-button (click)="mostrarAlertaConfirmacao()" class="btn-excluir">
+        <ion-icon class="excluir-icone" name="trash-outline"></ion-icon>
+      </ion-button>
+    </div>
 
     <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 
@@ -75,9 +129,22 @@
         </div>
       </ion-button>
     </div>
-  </div>
 
-  <ion-footer class="contatos-footer">
+
+  <ion-footer class="contato-footer">
+
+    <ion-button class="voltar-btn" href="expl-contatos">
+      <div class="voltar-btn-div">
+        <div class="voltar-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M15.65 26L26.85 37.2L24 40L8 24L24 8L26.85 10.8L15.65 22H40V26H15.65Z" fill="#737373"/>
+          </svg>
+        </div>
+        <div class="voltar-texto">
+          <p class="voltar">Voltar</p>
+        </div>
+      </div>
+    </ion-button>
 
     <ion-button class="inicio-btn" href="principal">
       <div class="inicio-btn-div">
@@ -107,4 +174,3 @@
 
   </ion-footer>
 
-</ion-content>

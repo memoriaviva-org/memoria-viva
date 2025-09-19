@@ -104,7 +104,11 @@ const routes: Routes = [
   {
     path: 'expl-contatos',
     loadChildren: () => import('./contato/expl-contatos/expl-contatos.module').then(m => m.ExplContatosPageModule)
+  },  {
+    path: 'add-contatos',
+    loadChildren: () => import('./contato/add-contatos/add-contatos.module').then( m => m.AddContatosPageModule)
   }
+
 ];
 
 @NgModule({
