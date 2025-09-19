@@ -39,19 +39,23 @@ export class PrincipalPage implements OnInit {
 
   toggleAudio() {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
 
     if (audio.paused) {
-      audio.style.display = 'block'; // mostra controles
-      audio.play();
-    } else {
-      audio.pause();
-    }
+        // Esconde botão e mostra player
+        button.style.display = 'none';
+        audio.style.display = 'block';
+        audio.play();
+      } else {
+        audio.pause();
+      }
 
-    // Esconder player quando terminar
-    audio.onended = () => {
-      audio.style.display = 'none';
-    };
-  }
+        // Quando terminar, esconde player e volta botão
+        audio.onended = () => {
+        audio.style.display = 'none';
+        button.style.display = 'inline-flex'; // volta o ion-button
+      };
+    }
 
 }
 
