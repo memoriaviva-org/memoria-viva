@@ -13,7 +13,20 @@
   <div class="form-container">
     <ion-input class="custom-input" fill="outline" placeholder="Nome" type="nome" [(ngModel)]="nome"></ion-input>
     <ion-input class="custom-input" fill="outline" placeholder="E-mail" type="email" [(ngModel)]="email"></ion-input>
-    <ion-input class="custom-input" fill="outline" placeholder="Senha" type="password" [(ngModel)]="password"></ion-input>
+    
+    <ion-input 
+      class="custom-input" 
+      fill="outline" 
+      [type]="mostrarSenha ? 'text' : 'password'"
+      placeholder="Senha" 
+      [(ngModel)]="password">
+      <ion-icon
+        [name]="mostrarSenha ? 'eye' : 'eye-off'"
+        slot="end"
+        (click)="togglePassword()"
+        style="cursor: pointer;">
+      </ion-icon>
+    </ion-input>
 
     <div class="btn-cadastrar">
       <ion-button fill="clear" class="custom-outline" (click)="register()">Cadastrar</ion-button>

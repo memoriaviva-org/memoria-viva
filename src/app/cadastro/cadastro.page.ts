@@ -18,12 +18,19 @@ export class CadastroPage {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
+  
+  mostrarSenha = false;
 
   constructor(
     private authService: AuthService,
     private toastController: ToastController,
     private router: Router
   ) {}
+
+  // ver senha
+  togglePassword() {
+    this.mostrarSenha = !this.mostrarSenha;
+  }
 
   async register() {
     this.errorMessage = ''; // limpa erro anterior
