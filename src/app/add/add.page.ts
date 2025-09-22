@@ -19,7 +19,7 @@ export class AddPage {
   titulo: string = '';
   diaSemana: string = '';
   horario: string = '';
-  tipoMidia: TipoMidia | null = null; // Corrigido
+  tipoMidia: TipoMidia | null = null;
 
   arquivoSelecionado: File | null = null;
   fotoSelecionadaUrl: string | null = null;
@@ -30,10 +30,21 @@ export class AddPage {
     private registroService: RegistroService,
     private router: Router,
     private toastController: ToastController
-  ) {}
+  ) {
+    const dias = [
+      'Domingo',
+      'Segunda-Feira',
+      'Terça-Feira',
+      'Quarta-Feira',
+      'Quinta-Feira',
+      'Sexta-Feira',
+      'Sábado'
+    ];
+    const hoje = new Date().getDay(); // 0 = Domingo ... 6 = Sábado
+    this.diaSemana = dias[hoje];
+  }
 
   async salvarRegistro() {
-    // Detecta tipo de mídia
     if (this.arquivoSelecionado) {
       if (this.arquivoSelecionado.type.startsWith('image/')) this.tipoMidia = 'imagem';
       else if (this.arquivoSelecionado.type.startsWith('video/')) this.tipoMidia = 'video';
