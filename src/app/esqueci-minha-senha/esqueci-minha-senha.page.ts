@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class EsqueciMinhaSenhaPage {
 
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
   email: string = ''; // e-mail digitado
   errorMessage: string = ''; // mensagem de erro na tela
 
@@ -27,7 +29,7 @@ export class EsqueciMinhaSenhaPage {
     this.errorMessage = ''; // limpa erro anterior
 
     if (!this.email) {
-      this.errorMessage = 'Digite um e-mail válido.'; // O Firebase, por segurança, não retorna erro de “usuário não encontrado” no sendPasswordResetEmail para evitar que alguém descubra quais e-mails existem ou não no sistema. 
+      this.errorMessage = 'Digite um e-mail válido.'; // O Firebase, por segurança, não retorna erro de “usuário não encontrado” no sendPasswordResetEmail para evitar que alguém descubra quais e-mails existem ou não no sistema.
       return;
     }
 
@@ -45,11 +47,11 @@ export class EsqueciMinhaSenhaPage {
 
         this.email = ''; // limpa campo
 
-        
+
 
         // só redireciona após o toast sumir (sem precisar setTimeout)
         await toast.onDidDismiss();
-        
+
         // tira o foco do botão atual
         (document.activeElement as HTMLElement)?.blur();
 
@@ -64,4 +66,24 @@ export class EsqueciMinhaSenhaPage {
       this.errorMessage = 'Ocorreu um erro ao tentar redefinir a senha. Tente novamente mais tarde.';
     }
   }
+  
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
+
+    if (audio.paused) {
+        // Esconde botão e mostra player
+        button.style.display = 'none';
+        audio.style.display = 'block';
+        audio.play();
+      } else {
+        audio.pause();
+      }
+
+        // Quando terminar, esconde player e volta botão
+        audio.onended = () => {
+        audio.style.display = 'none';
+        button.style.display = 'inline-flex'; // volta o ion-button
+      };
+    }
 }

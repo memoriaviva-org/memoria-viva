@@ -1,5 +1,5 @@
 import { TipoMidia } from './../services/registro.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { RegistroService, MeuDia } from '../services/registro.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class AddPage {
+
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   mostrarJanela = false;
   mostrarMensagemSucesso = false;
@@ -117,4 +119,24 @@ export class AddPage {
   naoExcluir() {
     this.mostrarConfirmacao = false;
   }
+
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
+
+    if (audio.paused) {
+        // Esconde botão e mostra player
+        button.style.display = 'none';
+        audio.style.display = 'block';
+        audio.play();
+      } else {
+        audio.pause();
+      }
+
+        // Quando terminar, esconde player e volta botão
+        audio.onended = () => {
+        audio.style.display = 'none';
+        button.style.display = 'inline-flex'; // volta o ion-button
+      };
+    }
 }

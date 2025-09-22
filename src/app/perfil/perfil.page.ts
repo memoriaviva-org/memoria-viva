@@ -1,5 +1,5 @@
 // import { firebase } from 'firebase/compat/app';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +21,8 @@ import { AuthService } from '../services/auth.service';
 
 
 export class PerfilPage implements OnInit {
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
   mostrarJanela = false
 
   nome: string = '';
@@ -58,5 +60,25 @@ export class PerfilPage implements OnInit {
   voltar() {
     this.navCtrl.back();
   }
+
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
+
+    if (audio.paused) {
+        // Esconde botão e mostra player
+        button.style.display = 'none';
+        audio.style.display = 'block';
+        audio.play();
+      } else {
+        audio.pause();
+      }
+
+        // Quando terminar, esconde player e volta botão
+        audio.onended = () => {
+        audio.style.display = 'none';
+        button.style.display = 'inline-flex'; // volta o ion-button
+      };
+    }
 
 }

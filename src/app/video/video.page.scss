@@ -94,3 +94,16 @@ p {
   bottom: 55%;
   right: 30px;
 }
+
+.audio-scss {
+  position: fixed;
+  top: 38%;
+  left: 30%;
+  z-index: 1;
+  width: 272px;
+  display: none;
+}
+
+.audio-scss::-webkit-media-controls-panel {
+  background-color: red;
+}

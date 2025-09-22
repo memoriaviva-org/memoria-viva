@@ -22,9 +22,11 @@
       <source src="assets/video-teste.mp4" type="video/mp4" />
     </video>
 
-    <ion-button class="audio-btn" fill="solid">
+    <ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
       <ion-icon name="volume-high" slot="icon-only"></ion-icon>
     </ion-button>
+
+    <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
     <div class="video-container">
       <ion-button class="btn-sim">

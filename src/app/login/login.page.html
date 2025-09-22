@@ -6,25 +6,28 @@
      <img src="assets/img/bonequinho.png" alt="Logo" class="header-logo" />
   </div>
 
-  <ion-button class="audio-btn" fill="solid">
-  <ion-icon name="volume-high" slot="icon-only"></ion-icon>
-</ion-button>
+  <ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
+    <ion-icon name="volume-high" slot="icon-only"></ion-icon>
+  </ion-button>
+
+  <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
+
 <br>
 <br>
   <div class="form-container">
-<ion-input 
-  class="custom-input" 
-  fill="outline" 
-  placeholder="E-mail" 
+<ion-input
+  class="custom-input"
+  fill="outline"
+  placeholder="E-mail"
   type="email"
   [(ngModel)]="email">
 </ion-input>
 
-<ion-input 
-  class="custom-input" 
-  fill="outline" 
+<ion-input
+  class="custom-input"
+  fill="outline"
   [type]="mostrarSenha ? 'text' : 'password'"
-  placeholder="Senha" 
+  placeholder="Senha"
   type="password"
   [(ngModel)]="senha">
 <ion-icon
@@ -34,7 +37,7 @@
     style="cursor: pointer;">
   </ion-icon>
 </ion-input>
-   
+
       <a href="/esqueci-minha-senha" class="link-senha">Esqueci minha senha</a>
 
 

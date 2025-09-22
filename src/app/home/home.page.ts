@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
-import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth'; 
-import { Component, OnInit } from '@angular/core';
+import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../app/services/auth.service';
 import { ToastController } from '@ionic/angular';
 
@@ -12,7 +12,9 @@ import { ToastController } from '@ionic/angular';
 })
 export class HomePage {
 
-  constructor(    
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
+  constructor(
     private authService: AuthService,
     private router: Router,
     private toastController: ToastController) {}
@@ -37,4 +39,24 @@ export class HomePage {
     });
     toast.present();
   }
+
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
+
+    if (audio.paused) {
+        // Esconde botão e mostra player
+        button.style.display = 'none';
+        audio.style.display = 'block';
+        audio.play();
+      } else {
+        audio.pause();
+      }
+
+        // Quando terminar, esconde player e volta botão
+        audio.onended = () => {
+        audio.style.display = 'none';
+        button.style.display = 'inline-flex'; // volta o ion-button
+      };
+    }
 }

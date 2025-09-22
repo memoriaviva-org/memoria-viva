@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../../app/services/auth.service';
@@ -11,6 +11,8 @@ import { AuthService } from '../../app/services/auth.service';
 })
 
 export class LoginPage {
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
   mostrarSenha = false;
   email = '';
   senha = '';
@@ -51,4 +53,24 @@ export class LoginPage {
     });
     toast.present();
   }
+
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
+
+    if (audio.paused) {
+        // Esconde botão e mostra player
+        button.style.display = 'none';
+        audio.style.display = 'block';
+        audio.play();
+      } else {
+        audio.pause();
+      }
+
+        // Quando terminar, esconde player e volta botão
+        audio.onended = () => {
+        audio.style.display = 'none';
+        button.style.display = 'inline-flex'; // volta o ion-button
+      };
+    }
 }

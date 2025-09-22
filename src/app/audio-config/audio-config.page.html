@@ -8,9 +8,11 @@
   <p class="audio-config-text">Áudio</p>
 </div>
 
-<ion-button class="audio-btn" fill="solid">
-    <ion-icon name="volume-high" slot="icon-only"></ion-icon>
+<ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
+  <ion-icon name="volume-high" slot="icon-only"></ion-icon>
 </ion-button>
+
+<audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
 <ion-content fullscreen>
 

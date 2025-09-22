@@ -8,7 +8,7 @@
 
 .contatos-text {
   position: absolute;
-  top: 45%;
+  top: 53%;
   left: 44%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -33,7 +33,7 @@
   box-sizing: border-box;
 
 
-  margin-top: 105px;
+  margin-top: 125px;
 }
 
 .add-container {
@@ -62,7 +62,7 @@
 
 .secao-salvar-excluir {
   width: 412px;
-  height: 134px;
+  height: 79px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -271,3 +271,20 @@
     margin-top: 3px;
   }
   }
+
+p {
+  margin: 0;
+}
+
+.audio-scss {
+  position: absolute;
+  top: 29%;
+  left: 30%;
+  z-index: 1;
+  width: 272px;
+  display: none;
+}
+
+.audio-scss::-webkit-media-controls-panel {
+  background-color: #DB6326;
+}

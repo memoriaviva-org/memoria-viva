@@ -182,3 +182,16 @@ p {
   margin: 0;
   margin-bottom: 5px;
 }
+
+.audio-scss {
+  position: absolute;
+  top: 29%;
+  left: 30%;
+  z-index: 1;
+  width: 272px;
+  display: none;
+}
+
+.audio-scss::-webkit-media-controls-panel {
+  background-color: red;
+}

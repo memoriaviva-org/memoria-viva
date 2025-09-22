@@ -27,7 +27,7 @@
   display: flex;
   justify-content: center; /* centraliza horizontalmente */
   gap: 40px;               /* espaço entre os dois botões */
-  margin-top: 125px;
+  margin-top: 145px;
   margin-bottom: 30px;
 }
 
@@ -203,4 +203,17 @@ ion-button.inicio-btn {
 
 p {
   margin: 0;
+}
+
+.audio-scss {
+  position: absolute;
+  top: 29%;
+  left: 30%;
+  z-index: 1;
+  width: 272px;
+  display: none;
+}
+
+.audio-scss::-webkit-media-controls-panel {
+  background-color: #9C3FC3;
 }

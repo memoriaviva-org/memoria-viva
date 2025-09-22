@@ -35,7 +35,7 @@
   box-sizing: border-box;
 
   /* Distância do topo */
-  margin-top: 110px; /* ajusta para subir ou descer os inputs */
+  margin-top: 127px; /* ajusta para subir ou descer os inputs */
 }
 
 /* Conteúdo do formulário */
@@ -79,7 +79,7 @@
     border-radius: 10px;
     width: 185px;
     height: 56px;
-    margin-top: 24px;
+    margin-top: 12px;
     z-index: -1;
     border-color: black;
     border: 2.5px solid black;
@@ -205,4 +205,17 @@
 
 p {
   margin: 0;
+}
+
+.audio-scss {
+  position: absolute;
+  top: 29%;
+  left: 30%;
+  z-index: 1;
+  width: 272px;
+  display: none;
+}
+
+.audio-scss::-webkit-media-controls-panel {
+  background-color: #9C3FC3;
 }

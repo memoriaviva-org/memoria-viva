@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RegistroService, MeuDia } from '../services/registro.service';
 import { Observable, map } from 'rxjs';
 
@@ -14,6 +14,8 @@ export class MeuDiaRegistrosPage implements OnInit {
   mostrarConfirmacao = false;
 
   constructor(private registroService: RegistroService) {}
+
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   ngOnInit() {
     this.registrosAgrupados$ = this.registroService.verMeuDia().pipe(
@@ -44,7 +46,25 @@ export class MeuDiaRegistrosPage implements OnInit {
     this.mostrarConfirmacao = false;
   }
 
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
 
+    if (audio.paused) {
+        // Esconde botão e mostra player
+        button.style.display = 'none';
+        audio.style.display = 'block';
+        audio.play();
+      } else {
+        audio.pause();
+      }
+
+        // Quando terminar, esconde player e volta botão
+        audio.onended = () => {
+        audio.style.display = 'none';
+        button.style.display = 'inline-flex'; // volta o ion-button
+      };
+    }
 }
 
 

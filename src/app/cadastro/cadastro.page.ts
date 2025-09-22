@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'; 
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,11 +14,13 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class CadastroPage {
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
   nome: string = '';
   email: string = '';
   password: string = '';
   errorMessage: string = '';
-  
+
   mostrarSenha = false;
 
   constructor(
@@ -47,7 +49,7 @@ export class CadastroPage {
 
     try {
       const userCredential = await this.authService.register(this.email, this.password, this.nome);
-  
+
       const user = userCredential.user as User; // Ensure correct type
 
 
@@ -93,4 +95,24 @@ export class CadastroPage {
         return 'Ocorreu um erro ao cadastrar. Tente novamente mais tarde.';
     }
   }
+
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
+
+    if (audio.paused) {
+        // Esconde botão e mostra player
+        button.style.display = 'none';
+        audio.style.display = 'block';
+        audio.play();
+      } else {
+        audio.pause();
+      }
+
+        // Quando terminar, esconde player e volta botão
+        audio.onended = () => {
+        audio.style.display = 'none';
+        button.style.display = 'inline-flex'; // volta o ion-button
+      };
+    }
 }

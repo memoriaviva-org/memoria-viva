@@ -200,11 +200,6 @@ p {
   margin-bottom: 5px;
 }
 
-.vp-access-button {
-  position: fixed !important;
-  top: -42% !important;
-}
-
 .audio-scss {
   position: fixed;
   top: 29%;
@@ -215,7 +210,7 @@ p {
 }
 
 .audio-scss::-webkit-media-controls-panel {
-  background-color: red
+  background-color: red;
 }
 
 
