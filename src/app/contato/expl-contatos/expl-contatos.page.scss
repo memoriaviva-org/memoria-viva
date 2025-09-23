@@ -133,5 +133,6 @@ ion-button.inicio-btn {
 }
 
 .audio-scss::-webkit-media-controls-panel {
-  background-color: #DB6326
+  background-color: #249CD9;
+  filter: invert(1);
 }
