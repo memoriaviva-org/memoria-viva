@@ -68,21 +68,7 @@
 }
 
 .audio-scss::-webkit-media-controls-panel {
-  background-color: red;
+  background-color: #00FFFF;
+  filter: invert(1);
 }
 
-.audio-scss::-webkit-media-controls-play-button,
-.audio-scss::-webkit-media-controls-volume-slider,
-.audio-scss::-webkit-media-controls-mute-button,
-.audio-scss::-webkit-media-controls-fullscreen-button,
-.audio-scss::-webkit-media-controls-seek-back-button,
-.audio-scss::-webkit-media-controls-seek-forward-button,
-.audio-scss::-webkit-media-controls-volume-bar,
-.audio-scss::-webkit-media-controls-current-time-display,
-.audio-scss::-webkit-media-controls-duration-display,
-.audio-scss::-webkit-media-controls-time-remaining-display,
-.audio-scss::-webkit-media-controls-rewind-button,
-.audio-scss::-webkit-media-controls-fast-forward-button,
-.audio-scss::-webkit-media-controls-more-button {
-  filter: brightness(0) invert(1);
-}

@@ -16,6 +16,8 @@ export class LoginPage {
   mostrarSenha = false;
   email = '';
   senha = '';
+  isEmailFocused: boolean = false;
+  isSenhaFocused: boolean = false;
 
   constructor(
     private authService: AuthService,

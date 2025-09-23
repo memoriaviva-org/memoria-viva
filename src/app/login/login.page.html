@@ -15,37 +15,46 @@
 <br>
 <br>
   <div class="form-container">
-<ion-input
-  class="custom-input"
-  fill="outline"
-  placeholder="E-mail"
-  type="email"
-  [(ngModel)]="email">
-</ion-input>
 
-<ion-input
-  class="custom-input"
-  fill="outline"
-  [type]="mostrarSenha ? 'text' : 'password'"
-  placeholder="Senha"
-  type="password"
-  [(ngModel)]="senha">
-<ion-icon
-    [name]="mostrarSenha ? 'eye' : 'eye-off'"
-    slot="end"
-    (click)="togglePassword()"
-    style="cursor: pointer;">
-  </ion-icon>
-</ion-input>
-
-      <a href="/esqueci-minha-senha" class="link-senha">Esqueci minha senha</a>
-
-
-    <div class="btn-entrar">
-  <ion-button fill="clear" class="custom-outline" (click)="login()">Entrar</ion-button>
-  </div>
-    <a href="/cadastro" class="link-cadastro">Não tem uma conta?</a>
+  <!-- Campo E-mail -->
+  <div class="floating-input">
+    <label [class.active]="email || isEmailFocused">E-mail</label>
+    <ion-input
+      class="custom-input"
+      fill="outline"
+      type="email"
+      [(ngModel)]="email"
+      (ionFocus)="isEmailFocused = true"
+      (ionBlur)="isEmailFocused = false">
+    </ion-input>
   </div>
 
-  <div class="app-footer">Memória Viva</div>
+  <!-- Campo Senha com ícone -->
+  <div class="floating-input">
+    <label [class.active]="senha || isSenhaFocused">Senha</label>
+    <ion-input
+      class="custom-input"
+      fill="outline"
+      [type]="mostrarSenha ? 'text' : 'password'"
+      [(ngModel)]="senha"
+      (ionFocus)="isSenhaFocused = true"
+      (ionBlur)="isSenhaFocused = false">
+      <ion-icon
+        [name]="mostrarSenha ? 'eye' : 'eye-off'"
+        slot="end"
+        (click)="togglePassword()"
+        class="mostrar-senha-icon">
+      </ion-icon>
+    </ion-input>
+  </div>
+
+  <!-- Links e botão -->
+  <a href="/esqueci-minha-senha" class="link-senha">Esqueci minha senha</a>
+
+  <div class="btn-entrar">
+    <ion-button fill="clear" class="custom-outline" (click)="login()">Entrar</ion-button>
+  </div>
+
+  <a href="/cadastro" class="link-cadastro">Não tem uma conta?</a>
+</div>
 </ion-content>

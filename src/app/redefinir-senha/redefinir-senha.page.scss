@@ -42,5 +42,6 @@
 }
 
 .audio-scss::-webkit-media-controls-panel {
-  background-color: red;
+  background-color: #00FFFF;
+  filter: invert(1);
 }
