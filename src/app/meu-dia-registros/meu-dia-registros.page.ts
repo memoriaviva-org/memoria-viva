@@ -30,6 +30,14 @@ export class MeuDiaRegistrosPage implements OnInit {
     );
   }
 
+  groupByTwo(registros: MeuDia[]): MeuDia[][] {
+    const grupos: MeuDia[][] = [];
+    for (let i = 0; i < registros.length; i += 2) {
+      grupos.push(registros.slice(i, i + 2));
+    }
+    return grupos;
+  }
+  
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
   }

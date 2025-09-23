@@ -23,9 +23,9 @@
       <p class="dia-da-semana-titulo">{{ dia.key }}</p>
 
       <!-- seção de registros do dia -->
-      <div class="secao-registros" *ngFor="let registro of dia.value">
+      <div class="secao-registros">
 
-        <ion-label class="dia-registro">
+        <ion-label class="dia-registro"  *ngFor="let registro of dia.value">
           <div class="video-foto">
             <ion-button class="video-foto-btn">
               <img  [src]="registro.tipoMidia === 'imagem' ? registro.midiaUrl
