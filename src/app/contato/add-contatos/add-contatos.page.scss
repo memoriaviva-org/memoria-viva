@@ -116,7 +116,7 @@
     top: 67%;
     left: 61%;
     transform: translate(-50%, -50%);
-    background-color: #FAC946;
+    background-color: #DB6326;
     width: 282.217px;
     height: 82px;
     border-radius: 38px;
@@ -131,6 +131,7 @@
     font-size: 16px;
     height: 18.5px;
     margin-top: 12px;
+    color: white;
   }
 
   .alerta-confirmacao-btns {
@@ -145,12 +146,14 @@
     --background: transparent;
     --box-shadow: transparent;
     margin-right: 41px;
+    color: white;
   }
 
   .alerta-confirmacao-nao-btn {
     all: unset;
     --background: transparent;
     --box-shadow: transparent;
+    color: white;
   }
 
   .alerta-confirmacao-sucesso {
