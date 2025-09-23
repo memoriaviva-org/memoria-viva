@@ -40,20 +40,13 @@
     <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
     <ion-input  placeholder="Digite o nome"
     maxlength="50"
-    pattern="[A-Za-zÀ-ÿ ]+"></ion-input>
+    pattern="[A-Za-zÀ-ÿ ]+" [(ngModel)]="nome"></ion-input>
 </ion-item>
 
 <ion-item class="input-item">
     <ion-icon slot="start" name="add-circle" class="icon-input blue"></ion-icon>
-    <ion-select placeholder="Selecione a relação com o contato" >
-      <ion-select-option value="mae">Mãe</ion-select-option>
-      <ion-select-option value="pai">Pai</ion-select-option>
-      <ion-select-option value="filho">Filho</ion-select-option>
-      <ion-select-option value="filha">Filha</ion-select-option>
-      <ion-select-option value="sobrinho">Sobrinho</ion-select-option>
-      <ion-select-option value="sobrinha">Sobrinha</ion-select-option>
-      <ion-select-option value="amigo">Amigo</ion-select-option>
-    </ion-select></ion-item>
+    <ion-input placeholder="Selecione a relação com o contato" [(ngModel)]="relacao">
+    </ion-input></ion-item>
 
     <ion-item class="input-item">
       <ion-icon slot="start" name="add-circle" class="icon-input green"></ion-icon>
@@ -69,18 +62,38 @@
 
 <ion-item class="input-item">
   <ion-icon slot="start" name="add-circle" class="icon-input purple"></ion-icon>
-  <ion-input placeholder="Digite o endereço"></ion-input>
+  <ion-input placeholder="Digite o endereço" [(ngModel)]="endereco"></ion-input>
 </ion-item>
 
 <ion-item class="input-item">
   <ion-icon slot="start" name="add-circle" class="icon-input yellow"></ion-icon>
-  <ion-input placeholder="Adicione a foto"></ion-input>
+  <ion-label class="midia-label">Adicione a foto</ion-label>
+  <input
+    type="file"
+    accept="image/*,video/*,audio/*"
+    (change)="onFileSelected($event)"
+    class="input-file"
+  />
+
+<img *ngIf="fotoUrl && arquivoSelecionado?.type?.startsWith('image/')"
+    [src]="fotoUrl"
+    alt="Preview" style="max-width: 50px; max-height: 50px;">
 </ion-item>
+
 
 <ion-item class="input-item">
   <ion-icon slot="start" name="add-circle" class="icon-input red"></ion-icon>
-  <ion-input placeholder="Adicione o áudio"></ion-input>
+  <ion-label class="midia-label">Adicione o áudio</ion-label>
+  <input
+    type="file"
+    accept="audio/*"
+    (change)="onAudioSelected($event)"
+    class="input-file"
+  />
+
+  <audio *ngIf="audioUrl" [src]="audioUrl" controls style="max-width: 150px;"></audio>
 </ion-item>
+
 
       </div>
     </div>
@@ -105,7 +118,7 @@
     </div>
 
     <div class="secao-salvar-excluir">
-      <ion-button class="btn-salvar">
+      <ion-button class="btn-salvar" (click)="salvarContato()">
         <p class="salvar-text">Salvar</p>
       </ion-button>
 

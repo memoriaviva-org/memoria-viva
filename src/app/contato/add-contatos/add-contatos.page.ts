@@ -3,6 +3,11 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { ContatoService, Contato } from '../../services/contato.service';
+
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-add-contatos',
   templateUrl: './add-contatos.page.html',
@@ -15,15 +20,89 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddContatosPage {
 
-  telefone: string = '';
+  nome = '';
+  relacao = '';
+  telefone = '';
+  endereco = '';
+  fotoUrl = '';
+  audioUrl = '';
 
-  constructor() {}
+  arquivoSelecionado: File | null = null;
+  audioSelecionado: File | null = null;
+
+  mostrarMensagemSucesso = false;
+  mostrarConfirmacao = false;
+
+  constructor(
+    private contatoService: ContatoService,
+    private router: Router,
+    private toastController: ToastController
+  ) {}
+
+  async salvarContato() {
+    if (!this.nome || !this.telefone) {
+      this.showToast('Nome e telefone são obrigatórios');
+      return;
+    }
+
+    const contato: Contato = {
+      nome: this.nome,
+      relacao: this.relacao,
+      telefone: this.telefone,
+      endereco: this.endereco,
+      fotoUrl: this.fotoUrl,
+      audioUrl: this.audioUrl
+    };
+
+    try {
+      await this.contatoService.addContato(contato);
+      this.router.navigateByUrl('/contatos'); // rota de listagem
+    } catch (err) {
+      console.error(err);
+      this.showToast('Erro ao salvar contato');
+    }
+  }
+
+  async showToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 3000,
+      color: 'danger',
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.arquivoSelecionado = input.files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.fotoUrl = reader.result as string;
+      };
+      reader.readAsDataURL(this.arquivoSelecionado);
+    }
+  }
+
+  onAudioSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.audioSelecionado = input.files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.audioUrl = reader.result as string;
+      };
+      reader.readAsDataURL(this.audioSelecionado);
+    }
+  }
+
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   mostrarJanela = false;
-  mostrarMensagemSucesso = false;
-  mostrarConfirmacao = false;
 
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
