@@ -78,10 +78,6 @@ const routes: Routes = [
     loadChildren: () => import('./meu-dia-registros/meu-dia-registros.module').then(m => m.MeuDiaRegistrosPageModule)
   },
   {
-    path: 'meu-dia',
-    loadChildren: () => import('./meu-dia/meu-dia.module').then(m => m.MeuDiaPageModule)
-  },
-  {
     path: 'categorias',
     loadChildren: () => import('./categorias/categorias.module').then(m => m.CategoriasPageModule)
   },
@@ -104,7 +100,8 @@ const routes: Routes = [
   {
     path: 'expl-contatos',
     loadChildren: () => import('./contato/expl-contatos/expl-contatos.module').then(m => m.ExplContatosPageModule)
-  },  {
+  },
+  {
     path: 'add-contatos',
     loadChildren: () => import('./contato/add-contatos/add-contatos.module').then( m => m.AddContatosPageModule)
   }
