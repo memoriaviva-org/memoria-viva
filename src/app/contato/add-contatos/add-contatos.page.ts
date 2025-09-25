@@ -1,7 +1,4 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 import { ContatoService, Contato } from '../../services/contato.service';
 
@@ -12,11 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-add-contatos',
   templateUrl: './add-contatos.page.html',
   styleUrls: ['./add-contatos.page.scss'],
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule
-  ],
+  standalone: false
 })
 export class AddContatosPage {
 
@@ -56,7 +49,7 @@ export class AddContatosPage {
 
     try {
       await this.contatoService.addContato(contato);
-      this.router.navigateByUrl('/contatos'); // rota de listagem
+      this.router.navigateByUrl('/expl-contatos'); // rota de listagem
     } catch (err) {
       console.error(err);
       this.showToast('Erro ao salvar contato');
