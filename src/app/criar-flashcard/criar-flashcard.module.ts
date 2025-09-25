@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { CriarFlashcardPageRoutingModule } from './criar-flashcard-routing.module';
+import { RouterModule } from '@angular/router';
 
 import { CriarFlashcardPage } from './criar-flashcard.page';
 
 @NgModule({
+  declarations: [CriarFlashcardPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CriarFlashcardPageRoutingModule,
-    CriarFlashcardPage
-  ],
+    RouterModule.forChild([{ path: '', component: CriarFlashcardPage }])
+  ]
 })
 export class CriarFlashcardPageModule {}

@@ -52,9 +52,9 @@ export class FuncCategoriaPage {
     this.router.navigate(['/gerenciar-flashcards'], { queryParams: { categoria: this.categoria } });
   }
 
-  // Navegar para adicionar flashcard
+  // Navegar para criar flashcard
   irParaAdicionar() {
-    this.router.navigate(['/adicionar-flashcard'], { queryParams: { categoria: this.categoria } });
+    this.router.navigate(['/criar-flashcard'], { queryParams: { categoria: this.categoria } });
   }
 
   // Botão voltar

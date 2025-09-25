@@ -20,48 +20,70 @@
 
       <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
-      <!-- Título -->
-      <ion-item class="input-item">
-        <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
-        <ion-input placeholder="Digite o título"></ion-input>
-      </ion-item>
+     <!-- Título -->
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
+  <ion-input placeholder="Digite o título" [(ngModel)]="titulo"></ion-input>
+</ion-item>
 
-      <!-- Pergunta (áudio) -->
-      <ion-item class="input-item">
-        <ion-icon slot="start" name="add-circle" class="icon-input blue"></ion-icon>
-        <ion-input placeholder="Selecione um áudio para a pergunta"></ion-input>
-      </ion-item>
+<!-- Mídia auxiliar -->
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input green"></ion-icon>
+  <ion-label>Adicionar mídia auxiliar</ion-label>
+  <input
+    type="file"
+    accept="image/*,video/*,audio/*"
+    (change)="onFileSelected($event)"
+    class="input-file"
+  />
 
-      <!-- Mídia auxiliar -->
-      <ion-item class="input-item">
-        <ion-icon slot="start" name="add-circle" class="icon-input green"></ion-icon>
-        <ion-input placeholder="Foto, áudio ou vídeo"></ion-input>
-      </ion-item>
+  <!-- Preview dentro do mesmo ion-item -->
+  <ng-container *ngIf="arquivoPreview">
+    <img *ngIf="tipoArquivo === 'image'" [src]="arquivoPreview" alt="Preview" style="max-width: 50px; max-height: 50px; margin-left: 10px;" />
+    <video *ngIf="tipoArquivo === 'video'" [src]="arquivoPreview" controls style="max-width: 100px; max-height: 50px; margin-left: 10px;"></video>
+    <audio *ngIf="tipoArquivo === 'audio'" [src]="arquivoPreview" controls style="margin-left: 10px;"></audio>
+  </ng-container>
+</ion-item>
 
-      <!-- Resposta (áudio) -->
-      <ion-item class="input-item">
-        <ion-icon slot="start" name="add-circle" class="icon-input purple"></ion-icon>
-        <ion-input placeholder="Selecione um áudio para a resposta"></ion-input>
-      </ion-item>
+<!-- Áudio Pergunta -->
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input blue"></ion-icon>
+  <ion-label>Áudio da pergunta</ion-label>
+  <input type="file" accept="audio/*" (change)="onAudioSelected($event,'pergunta')" class="input-file" />
 
-      <!-- Categoria (fixa) -->
-      <ion-item class="input-item">
-        <ion-icon slot="start" name="add-circle" class="icon-input yellow"></ion-icon>
-        <ion-select placeholder="Selecione uma categoria">
-          <ion-select-option value="familia">Família</ion-select-option>
-          <ion-select-option value="amigos">Amigos</ion-select-option>
-          <ion-select-option value="passatempos">Passatempos</ion-select-option>
-          <ion-select-option value="infancia">Infância</ion-select-option>
-          <ion-select-option value="juventude">Juventude</ion-select-option>
-          <ion-select-option value="animaisEstimacao">Animais de Estimação</ion-select-option>
-          <ion-select-option value="memoriasMarcantes">Memórias Marcantes</ion-select-option>
-        </ion-select>
-      </ion-item>
+  <audio *ngIf="audioPergunta" [src]="audioPergunta" controls style="margin-left: 10px;"></audio>
+</ion-item>
+
+<!-- Áudio Resposta -->
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input purple"></ion-icon>
+  <ion-label>Áudio da resposta</ion-label>
+  <input type="file" accept="audio/*" (change)="onAudioSelected($event,'resposta')" class="input-file" />
+
+  <audio *ngIf="audioResposta" [src]="audioResposta" controls style="margin-left: 10px;"></audio>
+</ion-item>
+
+<!-- Categoria -->
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input yellow"></ion-icon>
+  <ion-select placeholder="Selecione uma categoria" [(ngModel)]="categoriaSelecionada">
+    <ion-select-option value="Família">Família</ion-select-option>
+    <ion-select-option value="Amigos">Amigos</ion-select-option>
+    <ion-select-option value="Passatempos">Passatempos</ion-select-option>
+    <ion-select-option value="Infância">Infância</ion-select-option>
+    <ion-select-option value="Juventude">Juventude</ion-select-option>
+    <ion-select-option value="Animais de Estimação">Animais de Estimação</ion-select-option>
+    <ion-select-option value="Momentos Marcantes">Memórias Marcantes</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
 <div class="save-btn-wrapper">
-  <button class="btn-salvar">
-      <p class="salvar-text">Salvar</p>
-  </button>
+  <ion-button class="btn-salvar" expand="block" color="primary" (click)="salvarFlashcard()">
+    <p class="salvar-text">Salvar</p>
+  </ion-button>
 </div>
+
 
 <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 
