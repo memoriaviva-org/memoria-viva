@@ -13,6 +13,12 @@ import { FormsModule } from '@angular/forms';
 export class RedefinirSenhaPage {
   constructor() {}
 
+  senha = '';
+  repSenha = '';
+
+  isSenhaFocused: boolean = false;
+  isRepSenhaFocused: boolean = false;
+
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   toggleAudio() {

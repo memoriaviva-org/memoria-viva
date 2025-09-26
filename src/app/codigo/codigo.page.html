@@ -14,7 +14,17 @@
 
   <div class="form-container">
     <ion-input></ion-input>
-  <ion-input class="custom-input" fill="outline" placeholder="Código" type="text"></ion-input>
+
+  <div class="floating-input">
+    <label [class.active]="codigo || isCodigoFocused">Código</label>
+    <ion-input
+      class="custom-input"
+      fill="outline"
+      type="text"
+      (ionFocus)="isCodigoFocused = true"
+      (ionBlur)="isCodigoFocused = false">
+    </ion-input>
+  </div>
 
     <div class="btn-entrar">
   <ion-button fill="clear" class="custom-outline">Enviar</ion-button>
