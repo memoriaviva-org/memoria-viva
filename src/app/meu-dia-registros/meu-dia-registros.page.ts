@@ -38,6 +38,19 @@ export class MeuDiaRegistrosPage implements OnInit {
     return grupos;
   }
 
+  imagemSelecionada: string | null = null;
+
+  abrirImagemTelaCheia(url: string | undefined) {
+    if (!url) return;
+    console.log('Abrindo imagem:', url);
+    this.imagemSelecionada = url;
+  }
+
+  fecharImagemTelaCheia() {
+    this.imagemSelecionada = null;
+  }
+
+
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
   }
