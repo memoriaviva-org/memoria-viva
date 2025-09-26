@@ -15,6 +15,11 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 export class CodigoPage {
+
+  isCodigoFocused: boolean = false;
+
+  codigo = '';
+
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   toggleAudio() {
