@@ -115,18 +115,17 @@ width: 80px;
 }
 
 .btn-salvar {
-all: unset;
---background: #9C3FC3;
---border-radius: 6px;
-border-radius: 10px;
-width: 185px;
-height: 56px;
---border-color: black;
-border: 2.5px solid black;
-display: flex;
-justify-content: center;
-align-items: center;
-filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  all: unset;
+  --background: #9C3FC3;
+  --border-radius: 6px;
+  width: 185px;
+  height: 56px;
+  --border-color: black;
+  border: 2.5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .salvar-text {
