@@ -16,6 +16,8 @@ export class EsqueciMinhaSenhaPage {
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
+  isEmailFocused: boolean = false;
+
   email: string = ''; // e-mail digitado
   errorMessage: string = ''; // mensagem de erro na tela
 
@@ -66,7 +68,7 @@ export class EsqueciMinhaSenhaPage {
       this.errorMessage = 'Ocorreu um erro ao tentar redefinir a senha. Tente novamente mais tarde.';
     }
   }
-  
+
   toggleAudio() {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     const button = document.querySelector('.audio-btn') as HTMLElement;

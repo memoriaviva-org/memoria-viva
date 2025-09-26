@@ -13,12 +13,18 @@
   <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
   <div class="form-container">
-    <ion-input class="custom-input" fill="outline"
-      type="email"
-      label="Digite seu e-mail"
-      labelPlacement="floating"
-      [(ngModel)]="email">
-    </ion-input>
+
+    <div class="floating-input">
+      <label [class.active]="email || isEmailFocused">E-mail</label>
+      <ion-input
+        class="custom-input"
+        fill="outline"
+        type="email"
+        [(ngModel)]="email"
+        (ionFocus)="isEmailFocused = true"
+        (ionBlur)="isEmailFocused = false">
+      </ion-input>
+    </div>
 
     <div class="btn-enivar">
       <ion-button fill="clear" class="custom-outline"  (click)="onResetPassword()">Enviar <br/> e-mail</ion-button>
