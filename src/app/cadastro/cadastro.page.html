@@ -11,24 +11,50 @@
   </ion-button>
 
   <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
-  
-  <div class="form-container">
-    <ion-input class="custom-input" fill="outline" placeholder="Nome" type="nome" [(ngModel)]="nome"></ion-input>
-    <ion-input class="custom-input" fill="outline" placeholder="E-mail" type="email" [(ngModel)]="email"></ion-input>
 
-    <ion-input
-      class="custom-input"
-      fill="outline"
-      [type]="mostrarSenha ? 'text' : 'password'"
-      placeholder="Senha"
-      [(ngModel)]="password">
-      <ion-icon
-        [name]="mostrarSenha ? 'eye' : 'eye-off'"
-        slot="end"
-        (click)="togglePassword()"
-        style="cursor: pointer;">
-      </ion-icon>
-    </ion-input>
+  <div class="form-container">
+
+    <div class="floating-input">
+      <label [class.active]="nome || isNomeFocused">Nome</label>
+      <ion-input
+        class="custom-input"
+        fill="outline"
+        type="nome"
+        [(ngModel)]="nome"
+        (ionFocus)="isNomeFocused = true"
+        (ionBlur)="isNomeFocused = false">
+      </ion-input>
+    </div>
+
+    <div class="floating-input">
+      <label [class.active]="email || isEmailFocused">E-mail</label>
+      <ion-input
+        class="custom-input"
+        fill="outline"
+        type="email"
+        [(ngModel)]="email"
+        (ionFocus)="isEmailFocused = true"
+        (ionBlur)="isEmailFocused = false">
+      </ion-input>
+    </div>
+
+    <div class="floating-input">
+      <label [class.active]="password || isSenhaFocused">Senha</label>
+      <ion-input
+        class="custom-input"
+        fill="outline"
+        [type]="mostrarSenha ? 'text' : 'password'"
+        [(ngModel)]="password"
+        (ionFocus)="isSenhaFocused = true"
+        (ionBlur)="isSenhaFocused = false">
+        <ion-icon
+          [name]="mostrarSenha ? 'eye' : 'eye-off'"
+          slot="end"
+          (click)="togglePassword()"
+          style="cursor: pointer;">
+        </ion-icon>
+      </ion-input>
+    </div>
 
     <div class="btn-cadastrar">
       <ion-button fill="clear" class="custom-outline" (click)="register()">Cadastrar</ion-button>

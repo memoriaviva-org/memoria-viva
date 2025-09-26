@@ -21,6 +21,10 @@ export class CadastroPage {
   password: string = '';
   errorMessage: string = '';
 
+  isEmailFocused: boolean = false;
+  isSenhaFocused: boolean = false;
+  isNomeFocused: boolean = false;
+
   mostrarSenha = false;
 
   constructor(
