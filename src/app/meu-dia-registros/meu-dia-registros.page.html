@@ -28,13 +28,18 @@
           <ion-label class="dia-registro" *ngFor="let registro of dia.value">
             <div class="video-foto">
               <ion-button class="video-foto-btn">
-                <img [src]="
-                  registro.tipoMidia === 'imagem' ? registro.midiaUrl :
-                  registro.tipoMidia === 'video' ? 'assets/video-play-1.png' :
-                  'assets/audio-icon.png'
-                ">
+                <img
+                  [src]="
+                    registro.tipoMidia === 'imagem' ? registro.midiaUrl :
+                    registro.tipoMidia === 'video' ? 'assets/video-play-1.png' :
+                    'assets/audio-icon.png'
+                  "
+                  (click)="registro.tipoMidia === 'imagem' && registro.midiaUrl && abrirImagemTelaCheia(registro.midiaUrl)"
+                  class="imagem-miniatura"
+                />
               </ion-button>
             </div>
+
 
             <div class="dia-registro-titulo">{{ registro.titulo }}</div>
             <div class="dia-registro-horario">{{ registro.horario }}</div>
@@ -124,4 +129,14 @@
     </ion-button>
   </ion-footer>
 
+                        <!-- Modal de imagem em tela cheia -->
+            <div class="modal-imagem" *ngIf="imagemSelecionada" (click)="fecharImagemTelaCheia()">
+              <img
+                [src]="imagemSelecionada"
+                class="imagem-tela-cheia"
+                (click)="$event.stopPropagation()"
+              />
+              <button class="btn-fechar" (click)="fecharImagemTelaCheia()">✕</button>
+            </div>
+            
 </ion-content>

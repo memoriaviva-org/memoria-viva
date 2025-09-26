@@ -246,3 +246,42 @@ ion-button.inicio-btn {
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
+.imagem-miniatura {
+  width: 100%;
+  max-width: 100px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-imagem {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagem-tela-cheia {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.btn-fechar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  color: rgb(0, 0, 0);
+  font-size: 32px;
+  border: none;
+  cursor: pointer;
+  z-index: 100000;
+}
