@@ -51,7 +51,7 @@
       z-index: 2;
       color: #333;
       font-size: 20px;
-      margin-right: -30px;
+      margin-right: -42px;
     }
   }
 
@@ -85,6 +85,10 @@
     text-decoration: none;
     margin-top: 10px;
   }
+}
+
+::ng-deep ion-input .input-outline-container {
+  visibility: hidden;
 }
 
 .app-footer {
