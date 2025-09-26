@@ -15,8 +15,28 @@
 
   <div class="form-container">
     <ion-input></ion-input>
-  <ion-input class="custom-input" fill="outline" placeholder="Nova senha" type="password"></ion-input>
-  <ion-input class="custom-input" fill="outline" placeholder="Repita a senha" type="password"></ion-input>
+
+  <div class="floating-input">
+    <label [class.active]="senha || isSenhaFocused">Nova Senha</label>
+    <ion-input
+      class="custom-input"
+      fill="outline"
+      type="password"
+      (ionFocus)="isSenhaFocused = true"
+      (ionBlur)="isSenhaFocused = false">
+    </ion-input>
+  </div>
+
+  <div class="floating-input">
+    <label [class.active]="repSenha || isRepSenhaFocused">Repita a Senha</label>
+    <ion-input
+      class="custom-input"
+      fill="outline"
+      type="password"
+      (ionFocus)="isRepSenhaFocused = true"
+      (ionBlur)="isRepSenhaFocused = true">
+    </ion-input>
+  </div>
 
     <div class="btn-entrar">
   <ion-button fill="clear" class="custom-outline">Salvar</ion-button>
