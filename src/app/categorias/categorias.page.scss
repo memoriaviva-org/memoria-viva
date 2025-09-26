@@ -22,13 +22,12 @@
   width: 223px;
 }
 
-
 .btn-extra-container {
   display: flex;
   justify-content: center; /* centraliza horizontalmente */
   gap: 40px;               /* espaço entre os dois botões */
   margin-top: 145px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .btn-extra-item {
@@ -36,13 +35,14 @@
   flex-direction: column; /* mantém botão em cima, texto embaixo */
   align-items: center;    /* centraliza horizontalmente */
   text-align: center;     /* centraliza o texto */
-  gap: 6px;               /* espaço entre botão e texto */
+  gap: 6px;            /* espaço entre botão e texto */
+  width: 120px;
 }
 
 .btn-extra-item span {
   color: #737373;
   font-family: "Inter", sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
