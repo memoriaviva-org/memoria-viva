@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, collectionData, doc, addDoc, updateDoc, deleteDoc, query, orderBy } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, addDoc, updateDoc, deleteDoc, query, where, orderBy } from '@angular/fire/firestore';
 import { Auth, user } from '@angular/fire/auth';
 import { Observable, of, switchMap } from 'rxjs';
 
@@ -30,7 +30,17 @@ export class RegistroService {
       switchMap(u => {
         if (!u) return of([]);
         const colRef = collection(this.firestore, `users/${u.uid}/meuDia`);
-        const q = query(colRef, orderBy('createdAt', 'desc'));
+
+        // Definir limite 24h atrás
+        const limite = Date.now() - 24 * 60 * 60 * 1000;
+
+        // Query com filtro para pegar só os registros recentes
+        const q = query(
+          colRef,
+          where('createdAt', '>=', limite),
+          orderBy('createdAt', 'desc')
+        );
+
         return collectionData(q, { idField: 'id' }) as Observable<MeuDia[]>;
       })
     );
