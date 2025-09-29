@@ -63,7 +63,7 @@
 
   <!-- tela quando não houver registros -->
   <ng-template #semRegistros>
-    <div class="meu-dia-container">
+    <div *ngIf="!carregando" class=" meu-dia-container">
       <img class="menina-amarelo" src="assets/menina-amarelo-1.png">
       <p class="meu-dia-texto-explicativo">
         Nessa tela, você pode registrar <br>
@@ -138,5 +138,5 @@
               />
               <button class="btn-fechar" (click)="fecharImagemTelaCheia()">✕</button>
             </div>
-            
+
 </ion-content>

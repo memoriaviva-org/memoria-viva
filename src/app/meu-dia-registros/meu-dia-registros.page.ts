@@ -12,6 +12,7 @@ export class MeuDiaRegistrosPage implements OnInit {
   registrosAgrupados$!: Observable<{ [dia: string]: MeuDia[] }>;
   mostrarJanela = false;
   mostrarConfirmacao = false;
+  carregando = true;// flag de carregamento
 
   constructor(private registroService: RegistroService) {}
 
