@@ -61,7 +61,7 @@
       text-align: center;
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #000;
-      font-family: Inter;
+      font-family: "Open Sans", sans-serif;
       font-size: 20px;
       font-style: normal;
       font-weight: 700;
@@ -98,22 +98,30 @@
   }
 
   .bonequinho-img {
-      width: 40px;
-      height: 36px;
-      margin-left: 35px;
+    width: 40px;
+    height: 36px;
+    margin-left: 11px;
+    margin-right: 18px;
   }
 
   .fazer-flashcards-img {
-    margin-left: 30px;
+    margin-left: 32px;
+    margin-right: -12px;
   }
 
   .adicionar-flashcards-svg {
-    margin-left: 32px;
+    margin-left: -1px;
+    margin-right: 10px;
+  }
+
+  ion-icon {
+    width: 60px;
+    height: 60px;
   }
 
   .config-perfil-text {
-    margin-left: 34px;
-    margin-right: 68px;
+    margin-right: 46px;
+    width: 106px;
   }
 
   .func-categoria-footer {
