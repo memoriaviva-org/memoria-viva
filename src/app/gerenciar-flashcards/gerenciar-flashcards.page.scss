@@ -219,14 +219,14 @@ ion-button.flashcard-registro-editar-btn {
 }
 
 .flashcard-editar-text {
-  color: #000;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #FAC946;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+    color: #000;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #FAC946;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
 }
 
 /* --- BOTÃO DELETAR --- */
@@ -256,12 +256,12 @@ ion-button.flashcard-registro-deletar-btn {
 }
 
 .flashcard-deletar-text {
-  color: #000000;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #ff0000;
-  font-family: Inter, sans-serif;
-  font-weight: bold;
-  font-size: 12px;
+    color: #000000;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ff0000;
+    font-family: Inter, sans-serif;
+    font-weight: 100;
+    font-size: 14px;
 }
 
 /* --- TÍTULO DO FLASHCARD --- */
@@ -279,15 +279,15 @@ h2 {
 }
 
 .flashcard-titulo {
-  color: #000;
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  width: 100%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* --- SEÇÕES DO FLASHCARD --- */
@@ -297,14 +297,20 @@ h2 {
 }
 
 .flashcard-secao-titulo {
-  color: #000;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  text-align: left;
-  padding-left: 20px;
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    text-align: left;
+    padding-left: 20px;
+    margin-top: 9px;
+    margin-bottom: 16px;
+}
+
+h3 {
+  margin: 0;
 }
 
 /* --- COMPONENTES DE MÍDIA --- */

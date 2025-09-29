@@ -42,12 +42,12 @@
         </div>
       </ion-button>
     </div>
-    
+
     <!-- Título do flashcard -->
     <div class="flashcard-titulo-container">
       <h2 class="flashcard-titulo">{{ tituloFlashcard }}</h2>
     </div>
-    
+
     <div class="flashcard-secao pergunta-secao">
         <h3 class="flashcard-secao-titulo">Pergunta:</h3>
         <audio class="flashcard-audio" [src]="perguntaAudioSrc" controls></audio>
@@ -55,22 +55,22 @@
 
     <div class="flashcard-secao midia-auxiliar-secao">
         <h3 class="flashcard-secao-titulo">Mídia Auxiliar:</h3>
-        
-        <img *ngIf="midiaAuxiliarTipo === 'foto' && midiaAuxiliarSrc" 
-            [src]="midiaAuxiliarSrc" 
-            alt="Mídia Auxiliar" 
+
+        <img *ngIf="midiaAuxiliarTipo === 'foto' && midiaAuxiliarSrc"
+            [src]="midiaAuxiliarSrc"
+            alt="Mídia Auxiliar"
             class="flashcard-midia-img" />
-        
-        <video *ngIf="midiaAuxiliarTipo === 'video' && midiaAuxiliarSrc" 
-              [src]="midiaAuxiliarSrc" 
-              controls 
+
+        <video *ngIf="midiaAuxiliarTipo === 'video' && midiaAuxiliarSrc"
+              [src]="midiaAuxiliarSrc"
+              controls
               class="flashcard-midia-video"></video>
-              
-        <audio *ngIf="midiaAuxiliarTipo === 'audio' && midiaAuxiliarSrc" 
-              [src]="midiaAuxiliarSrc" 
-              controls 
+
+        <audio *ngIf="midiaAuxiliarTipo === 'audio' && midiaAuxiliarSrc"
+              [src]="midiaAuxiliarSrc"
+              controls
               class="flashcard-audio"></audio>
-              
+
         <p *ngIf="!midiaAuxiliarSrc" class="flashcard-sem-midia">Nenhuma mídia auxiliar adicionada.</p>
     </div>
 
@@ -78,7 +78,7 @@
         <h3 class="flashcard-secao-titulo">Resposta:</h3>
         <audio class="flashcard-audio" [src]="respostaAudioSrc" controls></audio>
     </div>
-    
+
   </div>
     <!-- fim do conteúdo -->
 

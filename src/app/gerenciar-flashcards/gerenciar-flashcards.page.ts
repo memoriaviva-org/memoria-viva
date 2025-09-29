@@ -22,7 +22,7 @@ export class GerenciarFlashcardsPage implements OnInit {
     // Variáveis das Mídias (Fontes)
   perguntaAudioSrc: string = 'assets/audio/audio-teste.m4a'; // Áudio da Pergunta
   respostaAudioSrc: string = 'assets/audio/audio-teste.m4a';   // Áudio da Resposta
-  
+
   // Mídia Auxiliar (Fonte e Tipo)
   midiaAuxiliarSrc: string = 'assets/foto-1.png'; // Pode ser .jpg, .mp4, .m4a, etc.
   midiaAuxiliarTipo: 'foto' | 'video' | 'audio' | 'none' = 'foto'; // Tipo da Mídia ('foto', 'video', 'audio' ou 'none')
