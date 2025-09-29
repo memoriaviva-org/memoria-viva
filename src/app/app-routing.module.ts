@@ -104,7 +104,11 @@ const routes: Routes = [
   {
     path: 'add-contatos',
     loadChildren: () => import('./contato/add-contatos/add-contatos.module').then( m => m.AddContatosPageModule)
+  },  {
+    path: 'gerenciar-flashcards',
+    loadChildren: () => import('./gerenciar-flashcards/gerenciar-flashcards.module').then( m => m.GerenciarFlashcardsPageModule)
   }
+
 
 ];
 
