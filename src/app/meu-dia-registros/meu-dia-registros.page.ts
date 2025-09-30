@@ -29,6 +29,9 @@ export class MeuDiaRegistrosPage implements OnInit {
         return grupos;
       })
     );
+    this.registrosAgrupados$.subscribe(() => {
+      this.carregando = false;
+    });
   }
 
   groupByTwo(registros: MeuDia[]): MeuDia[][] {
