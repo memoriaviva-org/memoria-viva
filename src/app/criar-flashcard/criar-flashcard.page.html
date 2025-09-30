@@ -77,6 +77,12 @@
   </ion-select>
 </ion-item>
 
+<ion-item class="input-item">
+  <ion-icon slot="start" name="add-circle" class="icon-input blue"></ion-icon>
+  <ion-input placeholder="Digite uma curiosidade"  [(ngModel)]="curiosidade"></ion-input>
+</ion-item>
+
+
 
 <div class="save-btn-wrapper">
   <ion-button class="btn-salvar" (click)="salvarFlashcard()">

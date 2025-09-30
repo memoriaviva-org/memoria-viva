@@ -18,6 +18,7 @@ export class CriarFlashcardPage {
   pergunta = '';
   resposta = '';
   categoriaSelecionada = '';
+  curiosidade ='';
 
   // base64
   midiaAuxiliar?: string;
@@ -57,7 +58,7 @@ export class CriarFlashcardPage {
       button.style.display = 'inline-flex';
     };
   }
-  
+
   // --- MÍDIA AUXILIAR (IMAGEM/VÍDEO/ÁUDIO) ---
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -141,7 +142,7 @@ export class CriarFlashcardPage {
     try {
       await this.flashcardService.addFlashcard(flashcard);
       alert('Flashcard salvo com sucesso!');
-      
+
       this.router.navigate(['/gerenciar-flashcards']);
     } catch (err) {
       console.error(err);
