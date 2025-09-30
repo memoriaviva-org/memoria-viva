@@ -51,6 +51,7 @@
 .form-content {
   width: 100%;
   max-width: 400px; /* largura máxima do formulário */
+  height: 620px;
   margin: 0 auto;   /* centraliza horizontalmente */
   display: flex;
   flex-direction: column;
@@ -75,6 +76,7 @@
 .icon-input.green  { color: #2ecc71; }
 .icon-input.orange { color: #f39c12; }
 .icon-input.purple { color: #9b59b6; }
+.icon-input.x { color: #ff0000}
 
 /* Botão Salvar estilo "Gerenciar Flashcards" */
 .save-btn-wrapper {
