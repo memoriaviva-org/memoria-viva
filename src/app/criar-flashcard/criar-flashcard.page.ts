@@ -14,9 +14,7 @@ export class CriarFlashcardPage {
 
   mostrarJanela = false;
 
-  titulo = '';
-  pergunta = '';
-  resposta = '';
+  tituloFlashcard = '';
   categoriaSelecionada = '';
 
   // base64
@@ -57,7 +55,7 @@ export class CriarFlashcardPage {
       button.style.display = 'inline-flex';
     };
   }
-  
+
   // --- MÍDIA AUXILIAR (IMAGEM/VÍDEO/ÁUDIO) ---
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -120,15 +118,15 @@ export class CriarFlashcardPage {
   async salvarFlashcard() {
     // Note: Mantive a checagem obrigatória para áudios para seguir a lógica original,
     // mas se o usuário pode não ter áudio, remova a checagem abaixo.
-    if (!this.titulo || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada) {
+    if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada) {
       alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta e Áudio da Resposta)!');
       return;
     }
 
     // Cria o objeto do flashcard com os Base64 (pequenos)
     const flashcard: Flashcard = {
-      titulo: this.titulo,
-      categoria: this.categoriaSelecionada,
+      tituloFlashcard: this.tituloFlashcard,
+      categoriaFlashcard: this.categoriaSelecionada,
       audioPergunta: this.audioPergunta,
       audioResposta: this.audioResposta
     };
@@ -141,7 +139,7 @@ export class CriarFlashcardPage {
     try {
       await this.flashcardService.addFlashcard(flashcard);
       alert('Flashcard salvo com sucesso!');
-      
+
       this.router.navigate(['/gerenciar-flashcards']);
     } catch (err) {
       console.error(err);
