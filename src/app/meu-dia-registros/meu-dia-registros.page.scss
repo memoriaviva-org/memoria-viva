@@ -1,3 +1,16 @@
+
+.video-preview,
+.video-player {
+  width: 70%;
+  max-height: 300px; /* ajuste conforme suas imagens */
+  object-fit: cover;
+  border-radius: 12px; /* mesmo arredondamento das imagens */
+  display: block;
+  margin: 0 auto;
+  margin-right: 95px;
+}
+
+
 .meu-dia-registros-svg {
   position: absolute;
   top: 45%;

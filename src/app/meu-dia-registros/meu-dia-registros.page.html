@@ -15,7 +15,7 @@
 <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
 <ion-content fullscreen>
-  
+
   <!-- Indicador de carregamento -->
   <div *ngIf="carregando" class="loading-container">
   <ion-spinner name="crescent"></ion-spinner>
@@ -37,12 +37,34 @@
                 <img
                   [src]="
                     registro.tipoMidia === 'imagem' ? registro.midiaUrl :
-                    registro.tipoMidia === 'video' ? 'assets/video-play-1.png' :
+                    registro.tipoMidia === 'video' ? registro.midiaUrl :
                     'assets/audio-icon.png'
                   "
-                  (click)="registro.tipoMidia === 'imagem' && registro.midiaUrl && abrirImagemTelaCheia(registro.midiaUrl)"
+                  (click)="abrirMidia(registro)"
                   class="imagem-miniatura"
                 />
+
+               <!-- Preview do vídeo (miniatura) -->
+                <video
+                  class="video-preview"
+                  [src]="registro.midiaUrl"
+                  muted
+                  playsinline
+                  preload="metadata"
+                  *ngIf="registro.tipoMidia === 'video' && !registro.reproduzindo"
+                  (click)="abrirMidia(registro)">
+                </video>
+
+                <!-- Player do vídeo -->
+                <video
+                  #videoPlayer
+                  [src]="registro.midiaUrl"
+                  class="video-player"
+                  controls
+                  autoplay
+                  *ngIf="registro.tipoMidia === 'video' && registro.reproduzindo">
+                </video>
+
               </ion-button>
             </div>
 

@@ -54,6 +54,14 @@ export class MeuDiaRegistrosPage implements OnInit {
     this.imagemSelecionada = null;
   }
 
+ abrirMidia(registro: any) {
+  if (registro.tipoMidia === 'imagem' && registro.midiaUrl) {
+    this.abrirImagemTelaCheia(registro.midiaUrl);
+  } else if (registro.tipoMidia === 'video' && registro.midiaUrl) {
+    registro.reproduzindo = !registro.reproduzindo;
+  }
+}
+
 
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;

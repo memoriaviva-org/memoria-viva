@@ -13,6 +13,7 @@ export interface MeuDia {
   horario: string;
   createdAt?: number;
   midiaUrl?: string;
+  reproduzindo?: boolean;
 }
 
 
