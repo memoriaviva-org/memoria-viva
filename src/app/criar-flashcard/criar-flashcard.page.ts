@@ -24,7 +24,7 @@ export class CriarFlashcardPage {
   audioPergunta?: string;
   audioResposta?: string;
 
-   // Arquivos e previews
+  // Arquivos e previews
   arquivoSelecionado?: File;
   tipoArquivo?: string; // 'image', 'video', 'audio'
   arquivoPreview?: string; // base64 para imagem/video/audio
@@ -42,6 +42,7 @@ export class CriarFlashcardPage {
   fecharJanelaMais() { this.mostrarJanela = false; }
 
   toggleAudio() {
+    // Lógica de áudio (mantida)
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     const button = document.querySelector('.audio-btn') as HTMLElement;
 
@@ -56,24 +57,23 @@ export class CriarFlashcardPage {
       button.style.display = 'inline-flex';
     };
   }
-
-  selecionarArquivo(event: any, tipo: 'midia' | 'audioPergunta' | 'audioResposta') {
-    const file: File = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64 = reader.result as string;
-      if (tipo === 'midia') this.midiaAuxiliar = base64;
-      if (tipo === 'audioPergunta') this.audioPergunta = base64;
-      if (tipo === 'audioResposta') this.audioResposta = base64;
-    };
-    reader.readAsDataURL(file); // converte para base64
-  }
-
+  
+  // --- MÍDIA AUXILIAR (IMAGEM/VÍDEO/ÁUDIO) ---
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (!file) return;
+
+    // NOVO: Limite de tamanho rigoroso para Mídia Auxiliar (150 KB)
+    const MAX_SIZE_BYTES = 150000;
+    if (file.size > MAX_SIZE_BYTES) {
+      alert(`O arquivo é muito grande. Para armazenamento direto, o limite da Mídia Auxiliar é de ${MAX_SIZE_BYTES / 1000} KB.`);
+      this.midiaAuxiliar = undefined; // Limpa qualquer valor anterior
+      this.arquivoSelecionado = undefined;
+      this.tipoArquivo = undefined;
+      this.arquivoPreview = undefined;
+      event.target.value = null; // Limpa o input
+      return;
+    }
 
     this.arquivoSelecionado = file;
 
@@ -83,15 +83,29 @@ export class CriarFlashcardPage {
     else if (file.type.startsWith('audio/')) this.tipoArquivo = 'audio';
     else this.tipoArquivo = undefined;
 
-    // Cria preview
+    // Cria preview e armazena o Base64 final
     const reader = new FileReader();
-    reader.onload = () => this.arquivoPreview = reader.result as string;
+    reader.onload = () => {
+        this.arquivoPreview = reader.result as string;
+        this.midiaAuxiliar = reader.result as string; // Armazena Base64 na variável final
+    };
     reader.readAsDataURL(file);
   }
 
+  // --- ÁUDIOS DE PERGUNTA/RESPOSTA ---
   onAudioSelected(event: any, tipo: 'pergunta' | 'resposta') {
     const file: File = event.target.files[0];
     if (!file) return;
+
+    // NOVO: Limite de tamanho mais rigoroso para Áudios (100 KB)
+    const MAX_SIZE_BYTES = 120000;
+    if (file.size > MAX_SIZE_BYTES) {
+        alert(`O arquivo de áudio é muito grande. O limite máximo é de ${MAX_SIZE_BYTES / 1000} KB.`);
+        event.target.value = null; // Limpa o input
+        if (tipo === 'pergunta') this.audioPergunta = undefined;
+        else this.audioResposta = undefined;
+        return;
+    }
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -102,38 +116,37 @@ export class CriarFlashcardPage {
     reader.readAsDataURL(file);
   }
 
+
   async salvarFlashcard() {
-  if (!this.titulo || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada) {
-    alert('Preencha todos os campos obrigatórios!');
-    return;
+    // Note: Mantive a checagem obrigatória para áudios para seguir a lógica original,
+    // mas se o usuário pode não ter áudio, remova a checagem abaixo.
+    if (!this.titulo || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada) {
+      alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta e Áudio da Resposta)!');
+      return;
+    }
+
+    // Cria o objeto do flashcard com os Base64 (pequenos)
+    const flashcard: Flashcard = {
+      titulo: this.titulo,
+      categoria: this.categoriaSelecionada,
+      audioPergunta: this.audioPergunta,
+      audioResposta: this.audioResposta
+    };
+
+    // Só adiciona midiaAuxiliar se houver e for pequeno o suficiente
+    if (this.midiaAuxiliar) {
+      flashcard.midiaAuxiliar = this.midiaAuxiliar;
+    }
+
+    try {
+      await this.flashcardService.addFlashcard(flashcard);
+      alert('Flashcard salvo com sucesso!');
+      
+      this.router.navigate(['/gerenciar-flashcards']);
+    } catch (err) {
+      console.error(err);
+      // Se o erro ainda ocorrer aqui, é porque a combinação dos Base64 superou o 1 MiB.
+      alert('Erro ao salvar flashcard. O tamanho combinado da mídia é muito grande para o Firestore.');
+    }
   }
-
-  // Cria o objeto do flashcard
-  const flashcard: Flashcard = {
-    titulo: this.titulo,
-    pergunta: this.pergunta || '',   // evita undefined
-    resposta: this.resposta || '',   // evita undefined
-    categoria: this.categoriaSelecionada,
-    audioPergunta: this.audioPergunta,
-    audioResposta: this.audioResposta
-  };
-
-  // Só adiciona midiaAuxiliar se houver
-  if (this.midiaAuxiliar) {
-    flashcard.midiaAuxiliar = this.midiaAuxiliar;
-  }
-
-  try {
-    await this.flashcardService.addFlashcard(flashcard);
-    alert('Flashcard salvo com sucesso!');
-    console.log('Título:', this.titulo);
-    console.log('Categoria:', this.categoriaSelecionada);
-    console.log('Arquivo:', this.arquivoSelecionado);
-
-    this.router.navigate(['/flashcards']);
-  } catch (err) {
-    console.error(err);
-    alert('Erro ao salvar flashcard.');
-  }
-}
 }

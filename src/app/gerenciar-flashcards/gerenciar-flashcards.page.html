@@ -5,9 +5,9 @@
 
   <!-- Aqui entra a imagem da categoria -->
   <img [src]="categoriaImg" alt="Categoria" class="categoria-header-img" />
+  <!-- Texto - nome da categoria -->
+  <p class="categoria-header-text">{{ tituloCategoria }}</p>
 
-  <!-- Texto opcional (se quiser mostrar o nome também) -->
-  <p class="categoria-header-text">{{ categoria }}</p>
 </div>
 
 <ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">

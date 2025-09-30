@@ -1,6 +1,10 @@
-
-import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+interface DadosCategoria {
+  caminhoDaImagem: string;
+  titulo: string;
+}
 
 @Component({
   selector: 'app-gerenciar-flashcards',
@@ -10,37 +14,38 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GerenciarFlashcardsPage implements OnInit {
 
- @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
-  mostrarJanela = false
+  mostrarJanela: boolean = false;
+  mostrarResposta: boolean = false;
 
   categoria: string = '';
   categoriaImg: string = '';
+  tituloCategoria: string = 'Meus Flashcards';
 
-  tituloFlashcard: string = 'Meus Flashcards';
+  tituloFlashcard: string = 'Título do Flashcard';
 
-    // Variáveis das Mídias (Fontes)
-  perguntaAudioSrc: string = 'assets/audio/audio-teste.m4a'; // Áudio da Pergunta
-  respostaAudioSrc: string = 'assets/audio/audio-teste.m4a';   // Áudio da Resposta
+  perguntaAudioSrc: string = 'assets/audio/audio-teste.m4a';
+  respostaAudioSrc: string = 'assets/audio/audio-teste.m4a';
 
-  // Mídia Auxiliar (Fonte e Tipo)
-  midiaAuxiliarSrc: string = 'assets/foto-1.png'; // Pode ser .jpg, .mp4, .m4a, etc.
-  midiaAuxiliarTipo: 'foto' | 'video' | 'audio' | 'none' = 'foto'; // Tipo da Mídia ('foto', 'video', 'audio' ou 'none')
-
-  mostrarResposta: boolean = false;
+  midiaAuxiliarSrc: string = 'assets/foto-1.png';
+  midiaAuxiliarTipo: 'foto' | 'video' | 'audio' | 'none' = 'foto';
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    // Pega o parâmetro enviado pela rota via queryParams
     this.route.queryParams.subscribe(params => {
       this.categoria = params['categoria'] || '';
-      this.categoriaImg = this.getImagemCategoria(this.categoria);
+      
+      const dados = this.getDadosCategoria(this.categoria);
+      
+      this.categoriaImg = dados.caminhoDaImagem;
+      this.tituloCategoria = dados.titulo;
     });
   }
 
-  getImagemCategoria(nome: string): string {
-    const imagens: any = {
+  getDadosCategoria(nome: string): DadosCategoria {
+    const categorias: { [key: string]: string } = {
       'Família': 'assets/img/categoria_familia.png',
       'Amigos': 'assets/img/categoria_amigos.png',
       'Passatempos': 'assets/img/categoria_passatempos.png',
@@ -49,44 +54,55 @@ export class GerenciarFlashcardsPage implements OnInit {
       'Animais de Estimação': 'assets/img/categoria_animais_de_estimacao.png',
       'Momentos Marcantes': 'assets/img/categoria_momentos_marcantes.png'
     };
-    return imagens[nome] || 'assets/img/categorias/default.png';
+
+    const caminhoDaImagem = categorias[nome];
+
+    if (caminhoDaImagem) {
+      return {
+        caminhoDaImagem: caminhoDaImagem,
+        titulo: nome
+      };
+    } else {
+      return {
+        caminhoDaImagem: 'assets/img/bolinha.png',
+        titulo: 'Minhas Memórias'
+      };
+    }
   }
 
-  // Botão voltar
-  voltar() {
+  voltar(): void {
     this.router.navigate(['/categorias']);
   }
 
-  // Botão início
-  inicio() {
+  inicio(): void {
     this.router.navigate(['/home']);
   }
 
-  mostrarJanelaMais() {
+  mostrarJanelaMais(): void {
     this.mostrarJanela = !this.mostrarJanela;
   }
 
-  fecharJanelaMais() {
+  fecharJanelaMais(): void {
     this.mostrarJanela = false;
   }
 
-  toggleAudio() {
+  toggleAudio(): void {
+    if (!this.audioPlayer) return;
+    
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     const button = document.querySelector('.audio-btn') as HTMLElement;
 
     if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
+      if (button) button.style.display = 'none';
+      audio.style.display = 'block';
+      audio.play();
+    } else {
+      audio.pause();
     }
+
+    audio.onended = () => {
+      audio.style.display = 'none';
+      if (button) button.style.display = 'inline-flex';
+    };
+  }
 }
