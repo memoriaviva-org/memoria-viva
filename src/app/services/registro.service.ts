@@ -29,15 +29,17 @@ export class RegistroService {
     return user(this.auth).pipe(
       switchMap(u => {
         if (!u) return of([]);
+
         const colRef = collection(this.firestore, `users/${u.uid}/meuDia`);
 
-        // Definir limite 24h atrás
-        const limite = Date.now() - 24 * 60 * 60 * 1000;
+        // Início do dia atual (00:00)
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+        const inicioDoDia = hoje.getTime();
 
-        // Query com filtro para pegar só os registros recentes
         const q = query(
           colRef,
-          where('createdAt', '>=', limite),
+          where('createdAt', '>=', inicioDoDia),
           orderBy('createdAt', 'desc')
         );
 
@@ -45,6 +47,7 @@ export class RegistroService {
       })
     );
   }
+
 
   async addItem(item: MeuDia) {
     const currentUser = this.auth.currentUser;
