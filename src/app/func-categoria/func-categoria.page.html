@@ -4,7 +4,7 @@
   </svg>
 
   <!-- Aqui entra a imagem da categoria -->
-  <img [src]="categoriaImg" alt="Categoria" class="categoria-header-img" />
+  <img [src]="categoriaImg" alt="Categoria" [ngClass]="getClasseCategoria(categoria)" />
 
   <!-- Texto opcional (se quiser mostrar o nome também) -->
   <p class="categoria-header-text">{{ categoria }}</p>

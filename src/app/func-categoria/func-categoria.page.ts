@@ -42,6 +42,20 @@ export class FuncCategoriaPage {
     return imagens[nome] || 'assets/img/categorias/default.png';
   }
 
+  getClasseCategoria(nome: string): string {
+    const classes: any = {
+      'Família': 'categoria-familia',
+      'Amigos': 'categoria-amigos',
+      'Passatempos': 'categoria-passatempos',
+      'Infância': 'categoria-infancia',
+      'Juventude': 'categoria-juventude',
+      'Animais de Estimação': 'categoria-animais',
+      'Momentos Marcantes': 'categoria-momentos'
+    };
+    return classes[nome] || 'categoria-default';
+  }
+
+
   // Navegar para a página de flashcards
   irParaFlashcards() {
     this.router.navigate(['/flashcard'], { queryParams: { categoria: this.categoria } });
