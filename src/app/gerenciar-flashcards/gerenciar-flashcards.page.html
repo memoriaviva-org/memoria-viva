@@ -3,7 +3,7 @@
     <path d="M-35 -18H621V365C433.901 115.251 174.347 172.943 -35 365V-18Z" fill="#9C3FC3"/>
   </svg>
 
-  <img [src]="categoriaImg" alt="Categoria" class="categoria-header-img" />
+  <img [src]="categoriaImg" alt="Categoria" [ngClass]="getClasseCategoria(categoria)" />
   <p class="categoria-header-text">{{ tituloCategoria }}</p>
 </div>
 

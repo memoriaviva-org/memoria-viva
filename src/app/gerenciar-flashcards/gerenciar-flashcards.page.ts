@@ -32,7 +32,7 @@ export class GerenciarFlashcardsPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.categoria = params['categoria'] || '';
-      
+
       const dados = this.getDadosCategoria(this.categoria);
       this.categoriaImg = dados.caminhoDaImagem;
       this.tituloCategoria = dados.titulo;
@@ -71,7 +71,7 @@ getMidiaAuxiliarTipo(flashcard: Flashcard): 'foto' | 'video' | 'audio' | 'none' 
   }
 
   const midiaUrl = flashcard.midiaAuxiliar.toLowerCase();
-  
+
   // Para Base64 - verifica o tipo pelo prefixo
   if (midiaUrl.startsWith('data:')) {
     if (midiaUrl.includes('image/')) return 'foto';
@@ -79,16 +79,16 @@ getMidiaAuxiliarTipo(flashcard: Flashcard): 'foto' | 'video' | 'audio' | 'none' 
     if (midiaUrl.includes('audio/')) return 'audio';
     return 'none';
   }
-  
+
   // Para URLs - verifica pela extensão
   if (midiaUrl.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i)) {
     return 'foto';
   }
-  
+
   if (midiaUrl.match(/\.(mp4|webm|ogg|mov|avi|wmv)$/i)) {
     return 'video';
   }
-  
+
   if (midiaUrl.match(/\.(mp3|wav|ogg|m4a|aac|flac)$/i)) {
     return 'audio';
   }
@@ -98,12 +98,12 @@ getMidiaAuxiliarTipo(flashcard: Flashcard): 'foto' | 'video' | 'audio' | 'none' 
   // Verifica se a URL da mídia é válida (para Base64)
   isMidiaValida(url: string | undefined): boolean {
     if (!url) return false;
-    
+
     // Para Base64, verifica se começa com data:
     if (url.startsWith('data:')) {
       return true;
     }
-    
+
     // Para URLs externas
     try {
       new URL(url);
@@ -125,11 +125,24 @@ getMidiaAuxiliarTipo(flashcard: Flashcard): 'foto' | 'video' | 'audio' | 'none' 
     };
 
     const caminhoDaImagem = categorias[nome] || 'assets/img/bolinha.png';
-    
+
     return {
       caminhoDaImagem: caminhoDaImagem,
       titulo: nome || 'Minhas Memórias'
     };
+  }
+
+  getClasseCategoria(nome: string): string {
+    const classes: any = {
+      'Família': 'categoria-familia',
+      'Amigos': 'categoria-amigos',
+      'Passatempos': 'categoria-passatempos',
+      'Infância': 'categoria-infancia',
+      'Juventude': 'categoria-juventude',
+      'Animais de Estimação': 'categoria-animais',
+      'Momentos Marcantes': 'categoria-momentos'
+    };
+    return classes[nome] || 'categoria-default';
   }
 
   async deletarFlashcard(id: string) {
@@ -139,12 +152,12 @@ getMidiaAuxiliarTipo(flashcard: Flashcard): 'foto' | 'video' | 'audio' | 'none' 
     }
 
     const confirmacao = confirm('Tem certeza que deseja deletar este flashcard?');
-    
+
     if (confirmacao) {
       try {
         await this.flashcardService.deleteFlashcard(id);
         console.log('Flashcard deletado com sucesso');
-        
+
         // Recarrega a lista
         this.carregarFlashcards();
       } catch (error) {
