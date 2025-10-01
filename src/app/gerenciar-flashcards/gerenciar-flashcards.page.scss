@@ -32,6 +32,90 @@
   text-align: center;
 }
 
+.categoria-familia {
+  position: absolute;
+  top: 45%;       /* ajusta verticalmente */
+  left: 18%;      /* ajusta horizontalmente */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 86px;    /* largura da imagem da categoria */
+  height: 82px;   /* altura da imagem da categoria */
+  // object-fit: cover;
+  border-radius: 8px;
+}
+
+.categoria-amigos {
+  position: absolute;
+  top: 45%;       /* ajusta verticalmente */
+  left: 18%;      /* ajusta horizontalmente */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 67px;    /* largura da imagem da categoria */
+  height: 82px;   /* altura da imagem da categoria */
+  // object-fit: cover;
+  border-radius: 8px;
+}
+
+.categoria-passatempos {
+  position: absolute;
+  top: 45%;       /* ajusta verticalmente */
+  left: 18%;      /* ajusta horizontalmente */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 82px;    /* largura da imagem da categoria */
+  height: 82px;   /* altura da imagem da categoria */
+  // object-fit: cover;
+  border-radius: 8px;
+}
+
+.categoria-infancia {
+  position: absolute;
+  top: 45%;       /* ajusta verticalmente */
+  left: 18%;      /* ajusta horizontalmente */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 79px;    /* largura da imagem da categoria */
+  height: 82px;   /* altura da imagem da categoria */
+  // object-fit: cover;
+  border-radius: 8px;
+}
+
+.categoria-juventude {
+  position: absolute;
+  top: 45%;       /* ajusta verticalmente */
+  left: 18%;      /* ajusta horizontalmente */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 82px;    /* largura da imagem da categoria */
+  height: 82px;   /* altura da imagem da categoria */
+  // object-fit: cover;
+  border-radius: 8px;
+}
+
+.categoria-animais {
+  position: absolute;
+  top: 45%;       /* ajusta verticalmente */
+  left: 18%;      /* ajusta horizontalmente */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 75px;    /* largura da imagem da categoria */
+  height: 82px;   /* altura da imagem da categoria */
+  // object-fit: cover;
+  border-radius: 8px;
+}
+
+.categoria-momentos {
+  position: absolute;
+  top: 45%;       /* ajusta verticalmente */
+  left: 18%;      /* ajusta horizontalmente */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 82px;    /* largura da imagem da categoria */
+  height: 82px;   /* altura da imagem da categoria */
+  // object-fit: cover;
+  border-radius: 8px;
+}
+
 // Audio
   ion-button.voltar-btn {
     all: unset;
@@ -342,9 +426,10 @@ h3 {
 }
 
 .flashcard-sem-midia {
-  color: #777;
-  font-style: italic;
-  font-size: 12px;
+    color: #777;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 100;
 }
 
 .flashcard-curiosidade-texto {

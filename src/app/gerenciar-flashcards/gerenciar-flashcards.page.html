@@ -3,7 +3,7 @@
     <path d="M-35 -18H621V365C433.901 115.251 174.347 172.943 -35 365V-18Z" fill="#9C3FC3"/>
   </svg>
 
-  <img [src]="categoriaImg" alt="Categoria" class="categoria-header-img" />
+  <img [src]="categoriaImg" alt="Categoria" [ngClass]="getClasseCategoria(categoria)" />
   <p class="categoria-header-text">{{ tituloCategoria }}</p>
 </div>
 
@@ -18,7 +18,7 @@
 
     <!-- Flashcards List -->
     <div class="flashcards-list">
-      
+
       <!-- Empty State -->
       <div *ngIf="(flashcards$ | async)?.length === 0" class="vetor-flashcards empty-state">
         <p class="flashcard-sem-midia">Não há flashcards para esta categoria. Adicione um novo!</p>
@@ -26,7 +26,7 @@
 
       <!-- Flashcards -->
       <div *ngFor="let flashcard of flashcards$ | async" class="vetor-flashcards">
-        
+
         <div class="flashcard-actions-container">
           <ion-button class="flashcard-registro-editar-btn">
             <div class="flashcard-registro-editar-btn-div">
@@ -55,9 +55,9 @@
 
         <div class="flashcard-secao pergunta-secao">
           <h3 class="flashcard-secao-titulo">Pergunta:</h3>
-          <audio 
-            class="flashcard-audio" 
-            [src]="flashcard.audioPergunta" 
+          <audio
+            class="flashcard-audio"
+            [src]="flashcard.audioPergunta"
             controls
             *ngIf="isMidiaValida(flashcard.audioPergunta)">
           </audio>
@@ -70,34 +70,34 @@
           <h3 class="flashcard-secao-titulo">Mídia Auxiliar:</h3>
 
           <!-- Imagem -->
-          <img 
+          <img
             *ngIf="getMidiaAuxiliarTipo(flashcard) === 'foto' && isMidiaValida(flashcard.midiaAuxiliar)"
-            [src]="flashcard.midiaAuxiliar" 
-            alt="Mídia Auxiliar" 
+            [src]="flashcard.midiaAuxiliar"
+            alt="Mídia Auxiliar"
             class="flashcard-midia-img"
             (error)="onImageError($event)" />
 
           <!-- Vídeo -->
-          <video 
+          <video
             *ngIf="getMidiaAuxiliarTipo(flashcard) === 'video' && isMidiaValida(flashcard.midiaAuxiliar)"
-            [src]="flashcard.midiaAuxiliar" 
-            controls 
+            [src]="flashcard.midiaAuxiliar"
+            controls
             class="flashcard-midia-video">
             Seu navegador não suporta o elemento de vídeo.
           </video>
 
           <!-- Áudio -->
-          <audio 
+          <audio
             *ngIf="getMidiaAuxiliarTipo(flashcard) === 'audio' && isMidiaValida(flashcard.midiaAuxiliar)"
-            [src]="flashcard.midiaAuxiliar" 
-            controls 
+            [src]="flashcard.midiaAuxiliar"
+            controls
             class="flashcard-audio">
             Seu navegador não suporta o elemento de áudio.
           </audio>
 
           <!-- Mensagem "Nenhuma mídia" só aparece quando realmente não há mídia -->
-          <p 
-            *ngIf="!flashcard.midiaAuxiliar || flashcard.midiaAuxiliar.trim() === ''" 
+          <p
+            *ngIf="!flashcard.midiaAuxiliar || flashcard.midiaAuxiliar.trim() === ''"
             class="flashcard-sem-midia">
             Nenhuma mídia auxiliar adicionada.
           </p>
@@ -105,9 +105,9 @@
 
         <div class="flashcard-secao resposta-secao">
           <h3 class="flashcard-secao-titulo">Resposta:</h3>
-          <audio 
-            class="flashcard-audio" 
-            [src]="flashcard.audioResposta" 
+          <audio
+            class="flashcard-audio"
+            [src]="flashcard.audioResposta"
             controls
             *ngIf="isMidiaValida(flashcard.audioResposta)">
           </audio>
