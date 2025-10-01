@@ -13,6 +13,8 @@ export class MeuDiaRegistrosPage implements OnInit {
   mostrarJanela = false;
   mostrarConfirmacao = false;
   carregando = true;// flag de carregamento
+  temRegistros = false;// mecanismo do audio
+
 
   constructor(private registroService: RegistroService) {}
 
@@ -29,9 +31,10 @@ export class MeuDiaRegistrosPage implements OnInit {
         return grupos;
       })
     );
-    this.registrosAgrupados$.subscribe(() => {
+    this.registrosAgrupados$.subscribe(registrosAgrupados => {
       this.carregando = false;
-    });
+      this.temRegistros = Object.keys(registrosAgrupados).length > 0;
+    });//mudado por conta do audio
   }
 
   groupByTwo(registros: MeuDia[]): MeuDia[][] {
@@ -82,6 +85,15 @@ export class MeuDiaRegistrosPage implements OnInit {
   toggleAudio() {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     const button = document.querySelector('.audio-btn') as HTMLElement;
+
+     // Define qual áudio será usado com base na flag temRegistros
+    const novoSrc = this.temRegistros
+    ? 'assets/audio/audio-teste.m4a'
+    : 'assets/audio/audio-pequeno.mp3';
+
+  // Atualiza o src e carrega o áudio
+  audio.src = novoSrc;
+  audio.load();
 
     if (audio.paused) {
       // Esconde botão e mostra player
