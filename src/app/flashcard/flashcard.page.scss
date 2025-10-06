@@ -5,14 +5,14 @@
     left: 18%; /* ajusta a posição horizontal */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 80px; /* tamanho da imagem */
-    height: 70px;
+    width: 60px; /* tamanho da imagem */
+    height: 60px;
   }
 
   .categoria-header-text {
     position: absolute;
-    top: 32%; /* acima da imagem */
-    left: 57%;
+    top: 44%;
+    left: 56%;
     transform: translate(-50%, -50%);
     z-index: 1;
     color: #FFF;
@@ -23,6 +23,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    width: 210px;
   }
 
 
@@ -104,6 +105,10 @@
     font-weight: 600;
     color: #fff;
   }
+
+.flashcard-sem-midia {
+  font-size: 20px;
+}
 
   .alerta-confirmacao {
   position: absolute;

@@ -116,6 +116,10 @@
   border-radius: 8px;
 }
 
+.categoria-default {
+  margin-left: 10px;
+}
+
 //botão de mais
 
 .adicionar-meu-dia-btn {
@@ -279,6 +283,7 @@
 /* --- FLASHCARD CONTAINER --- */
 .vetor-flashcards {
   margin-top: 120px;
+  margin-left: 50px;
   width: 300px;
   height: auto;
   flex-shrink: 0;
