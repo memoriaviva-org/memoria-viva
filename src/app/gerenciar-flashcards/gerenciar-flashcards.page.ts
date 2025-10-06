@@ -172,7 +172,7 @@ getMidiaAuxiliarTipo(flashcard: Flashcard): 'foto' | 'video' | 'audio' | 'none' 
   }
 
   inicio(): void {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/principal']);
   }
 
   mostrarJanelaMais(): void {

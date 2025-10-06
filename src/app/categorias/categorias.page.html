@@ -41,56 +41,19 @@
   <h1 class="title" >Categorias</h1>
   </div>
 
-    <div class="btn-grid">
-      <ion-button class="btn-pill" (click)="abrirCategoria('Família')">
+  <div class="btn-grid">
+    <ng-container *ngFor="let categoria of categorias">
+      <ion-button
+        *ngIf="categoria.possuiFlashcards"
+        class="btn-pill"
+        (click)="abrirCategoria(categoria.nome)">
         <div class="btn-content">
-          <img src="assets/img/categoria_familia.png" alt="Categoria Família">
-          <span>Família</span>
+          <img [src]="categoria.imagem" [alt]="'Categoria ' + categoria.nome">
+          <span>{{categoria.nome}}</span>
         </div>
       </ion-button>
-
-      <ion-button class="btn-pill" (click)="abrirCategoria('Amigos')">
-        <div class="btn-content">
-          <img src="../../assets/img/categoria_amigos.png" alt="Categoria Amigos">
-          <span>Amigos</span>
-        </div>
-      </ion-button>
-
-      <ion-button class="btn-pill" (click)="abrirCategoria('Passatempos')">
-        <div class="btn-content">
-          <img src="../../assets/img/categoria_passatempos.png" alt="Categoria Passatempos">
-          <span>Passatempos</span>
-        </div>
-      </ion-button>
-
-      <ion-button class="btn-pill" (click)="abrirCategoria('Infância')">
-        <div class="btn-content">
-          <img src="../../assets/img/categoria_infancia.png" alt="Categoria Infância">
-          <span>Infância</span>
-        </div>
-      </ion-button>
-
-        <ion-button class="btn-pill" (click)="abrirCategoria('Juventude')">
-        <div class="btn-content">
-          <img src="../../assets/img/categoria_juventude.png" alt="Categoria Juventude">
-          <span>Juventude</span>
-        </div>
-        </ion-button>
-
-        <ion-button class="btn-pill" (click)="abrirCategoria('Animais de Estimação')">
-        <div class="btn-content">
-          <img src="../../assets/img/categoria_animais_de_estimacao.png" alt="Categoria Animais de Estimação">
-          <span>Animais de Estimação</span>
-        </div>
-        </ion-button>
-
-        <ion-button class="btn-pill" (click)="abrirCategoria('Momentos Marcantes')">
-        <div class="btn-content">
-          <img src="../../assets/img/categoria_momentos_marcantes.png" alt="Categoria Momentos Marcantes">
-          <span>Memórias Marcantes</span>
-        </div>
-      </ion-button>
-    </div>
+    </ng-container>
+  </div>
 
     <br><br><br><br>
 
