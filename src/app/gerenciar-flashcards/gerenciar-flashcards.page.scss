@@ -116,6 +116,28 @@
   border-radius: 8px;
 }
 
+//botão de mais
+
+.adicionar-meu-dia-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+  position: fixed;
+  top: 82%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+
+.icone-mais {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  width: 45px;
+  height: 45px;
+}
+
 // Audio
   ion-button.voltar-btn {
     all: unset;

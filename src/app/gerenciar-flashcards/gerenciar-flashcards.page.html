@@ -130,6 +130,18 @@
     <br>
     <br>
     <br>
+
+    <ion-button
+    *ngIf="(flashcards$ | async)?.length === 0"
+    class="adicionar-meu-dia-btn"
+    href="criar-flashcard"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
+        <circle cx="35" cy="35" r="35" fill="#9C3FC3"/>
+      </svg>
+      <ion-icon class="icone-mais" name="add-outline"></ion-icon>
+    </ion-button>
+
     <!-- Janela Mais Opções -->
     <div *ngIf="mostrarJanela" class="overlay" (click)="fecharJanelaMais()"></div>
 
