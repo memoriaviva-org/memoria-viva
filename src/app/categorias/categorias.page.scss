@@ -104,6 +104,37 @@
   margin-top: 8px;      /* distancia entre o botão e o texto */
 }
 
+.meu-dia-texto-explicativo {
+  width: 249px;
+  color: white;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  position: absolute;
+  top: 38.5%;
+  left: 27%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.menina-amarelo {
+  margin-top: 108px;
+}
+
+.adicionar-meu-dia-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+  position: fixed;
+  top: 82%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+
+.icone-mais {
+  color: black;
+}
+
 /* Grid de categorias */
 .btn-grid {
   display: grid;
@@ -207,7 +238,7 @@ p {
 
 .audio-scss {
   position: absolute;
-  top: 29%;
+  top: 28%;
   left: 30%;
   z-index: 1;
   width: 272px;

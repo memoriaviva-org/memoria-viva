@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
   imports: [IonicModule, CommonModule]
 })
 export class CategoriasPage implements OnInit, OnDestroy {
+  carregando = true;// flag de carregamento
   constructor(
     private router: Router,
     private flashcardService: FlashcardService

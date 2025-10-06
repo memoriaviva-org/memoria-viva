@@ -16,6 +16,27 @@
 
   <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
+  <!-- 🌼 Bonequinha aparece só quando não há categorias com flashcards -->
+<div *ngIf="!existemCategoriasComFlashcards()" class="meu-dia-container">
+  <img class="menina-amarelo" src="assets/img/menino-roxo.png" alt="Bonequinha explicativa">
+  <p class="meu-dia-texto-explicativo">
+    Nessa tela, você pode registrar <br>
+    momentos do seu dia, como o <br>
+    almoço. Para adicionar, basta <br>
+    clicar no botão abaixo. Lembre- <br>
+    se, tudo o que for adicionado será
+    apagado automaticamente à meia noite.
+  </p>
+
+  <ion-button class="adicionar-meu-dia-btn" href="add">
+    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
+      <circle cx="35" cy="35" r="35" fill="#FAC943"/>
+    </svg>
+    <ion-icon class="icone-mais" name="add-outline"></ion-icon>
+  </ion-button>
+</div>
+
+
   <!-- Botões extras no topo -->
   <div class="btn-extra-container">
     <div class="btn-extra-item">
