@@ -47,7 +47,7 @@ export class GerenciarFlashcardsPage implements OnInit {
     if (this.categoria && this.categoria !== 'all') {
       this.flashcards$ = this.flashcardService.verFlashcardsPorCategoria(this.categoria);
     } else {
-      this.flashcards$ = this.flashcardService.verFlashcards();
+      this.flashcards$ = this.flashcardService.verTodosFlashcards();
     }
 
     // Atualiza o estado de carregamento quando os dados chegarem

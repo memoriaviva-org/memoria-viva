@@ -34,8 +34,8 @@ export class FlashcardService {
 
   constructor() {}
 
-  // Método para ver todos os flashcards
-  verFlashcards(): Observable<Flashcard[]> {
+  // Método para ver TODOS os flashcards (usado em "Minhas Memórias")
+  verTodosFlashcards(): Observable<Flashcard[]> {
     return user(this.auth).pipe(
       switchMap(u => {
         if (!u) return of([]);
@@ -48,19 +48,20 @@ export class FlashcardService {
     );
   }
 
-  // Método para ver flashcards por categoria
+  // Método para ver flashcards por categoria específica
   verFlashcardsPorCategoria(categoria: string): Observable<Flashcard[]> {
     return user(this.auth).pipe(
       switchMap(u => {
         if (!u) return of([]);
 
         const colRef = collection(this.firestore, `users/${u.uid}/flashcards`);
+        
+        // Busca por categoria específica
         const q = query(
           colRef,
           where('categoriaFlashcard', '==', categoria),
           orderBy('createdAt', 'desc')
         );
-
         return collectionData(q, { idField: 'id' }) as Observable<Flashcard[]>;
       })
     );

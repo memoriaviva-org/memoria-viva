@@ -4,83 +4,159 @@
       <path d="M-35 -18H621V365C433.901 115.251 174.347 172.943 -35 365V-18Z" fill="#9C3FC3"/>
     </svg>
 
-  <!-- Aqui entra a imagem da categoria -->
-<img [src]="categoriaImagem" alt="Categoria" class="categoria-header-img" />
-
-<!-- Texto opcional mostrando o nome da categoria -->
-<p class="categoria-header-text">{{ categoriaTexto }}</p>
+    <img [src]="categoriaImagem" alt="Categoria" class="categoria-header-img" />
+    <p class="categoria-header-text">{{ categoriaTexto }}</p>
   </div>
 
   <ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
     <ion-icon name="volume-high" slot="icon-only"></ion-icon>
   </ion-button>
 
-  <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
+  <audio class="audio-scss" #audioPlayer [src]="flashcardAtual?.audioPergunta" controls style="display: none;"></audio>
 
-  <div class="flashcard" [class.flip]="mostrarResposta">
+  <div class="flashcard" [class.flip]="mostrarResposta" *ngIf="flashcardAtual">
     <div class="flashcard-inner">
-      <!-- Frente -->
+      
+      <!-- FRENTE -->
       <div class="flashcard-front">
-        <ion-button class="editar-btn" fill="clear">
+        <ion-button class="editar-btn" fill="clear" (click)="editarFlashcard(flashcardAtual!)">
           <img src="../../assets/img/gerenciar_flashcards.png" alt="Editar">
           <span>Editar</span>
         </ion-button>
-        <div class="flashcard-conteudo">
-          <img *ngIf="tipoMidia === 'imagem'" src="../../assets/img/exemplo.jpg" alt="Imagem escolhida">
-          <video *ngIf="tipoMidia === 'video'" controls>
-            <source src="../../assets/videos/exemplo.mp4" type="video/mp4">
-          </video>
-          <audio *ngIf="tipoMidia === 'audio'" controls>
-            <source src="../../assets/audios/exemplo.mp3" type="audio/mpeg">
-          </audio>
+        <br>
+
+        <!-- Mostrar categoria real (apenas em Minhas Memórias) 
+        <div class="flashcard-categoria-info" *ngIf="isMinhasMemorias">
+          <small>Categoria: {{ getCategoriaFlashcard(flashcardAtual) }}</small>
         </div>
-        <div class="flashcard-audio">
-          <audio controls>
-            <source src="../../assets/audios/pergunta.mp3" type="audio/mpeg">
+        -->
+        
+        <div class="flashcard-titulo-container">
+          <h2 class="flashcard-titulo">{{ flashcardAtual.tituloFlashcard }}</h2>
+        </div>
+
+        <div class="flashcard-conteudo">
+          <!-- Mídia Auxiliar -->
+          <img
+            *ngIf="getMidiaAuxiliarTipo(flashcardAtual) === 'image' && isMidiaValida(flashcardAtual.midiaAuxiliar)"
+            [src]="flashcardAtual.midiaAuxiliar"
+            alt="Mídia Auxiliar"
+            class="flashcard-midia-img"
+            (error)="onImageError($event)" />
+
+          <video
+            *ngIf="getMidiaAuxiliarTipo(flashcardAtual) === 'video' && isMidiaValida(flashcardAtual.midiaAuxiliar)"
+            [src]="flashcardAtual.midiaAuxiliar"
+            controls
+            class="flashcard-midia-video">
+            Seu navegador não suporta o elemento de vídeo.
+          </video>
+
+          <audio
+            *ngIf="getMidiaAuxiliarTipo(flashcardAtual) === 'audio' && isMidiaValida(flashcardAtual.midiaAuxiliar)"
+            [src]="flashcardAtual.midiaAuxiliar"
+            controls
+            class="flashcard-audio">
+            Seu navegador não suporta o elemento de áudio.
           </audio>
+
+          <p *ngIf="!flashcardAtual.midiaAuxiliar" class="flashcard-sem-midia">
+            Nenhuma mídia auxiliar adicionada.
+          </p>
+        </div>
+
+        <div class="flashcard-audio">
+          <audio
+            class="flashcard-audio"
+            [src]="flashcardAtual.audioPergunta"
+            controls
+            *ngIf="isMidiaValida(flashcardAtual.audioPergunta)">
+          </audio>
+          <p *ngIf="!isMidiaValida(flashcardAtual.audioPergunta)" class="flashcard-sem-midia">
+            Áudio da pergunta não disponível
+          </p>
         </div>
       </div>
 
-      <!-- Verso -->
+      <!-- VERSO -->
       <div class="flashcard-back">
-        <ion-button class="editar-btn" fill="clear">
+        <ion-button class="editar-btn" fill="clear" (click)="editarFlashcard(flashcardAtual!)">
           <img src="../../assets/img/gerenciar_flashcards.png" alt="Editar">
           <span>Editar</span>
         </ion-button>
-        <div class="flashcard-conteudo">
-          <img *ngIf="tipoMidia === 'imagem'" src="../../assets/img/exemplo_resposta.jpg" alt="Imagem resposta">
-          <video *ngIf="tipoMidia === 'video'" controls>
-            <source src="../../assets/videos/exemplo_resposta.mp4" type="video/mp4">
-          </video>
-          <audio *ngIf="tipoMidia === 'audio'" controls>
-            <source src="../../assets/audios/exemplo_resposta.mp3" type="audio/mpeg">
-          </audio>
+
+        <div class="flashcard-titulo-container">
+          <h2 class="flashcard-titulo">{{ flashcardAtual.tituloFlashcard }}</h2>
         </div>
 
-         <div class="curiosidade-btn-container">
-    <ion-button class="curiosidade-btn" fill="clear" (click)="abrirCuriosidade()">
-      <span class="material-icons">maps_ugc</span>
-    </ion-button>
-    <p class="curiosidade-texto">Curiosidade</p>
-  </div>
+        <div class="flashcard-conteudo">
+          <!-- Mídia Auxiliar (mesma da frente) -->
+          <img
+            *ngIf="getMidiaAuxiliarTipo(flashcardAtual) === 'image' && isMidiaValida(flashcardAtual.midiaAuxiliar)"
+            [src]="flashcardAtual.midiaAuxiliar"
+            alt="Mídia Auxiliar"
+            class="flashcard-midia-img"
+            (error)="onImageError($event)" />
 
-<div class="curiosidade-tela" *ngIf="mostrarCuriosidade">
-  <div class="curiosidade-conteudo">
-    <p>{{ curiosidadeTexto }}</p>
-    <ion-button class="fechar-curiosidade-btn" fill="solid" (click)="fecharCuriosidade()">Voltar</ion-button>
-  </div>
-</div>
+          <video
+            *ngIf="getMidiaAuxiliarTipo(flashcardAtual) === 'video' && isMidiaValida(flashcardAtual.midiaAuxiliar)"
+            [src]="flashcardAtual.midiaAuxiliar"
+            controls
+            class="flashcard-midia-video">
+            Seu navegador não suporta o elemento de vídeo.
+          </video>
+
+          <audio
+            *ngIf="getMidiaAuxiliarTipo(flashcardAtual) === 'audio' && isMidiaValida(flashcardAtual.midiaAuxiliar)"
+            [src]="flashcardAtual.midiaAuxiliar"
+            controls
+            class="flashcard-audio">
+            Seu navegador não suporta o elemento de áudio.
+          </audio>
+
+          <p *ngIf="!flashcardAtual.midiaAuxiliar" class="flashcard-sem-midia">
+            Nenhuma mídia auxiliar adicionada.
+          </p>
+        </div>
+
+        <!-- Curiosidade -->
+        <div class="curiosidade-btn-container" *ngIf="flashcardAtual.curiosidade">
+          <ion-button class="curiosidade-btn" fill="clear" (click)="abrirCuriosidade()">
+            <span class="material-icons">maps_ugc</span>
+          </ion-button>
+          <p class="curiosidade-texto">Curiosidade</p>
+        </div>
+
+        <div class="curiosidade-tela" *ngIf="mostrarCuriosidade">
+          <div class="curiosidade-conteudo">
+            <p>{{ flashcardAtual.curiosidade }}</p>
+            <ion-button class="fechar-curiosidade-btn" fill="solid" (click)="fecharCuriosidade()">Voltar</ion-button>
+          </div>
+        </div>
 
         <div class="flashcard-audio">
-          <audio controls>
-            <source src="../../assets/audios/resposta.mp3" type="audio/mpeg">
+          <audio
+            class="flashcard-audio"
+            [src]="flashcardAtual.audioResposta"
+            controls
+            *ngIf="isMidiaValida(flashcardAtual.audioResposta)">
           </audio>
+          <p *ngIf="!isMidiaValida(flashcardAtual.audioResposta)" class="flashcard-sem-midia">
+            Áudio da resposta não disponível
+          </p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="botoes-container">
+  <!-- Mensagem quando não há flashcards -->
+  <div *ngIf="!flashcardAtual" class="empty-state">
+    <p class="flashcard-sem-midia">Não há flashcards {{ isMinhasMemorias ? 'nas suas memórias' : 'para esta categoria' }}.</p>
+    <!-- Tela menina ? -->
+  </div>
+
+  <!-- Botões de ação -->
+  <div class="botoes-container" *ngIf="flashcardAtual">
     <div class="botao-com-texto">
       <ion-button class="btn-circular" (click)="verResposta()">
         <img [src]="mostrarResposta ? '../../assets/img/redo-btn.png' : '../../assets/img/ver-resposta-btn.png'"
@@ -136,7 +212,7 @@
         Tem certeza que deseja excluir?
       </div>
       <div class="alerta-confirmacao-btns">
-        <ion-button class="alerta-confirmacao-sim-btn">
+        <ion-button class="alerta-confirmacao-sim-btn" (click)="confirmarExclusao()">
           SIM
         </ion-button>
         <ion-button (click)="naoExcluir()" class="alerta-confirmacao-nao-btn">
@@ -149,8 +225,7 @@
       Exclusão feita com sucesso
     </div>
 
-<ion-footer class="flashcard-footer">
-
+  <ion-footer class="flashcard-footer">
     <ion-button class="voltar-btn" (click)="voltar2()">
       <div class="voltar-btn-div">
         <div class="voltar-svg">
@@ -164,7 +239,7 @@
       </div>
     </ion-button>
 
-    <ion-button class="inicio-btn" href="/principal">
+    <ion-button class="inicio-btn" (click)="inicio()">
       <div class="inicio-btn-div">
         <div class="inicio-svg">
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -189,7 +264,5 @@
         </div>
       </div>
     </ion-button>
-
   </ion-footer>
-
 </ion-content>
