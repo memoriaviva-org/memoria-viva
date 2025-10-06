@@ -25,7 +25,7 @@
 .btn-extra-container {
   display: flex;
   justify-content: center; /* centraliza horizontalmente */
-  gap: 40px;               /* espaço entre os dois botões */
+  gap: 10px;               /* espaço entre os dois botões */
   margin-top: 145px;
   margin-bottom: 40px;
 }
@@ -48,11 +48,32 @@
   line-height: normal;
 }
 
+.black {
+  color: black !important;
+}
+
 .btn-extra {
   --background: #9C3FC3;
   --color: #fff;
   --background-activated: #822ea9;
   --background-hover: #a650cf;
+
+  height: 70px;
+  width: 90px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid #000; /* Borda preta */
+  border-radius: 8px;     /* (opcional) deixa os cantos arredondados */
+}
+
+.btn-extra2 {
+  --background: #FAC946;
+  --color: #fff;
+  --background-activated: #bd9935;
+  --background-hover: #fad05b;
 
   height: 70px;
   width: 90px;
@@ -77,6 +98,23 @@
 .btn-extra img {
   width: 60px;
   height: auto;
+}
+
+.add-btn {
+  all: unset;
+  --background: #FAC946;
+  --border-radius: 35px;
+  position: fixed;
+  height: 70px;
+  width: 70px;
+  top: 78%;
+  left: 73%;
+}
+
+.add-btn-icon {
+  width: 65px;
+  height: 65px;
+  color: black;
 }
 
 /* Estilo para o título "Categorias" */
