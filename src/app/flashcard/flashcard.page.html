@@ -16,7 +16,7 @@
 
   <div class="flashcard" [class.flip]="mostrarResposta" *ngIf="flashcardAtual">
     <div class="flashcard-inner">
-      
+
       <!-- FRENTE -->
       <div class="flashcard-front">
         <ion-button class="editar-btn" fill="clear" (click)="editarFlashcard(flashcardAtual!)">
@@ -25,12 +25,12 @@
         </ion-button>
         <br>
 
-        <!-- Mostrar categoria real (apenas em Minhas Memórias) 
+        <!-- Mostrar categoria real (apenas em Minhas Memórias)
         <div class="flashcard-categoria-info" *ngIf="isMinhasMemorias">
           <small>Categoria: {{ getCategoriaFlashcard(flashcardAtual) }}</small>
         </div>
         -->
-        
+
         <div class="flashcard-titulo-container">
           <h2 class="flashcard-titulo">{{ flashcardAtual.tituloFlashcard }}</h2>
         </div>
@@ -152,7 +152,6 @@
   <!-- Mensagem quando não há flashcards -->
   <div *ngIf="!flashcardAtual" class="empty-state">
     <p class="flashcard-sem-midia">Não há flashcards {{ isMinhasMemorias ? 'nas suas memórias' : 'para esta categoria' }}.</p>
-    <!-- Tela menina ? -->
   </div>
 
   <!-- Botões de ação -->

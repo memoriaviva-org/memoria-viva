@@ -36,6 +36,10 @@
     transform: translate(-50%, -50%);
   }
 
+  .flashcard-titulo{
+    margin-top: 35px;
+  }
+
   .flashcard-inner {
     position: relative;
     width: 100%;
@@ -455,4 +459,11 @@
 .audio-scss::-webkit-media-controls-panel {
   background-color: #63C03C;
   filter: invert(1);
+}
+
+// caso não haja nada
+.empty-state{
+  display: grid;
+  place-items: center; /* Centraliza o item em ambas as direções */
+  height: 100%;
 }
