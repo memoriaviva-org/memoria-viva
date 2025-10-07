@@ -1,15 +1,16 @@
 import { Injectable, inject } from '@angular/core';
-import { 
-  Firestore, 
-  collection, 
-  collectionData, 
-  doc, 
-  addDoc, 
-  updateDoc, 
-  deleteDoc, 
-  query, 
-  where, 
-  orderBy 
+import {
+  Firestore,
+  collection,
+  collectionData,
+  doc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+  orderBy,
+  docData
 } from '@angular/fire/firestore';
 import { Auth, user } from '@angular/fire/auth';
 import { Observable, of, switchMap } from 'rxjs';
@@ -34,6 +35,18 @@ export class FlashcardService {
 
   constructor() {}
 
+  // NOVO: Buscar flashcard por ID
+  getFlashcardPorId(id: string): Observable<Flashcard | undefined> {
+    return user(this.auth).pipe(
+      switchMap(u => {
+        if (!u) return of(undefined);
+
+        const docRef = doc(this.firestore, `users/${u.uid}/flashcards/${id}`);
+        return docData(docRef, { idField: 'id' }) as Observable<Flashcard>;
+      })
+    );
+  }
+
   // Método para ver TODOS os flashcards (usado em "Minhas Memórias")
   verTodosFlashcards(): Observable<Flashcard[]> {
     return user(this.auth).pipe(
@@ -55,7 +68,7 @@ export class FlashcardService {
         if (!u) return of([]);
 
         const colRef = collection(this.firestore, `users/${u.uid}/flashcards`);
-        
+
         // Busca por categoria específica
         const q = query(
           colRef,
@@ -71,11 +84,11 @@ export class FlashcardService {
   async addFlashcard(flashcard: Flashcard) {
     const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
-    
+
     const colRef = collection(this.firestore, `users/${currentUser.uid}/flashcards`);
-    return addDoc(colRef, { 
-      ...flashcard, 
-      createdAt: Date.now() 
+    return addDoc(colRef, {
+      ...flashcard,
+      createdAt: Date.now()
     });
   }
 
@@ -83,7 +96,9 @@ export class FlashcardService {
   async updateFlashcard(flashcard: Flashcard) {
     const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
-    
+
+    if (!flashcard.id) throw new Error('ID do flashcard é obrigatório para atualização');
+
     const docRef = doc(this.firestore, `users/${currentUser.uid}/flashcards/${flashcard.id}`);
     return updateDoc(docRef, {
       tituloFlashcard: flashcard.tituloFlashcard,
@@ -99,7 +114,7 @@ export class FlashcardService {
   async deleteFlashcard(id: string) {
     const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
-    
+
     const docRef = doc(this.firestore, `users/${currentUser.uid}/flashcards/${id}`);
     return deleteDoc(docRef);
   }

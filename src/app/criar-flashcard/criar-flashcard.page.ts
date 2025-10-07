@@ -17,6 +17,7 @@ export class CriarFlashcardPage implements OnInit {
 
   mostrarJanela = false;
 
+  // Variáveis do formulário
   tituloFlashcard = '';
   categoriaSelecionada = '';
   curiosidade = '';
@@ -31,9 +32,14 @@ export class CriarFlashcardPage implements OnInit {
   tipoArquivo?: string; // 'image', 'video', 'audio'
   arquivoPreview?: string; // base64 para imagem/video/audio
 
+  // NOVAS VARIÁVEIS PARA EDIÇÃO
+  modoEdicao = false;
+  flashcardId: string | null = null;
+  flashcardOriginal: Flashcard | null = null;
+
   categorias: string[] = [
     'Família',
-    'Amigos', 
+    'Amigos',
     'Passatempos',
     'Infância',
     'Juventude',
@@ -44,7 +50,52 @@ export class CriarFlashcardPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.categoriaSelecionada = params['categoria'] || '';
+
+      // Verificar se está no modo edição
+      if (params['editar'] === 'true' && params['id']) {
+        this.modoEdicao = true;
+        this.flashcardId = params['id'];
+        this.carregarFlashcardParaEdicao();
+      }
     });
+  }
+
+  // NOVO: Carregar flashcard para edição
+  carregarFlashcardParaEdicao() {
+    if (!this.flashcardId) return;
+
+    this.flashcardService.getFlashcardPorId(this.flashcardId).subscribe(flashcard => {
+      if (flashcard) {
+        this.flashcardOriginal = flashcard;
+        this.tituloFlashcard = flashcard.tituloFlashcard;
+        this.categoriaSelecionada = flashcard.categoriaFlashcard;
+        this.curiosidade = flashcard.curiosidade || '';
+        this.audioPergunta = flashcard.audioPergunta;
+        this.audioResposta = flashcard.audioResposta;
+        this.midiaAuxiliar = flashcard.midiaAuxiliar;
+
+        // Configurar preview da mídia auxiliar
+        if (this.midiaAuxiliar) {
+          this.arquivoPreview = this.midiaAuxiliar;
+          this.determinarTipoArquivo(this.midiaAuxiliar);
+        }
+
+        console.log('Flashcard carregado para edição:', flashcard);
+      }
+    });
+  }
+
+  // NOVO: Determinar tipo de arquivo baseado no Base64
+  private determinarTipoArquivo(base64String: string) {
+    if (base64String.startsWith('data:image/')) {
+      this.tipoArquivo = 'image';
+    } else if (base64String.startsWith('data:video/')) {
+      this.tipoArquivo = 'video';
+    } else if (base64String.startsWith('data:audio/')) {
+      this.tipoArquivo = 'audio';
+    } else {
+      this.tipoArquivo = undefined;
+    }
   }
 
   mostrarJanelaMais() { this.mostrarJanela = !this.mostrarJanela; }
@@ -58,8 +109,8 @@ export class CriarFlashcardPage implements OnInit {
       button.style.display = 'none';
       audio.style.display = 'block';
       audio.play();
-    } else { 
-      audio.pause(); 
+    } else {
+      audio.pause();
     }
 
     audio.onended = () => {
@@ -127,6 +178,14 @@ export class CriarFlashcardPage implements OnInit {
   }
 
   async salvarFlashcard() {
+    if (this.modoEdicao) {
+      await this.atualizarFlashcard();
+    } else {
+      await this.criarNovoFlashcard();
+    }
+  }
+
+  async criarNovoFlashcard() {
     if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada) {
       alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta e Áudio da Resposta)!');
       return;
@@ -154,6 +213,39 @@ export class CriarFlashcardPage implements OnInit {
     } catch (err) {
       console.error(err);
       alert('Erro ao salvar flashcard. O tamanho combinado da mídia é muito grande para o Firestore.');
+    }
+  }
+
+  // NOVO: Atualizar flashcard existente
+  async atualizarFlashcard() {
+    if (!this.flashcardId) {
+      alert('ID do flashcard não encontrado');
+      return;
+    }
+
+    if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada) {
+      alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta e Áudio da Resposta)!');
+      return;
+    }
+
+    const flashcardAtualizado: Flashcard = {
+      id: this.flashcardId,
+      tituloFlashcard: this.tituloFlashcard,
+      categoriaFlashcard: this.categoriaSelecionada,
+      curiosidade: this.curiosidade || undefined,
+      audioPergunta: this.audioPergunta,
+      audioResposta: this.audioResposta,
+      midiaAuxiliar: this.midiaAuxiliar
+    };
+
+    try {
+      await this.flashcardService.updateFlashcard(flashcardAtualizado);
+      alert('Flashcard atualizado com sucesso!');
+
+      this.router.navigate(['/gerenciar-flashcards']);
+    } catch (err) {
+      console.error(err);
+      alert('Erro ao atualizar flashcard.');
     }
   }
 
