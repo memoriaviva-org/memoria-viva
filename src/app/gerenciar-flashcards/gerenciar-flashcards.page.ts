@@ -26,7 +26,6 @@ export class GerenciarFlashcardsPage implements OnInit {
   private router = inject(Router);
 
   flashcards$!: Observable<Flashcard[]>;
-  // Novo Observable para grupos de flashcards
   flashcardsGrouped$!: Observable<FlashcardGroup[]>;
   carregando = true;
   mostrarJanela: boolean = false;
@@ -34,6 +33,9 @@ export class GerenciarFlashcardsPage implements OnInit {
   categoria: string = '';
   categoriaImg: string = '';
   tituloCategoria: string = 'Meus Flashcards';
+
+  // Nova propriedade para controlar quando mostrar a faixa
+  mostrarFaixaCategoria: boolean = false;
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
@@ -44,6 +46,11 @@ export class GerenciarFlashcardsPage implements OnInit {
       const dados = this.getDadosCategoria(this.categoria);
       this.categoriaImg = dados.caminhoDaImagem;
       this.tituloCategoria = dados.titulo;
+
+      // Define quando mostrar a faixa:
+      // MOSTRAR faixa apenas quando NÃO estiver em uma categoria específica
+      // (ou seja, quando estiver vendo TODOS os flashcards)
+      this.mostrarFaixaCategoria = !this.categoria || this.categoria === 'all';
 
       this.carregarFlashcards();
     });
@@ -58,10 +65,21 @@ export class GerenciarFlashcardsPage implements OnInit {
       this.flashcards$ = this.flashcardService.verTodosFlashcards();
     }
 
-    // Agrupa os flashcards por categoria
-    this.flashcardsGrouped$ = this.flashcards$.pipe(
-      map(flashcards => this.agruparFlashcardsPorCategoria(flashcards))
-    );
+    // Agrupa os flashcards por categoria apenas se for mostrar a faixa
+    if (this.mostrarFaixaCategoria) {
+      this.flashcardsGrouped$ = this.flashcards$.pipe(
+        map(flashcards => this.agruparFlashcardsPorCategoria(flashcards))
+      );
+    } else {
+      // Se não for mostrar faixa, usa os flashcards diretamente sem agrupar
+      this.flashcardsGrouped$ = this.flashcards$.pipe(
+        map(flashcards => [{
+          categoria: this.categoria,
+          flashcards: flashcards,
+          titulo: this.categoria
+        }])
+      );
+    }
 
     // Atualiza o estado de carregamento quando os dados chegarem
     this.flashcards$.subscribe({
@@ -94,6 +112,7 @@ export class GerenciarFlashcardsPage implements OnInit {
     );
   }
 
+  // ... resto dos métodos permanecem iguais ...
   editarFlashcard(flashcardId: string | undefined) {
     if (!flashcardId) {
       console.error('ID do flashcard não encontrado');
