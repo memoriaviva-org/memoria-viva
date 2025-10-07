@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RegistroService, MeuDia } from '../services/registro.service';
 import { Observable, map } from 'rxjs';
+import { Router } from '@angular/router'; // ADICIONAR
 
 @Component({
   selector: 'app-meu-dia-registros',
@@ -12,11 +13,14 @@ export class MeuDiaRegistrosPage implements OnInit {
   registrosAgrupados$!: Observable<{ [dia: string]: MeuDia[] }>;
   mostrarJanela = false;
   mostrarConfirmacao = false;
-  carregando = true;// flag de carregamento
-  temRegistros = false;// mecanismo do audio
+  carregando = true;
+  temRegistros = false;
 
-
-  constructor(private registroService: RegistroService) {}
+  // ADICIONAR Router no constructor
+  constructor(
+    private registroService: RegistroService,
+    private router: Router
+  ) {}
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
@@ -31,10 +35,21 @@ export class MeuDiaRegistrosPage implements OnInit {
         return grupos;
       })
     );
+
     this.registrosAgrupados$.subscribe(registrosAgrupados => {
       this.carregando = false;
       this.temRegistros = Object.keys(registrosAgrupados).length > 0;
-    });//mudado por conta do audio
+    });
+  }
+
+  // NOVA FUNÇÃO: Navegar para edição
+  editarRegistro(registroId: string | undefined) {
+    this.router.navigate(['/add'], {
+      queryParams: {
+        editar: 'true',
+        id: registroId
+      }
+    });
   }
 
   groupByTwo(registros: MeuDia[]): MeuDia[][] {
@@ -57,14 +72,13 @@ export class MeuDiaRegistrosPage implements OnInit {
     this.imagemSelecionada = null;
   }
 
- abrirMidia(registro: any) {
-  if (registro.tipoMidia === 'imagem' && registro.midiaUrl) {
-    this.abrirImagemTelaCheia(registro.midiaUrl);
-  } else if (registro.tipoMidia === 'video' && registro.midiaUrl) {
-    registro.reproduzindo = !registro.reproduzindo;
+  abrirMidia(registro: any) {
+    if (registro.tipoMidia === 'imagem' && registro.midiaUrl) {
+      this.abrirImagemTelaCheia(registro.midiaUrl);
+    } else if (registro.tipoMidia === 'video' && registro.midiaUrl) {
+      registro.reproduzindo = !registro.reproduzindo;
+    }
   }
-}
-
 
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela;
@@ -86,17 +100,14 @@ export class MeuDiaRegistrosPage implements OnInit {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     const button = document.querySelector('.audio-btn') as HTMLElement;
 
-     // Define qual áudio será usado com base na flag temRegistros
     const novoSrc = this.temRegistros
-    ? 'assets/audio/audio-teste.m4a'
-    : 'assets/audio/audio-pequeno.mp3';
+      ? 'assets/audio/audio-teste.m4a'
+      : 'assets/audio/audio-pequeno.mp3';
 
-  // Atualiza o src e carrega o áudio
-  audio.src = novoSrc;
-  audio.load();
+    audio.src = novoSrc;
+    audio.load();
 
     if (audio.paused) {
-      // Esconde botão e mostra player
       button.style.display = 'none';
       audio.style.display = 'block';
       audio.play();
@@ -104,14 +115,12 @@ export class MeuDiaRegistrosPage implements OnInit {
       audio.pause();
     }
 
-    // Quando terminar, esconde player e volta botão
     audio.onended = () => {
       audio.style.display = 'none';
-      button.style.display = 'inline-flex'; // volta o ion-button
+      button.style.display = 'inline-flex';
     };
   }
 
-  // 🔑 aqui está a função que substitui Object.keys() no HTML
   getKeys(obj: any): string[] {
     return obj ? Object.keys(obj) : [];
   }
