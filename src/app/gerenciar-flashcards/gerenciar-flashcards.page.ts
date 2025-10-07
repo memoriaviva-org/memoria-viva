@@ -57,44 +57,60 @@ export class GerenciarFlashcardsPage implements OnInit {
     });
   }
 
+  // NOVO: Função para editar flashcard
+  editarFlashcard(flashcardId: string | undefined) {
+    if (!flashcardId) {
+      console.error('ID do flashcard não encontrado');
+      return;
+    }
+
+    this.router.navigate(['/criar-flashcard'], {
+      queryParams: {
+        editar: 'true',
+        id: flashcardId
+      }
+    });
+  }
+
   // Método para tratamento de erro em imagens
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     img.style.display = 'none';
   }
 
- // Método para detectar tipo de mídia
-getMidiaAuxiliarTipo(flashcard: Flashcard): 'foto' | 'video' | 'audio' | 'none' {
-  // Primeiro verifica se existe mídia auxiliar
-  if (!flashcard.midiaAuxiliar || flashcard.midiaAuxiliar.trim() === '') {
+  // Método para detectar tipo de mídia
+  getMidiaAuxiliarTipo(flashcard: Flashcard): 'foto' | 'video' | 'audio' | 'none' {
+    // Primeiro verifica se existe mídia auxiliar
+    if (!flashcard.midiaAuxiliar || flashcard.midiaAuxiliar.trim() === '') {
+      return 'none';
+    }
+
+    const midiaUrl = flashcard.midiaAuxiliar.toLowerCase();
+
+    // Para Base64 - verifica o tipo pelo prefixo
+    if (midiaUrl.startsWith('data:')) {
+      if (midiaUrl.includes('image/')) return 'foto';
+      if (midiaUrl.includes('video/')) return 'video';
+      if (midiaUrl.includes('audio/')) return 'audio';
+      return 'none';
+    }
+
+    // Para URLs - verifica pela extensão
+    if (midiaUrl.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i)) {
+      return 'foto';
+    }
+
+    if (midiaUrl.match(/\.(mp4|webm|ogg|mov|avi|wmv)$/i)) {
+      return 'video';
+    }
+
+    if (midiaUrl.match(/\.(mp3|wav|ogg|m4a|aac|flac)$/i)) {
+      return 'audio';
+    }
+
     return 'none';
   }
 
-  const midiaUrl = flashcard.midiaAuxiliar.toLowerCase();
-
-  // Para Base64 - verifica o tipo pelo prefixo
-  if (midiaUrl.startsWith('data:')) {
-    if (midiaUrl.includes('image/')) return 'foto';
-    if (midiaUrl.includes('video/')) return 'video';
-    if (midiaUrl.includes('audio/')) return 'audio';
-    return 'none';
-  }
-
-  // Para URLs - verifica pela extensão
-  if (midiaUrl.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i)) {
-    return 'foto';
-  }
-
-  if (midiaUrl.match(/\.(mp4|webm|ogg|mov|avi|wmv)$/i)) {
-    return 'video';
-  }
-
-  if (midiaUrl.match(/\.(mp3|wav|ogg|m4a|aac|flac)$/i)) {
-    return 'audio';
-  }
-
-  return 'none';
-}
   // Verifica se a URL da mídia é válida (para Base64)
   isMidiaValida(url: string | undefined): boolean {
     if (!url) return false;

@@ -24,7 +24,7 @@ export class FlashcardPage implements OnInit {
 
   // Observable para lista de flashcards
   flashcards$!: Observable<Flashcard[]>;
-  
+
   // Flashcard atual sendo exibido
   flashcardAtual: Flashcard | null = null;
   currentIndex: number = 0;
@@ -46,7 +46,7 @@ export class FlashcardPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.categoriaSelecionada = params['categoria'] || '';
       this.setCategoria(this.categoriaSelecionada);
-      
+
       // Carrega flashcards
       this.carregarFlashcards();
     });
@@ -60,7 +60,7 @@ export class FlashcardPage implements OnInit {
       // Categoria específica
       this.flashcards$ = this.flashcardService.verFlashcardsPorCategoria(this.categoriaSelecionada);
     }
-    
+
     this.flashcards$.subscribe(flashcards => {
       console.log('Flashcards carregados:', flashcards.length);
       if (flashcards.length > 0) {
@@ -125,11 +125,11 @@ export class FlashcardPage implements OnInit {
   // Métodos para manipulação de mídia
   getMidiaAuxiliarTipo(flashcard: Flashcard): string {
     if (!flashcard.midiaAuxiliar) return '';
-    
+
     if (flashcard.midiaAuxiliar.startsWith('data:image')) return 'image';
     if (flashcard.midiaAuxiliar.startsWith('data:video')) return 'video';
     if (flashcard.midiaAuxiliar.startsWith('data:audio')) return 'audio';
-    
+
     return '';
   }
 
@@ -183,7 +183,7 @@ export class FlashcardPage implements OnInit {
         await this.flashcardService.deleteFlashcard(this.flashcardAtual.id);
         this.mostrarConfirmacao = false;
         this.mostrarMensagemSucesso = true;
-        
+
         // Recarrega a lista após exclusão
         setTimeout(() => {
           this.mostrarMensagemSucesso = false;
@@ -198,11 +198,9 @@ export class FlashcardPage implements OnInit {
   editarFlashcard(flashcard: Flashcard) {
     this.router.navigate(['/criar-flashcard'], {
       queryParams: {
+        editar: 'true',
         id: flashcard.id,
-        categoria: flashcard.categoriaFlashcard,
-        titulo: flashcard.tituloFlashcard,
-        curiosidade: flashcard.curiosidade,
-        editando: true
+        categoria: flashcard.categoriaFlashcard
       }
     });
   }
