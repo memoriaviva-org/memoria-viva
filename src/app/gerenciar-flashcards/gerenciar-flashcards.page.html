@@ -24,34 +24,35 @@
     <!-- Flashcards List Agrupados -->
     <div *ngIf="!carregando" class="flashcards-list">
 
-      <!-- Empty State -->
-      <div *ngIf="(flashcardsGrouped$ | async)?.length === 0" class="vetor-flashcards empty-state">
-        <p class="flashcard-sem-midia">
-          {{ categoria ?
-             'Não há flashcards para esta categoria.' :
-             'Não há flashcards cadastrados.'
-          }}
-        </p>
+    <!-- Empty State -->
+    <div *ngIf="(flashcardsGrouped$ | async)?.length === 0" class="vetor-flashcards empty-state">
+      <p class="flashcard-sem-midia">
+        {{ categoria ?
+          'Não há flashcards para esta categoria.' :
+          'Não há flashcards cadastrados.'
+        }}
+      </p>
+    </div>
+
+    <!-- Grupos de Flashcards por Categoria -->
+    <div *ngFor="let grupo of flashcardsGrouped$ | async" class="categoria-group">
+
+      <!-- Faixa da Categoria - SÓ APARECE quando mostrarFaixaCategoria for true -->
+      <div *ngIf="mostrarFaixaCategoria" class="faixa-categoria-linha">
+        <div class="faixa-conteudo">
+          <img
+            [src]="getIconeMiniCategoria(grupo.categoria)"
+            [alt]="grupo.titulo"
+            class="faixa-icone"
+            (error)="onImageError($event)"
+          />
+          <span class="faixa-texto">{{ grupo.titulo }}</span>
+        </div>
       </div>
 
-      <!-- Grupos de Flashcards por Categoria -->
-      <div *ngFor="let grupo of flashcardsGrouped$ | async" class="categoria-group">
+      <!-- Flashcards desta categoria -->
+      <div *ngFor="let flashcard of grupo.flashcards" class="vetor-flashcards">
 
-        <!-- Faixa da Categoria (UMA por grupo) -->
-        <div class="faixa-categoria-linha">
-          <div class="faixa-conteudo">
-            <img
-              [src]="getIconeMiniCategoria(grupo.categoria)"
-              [alt]="grupo.titulo"
-              class="faixa-icone"
-              (error)="onImageError($event)"
-            />
-            <span class="faixa-texto">{{ grupo.titulo }}</span>
-          </div>
-        </div>
-
-        <!-- Flashcards desta categoria -->
-        <div *ngFor="let flashcard of grupo.flashcards" class="vetor-flashcards">
 
           <!-- Botões (mantêm-se no topo) -->
           <div class="flashcard-actions-container">
