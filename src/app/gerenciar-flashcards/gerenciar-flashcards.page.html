@@ -23,9 +23,10 @@
       <div *ngIf="(flashcards$ | async)?.length === 0" class="vetor-flashcards empty-state">
         <p class="flashcard-sem-midia">Não há flashcards para esta categoria. Adicione um novo!</p>
       </div>
-
       <!-- Flashcards -->
       <div *ngFor="let flashcard of flashcards$ | async" class="vetor-flashcards">
+          <!-- Faixa de Categoria -->
+          <div class="categoria-faixa" [ngClass]="getClasseCategoria(flashcard.categoriaFlashcard)"></div>
 
   <!-- Botões (mantêm-se no topo) -->
   <div class="flashcard-actions-container">

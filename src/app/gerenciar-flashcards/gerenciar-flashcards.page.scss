@@ -488,3 +488,12 @@ h3 {
   white-space: pre-line;
   font-weight: 100;
 }
+
+//faixa 
+.categoria-faixa {
+  width: 300%;
+  height: 10px;
+  background-color: #9C3FC3;
+  position: fixed;
+  top: -10%;
+}
