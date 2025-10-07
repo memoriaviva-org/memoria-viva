@@ -69,24 +69,6 @@
   border-radius: 8px;     /* (opcional) deixa os cantos arredondados */
 }
 
-.btn-extra2 {
-  --background: #FAC946;
-  --color: #fff;
-  --background-activated: #bd9935;
-  --background-hover: #fad05b;
-
-  height: 70px;
-  width: 90px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border: 2px solid #000; /* Borda preta */
-  border-radius: 8px;     /* (opcional) deixa os cantos arredondados */
-}
-
-
 .btn-extra .btn-content {
   display: flex;
   flex-direction: column;
@@ -117,6 +99,11 @@
   color: black;
 }
 
+.add-btn-icon-add-flashcard {
+  width: 65px;
+  height: 65px;
+}
+
 /* Estilo para o título "Categorias" */
 .title {
   color: #000;
@@ -128,6 +115,12 @@
   text-align: center; /* centraliza o texto horizontalmente */
 }
 
+.titulo {
+  display: flex;
+  justify-content: center;
+  font-family: Inter;
+  font-weight: 500;
+}
 
 /* Texto dos botões extras no topo */
 .text-btn {
