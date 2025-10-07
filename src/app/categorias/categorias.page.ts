@@ -80,9 +80,11 @@ export class CategoriasPage implements OnInit, OnDestroy {
       .subscribe({
         next: (flashcards: Flashcard[]) => {
           this.atualizarCategoriasComFlashcards(flashcards);
+          this.carregando = false; // DADOS CARREGADOS - DESATIVA LOADING
         },
         error: (error) => {
           console.error('Erro ao carregar flashcards:', error);
+          this.carregando = false; // EM CASO DE ERRO TAMBÉM DESATIVA LOADING
         }
       });
   }

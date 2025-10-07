@@ -1,93 +1,104 @@
 <ion-content fullscreen>
 
-<!-- 🌸 Cabeçalho -->
-<div class="header-svg-container">
-  <svg xmlns="http://www.w3.org/2000/svg" width="412" height="365" viewBox="0 0 412 365" fill="none">
-    <path d="M-35 -18H621V365C433.901 115.251 174.347 172.943 -35 365V-18Z" fill="#9C3FC3"/>
-  </svg>
-  <svg class="logo-header-img" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-    <circle cx="30" cy="30" r="28.5" fill="white" stroke="black" stroke-width="3"/>
-  </svg>
-  <p class="logo-header-text">Minhas Memórias</p>
-</div>
+  <!-- 🌸 Cabeçalho -->
+  <div class="header-svg-container">
+    <svg xmlns="http://www.w3.org/2000/svg" width="412" height="365" viewBox="0 0 412 365" fill="none">
+      <path d="M-35 -18H621V365C433.901 115.251 174.347 172.943 -35 365V-18Z" fill="#9C3FC3"/>
+    </svg>
+    <svg class="logo-header-img" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+      <circle cx="30" cy="30" r="28.5" fill="white" stroke="black" stroke-width="3"/>
+    </svg>
+    <p class="logo-header-text">Minhas Memórias</p>
+  </div>
 
-<!-- 🔊 Botão de áudio -->
-<ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
-  <ion-icon name="volume-high" slot="icon-only"></ion-icon>
-</ion-button>
-
-<audio #audioPlayer controls="false" class="audio-scss"></audio>
-
-
-<div *ngIf="!existemCategoriasComFlashcards()" class="meu-dia-container">
-  <img class="menina-amarelo" src="assets/img/menino-roxo.png" alt="Bonequinha explicativa">
-  <p class="meu-dia-texto-explicativo">
-    Nessa tela, você pode registrar <br>
-    momentos do seu dia, como o <br>
-    almoço. Para adicionar, basta <br>
-    clicar no botão abaixo. Lembre- <br>
-    se, tudo o que for adicionado será
-    apagado automaticamente à meia noite.
-  </p>
-
-  <!-- 👇 Botão adicionado dentro do mesmo ngIf -->
-  <ion-button class="add-btn" href="criar-flashcard">
-    <ion-icon name="add-outline" class="add-btn-icon"></ion-icon>
+  <!-- 🔊 Botão de áudio -->
+  <ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
+    <ion-icon name="volume-high" slot="icon-only"></ion-icon>
   </ion-button>
-</div>
 
-<!-- 🌸 Botões e categorias: só aparecem quando EXISTEM categorias -->
-<div *ngIf="existemCategoriasComFlashcards()">
+  <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
-  <div class="btn-extra-container">
-    <div class="btn-extra-item">
-      <ion-button class="btn-extra" href="/flashcard">
-        <div class="btn-content">
-          <ion-icon name="add-outline" class="add-btn-icon-add-flashcard"></ion-icon>
-        </div>
-      </ion-button>
-      <span class="text-btn"><span class="black">Adicionar Flashcard</span></span>
-    </div>
-
-    <div class="btn-extra-item">
-      <ion-button class="btn-extra" href="/flashcard">
-        <div class="btn-content">
-          <img src="assets/img/fazer_flashcards.png" alt="Fazer Flashcards">
-        </div>
-      </ion-button>
-      <span class="text-btn">Fazer Flashcards</span>
-    </div>
-
-    <div class="btn-extra-item">
-      <ion-button class="btn-extra" href="/gerenciar-flashcards">
-        <div class="btn-content">
-          <img src="assets/img/gerenciar_flashcards.png" alt="Gerenciar Flashcards">
-        </div>
-      </ion-button>
-      <span class="text-btn">Gerenciar Flashcards</span>
-    </div>
+  <!-- ✅ INDICADOR DE CARREGAMENTO (EXATAMENTE IGUAL À OUTRA PÁGINA) -->
+  <div *ngIf="carregando" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Carregando...</p>
   </div>
 
-  <!-- 🌼 Título "Categorias" -->
-  <div class="titulo-container">
-    <h2 class="titulo">Categorias</h2>
-  </div>
+  <!-- ✅ CONTEÚDO PRINCIPAL - SÓ APARECE QUANDO NÃO ESTÁ CARREGANDO -->
+  <div *ngIf="!carregando">
 
-  <!-- 🔹 Botões das categorias -->
-  <div class="btn-grid">
-    <ng-container *ngFor="let categoria of categorias">
-      <ion-button
-        *ngIf="categoria.possuiFlashcards"
-        class="btn-pill"
-        (click)="abrirCategoria(categoria.nome)">
-        <div class="btn-content">
-          <img [src]="categoria.imagem" [alt]="'Categoria ' + categoria.nome">
-          <span>{{ categoria.nome }}</span>
-        </div>
+    <!-- Tela quando não há categorias com flashcards -->
+    <div *ngIf="!existemCategoriasComFlashcards()" class="meu-dia-container">
+      <img class="menina-amarelo" src="assets/img/menino-roxo.png" alt="Bonequinha explicativa">
+      <p class="meu-dia-texto-explicativo">
+        Nessa tela, você pode registrar <br>
+        momentos do seu dia, como o <br>
+        almoço. Para adicionar, basta <br>
+        clicar no botão abaixo. Lembre- <br>
+        se, tudo o que for adicionado será
+        apagado automaticamente à meia noite.
+      </p>
+
+      <!-- 👇 Botão adicionado dentro do mesmo ngIf -->
+      <ion-button class="add-btn" href="criar-flashcard">
+        <ion-icon name="add-outline" class="add-btn-icon"></ion-icon>
       </ion-button>
-    </ng-container>
+    </div>
+
+    <!-- 🌸 Botões e categorias: só aparecem quando EXISTEM categorias -->
+    <div *ngIf="existemCategoriasComFlashcards()">
+
+      <div class="btn-extra-container">
+        <div class="btn-extra-item">
+          <ion-button class="btn-extra" href="/flashcard">
+            <div class="btn-content">
+              <ion-icon name="add-outline" class="add-btn-icon-add-flashcard"></ion-icon>
+            </div>
+          </ion-button>
+          <span class="text-btn"><span class="black">Adicionar Flashcard</span></span>
+        </div>
+
+        <div class="btn-extra-item">
+          <ion-button class="btn-extra" href="/flashcard">
+            <div class="btn-content">
+              <img src="assets/img/fazer_flashcards.png" alt="Fazer Flashcards">
+            </div>
+          </ion-button>
+          <span class="text-btn">Fazer Flashcards</span>
+        </div>
+
+        <div class="btn-extra-item">
+          <ion-button class="btn-extra" href="/gerenciar-flashcards">
+            <div class="btn-content">
+              <img src="assets/img/gerenciar_flashcards.png" alt="Gerenciar Flashcards">
+            </div>
+          </ion-button>
+          <span class="text-btn">Gerenciar Flashcards</span>
+        </div>
+      </div>
+
+      <!-- 🌼 Título "Categorias" -->
+      <div class="titulo-container">
+        <h2 class="titulo">Categorias</h2>
+      </div>
+
+      <!-- 🔹 Botões das categorias -->
+      <div class="btn-grid">
+        <ng-container *ngFor="let categoria of categorias">
+          <ion-button
+            *ngIf="categoria.possuiFlashcards"
+            class="btn-pill"
+            (click)="abrirCategoria(categoria.nome)">
+            <div class="btn-content">
+              <img [src]="categoria.imagem" [alt]="'Categoria ' + categoria.nome">
+              <span>{{ categoria.nome }}</span>
+            </div>
+          </ion-button>
+        </ng-container>
+      </div>
+    </div>
+
   </div>
-</div>
 
     <br><br><br><br>
 
