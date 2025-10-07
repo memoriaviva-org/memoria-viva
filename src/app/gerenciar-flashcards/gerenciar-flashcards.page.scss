@@ -548,6 +548,7 @@ h3 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-text-stroke: 0px;
 }
 
 .loading-state {
