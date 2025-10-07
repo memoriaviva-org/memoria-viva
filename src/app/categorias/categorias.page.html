@@ -16,7 +16,8 @@
   <ion-icon name="volume-high" slot="icon-only"></ion-icon>
 </ion-button>
 
-<audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
+<audio #audioPlayer controls="false" class="audio-scss"></audio>
+
 
 <div *ngIf="!existemCategoriasComFlashcards()" class="meu-dia-container">
   <img class="menina-amarelo" src="assets/img/menino-roxo.png" alt="Bonequinha explicativa">

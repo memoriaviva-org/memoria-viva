@@ -13,7 +13,8 @@ import { Subscription } from 'rxjs';
   imports: [IonicModule, CommonModule]
 })
 export class CategoriasPage implements OnInit, OnDestroy {
-  carregando = true;// flag de carregamento
+
+  carregando = true; // Flag de carregamento
   constructor(
     private router: Router,
     private flashcardService: FlashcardService
@@ -130,16 +131,24 @@ export class CategoriasPage implements OnInit, OnDestroy {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     const button = document.querySelector('.audio-btn') as HTMLElement;
 
+    // Usa a função que já existe para decidir qual áudio tocar
+    const novoSrc = this.existemCategoriasComFlashcards()
+      ? 'assets/audio/audio-teste.m4a'      // quando existem categorias
+      : 'assets/audio/audio-pequeno.mp3';    // quando não existem categorias
+
+    // Atualiza o src e recarrega
+    audio.src = novoSrc;
+    audio.load();
+
     if (audio.paused) {
-      // Esconde botão e mostra player
       button.style.display = 'none';
       audio.style.display = 'block';
-      audio.play();
+      audio.play().catch(err => console.error('Erro ao reproduzir áudio:', err));
     } else {
       audio.pause();
     }
 
-    // Quando terminar, esconde player e volta botão
+    // Quando o áudio termina, volta ao botão
     audio.onended = () => {
       audio.style.display = 'none';
       button.style.display = 'inline-flex';
