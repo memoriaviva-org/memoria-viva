@@ -200,7 +200,8 @@ export class FlashcardPage implements OnInit {
       queryParams: {
         editar: 'true',
         id: flashcard.id,
-        categoria: flashcard.categoriaFlashcard
+        categoria: flashcard.categoriaFlashcard,
+        origem: 'flashcards' 
       }
     });
   }

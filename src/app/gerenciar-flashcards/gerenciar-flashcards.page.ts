@@ -57,7 +57,6 @@ export class GerenciarFlashcardsPage implements OnInit {
     });
   }
 
-  // NOVO: Função para editar flashcard
   editarFlashcard(flashcardId: string | undefined) {
     if (!flashcardId) {
       console.error('ID do flashcard não encontrado');
@@ -67,7 +66,8 @@ export class GerenciarFlashcardsPage implements OnInit {
     this.router.navigate(['/criar-flashcard'], {
       queryParams: {
         editar: 'true',
-        id: flashcardId
+        id: flashcardId,
+        origem: 'gerenciar'
       }
     });
   }
