@@ -16,121 +16,144 @@
 <ion-content fullscreen>
   <div class="config-container">
 
-    <!-- Flashcards List -->
-    <div class="flashcards-list">
+    <!-- Loading State -->
+    <div *ngIf="carregando" class="loading-state">
+      <p>Carregando flashcards...</p>
+    </div>
+
+    <!-- Flashcards List Agrupados -->
+    <div *ngIf="!carregando" class="flashcards-list">
 
       <!-- Empty State -->
-      <div *ngIf="(flashcards$ | async)?.length === 0" class="vetor-flashcards empty-state">
-        <p class="flashcard-sem-midia">Não há flashcards para esta categoria. Adicione um novo!</p>
-      </div>
-      <!-- Flashcards -->
-      <div *ngFor="let flashcard of flashcards$ | async" class="vetor-flashcards">
-          <!-- Faixa de Categoria -->
-          <div class="categoria-faixa" [ngClass]="getClasseCategoria(flashcard.categoriaFlashcard)"></div>
-
-  <!-- Botões (mantêm-se no topo) -->
-  <div class="flashcard-actions-container">
-    <ion-button class="flashcard-registro-editar-btn" (click)="editarFlashcard(flashcard.id)">
-      <div class="flashcard-registro-editar-btn-div">
-        <svg class="flashcard-registro-editar-btn-svg" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-          <path d="M5.20833 21.875C4.63542 21.875 4.14497 21.671 3.73698 21.263C3.32899 20.855 3.125 20.3646 3.125 19.7917V5.20833C3.125 4.63542 3.32899 4.14497 3.73698 3.73698C4.14497 3.32899 4.63542 3.125 5.20833 3.125H14.5052L12.4219 5.20833H5.20833V19.7917H19.7917V12.5521L21.875 10.4688V19.7917C21.875 20.3646 21.671 20.855 21.263 21.263C20.855 21.671 20.3646 21.875 19.7917 21.875H5.20833ZM9.375 15.625V11.1979L18.9323 1.64062C19.1406 1.43229 19.375 1.27604 19.6354 1.17188C19.8958 1.06771 20.1562 1.01562 20.4167 1.01562C20.6944 1.01562 20.9592 1.06771 21.2109 1.17188C21.4627 1.27604 21.6927 1.43229 21.901 1.64062L23.3594 3.125C23.5503 3.33333 23.6979 3.56337 23.8021 3.8151C23.9062 4.06684 23.9583 4.32292 23.9583 4.58333C23.9583 4.84375 23.9106 5.09983 23.8151 5.35156C23.7196 5.6033 23.5677 5.83333 23.3594 6.04167L13.8021 15.625H9.375ZM11.4583 13.5417H12.9167L18.9583 7.5L18.2292 6.77083L17.474 6.04167L11.4583 12.0573V13.5417Z" fill="#FAC946"/>
-        </svg>
-        <span class="flashcard-editar-text">Editar</span>
-      </div>
-    </ion-button>
-
-    <ion-button
-      class="flashcard-registro-deletar-btn"
-      (click)="deletarFlashcard(flashcard.id!)"
-    >
-      <div class="flashcard-registro-deletar-btn-div">
-        <ion-icon name="trash-outline" class="flashcard-registro-deletar-icon"></ion-icon>
-        <span class="flashcard-deletar-text">Deletar</span>
-      </div>
-    </ion-button>
-  </div>
-
-      <!-- Título (agora abaixo dos botões) -->
-      <div class="flashcard-titulo-container">
-        <h2 class="flashcard-titulo">{{ flashcard.tituloFlashcard }}</h2>
+      <div *ngIf="(flashcardsGrouped$ | async)?.length === 0" class="vetor-flashcards empty-state">
+        <p class="flashcard-sem-midia">
+          {{ categoria ?
+             'Não há flashcards para esta categoria.' :
+             'Não há flashcards cadastrados.'
+          }}
+        </p>
       </div>
 
-        <div class="flashcard-secao pergunta-secao">
-          <h3 class="flashcard-secao-titulo">Pergunta:</h3>
-          <audio
-            class="flashcard-audio"
-            [src]="flashcard.audioPergunta"
-            controls
-            *ngIf="isMidiaValida(flashcard.audioPergunta)">
-          </audio>
-          <p *ngIf="!isMidiaValida(flashcard.audioPergunta)" class="flashcard-sem-midia">
-            Áudio da pergunta não disponível
-          </p>
+      <!-- Grupos de Flashcards por Categoria -->
+      <div *ngFor="let grupo of flashcardsGrouped$ | async" class="categoria-group">
+
+        <!-- Faixa da Categoria (UMA por grupo) -->
+        <div class="faixa-categoria-linha">
+          <div class="faixa-conteudo">
+            <img
+              [src]="getIconeMiniCategoria(grupo.categoria)"
+              [alt]="grupo.titulo"
+              class="faixa-icone"
+              (error)="onImageError($event)"
+            />
+            <span class="faixa-texto">{{ grupo.titulo }}</span>
+          </div>
         </div>
 
-        <div class="flashcard-secao midia-auxiliar-secao">
-          <h3 class="flashcard-secao-titulo">Mídia Auxiliar:</h3>
+        <!-- Flashcards desta categoria -->
+        <div *ngFor="let flashcard of grupo.flashcards" class="vetor-flashcards">
 
-          <!-- Imagem -->
-          <img
-            *ngIf="getMidiaAuxiliarTipo(flashcard) === 'foto' && isMidiaValida(flashcard.midiaAuxiliar)"
-            [src]="flashcard.midiaAuxiliar"
-            alt="Mídia Auxiliar"
-            class="flashcard-midia-img"
-            (error)="onImageError($event)" />
+          <!-- Botões (mantêm-se no topo) -->
+          <div class="flashcard-actions-container">
+            <ion-button class="flashcard-registro-editar-btn" (click)="editarFlashcard(flashcard.id)">
+              <div class="flashcard-registro-editar-btn-div">
+                <svg class="flashcard-registro-editar-btn-svg" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                  <path d="M5.20833 21.875C4.63542 21.875 4.14497 21.671 3.73698 21.263C3.32899 20.855 3.125 20.3646 3.125 19.7917V5.20833C3.125 4.63542 3.32899 4.14497 3.73698 3.73698C4.14497 3.32899 4.63542 3.125 5.20833 3.125H14.5052L12.4219 5.20833H5.20833V19.7917H19.7917V12.5521L21.875 10.4688V19.7917C21.875 20.3646 21.671 20.855 21.263 21.263C20.855 21.671 20.3646 21.875 19.7917 21.875H5.20833ZM9.375 15.625V11.1979L18.9323 1.64062C19.1406 1.43229 19.375 1.27604 19.6354 1.17188C19.8958 1.06771 20.1562 1.01562 20.4167 1.01562C20.6944 1.01562 20.9592 1.06771 21.2109 1.17188C21.4627 1.27604 21.6927 1.43229 21.901 1.64062L23.3594 3.125C23.5503 3.33333 23.6979 3.56337 23.8021 3.8151C23.9062 4.06684 23.9583 4.32292 23.9583 4.58333C23.9583 4.84375 23.9106 5.09983 23.8151 5.35156C23.7196 5.6033 23.5677 5.83333 23.3594 6.04167L13.8021 15.625H9.375ZM11.4583 13.5417H12.9167L18.9583 7.5L18.2292 6.77083L17.474 6.04167L11.4583 12.0573V13.5417Z" fill="#FAC946"/>
+                </svg>
+                <span class="flashcard-editar-text">Editar</span>
+              </div>
+            </ion-button>
 
-          <!-- Vídeo -->
-          <video
-            *ngIf="getMidiaAuxiliarTipo(flashcard) === 'video' && isMidiaValida(flashcard.midiaAuxiliar)"
-            [src]="flashcard.midiaAuxiliar"
-            controls
-            class="flashcard-midia-video">
-            Seu navegador não suporta o elemento de vídeo.
-          </video>
+            <ion-button
+              class="flashcard-registro-deletar-btn"
+              (click)="deletarFlashcard(flashcard.id!)"
+            >
+              <div class="flashcard-registro-deletar-btn-div">
+                <ion-icon name="trash-outline" class="flashcard-registro-deletar-icon"></ion-icon>
+                <span class="flashcard-deletar-text">Deletar</span>
+              </div>
+            </ion-button>
+          </div>
 
-          <!-- Áudio -->
-          <audio
-            *ngIf="getMidiaAuxiliarTipo(flashcard) === 'audio' && isMidiaValida(flashcard.midiaAuxiliar)"
-            [src]="flashcard.midiaAuxiliar"
-            controls
-            class="flashcard-audio">
-            Seu navegador não suporta o elemento de áudio.
-          </audio>
+          <!-- Título (agora abaixo dos botões) -->
+          <div class="flashcard-titulo-container">
+            <h2 class="flashcard-titulo">{{ flashcard.tituloFlashcard }}</h2>
+          </div>
 
-          <!-- Mensagem "Nenhuma mídia" só aparece quando realmente não há mídia -->
-          <p
-            *ngIf="!flashcard.midiaAuxiliar || flashcard.midiaAuxiliar.trim() === ''"
-            class="flashcard-sem-midia">
-            Nenhuma mídia auxiliar adicionada.
-          </p>
+          <div class="flashcard-secao pergunta-secao">
+            <h3 class="flashcard-secao-titulo">Pergunta:</h3>
+            <audio
+              class="flashcard-audio"
+              [src]="flashcard.audioPergunta"
+              controls
+              *ngIf="isMidiaValida(flashcard.audioPergunta)">
+            </audio>
+            <p *ngIf="!isMidiaValida(flashcard.audioPergunta)" class="flashcard-sem-midia">
+              Áudio da pergunta não disponível
+            </p>
+          </div>
+
+          <div class="flashcard-secao midia-auxiliar-secao">
+            <h3 class="flashcard-secao-titulo">Mídia Auxiliar:</h3>
+
+            <!-- Imagem -->
+            <img
+              *ngIf="getMidiaAuxiliarTipo(flashcard) === 'foto' && isMidiaValida(flashcard.midiaAuxiliar)"
+              [src]="flashcard.midiaAuxiliar"
+              alt="Mídia Auxiliar"
+              class="flashcard-midia-img"
+              (error)="onImageError($event)" />
+
+            <!-- Vídeo -->
+            <video
+              *ngIf="getMidiaAuxiliarTipo(flashcard) === 'video' && isMidiaValida(flashcard.midiaAuxiliar)"
+              [src]="flashcard.midiaAuxiliar"
+              controls
+              class="flashcard-midia-video">
+              Seu navegador não suporta o elemento de vídeo.
+            </video>
+
+            <!-- Áudio -->
+            <audio
+              *ngIf="getMidiaAuxiliarTipo(flashcard) === 'audio' && isMidiaValida(flashcard.midiaAuxiliar)"
+              [src]="flashcard.midiaAuxiliar"
+              controls
+              class="flashcard-audio">
+              Seu navegador não suporta o elemento de áudio.
+            </audio>
+
+            <!-- Mensagem "Nenhuma mídia" só aparece quando realmente não há mídia -->
+            <p
+              *ngIf="!flashcard.midiaAuxiliar || flashcard.midiaAuxiliar.trim() === ''"
+              class="flashcard-sem-midia">
+              Nenhuma mídia auxiliar adicionada.
+            </p>
+          </div>
+
+          <div class="flashcard-secao resposta-secao">
+            <h3 class="flashcard-secao-titulo">Resposta:</h3>
+            <audio
+              class="flashcard-audio"
+              [src]="flashcard.audioResposta"
+              controls
+              *ngIf="isMidiaValida(flashcard.audioResposta)">
+            </audio>
+            <p *ngIf="!isMidiaValida(flashcard.audioResposta)" class="flashcard-sem-midia">
+              Áudio da resposta não disponível
+            </p>
+          </div>
+
+          <!-- Seção Curiosidade -->
+          <div class="flashcard-secao" *ngIf="flashcard.curiosidade">
+            <h3 class="flashcard-secao-titulo">Curiosidade:</h3>
+            <p class="flashcard-curiosidade-texto">{{ flashcard.curiosidade }}</p>
+          </div>
+
         </div>
-
-        <div class="flashcard-secao resposta-secao">
-          <h3 class="flashcard-secao-titulo">Resposta:</h3>
-          <audio
-            class="flashcard-audio"
-            [src]="flashcard.audioResposta"
-            controls
-            *ngIf="isMidiaValida(flashcard.audioResposta)">
-          </audio>
-          <p *ngIf="!isMidiaValida(flashcard.audioResposta)" class="flashcard-sem-midia">
-            Áudio da resposta não disponível
-          </p>
-        </div>
-        <!-- Seção Curiosidade -->
-        <div class="flashcard-secao" *ngIf="flashcard.curiosidade">
-          <h3 class="flashcard-secao-titulo">Curiosidade:</h3>
-          <p class="flashcard-curiosidade-texto">{{ flashcard.curiosidade }}</p>
-        </div>
-
       </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
+    <br><br><br><br><br><br>
 
     <ion-button
     *ngIf="(flashcards$ | async)?.length === 0"

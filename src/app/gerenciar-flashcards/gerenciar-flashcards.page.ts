@@ -1,10 +1,16 @@
 import { Component, ViewChild, ElementRef, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { FlashcardService, Flashcard } from '../services/flashcard.service';
 
 interface DadosCategoria {
   caminhoDaImagem: string;
+  titulo: string;
+}
+
+interface FlashcardGroup {
+  categoria: string;
+  flashcards: Flashcard[];
   titulo: string;
 }
 
@@ -20,6 +26,8 @@ export class GerenciarFlashcardsPage implements OnInit {
   private router = inject(Router);
 
   flashcards$!: Observable<Flashcard[]>;
+  // Novo Observable para grupos de flashcards
+  flashcardsGrouped$!: Observable<FlashcardGroup[]>;
   carregando = true;
   mostrarJanela: boolean = false;
 
@@ -50,11 +58,40 @@ export class GerenciarFlashcardsPage implements OnInit {
       this.flashcards$ = this.flashcardService.verTodosFlashcards();
     }
 
+    // Agrupa os flashcards por categoria
+    this.flashcardsGrouped$ = this.flashcards$.pipe(
+      map(flashcards => this.agruparFlashcardsPorCategoria(flashcards))
+    );
+
     // Atualiza o estado de carregamento quando os dados chegarem
     this.flashcards$.subscribe({
       next: () => this.carregando = false,
       error: () => this.carregando = false
     });
+  }
+
+  // Método para agrupar flashcards por categoria
+  private agruparFlashcardsPorCategoria(flashcards: Flashcard[]): FlashcardGroup[] {
+    const grupos: { [key: string]: FlashcardGroup } = {};
+
+    flashcards.forEach(flashcard => {
+      const categoria = flashcard.categoriaFlashcard;
+
+      if (!grupos[categoria]) {
+        grupos[categoria] = {
+          categoria: categoria,
+          flashcards: [],
+          titulo: categoria
+        };
+      }
+
+      grupos[categoria].flashcards.push(flashcard);
+    });
+
+    // Converte o objeto em array e ordena por categoria
+    return Object.values(grupos).sort((a, b) =>
+      a.categoria.localeCompare(b.categoria)
+    );
   }
 
   editarFlashcard(flashcardId: string | undefined) {
@@ -159,6 +196,11 @@ export class GerenciarFlashcardsPage implements OnInit {
       'Momentos Marcantes': 'categoria-momentos'
     };
     return classes[nome] || 'categoria-default';
+  }
+
+  // Método para obter o ícone mini da categoria
+  getIconeMiniCategoria(categoria: string): string {
+    return this.getDadosCategoria(categoria).caminhoDaImagem;
   }
 
   async deletarFlashcard(id: string) {
