@@ -88,8 +88,14 @@ margin-right: 10px;
   appearance: none;
   border: none;
   background: transparent;
+  max-width: 100px;
+  max-height: 100px;
 }
 
+.preview-midia{
+  max-width: 100px;
+  max-height: 100px;
+}
 
 .secao-salvar-excluir {
 width: 412px;
