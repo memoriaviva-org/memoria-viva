@@ -1,9 +1,10 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
 
 import { ContatoService, Contato } from '../../services/contato.service';
 
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-contatos',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-contatos.page.scss'],
   standalone: false
 })
-export class AddContatosPage {
+export class AddContatosPage implements OnInit  {
 
   nome = '';
   relacao = '';
@@ -26,35 +27,46 @@ export class AddContatosPage {
   mostrarMensagemSucesso = false;
   mostrarConfirmacao = false;
 
+  contatoId: string | null = null;
+  editando = false;
+
   constructor(
     private contatoService: ContatoService,
-    private router: Router,
+    private router: Router, private route: ActivatedRoute,
     private toastController: ToastController
   ) {}
 
-  async salvarContato() {
-    if (!this.nome || !this.telefone) {
-      this.showToast('Nome e telefone são obrigatórios');
-      return;
+    async salvarContato() {
+      if (!this.nome || !this.telefone) {
+        this.showToast('Nome e telefone são obrigatórios');
+        return;
+      }
+
+      const contato: Contato = {
+        nome: this.nome,
+        relacao: this.relacao,
+        telefone: this.telefone,
+        endereco: this.endereco,
+        fotoUrl: this.fotoUrl,
+        audioUrl: this.audioUrl
+      };
+
+      try {
+        if (this.editando && this.contatoId) {
+          // Atualiza contato existente
+          contato.id = this.contatoId;  // <-- garantir que id está definido
+          await this.contatoService.updateContato(contato);
+        } else {
+          // Adiciona novo contato
+          await this.contatoService.addContato(contato);
+        }
+        this.router.navigateByUrl('/contatos');
+      } catch (err) {
+        console.error(err);
+        this.showToast('Erro ao salvar contato');
+      }
     }
 
-    const contato: Contato = {
-      nome: this.nome,
-      relacao: this.relacao,
-      telefone: this.telefone,
-      endereco: this.endereco,
-      fotoUrl: this.fotoUrl,
-      audioUrl: this.audioUrl
-    };
-
-    try {
-      await this.contatoService.addContato(contato);
-      this.router.navigateByUrl('/contatos'); 
-    } catch (err) {
-      console.error(err);
-      this.showToast('Erro ao salvar contato');
-    }
-  }
 
   async showToast(msg: string) {
     const toast = await this.toastController.create({
@@ -92,6 +104,24 @@ export class AddContatosPage {
     }
   }
 
+  ngOnInit() {
+    this.route.queryParams.subscribe(async (params) => {
+      if (params['editar'] === 'true' && params['id']) {
+        this.editando = true;
+        this.contatoId = params['id'];
+        const contato = await this.contatoService.getContatoById(this.contatoId!);
+        if (contato) {
+          // Preencher os campos
+          this.nome = contato.nome;
+          this.relacao = contato.relacao;
+          this.telefone = contato.telefone;
+          this.endereco = contato.endereco ?? '';
+          this.fotoUrl = contato.fotoUrl ?? '';
+          this.audioUrl = contato.audioUrl ?? '';
+        }
+      }
+    });
+  }
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 

@@ -75,9 +75,9 @@
     class="input-file"
   />
 
-<img *ngIf="fotoUrl && arquivoSelecionado?.type?.startsWith('image/')"
-    [src]="fotoUrl"
-    alt="Preview" style="max-width: 50px; max-height: 50px;">
+<img *ngIf="fotoUrl && (!arquivoSelecionado || arquivoSelecionado.type.startsWith('image/'))"
+     [src]="fotoUrl"
+     alt="Preview" style="max-width: 50px; max-height: 50px;">
 </ion-item>
 
 
@@ -119,7 +119,7 @@
 
     <div class="secao-salvar-excluir">
       <ion-button class="btn-salvar" (click)="salvarContato()">
-        <p class="salvar-text">Salvar</p>
+        <p class="salvar-text">{{ editando ? 'Atualizar' : 'Salvar' }}</p>
       </ion-button>
 
       <ion-button (click)="mostrarAlertaConfirmacao()" class="btn-excluir">
@@ -156,7 +156,7 @@
 
   <ion-footer class="contato-footer">
 
-    <ion-button class="voltar-btn" href="expl-contatos">
+    <ion-button class="voltar-btn" href="contatos">
       <div class="voltar-btn-div">
         <div class="voltar-svg">
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
