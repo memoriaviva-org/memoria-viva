@@ -25,10 +25,10 @@
 </div>
 
 <ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
-  <ion-icon name="volume-high" slot="icon-only"></ion-icon>
-</ion-button>
+    <ion-icon name="volume-high" slot="icon-only"></ion-icon>
+  </ion-button>
 
-<audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
+  <audio #audioPlayer controls="false" class="audio-scss"></audio>
 
 <ion-content fullscreen>
   <div class="contatos-container">
@@ -46,21 +46,9 @@
       </ion-label>
     </ion-item>
 
-  </ion-list>
-    <ng-template #carregando>
-    <ion-spinner></ion-spinner>
-    <p>Carregando contatos...</p>
-  </ng-template>
-
-  <!--
-    <div class="vetor-contatos">
-      <img src="../../../assets/menina-amarelo-1.png" alt="foto" class="fotoPerfil"/>
-
-    </div>
-  -->
-  <!--
-    <img class="menina-laranja" src="assets/img/menina-laranja.png">
-
+    <!-- AQUI: Se o array de contatos estiver vazio, mostra a boneca -->
+  <div *ngIf="contatos.length === 0" class="sem-contatos">
+    <img src="assets/img/menina-laranja.png" alt="Boneca" class="menina-laranja">
     <p class="contatos-texto-explicativo">
       Nessa tela, você pode adicionar <br>
       os contatos das pessoas <br>
@@ -68,7 +56,15 @@
       adicionar, clique no botão roxo <br>
       abaixo e registre suas informações.
     </p>
-  -->
+  </div>
+
+  </ion-list>
+
+    <ng-template #carregando>
+    <ion-spinner></ion-spinner>
+    <p>Carregando contatos...</p>
+    </ng-template>
+
     <ion-button class="adicionar-contato-btn" href="/add-contatos">
       <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
         <circle cx="35" cy="35" r="35" fill="#9C3FC3"/>
