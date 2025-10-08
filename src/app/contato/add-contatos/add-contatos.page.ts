@@ -49,7 +49,7 @@ export class AddContatosPage {
 
     try {
       await this.contatoService.addContato(contato);
-      this.router.navigateByUrl('/expl-contatos'); // rota de listagem
+      this.router.navigateByUrl('/contatos'); 
     } catch (err) {
       console.error(err);
       this.showToast('Erro ao salvar contato');

@@ -1,4 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ContatoService, Contato } from '../../services/contato.service';
 
 @Component({
   selector: 'app-contatos',
@@ -6,9 +9,16 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./contatos.page.scss'],
   standalone: false,
 })
-export class ContatosPage {
+export class ContatosPage implements OnInit {
 
-  constructor() {}
+  contatos$!: Observable<Contato[]>;
+
+  constructor(private contatoService: ContatoService) {}
+
+  ngOnInit() {
+    this.contatos$ = this.contatoService.verContatos();
+  }
+
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 

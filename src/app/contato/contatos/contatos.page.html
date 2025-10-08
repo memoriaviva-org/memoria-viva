@@ -31,8 +31,34 @@
 <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
 <ion-content fullscreen>
-
   <div class="contatos-container">
+
+  <ion-list *ngIf="contatos$ | async as contatos; else carregando">
+    <ion-item *ngFor="let contato of contatos">
+      <ion-avatar slot="start">
+        <img [src]="contato.fotoUrl || 'assets/default-avatar.png'" alt="Foto">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ contato.nome }}</h2>
+        <p>{{ contato.telefone }}</p>
+        <p *ngIf="contato.relacao">{{ contato.relacao }}</p>
+        <p *ngIf="contato.endereco">{{ contato.endereco }}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+    <ng-template #carregando>
+    <ion-spinner></ion-spinner>
+    <p>Carregando contatos...</p>
+  </ng-template>
+
+  <!--
+    <div class="vetor-contatos">
+      <img src="../../../assets/menina-amarelo-1.png" alt="foto" class="fotoPerfil"/>
+
+    </div>
+  -->
+  <!--
     <img class="menina-laranja" src="assets/img/menina-laranja.png">
 
     <p class="contatos-texto-explicativo">
@@ -42,7 +68,7 @@
       adicionar, clique no botão roxo <br>
       abaixo e registre suas informações.
     </p>
-
+  -->
     <ion-button class="adicionar-contato-btn" href="/add-contatos">
       <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
         <circle cx="35" cy="35" r="35" fill="#9C3FC3"/>

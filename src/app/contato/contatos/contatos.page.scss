@@ -136,3 +136,27 @@ ion-button.inicio-btn {
   background-color: #249CD9;
   filter: invert(1);
 }
+
+// contatos
+.vetor-contatos{
+  margin: 189px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  height: auto;
+  flex-shrink: 0;
+  background-color: #FFF;
+  border: 2px solid #EDB192;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 15px;
+  position: relative;
+  padding-top: 60px; /* Espaço para os botões */
+  padding-bottom: 20px;
+}
+
+.fotoPerfil{
+  width: 74px;
+  height: 74px;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+}
