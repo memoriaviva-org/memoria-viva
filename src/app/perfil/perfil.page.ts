@@ -27,27 +27,35 @@ export class PerfilPage implements OnInit {
 
   nome: string = '';
   email: string = '';
-  idade: number = 0;
+  idade: string = '';
 
   constructor(
     private authService: AuthService,
     private navCtrl: NavController
   ) {}
 
-  ngOnInit() {
-    this.authService.getCurrentUser().subscribe(async user => {
-      if (user) {
-        await user.reload();
-        this.nome = user.displayName ?? 'Usuário';
-        this.email = user.email ?? 'Email não disponível';
-        this.idade = this.idade ?? 'Idade não disponível';
+ngOnInit() {
+  this.authService.getCurrentUser().subscribe(async user => {
+    if (user) {
+      await user.reload();
+      this.nome = user.displayName ?? 'Usuário';
+      this.email = user.email ?? 'Email não disponível';
+
+      // Agora busca os dados no Firestore
+      const dados = await this.authService.getUserData(user.uid);
+      if (dados && dados['idade']) {
+        this.idade = dados['idade'].toString(); // converte para string se necessário
       } else {
-        this.nome = 'Não autenticado';
-        this.email = 'Email não disponível';
-        this.idade = 0;
+        this.idade = 'Idade não disponível';
       }
-    });
-  }
+    } else {
+      this.nome = 'Não autenticado';
+      this.email = 'Email não disponível';
+      this.idade = '0';
+    }
+  });
+}
+
 
   mostrarJanelaMais() {
     this.mostrarJanela = !this.mostrarJanela
