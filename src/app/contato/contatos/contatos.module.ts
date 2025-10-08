@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
-import { ExplContatosPageRoutingModule } from './expl-contatos-routing.module';
-
-import { ExplContatosPage } from './expl-contatos.page';
+import { ContatosPage } from './contatos.page'
 
 @NgModule({
+  declarations: [ContatosPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ExplContatosPageRoutingModule,
-    ExplContatosPage
-  ],
+    RouterModule.forChild([{ path: '', component: ContatosPage }])
+  ]
 })
-export class ExplContatosPageModule {}
+
+export class ContatosPageModule {}

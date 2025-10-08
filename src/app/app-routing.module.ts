@@ -94,17 +94,14 @@ const routes: Routes = [
     loadChildren: () => import('./flashcard/flashcard.module').then(m => m.FlashcardPageModule)
   },
   {
-    path: 'expl-flashcard',
-    loadChildren: () => import('./expl-flashcard/expl-flashcard.module').then(m => m.ExplFlashcardPageModule)
-  },
-  {
-    path: 'expl-contatos',
-    loadChildren: () => import('./contato/expl-contatos/expl-contatos.module').then(m => m.ExplContatosPageModule)
+    path: 'contatos',
+    loadChildren: () => import('./contato/contatos/contatos.module').then(m => m.ContatosPageModule)
   },
   {
     path: 'add-contatos',
     loadChildren: () => import('./contato/add-contatos/add-contatos.module').then( m => m.AddContatosPageModule)
-  },  {
+  },
+  {
     path: 'gerenciar-flashcards',
     loadChildren: () => import('./gerenciar-flashcards/gerenciar-flashcards.module').then( m => m.GerenciarFlashcardsPageModule)
   }

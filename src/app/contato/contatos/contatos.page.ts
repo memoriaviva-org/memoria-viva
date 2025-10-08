@@ -1,20 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-expl-contatos',
-  templateUrl: './expl-contatos.page.html',
-  styleUrls: ['./expl-contatos.page.scss'],
-  standalone: true,
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule
-  ],
+  selector: 'app-contatos',
+  templateUrl: './contatos.page.html',
+  styleUrls: ['./contatos.page.scss'],
+  standalone: false,
 })
-export class ExplContatosPage {
+export class ContatosPage {
 
   constructor() {}
 
