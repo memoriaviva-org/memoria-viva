@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContatoService, Contato } from '../../services/contato.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-contatos',
@@ -13,10 +14,25 @@ export class ContatosPage implements OnInit {
 
   contatos$!: Observable<Contato[]>;
 
-  constructor(private contatoService: ContatoService) {}
+  constructor(private contatoService: ContatoService, private router: Router) {}
 
   ngOnInit() {
     this.contatos$ = this.contatoService.verContatos();
+  }
+
+    editarContato(contatoId: string | undefined) {
+    if (!contatoId) {
+      console.error('ID do contato não encontrado');
+      return;
+    }
+
+    this.router.navigate(['/add-contatos'], {
+      queryParams: {
+        editar: 'true',
+        id: contatoId,
+        origem: 'gerenciar'
+      }
+    });
   }
 
 

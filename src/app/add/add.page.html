@@ -62,7 +62,7 @@
         <video
           *ngIf="tipoMidia === 'video'"
           [src]="fotoSelecionadaUrl"
-          
+
           class="preview-midia"
         >
         </video>
@@ -92,8 +92,8 @@
   </div>
 
     <div class="secao-salvar-excluir">
-      <ion-button class="btn-salvar" (click)="salvarRegistro()" [disabled]="carregando">
-        <p class="salvar-text"> {{ carregando ? 'Carregando...' : 'Salvar' }} </p>
+      <ion-button class="btn-salvar" (click)="salvarRegistro()">
+        <p class="salvar-text"> {{ modoEdicao ? 'Atualizar' : 'Salvar' }}</p>
       </ion-button>
 
       <ion-button (click)="mostrarAlertaConfirmacao()" class="btn-excluir">

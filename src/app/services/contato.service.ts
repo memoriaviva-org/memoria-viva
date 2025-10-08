@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, collectionData, doc, addDoc, updateDoc, deleteDoc, query, orderBy } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, getDoc, addDoc, updateDoc, deleteDoc, query, orderBy } from '@angular/fire/firestore';
 import { Auth, user } from '@angular/fire/auth';
 import { Observable, of, switchMap } from 'rxjs';
 
@@ -59,4 +59,15 @@ export class ContatoService {
     const docRef = doc(this.firestore, `users/${currentUser.uid}/contatos/${id}`);
     return deleteDoc(docRef);
   }
+
+  async getContatoById(id: string): Promise<Contato | null> {
+  const currentUser = this.auth.currentUser;
+  if (!currentUser) throw new Error('Usuário não autenticado');
+
+  const docRef = doc(this.firestore, `users/${currentUser.uid}/contatos/${id}`);
+  const snapshot = await getDoc(docRef);
+  if (!snapshot.exists()) return null;
+
+  return { id: snapshot.id, ...snapshot.data() } as Contato;
+}
 }
