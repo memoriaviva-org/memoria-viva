@@ -34,7 +34,7 @@
   <div class="contatos-container">
 
   <ion-list *ngIf="contatos$ | async as contatos; else carregando">
-    <ion-item *ngFor="let contato of contatos">
+    <ion-item *ngFor="let contato of contatos" class="vetor-contatos">
       <ion-avatar slot="start">
         <img [src]="contato.fotoUrl || 'assets/default-avatar.png'" alt="Foto">
       </ion-avatar>
