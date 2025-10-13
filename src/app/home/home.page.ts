@@ -4,6 +4,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../app/services/auth.service';
 import { ToastController } from '@ionic/angular';
 
+import { LocalNotifications } from '@capacitor/local-notifications';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -58,5 +61,29 @@ export class HomePage {
         audio.style.display = 'none';
         button.style.display = 'inline-flex'; // volta o ion-button
       };
+   }
+
+   // Notificações:
+   async ionViewDidEnter() {
+    // 1️⃣ Pede permissão para mandar notificações
+    const perm = await LocalNotifications.requestPermissions();
+
+    if (perm.display === 'granted') {
+      // 2️⃣ Agenda uma notificação pra aparecer em 5 segundos
+      await LocalNotifications.schedule({
+        notifications: [
+          {
+            title: '💭 Lembrete de Memória Viva',
+            body: 'Ei! Que tal criar um flashcard hoje?',
+            id: 1,
+            schedule: { at: new Date(Date.now() + 5000) }, // 5 segundos
+            sound: 'default',
+          },
+        ],
+      });
+      console.log('Notificação agendada com sucesso!');
+    } else {
+      console.log('Permissão negada.');
     }
+  }
 }
