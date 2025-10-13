@@ -40,8 +40,10 @@
       </ion-avatar>
       <ion-label>
         <h2 class="contato-nome">{{ contato.nome }}</h2>
-        <p class="contato-telefone">{{ contato.telefone }}</p>
+        <p class="contato-telefone"><ion-icon name="call" class="call-icon"></ion-icon>{{ contato.telefone }}</p>
         <p *ngIf="contato.relacao" class="contato-relacao">{{ contato.relacao }}</p>
+
+        <img src="assets/location-img.png" class="location">
         <p *ngIf="contato.endereco" class="contato-endereco">{{ contato.endereco }}</p>
       </ion-label>
 
