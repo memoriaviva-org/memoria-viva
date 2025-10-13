@@ -154,6 +154,11 @@ ion-button.inicio-btn {
   // padding-bottom: 20px;
 }
 
+.vetor-contatos::part(item-inner) {
+  border-style: none !important;
+}
+
+
 .fotoPerfil {
   width: 74px;
   height: 74px;
@@ -194,6 +199,12 @@ ion-button.inicio-btn {
     position: fixed;
     top: 51%;
     left: 35%;
+    display: flex;
+    align-items: center;
+}
+
+.call-icon {
+  margin-right: 5px;
 }
 
 .contato-endereco {
@@ -207,12 +218,20 @@ ion-button.inicio-btn {
   height: 45px;
 }
 
+.location-svg {
+   position: fixed;
+    top: 63%;
+    left: 8%;
+    height: 53px;
+    width: 52px;
+}
+
 .flashcard-registro-editar-btn {
   all: unset;
   --background: transparent;
   --box-shadow: transparent;
   position: fixed;
-  top: 25%;
+  top: 21%;
   left: 77%;
 }
 
