@@ -142,21 +142,97 @@ ion-button.inicio-btn {
   margin: 150px auto 0 auto;
   display: flex;
   justify-content: center;
-  width: 300px;
-  height: auto;
+  width: 307px;
+  height: 176px;
   flex-shrink: 0;
   background-color: #FFF;
   border: 2px solid #EDB192;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 15px;
   position: relative;
-  padding-top: 60px; /* Espaço para os botões */
-  padding-bottom: 20px;
+  // padding-top: 60px; /* Espaço para os botões */
+  // padding-bottom: 20px;
 }
 
-.fotoPerfil{
+.fotoPerfil {
   width: 74px;
   height: 74px;
   flex-shrink: 0;
-  aspect-ratio: 1/1;
+  position: fixed;
+  aspect-ratio: 1 / 1;
+  top: 10%;
+  left: 7%;
+  margin: 0;
+}
+
+.contato-nome {
+  font-size: 17px;
+  font-weight: 600;
+  position: fixed;
+  margin: 0px;
+  top: 9%;
+  left: 35%;
+  width: 185px;
+}
+
+.contato-relacao {
+    font-size: 17px;
+    font-weight: 600;
+    position: fixed;
+    top: 25%;
+    left: 36%;
+    background-color: #9C3FC3;
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.contato-telefone {
+    font-size: 17px;
+    color: black;
+    font-weight: 700;
+    position: fixed;
+    top: 51%;
+    left: 35%;
+}
+
+.contato-endereco {
+  font-size: 14px;
+  font-weight: 400;
+  color: black;
+  position: fixed;
+  top: 69%;
+  left: 28%;
+  width: 200px;
+  height: 45px;
+}
+
+.flashcard-registro-editar-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+  position: fixed;
+  top: 25%;
+  left: 77%;
+}
+
+.flashcard-registro-editar-btn-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #DB6326;
+  font-weight: 600;
+}
+
+.flashcard-registro-editar-btn-svg {
+  color: #DB6326;
+}
+
+.loading {
+  font-size: 20px;
+  font-weight: 600;
+  position: fixed;
+  top: 40%;
+  left: 24%;
+  width: 250px;
 }
