@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContatoService, Contato } from '../../services/contato.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contatos',
@@ -13,14 +13,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ContatosPage implements OnInit {
 
   contatos$!: Observable<Contato[]>;
+  contatos: Contato[] = []; // 👈 adicionamos isso pra armazenar a lista
+
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
+  mostrarJanela = false;
 
   constructor(private contatoService: ContatoService, private router: Router) {}
 
   ngOnInit() {
     this.contatos$ = this.contatoService.verContatos();
+
+    // 👇 guarda os contatos num array pra verificar depois
+    this.contatos$.subscribe(dados => {
+      this.contatos = dados || [];
+    });
   }
 
-    editarContato(contatoId: string | undefined) {
+  editarContato(contatoId: string | undefined) {
     if (!contatoId) {
       console.error('ID do contato não encontrado');
       return;
@@ -35,13 +45,8 @@ export class ContatosPage implements OnInit {
     });
   }
 
-
-  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
-
-  mostrarJanela = false
-
   mostrarJanelaMais() {
-    this.mostrarJanela = !this.mostrarJanela
+    this.mostrarJanela = !this.mostrarJanela;
   }
 
   fecharJanelaMais() {
@@ -51,6 +56,14 @@ export class ContatosPage implements OnInit {
   toggleAudio() {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     const button = document.querySelector('.audio-btn') as HTMLElement;
+
+    // 👇 Escolhe o áudio com base em ter contatos ou não
+    const audioSrc = this.contatos.length > 0
+      ? 'assets/audio/audio-teste.m4a'
+      : 'assets/audio/audio-pequeno.mp3';
+
+    audio.src = audioSrc;
+    audio.load();
 
     if (audio.paused) {
       button.style.display = 'none';
