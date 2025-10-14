@@ -48,13 +48,30 @@ export class LoginPage {
   }
 
   async presentToast(mensagem: string, cor: string) {
-    const toast = await this.toastController.create({
-      message: mensagem,
-      color: cor,
-      duration: 2000
-    });
-    toast.present();
-  }
+  const toast = await this.toastController.create({
+    message: mensagem,
+    color: cor,
+    duration: 9999999,
+  });
+
+  await toast.present();
+
+  // O toast JÁ é o elemento <ion-toast>
+  const shadow = toast.shadowRoot;
+  if (!shadow) return;
+
+  const container = shadow.querySelector('.toast-container');
+  const content = shadow.querySelector('.toast-content');
+  const message = shadow.querySelector('.toast-message');
+
+  container?.classList.add('custom-toast-container');
+  content?.classList.add('custom-toast-content');
+  message?.classList.add('custom-toast-message');
+}
+
+
+
+
 
   toggleAudio() {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
