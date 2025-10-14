@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { FlashcardService, Flashcard } from '../services/flashcard.service';
+import { firstValueFrom, of } from 'rxjs';
 
 interface DadosCategoria {
   caminhoDaImagem: string;
@@ -227,16 +228,48 @@ export class GerenciarFlashcardsPage implements OnInit {
       console.error('ID do flashcard não fornecido');
       return;
     }
-
+  
     const confirmacao = confirm('Tem certeza que deseja deletar este flashcard?');
-
+  
     if (confirmacao) {
       try {
         await this.flashcardService.deleteFlashcard(id);
         console.log('Flashcard deletado com sucesso');
-
-        // Recarrega a lista
-        this.carregarFlashcards();
+  
+        // Busca os flashcards atualizados
+        let flashcardsAtualizados: Flashcard[];
+  
+        if (this.categoria && this.categoria !== 'all') {
+          flashcardsAtualizados = await firstValueFrom(
+            this.flashcardService.verFlashcardsPorCategoria(this.categoria)
+          );
+        } else {
+          flashcardsAtualizados = await firstValueFrom(
+            this.flashcardService.verTodosFlashcards()
+          );
+        }
+  
+        if (!flashcardsAtualizados || flashcardsAtualizados.length === 0) {
+          // Se não tem flashcards, redireciona para /categorias
+          this.router.navigate(['/categorias']);
+        } else {
+          // Atualiza o Observable para atualizar a lista na UI
+          this.flashcards$ = of(flashcardsAtualizados);
+  
+          if (this.mostrarFaixaCategoria) {
+            this.flashcardsGrouped$ = this.flashcards$.pipe(
+              map(flashcards => this.agruparFlashcardsPorCategoria(flashcards))
+            );
+          } else {
+            this.flashcardsGrouped$ = this.flashcards$.pipe(
+              map(flashcards => [{
+                categoria: this.categoria,
+                flashcards: flashcards,
+                titulo: this.categoria
+              }])
+            );
+          }
+        }
       } catch (error) {
         console.error('Erro ao deletar flashcard:', error);
         alert('Não foi possível deletar o flashcard.');

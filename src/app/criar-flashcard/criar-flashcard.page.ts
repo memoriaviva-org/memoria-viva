@@ -165,7 +165,7 @@ export class CriarFlashcardPage implements OnInit {
       curiosidade: this.curiosidade || undefined,
       audioPergunta: this.audioPergunta,
       audioResposta: this.audioResposta,
-      midiaAuxiliar: this.midiaAuxiliar  // Agora obrigatória
+      midiaAuxiliar: this.midiaAuxiliar  
     };
   
     try {
