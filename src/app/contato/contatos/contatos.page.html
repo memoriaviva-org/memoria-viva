@@ -40,7 +40,7 @@
       </ion-avatar>
       <ion-label>
         <h2 class="contato-nome">{{ contato.nome }}</h2>
-        
+
         <!-- AQUI: abre o aplicativo de ligação -->
         <p class="contato-telefone">
          <ion-icon name="call" class="call-icon"></ion-icon>
@@ -48,6 +48,8 @@
         </p>
 
         <p *ngIf="contato.relacao" class="contato-relacao">{{ contato.relacao }}</p>
+
+        <audio class="contato-audio" controls="false"></audio>
 
         <img src="assets/location-img.png" class="location">
         <p *ngIf="contato.endereco" class="contato-endereco">{{ contato.endereco }}</p>
