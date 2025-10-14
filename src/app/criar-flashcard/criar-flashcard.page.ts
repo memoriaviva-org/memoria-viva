@@ -21,9 +21,9 @@ export class CriarFlashcardPage implements OnInit {
   tituloFlashcard = '';
   categoriaSelecionada = '';
   curiosidade = '';
+  midiaAuxiliar: string = '';
 
-  // base64
-  midiaAuxiliar?: string;
+
   audioPergunta?: string;
   audioResposta?: string;
 
@@ -117,8 +117,8 @@ export class CriarFlashcardPage implements OnInit {
   }
 
   async criarNovoFlashcard() {
-    if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada) {
-      alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta e Áudio da Resposta)!');
+    if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada || !this.midiaAuxiliar) {
+      alert('Preencha todos os campos obrigatórios (Título, Categoria, Mídia Auxiliar, Áudio da Pergunta e Áudio da Resposta)!');
       return;
     }
 
@@ -127,7 +127,8 @@ export class CriarFlashcardPage implements OnInit {
       categoriaFlashcard: this.categoriaSelecionada,
       curiosidade: this.curiosidade || undefined,
       audioPergunta: this.audioPergunta,
-      audioResposta: this.audioResposta
+      audioResposta: this.audioResposta,
+      midiaAuxiliar: this.midiaAuxiliar
     };
 
     if (this.midiaAuxiliar) {
@@ -151,12 +152,12 @@ export class CriarFlashcardPage implements OnInit {
       alert('ID do flashcard não encontrado');
       return;
     }
-
-    if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada) {
-      alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta e Áudio da Resposta)!');
+  
+    if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada || !this.midiaAuxiliar) {
+      alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta, Áudio da Resposta e Mídia Auxiliar)!');
       return;
     }
-
+  
     const flashcardAtualizado: Flashcard = {
       id: this.flashcardId,
       tituloFlashcard: this.tituloFlashcard,
@@ -164,20 +165,19 @@ export class CriarFlashcardPage implements OnInit {
       curiosidade: this.curiosidade || undefined,
       audioPergunta: this.audioPergunta,
       audioResposta: this.audioResposta,
-      midiaAuxiliar: this.midiaAuxiliar
+      midiaAuxiliar: this.midiaAuxiliar  // Agora obrigatória
     };
-
+  
     try {
       await this.flashcardService.updateFlashcard(flashcardAtualizado);
       alert('Flashcard atualizado com sucesso!');
-
-      // USAR O NOVO MÉTODO
       this.navegarDeVolta();
     } catch (err) {
       console.error(err);
       alert('Erro ao atualizar flashcard.');
     }
   }
+  
 
   // Também atualizar o método voltar para usar a origem
   voltar() {
@@ -200,46 +200,42 @@ export class CriarFlashcardPage implements OnInit {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (!file) return;
-
+  
     const MAX_SIZE_BYTES = 150000;
     if (file.size > MAX_SIZE_BYTES) {
-      alert(`O arquivo é muito grande. Para armazenamento direto, o limite da Mídia Auxiliar é de ${MAX_SIZE_BYTES / 1000} KB.`);
-      this.midiaAuxiliar = undefined;
-      this.arquivoSelecionado = undefined;
-      this.tipoArquivo = undefined;
-      this.arquivoPreview = undefined;
+      alert(`O arquivo é muito grande. O limite da Mídia Auxiliar é de ${MAX_SIZE_BYTES / 1000} KB.`);
+      this.limparMidiaAuxiliar();
       event.target.value = null;
       return;
     }
-
+  
     this.arquivoSelecionado = file;
-
-    if (file.type.startsWith('image/')) this.tipoArquivo = 'image';
-    else if (file.type.startsWith('video/')) this.tipoArquivo = 'video';
-    else if (file.type.startsWith('audio/')) this.tipoArquivo = 'audio';
-    else this.tipoArquivo = undefined;
-
     const reader = new FileReader();
     reader.onload = () => {
-        this.arquivoPreview = reader.result as string;
-        this.midiaAuxiliar = reader.result as string;
+      this.arquivoPreview = reader.result as string;
+      this.midiaAuxiliar = reader.result as string;
+      this.determinarTipoArquivo(this.arquivoPreview);  
     };
     reader.readAsDataURL(file);
   }
-
+  
+  
   onAudioSelected(event: any, tipo: 'pergunta' | 'resposta') {
     const file: File = event.target.files[0];
     if (!file) return;
-
+  
     const MAX_SIZE_BYTES = 120000;
     if (file.size > MAX_SIZE_BYTES) {
-        alert(`O arquivo de áudio é muito grande. O limite máximo é de ${MAX_SIZE_BYTES / 1000} KB.`);
-        event.target.value = null;
-        if (tipo === 'pergunta') this.audioPergunta = undefined;
-        else this.audioResposta = undefined;
-        return;
+      alert(`O arquivo de áudio é muito grande. O limite máximo é de ${MAX_SIZE_BYTES / 1000} KB.`);
+  
+      event.target.value = null;
+  
+      if (tipo === 'pergunta') this.audioPergunta = '';
+      else this.audioResposta = '';
+  
+      return;
     }
-
+  
     const reader = new FileReader();
     reader.onload = () => {
       const base64 = reader.result as string;
@@ -248,9 +244,10 @@ export class CriarFlashcardPage implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+  
 
   limparMidiaAuxiliar() {
-    this.midiaAuxiliar = undefined;
+    this.midiaAuxiliar = '';
     this.arquivoSelecionado = undefined;
     this.tipoArquivo = undefined;
     this.arquivoPreview = undefined;

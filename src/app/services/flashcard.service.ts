@@ -22,7 +22,7 @@ export interface Flashcard {
   curiosidade?: string;
   audioPergunta: string;
   audioResposta: string;
-  midiaAuxiliar?: string;
+  midiaAuxiliar: string;
   createdAt?: number;
 }
 

@@ -32,7 +32,7 @@
   <ion-label>Adicionar mídia auxiliar</ion-label>
   <input
     type="file"
-    accept="image/*,video/*,audio/*"
+    accept="image/*,video/*"
     (change)="onFileSelected($event)"
     class="input-file"
   />
@@ -41,7 +41,6 @@
   <ng-container *ngIf="arquivoPreview">
     <img *ngIf="tipoArquivo === 'image'" [src]="arquivoPreview" alt="Preview" style="max-width: 50px; max-height: 50px; margin-left: 10px;" />
     <video *ngIf="tipoArquivo === 'video'" [src]="arquivoPreview" controls style="max-width: 100px; max-height: 50px; margin-left: 10px;"></video>
-    <audio *ngIf="tipoArquivo === 'audio'" [src]="arquivoPreview" controls style="margin-left: 10px;"></audio>
   </ng-container>
 </ion-item>
 
