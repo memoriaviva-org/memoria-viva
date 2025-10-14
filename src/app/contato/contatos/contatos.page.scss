@@ -152,6 +152,7 @@ ion-button.inicio-btn {
   position: relative;
   // padding-top: 60px; /* Espaço para os botões */
   // padding-bottom: 20px;
+  --border-style: none;
 }
 
 .vetor-contatos::part(item-inner) {
