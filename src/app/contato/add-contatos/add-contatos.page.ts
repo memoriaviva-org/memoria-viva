@@ -1,7 +1,5 @@
-import { Component, ViewChild, ElementRef, OnInit} from '@angular/core';
-
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ContatoService, Contato } from '../../services/contato.service';
-
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-contatos.page.scss'],
   standalone: false
 })
-export class AddContatosPage implements OnInit  {
+export class AddContatosPage implements OnInit {
 
   nome = '';
   relacao = '';
@@ -32,41 +30,57 @@ export class AddContatosPage implements OnInit  {
 
   constructor(
     private contatoService: ContatoService,
-    private router: Router, private route: ActivatedRoute,
+    private router: Router,
+    private route: ActivatedRoute,
     private toastController: ToastController
   ) {}
 
-    async salvarContato() {
-      if (!this.nome || !this.telefone) {
-        this.showToast('Nome e telefone são obrigatórios');
-        return;
-      }
-
-      const contato: Contato = {
-        nome: this.nome,
-        relacao: this.relacao,
-        telefone: this.telefone,
-        endereco: this.endereco,
-        fotoUrl: this.fotoUrl,
-        audioUrl: this.audioUrl
-      };
-
-      try {
-        if (this.editando && this.contatoId) {
-          // Atualiza contato existente
-          contato.id = this.contatoId;  // <-- garantir que id está definido
-          await this.contatoService.updateContato(contato);
-        } else {
-          // Adiciona novo contato
-          await this.contatoService.addContato(contato);
-        }
-        this.router.navigateByUrl('/contatos');
-      } catch (err) {
-        console.error(err);
-        this.showToast('Erro ao salvar contato');
-      }
+  async salvarContato() {
+    if (!this.nome || !this.telefone) {
+      this.showToast('Nome e telefone são obrigatórios');
+      return;
     }
 
+    const contato: Contato = {
+      nome: this.nome,
+      relacao: this.relacao,
+      telefone: this.telefone,
+      endereco: this.endereco,
+      fotoUrl: this.fotoUrl,
+      audioUrl: this.audioUrl
+    };
+
+    try {
+      if (this.editando && this.contatoId) {
+        // Atualiza contato existente
+        contato.id = this.contatoId;  // <-- garantir que id está definido
+        await this.contatoService.updateContato(contato);
+      } else {
+        // Adiciona novo contato
+        await this.contatoService.addContato(contato);
+      }
+      this.router.navigateByUrl('/contatos');
+    } catch (err) {
+      console.error(err);
+      this.showToast('Erro ao salvar contato');
+    }
+  }
+
+  // Função para deletar o contato
+  async deletarContato() {
+    if (!this.contatoId) {
+      this.showToast('Contato não encontrado');
+      return;
+    }
+
+    try {
+      await this.contatoService.deleteContato(this.contatoId);
+      this.router.navigateByUrl('/contatos');  // Navega de volta para a lista de contatos
+    } catch (err) {
+      console.error(err);
+      this.showToast('Erro ao deletar contato');
+    }
+  }
 
   async showToast(msg: string) {
     const toast = await this.toastController.create({
@@ -178,18 +192,18 @@ export class AddContatosPage implements OnInit  {
     const button = document.querySelector('.audio-btn') as HTMLElement;
 
     if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
+      // Esconde botão e mostra player
+      button.style.display = 'none';
+      audio.style.display = 'block';
+      audio.play();
+    } else {
+      audio.pause();
     }
+
+    // Quando terminar, esconde player e volta botão
+    audio.onended = () => {
+      audio.style.display = 'none';
+      button.style.display = 'inline-flex'; // volta o ion-button
+    };
+  }
 }
