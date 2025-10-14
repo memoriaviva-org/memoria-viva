@@ -80,4 +80,8 @@ export class ContatosPage implements OnInit {
     };
   }
 
+  abrirNoMaps(endereco: string): string {
+    return 'https://www.google.com/maps?q=' + encodeURIComponent(endereco);
+  }
+
 }

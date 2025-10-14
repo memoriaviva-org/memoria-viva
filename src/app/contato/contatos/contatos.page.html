@@ -49,9 +49,9 @@
 
         <p *ngIf="contato.relacao" class="contato-relacao">{{ contato.relacao }}</p>
 
-        <audio class="contato-audio" controls="false"></audio>
-
-        <img src="assets/location-img.png" class="location">
+        <a *ngIf="contato.endereco" [href]="abrirNoMaps(contato.endereco)" target="_blank">
+          <img src="assets/location-img.png" class="location" alt="Localização do contato">
+        </a>
         <p *ngIf="contato.endereco" class="contato-endereco">{{ contato.endereco }}</p>
       </ion-label>
 
