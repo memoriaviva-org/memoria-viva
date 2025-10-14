@@ -75,7 +75,7 @@ export class AddContatosPage implements OnInit {
 
     try {
       await this.contatoService.deleteContato(this.contatoId);
-      this.router.navigateByUrl('/contatos');  // Navega de volta para a lista de contatos
+      this.router.navigateByUrl('/contatos');  
     } catch (err) {
       console.error(err);
       this.showToast('Erro ao deletar contato');

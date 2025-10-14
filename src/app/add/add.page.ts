@@ -166,6 +166,7 @@ export class AddPage implements OnInit {
       await this.registroService.deleteItem(this.registroId);
       this.mostrarConfirmacao = false;
       this.mostrarMensagemSucesso = true;
+      this.router.navigateByUrl('/meu-dia-registros');
 
       setTimeout(() => {
         this.mostrarMensagemSucesso = false;
