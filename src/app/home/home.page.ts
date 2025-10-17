@@ -2,9 +2,10 @@ import { Router } from '@angular/router';
 import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../app/services/auth.service';
-import { ToastController } from '@ionic/angular';
 
 import { LocalNotifications } from '@capacitor/local-notifications';
+
+import { Platform, LoadingController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -13,34 +14,100 @@ import { LocalNotifications } from '@capacitor/local-notifications';
   styleUrls: ['./home.page.scss'],
   standalone: false
 })
-export class HomePage {
-
+  
+export class HomePage implements OnInit {
+  
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
+  isProcessing = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController) {}
+    private platform: Platform,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+  ) {}
+ async ngOnInit() {
+  console.log('🏠 HomePage iniciada');
+  await this.checkLoginState();
+}
 
-  async loginGoogle() {
+
+private async checkLoginState() {
+  if (this.isProcessing) return;
+  this.isProcessing = true;
+
   try {
-    await this.authService.loginWithGoogle();
-    this.router.navigateByUrl('/principal');
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      this.presentToast('Erro ao logar com Google: ' + error.message, 'danger');
-    } else {
-      this.presentToast('Erro desconhecido ao logar com Google.', 'danger');
+    // 🔥 Tenta recuperar login via redirect
+    const user = await this.authService.handleAuthRedirect();
+
+    if (user) {
+      console.log('🎉 Login detectado. Redirecionando...');
+      this.navigateToMain();
+      return;
     }
+
+    // 🔍 Se já estiver logado (sem redirect)
+    const currentUser = this.authService['authenticate'].currentUser;
+    if (currentUser) {
+      console.log('✅ Já logado:', currentUser.email);
+      this.navigateToMain();
+    }
+
+  } catch (err) {
+    console.error('Erro ao checar login:', err);
+  } finally {
+    this.isProcessing = false;
   }
 }
-  async presentToast(mensagem: string, cor: string) {
-    const toast = await this.toastController.create({
-      message: mensagem,
-      color: cor,
-      duration: 2000
+
+async onGoogleLogin() {
+  console.log('🔐 Iniciando login Google');
+  try {
+    await this.authService.loginWithGoogle();
+    // Web → login imediato
+    const user = this.authService['authenticate'].currentUser;
+    if (user) {
+      this.navigateToMain();
+    }
+  } catch (error) {
+    console.error('❌ Erro no login Google:', error);
+    this.showErrorToast('Falha no login com Google');
+  }
+}
+
+private navigateToMain() {
+  console.log('🚀 Indo para /principal');
+  this.router.navigateByUrl('/principal', { replaceUrl: true });
+}
+
+
+  private async showError(message: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 4000,
+      color: 'danger',
+      position: 'bottom'
     });
-    toast.present();
+    await toast.present();
+  }
+
+  /**
+   * Mostra toast de erro padrão
+   */
+  private async showErrorToast(message: string): Promise<void> {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 4000,
+      color: 'danger',
+      position: 'bottom',
+      buttons: [{
+        text: 'Fechar',
+        role: 'cancel'
+      }]
+    });
+    await toast.present();
   }
 
   toggleAudio() {
@@ -63,7 +130,7 @@ export class HomePage {
       };
    }
 
-   // Notificações:
+     // Notificações:
    async ionViewDidEnter() {
     // 1️⃣ Pede permissão para mandar notificações
     const perm = await LocalNotifications.requestPermissions();
@@ -86,4 +153,5 @@ export class HomePage {
       console.log('Permissão negada.');
     }
   }
+
 }

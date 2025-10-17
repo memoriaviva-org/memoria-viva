@@ -12,7 +12,8 @@ export const environment = {
     messagingSenderId: "186532293956",
     appId: "1:186532293956:web:8df7f79ee29a0e1e03bb11",
     measurementId: "G-ZMQ4DVFC32"
-  }
+  },
+  appUrl: 'memoriaviva://home'
 }
 /*
  * For easier debugging in development mode, you can import the following file

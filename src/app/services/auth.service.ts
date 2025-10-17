@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { Platform } from '@ionic/angular';
+
 import {
   Auth,
   GoogleAuthProvider,
@@ -12,6 +14,7 @@ import {
   updateEmail,
   User,
   signInWithRedirect,
+  getRedirectResult,
   user as authUser,
   signInWithPopup
 } from '@angular/fire/auth';
@@ -29,6 +32,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+
+  private platform = inject(Platform);
+  private authenticate = inject(Auth);
 
   constructor(
     private auth: Auth,
@@ -64,12 +70,69 @@ export class AuthService {
     return signOut(this.auth);
   }
 
-  // Login com Google
-  loginWithGoogle() {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(this.auth, provider);
-    
+ async loginWithGoogle(): Promise<void> {
+  const provider = new GoogleAuthProvider();
+
+  if (this.platform.is('android') || this.platform.is('ios')) {
+    console.log('📱 Mobile: redirect Google');
+    await signInWithRedirect(this.auth, provider);
+  } else {
+    console.log('💻 Web: popup Google');
+    const result = await signInWithPopup(this.auth, provider);
+    if (result?.user) {
+      await this.saveUserToFirestore(result.user);
+    }
   }
+}
+
+// Retorna o usuário autenticado após redirect
+async handleAuthRedirect(): Promise<User | null> {
+  try {
+    const result = await getRedirectResult(this.auth);
+    if (result?.user) {
+      await this.saveUserToFirestore(result.user);
+      console.log('✅ Usuário autenticado via redirect:', result.user.email);
+      return result.user;
+    }
+    return null;
+  } catch (error) {
+    console.error('Erro no redirect:', error);
+    return null;
+  }
+}
+
+
+  private async checkCurrentUser(): Promise<boolean> {
+    const user = this.auth.currentUser;
+    if (user) {
+      console.log('✅ Usuário já está autenticado:', user.email);
+      return true;
+    }
+    return false;
+  }
+  /**
+   * Salva/Atualiza usuário no Firestore
+   */
+  private async saveUserToFirestore(user: User): Promise<void> {
+    try {
+      const userRef = doc(this.firestore, `users/${user.uid}`);
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        lastLogin: new Date(),
+        provider: 'google'
+      }, { merge: true });
+      
+      console.log('Usuário salvo no Firestore:', user.uid);
+    } catch (error) {
+      console.error('Erro ao salvar usuário:', error);
+      // Não lança erro para não quebrar o login
+    }
+  }
+
+
 
   // Observable do usuário atual
   getCurrentUser(): Observable<User | null> {

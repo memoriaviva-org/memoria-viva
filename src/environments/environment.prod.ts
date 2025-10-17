@@ -8,5 +8,6 @@ export const environment = {
     messagingSenderId: "186532293956",
     appId: "1:186532293956:web:fd94dd7893ded34003bb11",
     measurementId: "" // opcional
-  }
+  },
+  appUrl: 'memoriaviva://home'
 };

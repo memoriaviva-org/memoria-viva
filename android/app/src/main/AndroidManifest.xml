@@ -28,7 +28,24 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="io.ionic.starter" />
             </intent-filter>
+            <!-- ✅ Scheme personalizado para o app -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="memoriaviva" />
+            </intent-filter>
 
+            <!-- ✅ Domínio Firebase para web -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data 
+                    android:scheme="https"
+                    android:host="memoriaviva-95fad.firebaseapp.com"
+                    android:pathPrefix="/__/auth/handler" />
+            </intent-filter>
         </activity>
 
         <provider
