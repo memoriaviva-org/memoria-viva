@@ -87,6 +87,14 @@
   <ion-button class="btn-salvar" (click)="salvarFlashcard()">
     <p class="salvar-text">{{ modoEdicao ? 'Atualizar' : 'Salvar' }}</p>
   </ion-button>
+
+  <ion-alert
+  [isOpen]="alertaAbertoCamposObrigatorios"
+  [message]="mensagemAlertaPreencherCamposObrigatorios"
+  buttons="OK"
+  (didDismiss)="alertaAbertoCamposObrigatorios = false"
+  cssClass="meu-alerta-customizado">
+</ion-alert>
 </div>
 
 
