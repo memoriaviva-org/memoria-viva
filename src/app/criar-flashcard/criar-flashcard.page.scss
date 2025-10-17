@@ -233,20 +233,24 @@ p {
   filter: invert(1);
 }
 
-.meu-alerta-customizado {
-  height: 100px;
-  --max-height: none;
-  max-width: none;
-  width: 68%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.alert-campos-obrigatorios {
+    height: 100px;
+    width: 80%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: #ffecec;
+    border-left: 6px solid #ff3b30;
+    border-radius: 8px;
+    color: #d00000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-ion-backdrop {
-  box-shadow: none !important;
-    border: none !important;
-    border-style: none !important;
-    max-width: 0px !important;
+.error-icon {
+  margin-right: 10px;
 }
+

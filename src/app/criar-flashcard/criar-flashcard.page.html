@@ -84,17 +84,15 @@
 
 
 <div class="save-btn-wrapper">
-  <ion-button class="btn-salvar" (click)="salvarFlashcard()">
+  <ion-button class="btn-salvar" (click)="salvarFlashcard()" (click)="alertCamposObriatorios()">
     <p class="salvar-text">{{ modoEdicao ? 'Atualizar' : 'Salvar' }}</p>
   </ion-button>
+</div>
 
-  <ion-alert
-  [isOpen]="alertaAbertoCamposObrigatorios"
-  [message]="mensagemAlertaPreencherCamposObrigatorios"
-  buttons="OK"
-  (didDismiss)="alertaAbertoCamposObrigatorios = false"
-  cssClass="meu-alerta-customizado">
-</ion-alert>
+<div *ngIf="mostrarAlertCamposObrigatorios" class="alert-campos-obrigatorios">
+  <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
+  Preencha todos os campos obrigatórios: <br>
+     (Título, Categoria, Mídia Auxiliar, Áudio da Pergunta e Áudio da Resposta)!
 </div>
 
 

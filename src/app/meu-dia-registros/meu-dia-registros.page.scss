@@ -90,7 +90,7 @@ p {
 .dia-registro {
   width: 160px;
   height: 200px;
-  background-color: #FAC946;
+  background-color: #16b954;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
   margin-top: 25px;
   border-radius: 20px;
@@ -131,12 +131,14 @@ ion-button.video-foto-btn::part(native) {
   margin-left: 13px;
   width: 87px;
   height: 32px;
+  color: white;
 }
 
 .dia-registro-horario {
   width: 50px;
   margin-left: 15px;
   margin-top: 14px;
+  color: white;
 }
 
 .dia-registro-editar-btn-posicao {
@@ -161,6 +163,7 @@ ion-button.dia-registro-editar-btn {
   align-items: center;
   flex-direction: column;
   background-color: transparent;
+  color: white;
 }
 
 .dia-registro-editar-btn-svg {
@@ -265,13 +268,13 @@ ion-button.inicio-btn {
 
 .meu-dia-texto-explicativo {
     width: 241px;
-    color: #000;
+    color: white;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     position: absolute;
-    top: 33.8%;
-    left: 23.63%;
+    top: 34.1%;
+    left: 27%;
     text-align: center;
     overflow: hidden;
 }

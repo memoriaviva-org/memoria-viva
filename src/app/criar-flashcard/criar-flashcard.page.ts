@@ -20,6 +20,8 @@ export class CriarFlashcardPage implements OnInit {
   alertaAbertoCamposObrigatorios = false;
   mensagemAlertaPreencherCamposObrigatorios = '';
 
+  mostrarAlertCamposObrigatorios = false;
+
   // Variáveis do formulário
   tituloFlashcard = '';
   categoriaSelecionada = '';
@@ -117,6 +119,10 @@ export class CriarFlashcardPage implements OnInit {
     } else {
       await this.criarNovoFlashcard();
     }
+  }
+
+  alertCamposObriatorios() {
+    this.mostrarAlertCamposObrigatorios = true;
   }
 
   async criarNovoFlashcard() {
