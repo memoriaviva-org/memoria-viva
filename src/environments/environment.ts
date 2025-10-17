@@ -8,10 +8,10 @@ export const environment = {
     apiKey: "AIzaSyCKVEb_wVc3bNi5OVQ1DxFnURy6pMzqcss",
     authDomain: "memoriaviva-95fad.firebaseapp.com",
     projectId: "memoriaviva-95fad",
-    storageBucket: "memoriaviva-95fad.appspot.com",
+    storageBucket: "memoriaviva-95fad.firebasestorage.app",
     messagingSenderId: "186532293956",
-    appId: "1:186532293956:web:fd94dd7893ded34003bb11",
-    measurementId: "" // opcional
+    appId: "1:186532293956:web:8df7f79ee29a0e1e03bb11",
+    measurementId: "G-ZMQ4DVFC32"
   }
 }
 /*
@@ -22,3 +22,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+

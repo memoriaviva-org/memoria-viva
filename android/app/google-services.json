@@ -12,15 +12,33 @@
           "package_name": "io.ionic.starter"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "186532293956-et6ifsrn1164h2439ns0r313jprjulcu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.ionic.starter",
+            "certificate_hash": "105763cc9efacfe81cd3b7f3189c9ce2fc372f90"
+          }
+        },
+        {
+          "client_id": "186532293956-jcpen7sd2ov7vjnjgd2746damf80j0r5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCpOp_NH7aRY1fKzX8ga8H7ODuBOtOoLFk"
+          "current_key": "AIzaSyAuN8wf8v7tLHLKBd_jVeIDhNlDzGAEth0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186532293956-jcpen7sd2ov7vjnjgd2746damf80j0r5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
