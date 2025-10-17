@@ -232,3 +232,21 @@ p {
   background-color: #63C03C;
   filter: invert(1);
 }
+
+.meu-alerta-customizado {
+  height: 100px;
+  --max-height: none;
+  max-width: none;
+  width: 68%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ion-backdrop {
+  box-shadow: none !important;
+    border: none !important;
+    border-style: none !important;
+    max-width: 0px !important;
+}

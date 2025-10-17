@@ -34,7 +34,7 @@ p {
     all: unset;
     --background: transparent;
     --box-shadow: transparent;
-    position: absolute;
+    position: fixed;
     top: 82%;
     left: 80%;
     transform: translate(-50%, -50%);
@@ -51,19 +51,16 @@ p {
 }
 
 .contatos-texto-explicativo {
-    width: 233px;
-    color: white;
-    // font-family: "Open Sans";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    position: absolute;
-    top: 48.3%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    margin-top: 20px;
-    width: 246px;
+  color: white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  position: absolute;
+  top: 42.3%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 246px;
 }
 
 .contatos-footer {

@@ -160,3 +160,12 @@
     color: #fff;
   }
 }
+
+ion-toast::part(container) {
+  height: 100px !important;
+  margin-bottom: 315px !important;
+}
+
+ion-toast {
+  --border-radius: 20px;
+}
