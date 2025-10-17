@@ -20,6 +20,9 @@ export class CadastroPage {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
+  idade: number | null = null;
+  isIdadeFocused = false;
+
 
   isEmailFocused: boolean = false;
   isSenhaFocused: boolean = false;

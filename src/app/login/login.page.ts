@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../../app/services/auth.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -22,7 +23,7 @@ export class LoginPage {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
   ) {}
 
   togglePassword() {
@@ -47,6 +48,7 @@ export class LoginPage {
     }
   }
 
+
   async presentToast(mensagem: string, cor: string) {
   const toast = await this.toastController.create({
     message: mensagem,
@@ -68,9 +70,6 @@ export class LoginPage {
   content?.classList.add('custom-toast-content');
   message?.classList.add('custom-toast-message');
 }
-
-
-
 
 
   toggleAudio() {

@@ -26,6 +26,20 @@
       </ion-input>
     </div>
 
+     <!-- NOVA DIV: Campo para idade -->
+     <div class="floating-input">
+      <label [class.active]="idade || isIdadeFocused">Idade</label>
+      <ion-input
+        class="custom-input"
+        fill="outline"
+        type="number"
+        min="0"
+        [(ngModel)]="idade"
+        (ionFocus)="isIdadeFocused = true"
+        (ionBlur)="isIdadeFocused = false">
+      </ion-input>
+    </div>
+
     <div class="floating-input">
       <label [class.active]="email || isEmailFocused">E-mail</label>
       <ion-input

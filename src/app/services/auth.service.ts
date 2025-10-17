@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NotificacaoService } from '../services/notificacao.service';
 import {
   Auth,
   GoogleAuthProvider,
@@ -32,13 +33,25 @@ export class AuthService {
 
   constructor(
     private auth: Auth,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private notificacaoService: NotificacaoService
   ) {}
 
   // Login com email e senha
-  login(email: string, senha: string) {
-    return signInWithEmailAndPassword(this.auth, email, senha);
+  async login(email: string, senha: string) {
+    const cred = await signInWithEmailAndPassword(this.auth, email, senha);
+
+    if (cred.user) {
+      await this.notificacaoService.solicitarPermissao();
+      await this.notificacaoService.agendarBoasVindas();
+      await this.notificacaoService.agendarNotificacaoPeriodica();
+      await this.notificacaoService.cancelarInatividade();
+      await this.notificacaoService.agendarNotificacaoInatividade();
+    }
+
+    return cred;
   }
+
 
   // Cadastro de usuário
   async register(email: string, senha: string, nome: string) {
@@ -65,11 +78,21 @@ export class AuthService {
   }
 
   // Login com Google
-  loginWithGoogle() {
+  async loginWithGoogle() {
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(this.auth, provider);
-    
+    const cred = await signInWithPopup(this.auth, provider);
+
+    if (cred.user) {
+      await this.notificacaoService.solicitarPermissao();
+      await this.notificacaoService.agendarBoasVindas();
+      await this.notificacaoService.agendarNotificacaoPeriodica();
+      await this.notificacaoService.cancelarInatividade();
+      await this.notificacaoService.agendarNotificacaoInatividade();
+    }
+
+    return cred;
   }
+
 
   // Observable do usuário atual
   getCurrentUser(): Observable<User | null> {
