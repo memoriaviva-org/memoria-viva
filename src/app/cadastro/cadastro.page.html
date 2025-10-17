@@ -28,11 +28,11 @@
 
      <!-- NOVA DIV: Campo para idade -->
      <div class="floating-input">
-      <label [class.active]="idade || isIdadeFocused">Idade</label>
+      <label [class.active]="idade || isIdadeFocused">Data de Nascimento</label>
       <ion-input
         class="custom-input"
         fill="outline"
-        type="number"
+        type="date"
         min="0"
         [(ngModel)]="idade"
         (ionFocus)="isIdadeFocused = true"
