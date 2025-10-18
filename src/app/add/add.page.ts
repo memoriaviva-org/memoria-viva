@@ -12,7 +12,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddPage implements OnInit {
 
-  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+@ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef<HTMLAudioElement>;
+
 
   mostrarJanela = false;
   mostrarMensagemSucesso = false;
@@ -228,9 +229,16 @@ export class AddPage implements OnInit {
     this.mostrarConfirmacao = false;
   }
 
-  toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
+  toggleAudio(event: Event) {
+    const button = event.currentTarget as HTMLElement;
+    const audio = this.audioPlayer.nativeElement;
+
+    const src = this.modoEdicao
+        ? 'assets/audio/audio-teste.m4a'
+        : 'assets/audio/audio-pequeno.mp3';
+        
+    audio.src = src;
+    audio.load();
 
     if (audio.paused) {
       button.style.display = 'none';

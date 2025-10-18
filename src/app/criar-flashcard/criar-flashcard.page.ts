@@ -13,7 +13,7 @@ export class CriarFlashcardPage implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
-  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+  @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef<HTMLAudioElement>;
 
   mostrarJanela = false;
 
@@ -274,9 +274,16 @@ export class CriarFlashcardPage implements OnInit {
   mostrarJanelaMais() { this.mostrarJanela = !this.mostrarJanela; }
   fecharJanelaMais() { this.mostrarJanela = false; }
 
-  toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
+   toggleAudio(event: Event) {
+    const button = event.currentTarget as HTMLElement;
+    const audio = this.audioPlayer.nativeElement;
+
+    const src = this.modoEdicao
+        ? 'assets/audio/audio-teste.m4a'
+        : 'assets/audio/audio-pequeno.mp3';
+        
+    audio.src = src;
+    audio.load();
 
     if (audio.paused) {
       button.style.display = 'none';

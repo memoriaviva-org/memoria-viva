@@ -12,6 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddContatosPage implements OnInit {
 
+    @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef<HTMLAudioElement>;
+
   nome = '';
   relacao = '';
   telefone = '';
@@ -26,7 +28,7 @@ export class AddContatosPage implements OnInit {
   mostrarConfirmacao = false;
 
   contatoId: string | null = null;
-  editando = false;
+  modoEdicao = false;
 
   constructor(
     private contatoService: ContatoService,
@@ -51,7 +53,7 @@ export class AddContatosPage implements OnInit {
     };
 
     try {
-      if (this.editando && this.contatoId) {
+      if (this.modoEdicao && this.contatoId) {
         // Atualiza contato existente
         contato.id = this.contatoId;  // <-- garantir que id está definido
         await this.contatoService.updateContato(contato);
@@ -121,7 +123,7 @@ export class AddContatosPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(async (params) => {
       if (params['editar'] === 'true' && params['id']) {
-        this.editando = true;
+        this.modoEdicao = true;
         this.contatoId = params['id'];
         const contato = await this.contatoService.getContatoById(this.contatoId!);
         if (contato) {
@@ -136,8 +138,6 @@ export class AddContatosPage implements OnInit {
       }
     });
   }
-
-  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   mostrarJanela = false;
 
@@ -187,23 +187,28 @@ export class AddContatosPage implements OnInit {
     this.telefone = value; // Atualiza a variável com o valor formatado
   }
 
-  toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
+     toggleAudio(event: Event) {
+    const button = event.currentTarget as HTMLElement;
+    const audio = this.audioPlayer.nativeElement;
+
+    const src = this.modoEdicao
+        ? 'assets/audio/audio-teste.m4a'
+        : 'assets/audio/audio-pequeno.mp3';
+        
+    audio.src = src;
+    audio.load();
 
     if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
+      button.style.display = 'none';
+      audio.style.display = 'block';
+      audio.play();
+    } else {
+      audio.pause();
     }
+
+    audio.onended = () => {
+      audio.style.display = 'none';
+      button.style.display = 'inline-flex';
+    };
+  }
 }

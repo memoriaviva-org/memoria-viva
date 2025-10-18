@@ -8,11 +8,13 @@
   <p class="add-text">Meu Dia</p>
 </div>
 
-<ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
+<ion-button class="audio-btn" fill="solid" (click)="toggleAudio($event)">
   <ion-icon name="volume-high" slot="icon-only"></ion-icon>
 </ion-button>
 
-<audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
+<audio #audioPlayer class="audio-scss" controls></audio>
+
+
 
 <ion-content fullscreen>
 
