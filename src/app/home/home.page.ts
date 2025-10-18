@@ -3,8 +3,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../app/services/auth.service';
 import { ToastController } from '@ionic/angular';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',

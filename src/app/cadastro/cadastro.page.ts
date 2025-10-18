@@ -53,6 +53,18 @@ export class CadastroPage {
     this.errorMessage = this.getFriendlyError('invalid-name');
     return;
   }
+  if (this.nome.length > 50) {
+    this.errorMessage = 'O nome não pode ultrapassar 50 caracteres.';
+    return;
+  }
+  if (this.password.length < 6 || this.password.length > 25) {
+    this.errorMessage = 'A senha deve ter entre 6 e 25 caracteres.';
+    return;
+  }
+  
+  const safeNome = this.nome.replace(/[<>&'"]/g, '');
+  message: `Cadastro realizado com sucesso! Bem-vindo(a), ${safeNome}. Verifique seu e-mail.`
+
 
     try {
       const userCredential = await this.authService.register(this.email, this.password, this.nome);

@@ -20,6 +20,7 @@
         class="custom-input"
         fill="outline"
         type="nome"
+        maxlength="50"
         [(ngModel)]="nome"
         (ionFocus)="isNomeFocused = true"
         (ionBlur)="isNomeFocused = false">
@@ -46,6 +47,7 @@
         class="custom-input"
         fill="outline"
         type="email"
+        maxlength="254"
         [(ngModel)]="email"
         (ionFocus)="isEmailFocused = true"
         (ionBlur)="isEmailFocused = false">
@@ -57,6 +59,7 @@
       <ion-input
         class="custom-input"
         fill="outline"
+        maxlength="25"
         [type]="mostrarSenha ? 'text' : 'password'"
         [(ngModel)]="password"
         (ionFocus)="isSenhaFocused = true"

@@ -143,29 +143,3 @@
   background-color: #00FFFF;
   filter: invert(1);
 }
-
-.my-custom-toast {
-  .custom-toast-container {
-    background-color: #222;
-    border-radius: 10px;
-    padding: 12px;
-  }
-
-  .custom-toast-content {
-    height: 100px !important;
-  }
-
-  .custom-toast-message {
-    font-size: 18px;
-    color: #fff;
-  }
-}
-
-ion-toast::part(container) {
-  height: 100px !important;
-  margin-bottom: 315px !important;
-}
-
-ion-toast {
-  --border-radius: 20px;
-}

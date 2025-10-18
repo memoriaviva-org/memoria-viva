@@ -16,10 +16,12 @@ export class EsqueciMinhaSenhaPage {
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
-  isEmailFocused: boolean = false;
+  isEmailFocused = false;
+  email = '';
+  errorMessage = '';
 
-  email: string = ''; // e-mail digitado
-  errorMessage: string = ''; // mensagem de erro na tela
+  private activeToast: HTMLIonToastElement | null = null;
+  private isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -27,46 +29,92 @@ export class EsqueciMinhaSenhaPage {
     private router: Router
   ) {}
 
-  async onResetPassword() {
-    this.errorMessage = ''; // limpa erro anterior
+  sanitize(input: string): string {
+    return input.replace(/[<>"'\/]/g, '');
+  }
 
-    if (!this.email) {
-      this.errorMessage = 'Digite um e-mail válido.'; // O Firebase, por segurança, não retorna erro de “usuário não encontrado” no sendPasswordResetEmail para evitar que alguém descubra quais e-mails existem ou não no sistema.
+  async onResetPassword() {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    const sanitizedEmail = this.sanitize(this.email.trim());
+
+    if (!sanitizedEmail) {
+      this.errorMessage = 'Digite um e-mail.';
+      this.isLoading = false;
       return;
     }
 
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sanitizedEmail);
+    if (!emailValido) {
+      this.errorMessage = 'Formato de e-mail inválido.';
+      this.isLoading = false;
+      return;
+    }
+    
+    if (this.email.length > 254) {
+      this.errorMessage = 'E-mail muito longo.';
+      return;
+    }
+
+
     try {
-      const result = await this.authService.resetPassword(this.email);
+      const result = await this.authService.resetPassword(sanitizedEmail);
 
       if (result.success) {
-        const toast = await this.toastController.create({
-          message: result.message,
-          duration: 3000,
-          color: 'success',
-          position: 'top'
-        });
-        await toast.present();
+        await this.presentToast(this.sanitize(result.message), 'success');
+        this.email = '';
 
-        this.email = ''; // limpa campo
-
-
-
-        // só redireciona após o toast sumir (sem precisar setTimeout)
-        await toast.onDidDismiss();
-
-        // tira o foco do botão atual
-        (document.activeElement as HTMLElement)?.blur();
-
-        this.router.navigate(['/login']);
-
+        await this.router.navigate(['/login']);
       } else {
-        this.errorMessage = result.message;
+        this.errorMessage = this.sanitize(result.message);
       }
 
     } catch (error: any) {
       console.error('Erro ao redefinir senha:', error);
       this.errorMessage = 'Ocorreu um erro ao tentar redefinir a senha. Tente novamente mais tarde.';
+    } finally {
+      this.isLoading = false;
     }
+  }
+
+  async presentToast(mensagem: string, tipo: 'success' | 'warning' | 'danger') {
+    if (this.activeToast) {
+      await this.activeToast.dismiss();
+    }
+
+    const cores: Record<string, string> = {
+      success: '#28a745',
+      warning: '#ffcc00',
+      danger: '#ff3b30'
+    };
+
+    const toast = await this.toastController.create({
+      message: this.sanitize(mensagem),
+      duration: 3000,
+      position: 'bottom',
+      cssClass: 'custom-toast',
+      animated: true
+    });
+
+    await toast.present();
+
+    const shadow = toast.shadowRoot;
+    if (shadow) {
+      const wrapper = shadow.querySelector('.toast-wrapper') as HTMLElement | null;
+      if (wrapper) {
+        wrapper.style.background = cores[tipo];
+        wrapper.style.color = '#fff';
+        wrapper.style.borderRadius = '10px';
+        wrapper.style.fontSize = '16px';
+        wrapper.style.textAlign = 'center';
+        wrapper.style.padding = '10px 12px';
+      }
+    }
+
+    this.activeToast = toast;
+    toast.onDidDismiss().then(() => (this.activeToast = null));
   }
 
   toggleAudio() {
@@ -74,18 +122,16 @@ export class EsqueciMinhaSenhaPage {
     const button = document.querySelector('.audio-btn') as HTMLElement;
 
     if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
+      button.style.display = 'none';
+      audio.style.display = 'block';
+      audio.play();
+    } else {
+      audio.pause();
     }
+
+    audio.onended = () => {
+      audio.style.display = 'none';
+      button.style.display = 'inline-flex';
+    };
+  }
 }
