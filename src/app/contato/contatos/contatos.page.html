@@ -47,8 +47,9 @@
          <a [href]="'tel:' + contato.telefone">{{ contato.telefone }}</a>
         </p>
 
-        <audio class="contato-audio" controls="false"></audio>
-
+      <div *ngIf="contato.audioUrl">
+        <audio class="contato-audio" [src]="contato.audioUrl" controls></audio>
+      </div>
         <p *ngIf="contato.relacao" class="contato-relacao">{{ contato.relacao }}</p>
 
         <a *ngIf="contato.endereco" [href]="abrirNoMaps(contato.endereco)" target="_blank">
