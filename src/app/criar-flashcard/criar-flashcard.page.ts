@@ -13,14 +13,9 @@ export class CriarFlashcardPage implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
-  @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef<HTMLAudioElement>;
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   mostrarJanela = false;
-
-  alertaAbertoCamposObrigatorios = false;
-  mensagemAlertaPreencherCamposObrigatorios = '';
-
-  mostrarAlertCamposObrigatorios = false;
 
   // Variáveis do formulário
   tituloFlashcard = '';
@@ -121,14 +116,9 @@ export class CriarFlashcardPage implements OnInit {
     }
   }
 
-  alertCamposObriatorios() {
-    this.mostrarAlertCamposObrigatorios = true;
-  }
-
   async criarNovoFlashcard() {
     if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada || !this.midiaAuxiliar) {
-      this.mensagemAlertaPreencherCamposObrigatorios = 'Preencha todos os campos obrigatórios (Título, Categoria, Mídia Auxiliar, Áudio da Pergunta e Áudio da Resposta)!';
-      this.alertaAbertoCamposObrigatorios = true;
+      alert('Preencha todos os campos obrigatórios (Título, Categoria, Mídia Auxiliar, Áudio da Pergunta e Áudio da Resposta)!');
       return;
     }
 
@@ -175,7 +165,7 @@ export class CriarFlashcardPage implements OnInit {
       curiosidade: this.curiosidade || undefined,
       audioPergunta: this.audioPergunta,
       audioResposta: this.audioResposta,
-      midiaAuxiliar: this.midiaAuxiliar
+      midiaAuxiliar: this.midiaAuxiliar  // Agora obrigatória
     };
 
     try {
@@ -274,16 +264,9 @@ export class CriarFlashcardPage implements OnInit {
   mostrarJanelaMais() { this.mostrarJanela = !this.mostrarJanela; }
   fecharJanelaMais() { this.mostrarJanela = false; }
 
-   toggleAudio(event: Event) {
-    const button = event.currentTarget as HTMLElement;
-    const audio = this.audioPlayer.nativeElement;
-
-    const src = this.modoEdicao
-        ? 'assets/audio/audio-teste.m4a'
-        : 'assets/audio/audio-pequeno.mp3';
-        
-    audio.src = src;
-    audio.load();
+  toggleAudio() {
+    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
+    const button = document.querySelector('.audio-btn') as HTMLElement;
 
     if (audio.paused) {
       button.style.display = 'none';

@@ -14,12 +14,11 @@
   <div class="form-wrapper">
     <div class="form-content">
 
-    <ion-button class="audio-btn" fill="solid" (click)="toggleAudio($event)">
-      <ion-icon name="volume-high" slot="icon-only"></ion-icon>
-    </ion-button>
+      <ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
+        <ion-icon name="volume-high" slot="icon-only"></ion-icon>
+      </ion-button>
 
-    <audio #audioPlayer class="audio-scss" controls></audio>
-
+      <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
 
      <!-- Título -->
 <ion-item class="input-item">
@@ -33,6 +32,7 @@
   <ion-label>Adicionar mídia auxiliar</ion-label>
   <input
     type="file"
+    accept="image/*,video/*,audio/*"
     accept="image/*,video/*"
     (change)="onFileSelected($event)"
     class="input-file"
@@ -42,6 +42,7 @@
   <ng-container *ngIf="arquivoPreview">
     <img *ngIf="tipoArquivo === 'image'" [src]="arquivoPreview" alt="Preview" style="max-width: 50px; max-height: 50px; margin-left: 10px;" />
     <video *ngIf="tipoArquivo === 'video'" [src]="arquivoPreview" controls style="max-width: 100px; max-height: 50px; margin-left: 10px;"></video>
+    <audio *ngIf="tipoArquivo === 'audio'" [src]="arquivoPreview" controls style="margin-left: 10px;"></audio>
   </ng-container>
 </ion-item>
 
@@ -85,15 +86,9 @@
 
 
 <div class="save-btn-wrapper">
-  <ion-button class="btn-salvar" (click)="salvarFlashcard()" (click)="alertCamposObriatorios()">
+  <ion-button class="btn-salvar" (click)="salvarFlashcard()">
     <p class="salvar-text">{{ modoEdicao ? 'Atualizar' : 'Salvar' }}</p>
   </ion-button>
-</div>
-
-<div *ngIf="mostrarAlertCamposObrigatorios" class="alert-campos-obrigatorios">
-  <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
-  Preencha todos os campos obrigatórios: <br>
-     (Título, Categoria, Mídia Auxiliar, Áudio da Pergunta e Áudio da Resposta)!
 </div>
 
 
