@@ -64,6 +64,33 @@ export class AtualizarPerfilPage implements OnInit {
         color: 'success'
       });
       toast.present();
+
+      const shadow = toast.shadowRoot;
+    if (!shadow) return;
+
+    const toastWrapper = shadow.querySelector('.toast-wrapper.toast-bottom.toast-layout-baseline') as HTMLElement | null;
+    const container = shadow.querySelector('.toast-container');
+    const content = shadow.querySelector('.toast-content');
+    const message = shadow.querySelector('.toast-message');
+
+    container?.classList.add('custom-toast-container');
+    content?.classList.add('custom-toast-content');
+    message?.classList.add('custom-toast-message');
+    container?.setAttribute('style',
+      'font-size: 16px; color:#00d023'
+    );
+
+    if (toastWrapper) {
+      toastWrapper.style.top = '80%';
+      toastWrapper.style.borderRadius = '8px';
+      toastWrapper.style.height = '60px';
+      toastWrapper.style.marginTop = '0px'
+      toastWrapper.style.width = '75%';
+      toastWrapper.style.backgroundColor = 'white';
+      toastWrapper.style.borderLeft = '6px solid #00d023';
+    }
+    await toast.present();
+
     } catch (error: any) {
       const toast = await this.toastController.create({
         message: error.message || 'Erro ao atualizar dados.',
