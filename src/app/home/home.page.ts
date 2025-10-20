@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../app/services/auth.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, Platform } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomePage {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController) {}
+    private toastController: ToastController,
+    private platform: Platform) {}
 
   async loginGoogle() {
   try {
@@ -37,6 +39,22 @@ export class HomePage {
       duration: 2000
     });
     toast.present();
+  }
+
+  async loginFacebook() {
+    try {
+      // verifica se está em ambiente mobile (Capacitor)
+      if (this.platform.is('capacitor')) {
+        await this.authService.loginWithFacebook();
+      } else {
+        this.presentToast('O login com Facebook funciona apenas no app móvel.', 'warning');
+        return;
+      }
+
+      this.router.navigateByUrl('/principal');
+    } catch (error: any) {
+      this.presentToast('Erro ao logar com Facebook: ' + error.message, 'danger');
+    }
   }
 
   toggleAudio() {
