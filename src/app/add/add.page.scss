@@ -138,11 +138,11 @@ width: 80px;
 }
 
 .salvar-text {
+font-family: "Open Sans", sans-serif;
 color: #FFF;
 text-align: center;
 -webkit-text-stroke-width: 1px;
 -webkit-text-stroke-color: #000;
-font-family: Inter;
 font-size: 25px;
 font-style: normal;
 font-weight: 700;
@@ -321,5 +321,6 @@ margin-right: 40px;
 }
 
 .audio-scss::-webkit-media-controls-panel {
-  background-color: #FAC946;
+  background-color: #E94AAB;
+  filter: invert(1);
 }
