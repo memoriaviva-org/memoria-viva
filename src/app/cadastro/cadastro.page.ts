@@ -61,7 +61,7 @@ export class CadastroPage {
     this.errorMessage = 'A senha deve ter entre 6 e 25 caracteres.';
     return;
   }
-  
+
   const safeNome = this.nome.replace(/[<>&'"]/g, '');
   message: `Cadastro realizado com sucesso! Bem-vindo(a), ${safeNome}. Verifique seu e-mail.`
 

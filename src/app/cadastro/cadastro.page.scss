@@ -40,12 +40,12 @@
       border-radius: 10px;
       background: transparent;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-      --padding-end: 44px; // espaço para o ícone
+      --padding-end: 20px; // espaço para o ícone
     }
 
     ion-icon {
       position: absolute;
-      right: 16px;
+      right: 41px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 2;
@@ -90,3 +90,24 @@
   filter: invert(1);
 }
 
+/* Para navegadores baseados em WebKit (Chrome, Safari, Edge Chromium) */
+ion-input[type='date'] input::-webkit-datetime-edit-text {
+  color: transparent;
+}
+
+/* Trazer de volta o texto editável para os campos dia, mês e ano */
+ion-input[type='date'] input::-webkit-datetime-edit-day-field,
+ion-input[type='date'] input::-webkit-datetime-edit-month-field,
+ion-input[type='date'] input::-webkit-datetime-edit-year-field {
+  color: #000; /* Ou a cor do texto que desejar */
+}
+
+/* Para Firefox */
+ion-input[type='date'] input::-moz-placeholder {
+  color: transparent;
+}
+
+/* Em geral, para esconder o placeholder automático (fallback) */
+ion-input[type='date'] input::placeholder {
+  color: transparent;
+}
