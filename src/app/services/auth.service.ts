@@ -17,6 +17,11 @@ import {
   signInWithPopup
 } from '@angular/fire/auth';
 
+import { FacebookLogin } from '@capacitor-community/facebook-login';
+import { getAuth, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
+
 import {
   Firestore,
   doc,
@@ -91,6 +96,34 @@ export class AuthService {
     }
 
     return cred;
+  }
+
+  async loginWithFacebook() {
+    // tenta login via Capacitor plugin
+    const result = await FacebookLogin.login({ permissions: ['email', 'public_profile'] });
+
+    // pega o token independentemente da estrutura retornada
+    const accessToken =
+      result?.accessToken?.token ||
+      (result as any)?.accessToken ||
+      (result as any)?.authResponse?.accessToken;
+
+    if (!accessToken) {
+      throw new Error('Login cancelado ou falhou.');
+    }
+
+    // cria credencial e autentica no Firebase usando a instância injetada this.auth
+    const credential = FacebookAuthProvider.credential(accessToken);
+    const userCredential = await signInWithCredential(this.auth as any, credential);
+
+    // rotina de notificações (mesma que você usa nos outros logins)
+    await this.notificacaoService.solicitarPermissao();
+    await this.notificacaoService.agendarBoasVindas();
+    await this.notificacaoService.agendarNotificacaoPeriodica();
+    await this.notificacaoService.cancelarInatividade();
+    await this.notificacaoService.agendarNotificacaoInatividade();
+
+    return userCredential;
   }
 
 
