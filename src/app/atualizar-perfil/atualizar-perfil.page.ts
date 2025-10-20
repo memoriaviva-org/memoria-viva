@@ -99,6 +99,32 @@ export class AtualizarPerfilPage implements OnInit {
       });
       toast.present();
       console.error('Erro ao atualizar dados:', error);
+
+      const shadow = toast.shadowRoot;
+    if (!shadow) return;
+
+    const toastWrapper = shadow.querySelector('.toast-wrapper.toast-bottom.toast-layout-baseline') as HTMLElement | null;
+    const container = shadow.querySelector('.toast-container');
+    const content = shadow.querySelector('.toast-content');
+    const message = shadow.querySelector('.toast-message');
+
+    container?.classList.add('custom-toast-container');
+    content?.classList.add('custom-toast-content');
+    message?.classList.add('custom-toast-message');
+    container?.setAttribute('style',
+      'font-size: 16px; color: #d00000'
+    );
+
+    if (toastWrapper) {
+      toastWrapper.style.top = '80%';
+      toastWrapper.style.borderRadius = '8px';
+      toastWrapper.style.height = '60px';
+      toastWrapper.style.marginTop = '0px'
+      toastWrapper.style.width = '75%';
+      toastWrapper.style.backgroundColor = '#ffecec';
+      toastWrapper.style.borderLeft = '6px solid #ff3b30';
+    }
+    await toast.present();
     }
   }
 
@@ -111,6 +137,32 @@ export class AtualizarPerfilPage implements OnInit {
     });
     toast.present();
     this.router.navigateByUrl('/home');
+
+    const shadow = toast.shadowRoot;
+    if (!shadow) return;
+
+    const toastWrapper = shadow.querySelector('.toast-wrapper.toast-bottom.toast-layout-baseline') as HTMLElement | null;
+    const container = shadow.querySelector('.toast-container');
+    const content = shadow.querySelector('.toast-content');
+    const message = shadow.querySelector('.toast-message');
+
+    container?.classList.add('custom-toast-container');
+    content?.classList.add('custom-toast-content');
+    message?.classList.add('custom-toast-message');
+    container?.setAttribute('style',
+      'font-size: 16px; color: #d00000'
+    );
+
+    if (toastWrapper) {
+      toastWrapper.style.top = '80%';
+      toastWrapper.style.borderRadius = '8px';
+      toastWrapper.style.height = '60px';
+      toastWrapper.style.marginTop = '0px'
+      toastWrapper.style.width = '75%';
+      toastWrapper.style.backgroundColor = '#ffecec';
+      toastWrapper.style.borderLeft = '6px solid #ff3b30';
+    }
+    await toast.present();
   }
 
   toggleAudio() {
