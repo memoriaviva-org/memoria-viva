@@ -4,4 +4,6 @@
     <string name="title_activity_main">MemoriaViva</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="facebook_app_id">1401069974287118</string>
+    <string name="facebook_client_token">50c46ed20c761a3e9da7fbdf3f46d8e9</string>
 </resources>
