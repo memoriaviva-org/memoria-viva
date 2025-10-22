@@ -19,6 +19,7 @@ export class CriarFlashcardPage implements OnInit {
 
   mostrarAlertCO =  false;
   mostrarAlertSuccess = false;
+  mostrarAlertFirestore = false;
 
   // Variáveis do formulário
   tituloFlashcard = '';
@@ -124,7 +125,7 @@ export class CriarFlashcardPage implements OnInit {
       this.mostrarAlertCO = true;
       setTimeout(() => {
         this.mostrarAlertCO = false;
-      }, 5000);
+      }, 4000);
       return
     }
 
@@ -153,7 +154,12 @@ export class CriarFlashcardPage implements OnInit {
       this.navegarDeVolta();
     } catch (err) {
       console.error(err);
-      alert('Erro ao salvar flashcard. O tamanho combinado da mídia é muito grande para o Firestore.');
+
+      this.mostrarAlertFirestore = true;
+
+      setTimeout(() => {
+        this.mostrarAlertFirestore = false;
+      }, 4000);
     }
   }
 

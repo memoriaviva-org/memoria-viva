@@ -250,11 +250,13 @@ p {
     align-items: center;
 }
 
-.error-icon {
+.error-icon2 {
   margin-right: 10px;
+  color: #ff3b30;
+  font-size: 70px;
 }
 
-.alert-co {
+.alert-erro {
   position: fixed;
   top: 36%;
   left: 50%;
@@ -273,6 +275,27 @@ p {
   width: 75%;
   display: flex;
   align-items: center;
+}
+
+.alert-erro2 {
+  position: fixed;
+    top: 39%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffecec;
+    border-left: 6px solid #ff3b30;
+    padding: 16px;
+    margin-top: 16px;
+    border-radius: 8px;
+    color: #d00000;
+    gap: 2px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    z-index: 1;
+    width: 89%;
+    display: flex;
+    align-items: center;
 }
 
 .alert-success {
