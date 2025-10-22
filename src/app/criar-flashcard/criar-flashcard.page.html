@@ -108,6 +108,10 @@
   <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> ID do Flashcard não encontrado.
 </div>
 
+<div *ngIf="mostrarAlertSuccessEdicao" class="alert-success">
+  <ion-icon name="checkmark-outline" class="success-icon"></ion-icon> Flashcard atualizado com sucesso!
+</div>
+
 
 <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 

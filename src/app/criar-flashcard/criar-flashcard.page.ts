@@ -21,6 +21,7 @@ export class CriarFlashcardPage implements OnInit {
   mostrarAlertSuccess = false;
   mostrarAlertFirestore = false;
   mostrarAlertID = false;
+  mostrarAlertSuccessEdicao = false;
 
   // Variáveis do formulário
   tituloFlashcard = '';
@@ -187,7 +188,7 @@ export class CriarFlashcardPage implements OnInit {
       setTimeout(() => {
         this.mostrarAlertCO = false;
       }, 4000);
-      
+
       return;
     }
 
@@ -203,7 +204,13 @@ export class CriarFlashcardPage implements OnInit {
 
     try {
       await this.flashcardService.updateFlashcard(flashcardAtualizado);
-      alert('Flashcard atualizado com sucesso!');
+
+      this.mostrarAlertSuccessEdicao = true;
+
+      await this.delay(3000);
+
+      this.mostrarAlertSuccessEdicao = false;
+
       this.navegarDeVolta();
     } catch (err) {
       console.error(err);
