@@ -104,6 +104,10 @@
   O tamanho combinado da mídia é muito grande para o Firestore.
 </div>
 
+<div *ngIf="mostrarAlertID" class="alert-erro">
+  <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> ID do Flashcard não encontrado.
+</div>
+
 
 <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 

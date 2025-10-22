@@ -20,6 +20,7 @@ export class CriarFlashcardPage implements OnInit {
   mostrarAlertCO =  false;
   mostrarAlertSuccess = false;
   mostrarAlertFirestore = false;
+  mostrarAlertID = false;
 
   // Variáveis do formulário
   tituloFlashcard = '';
@@ -170,7 +171,12 @@ export class CriarFlashcardPage implements OnInit {
 
   async atualizarFlashcard() {
     if (!this.flashcardId) {
-      alert('ID do flashcard não encontrado');
+      this.mostrarAlertID = true;
+
+      setTimeout(() => {
+        this.mostrarAlertID = false;
+      }, 4000);
+
       return;
     }
 
