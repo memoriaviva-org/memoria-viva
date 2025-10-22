@@ -8,6 +8,20 @@ export class NotificacaoService {
 
   constructor() {}
 
+  async criarCanalAndroid() {
+    await LocalNotifications.createChannel({
+      id: 'memoria-viva-canal',
+      name: 'Memória Viva Notificações',
+      description: 'Canal para notificações do app',
+      importance: 5, // IMPORTANCE_HIGH
+      visibility: 1, // VISIBILITY_PUBLIC
+      lights: true,
+      lightColor: '#9C3FC3',
+      vibration: true
+    });
+  }
+
+
   async solicitarPermissao() {
     const perm = await LocalNotifications.requestPermissions();
     if (perm.display !== 'granted') {
@@ -23,7 +37,8 @@ export class NotificacaoService {
           id: 1,
           title: 'Bem-vindo 💜',
           body: 'É ótimo ter você aqui!',
-          schedule: { at: new Date(Date.now() + 2000) }
+          schedule: { at: new Date(Date.now() + 2000) }, // em 2 segundos
+          channelId: 'memoria-viva-canal',
         }
       ]
     });

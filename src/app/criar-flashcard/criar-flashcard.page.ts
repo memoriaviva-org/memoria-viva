@@ -17,6 +17,12 @@ export class CriarFlashcardPage implements OnInit {
 
   mostrarJanela = false;
 
+  mostrarAlertCO =  false;
+  mostrarAlertSuccess = false;
+  mostrarAlertFirestore = false;
+  mostrarAlertID = false;
+  mostrarAlertSuccessEdicao = false;
+
   // Variáveis do formulário
   tituloFlashcard = '';
   categoriaSelecionada = '';
@@ -118,8 +124,11 @@ export class CriarFlashcardPage implements OnInit {
 
   async criarNovoFlashcard() {
     if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada || !this.midiaAuxiliar) {
-      alert('Preencha todos os campos obrigatórios (Título, Categoria, Mídia Auxiliar, Áudio da Pergunta e Áudio da Resposta)!');
-      return;
+      this.mostrarAlertCO = true;
+      setTimeout(() => {
+        this.mostrarAlertCO = false;
+      }, 4000);
+      return
     }
 
     const flashcard: Flashcard = {
@@ -137,24 +146,49 @@ export class CriarFlashcardPage implements OnInit {
 
     try {
       await this.flashcardService.addFlashcard(flashcard);
-      alert('Flashcard salvo com sucesso!');
+      this.mostrarAlertSuccess = true;
+
+      await this.delay(3000);
+
+      this.mostrarAlertSuccess = false;
 
       // USAR O NOVO MÉTODO
       this.navegarDeVolta();
     } catch (err) {
       console.error(err);
-      alert('Erro ao salvar flashcard. O tamanho combinado da mídia é muito grande para o Firestore.');
+
+      this.mostrarAlertFirestore = true;
+
+      setTimeout(() => {
+        this.mostrarAlertFirestore = false;
+      }, 4000);
     }
   }
 
+  private delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
   async atualizarFlashcard() {
     if (!this.flashcardId) {
-      alert('ID do flashcard não encontrado');
+      this.mostrarAlertID = true;
+
+      setTimeout(() => {
+        this.mostrarAlertID = false;
+      }, 4000);
+
       return;
     }
 
     if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada || !this.midiaAuxiliar) {
-      alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta, Áudio da Resposta e Mídia Auxiliar)!');
+
+      this.mostrarAlertCO = true;
+
+      setTimeout(() => {
+        this.mostrarAlertCO = false;
+      }, 4000);
+
       return;
     }
 
@@ -170,7 +204,13 @@ export class CriarFlashcardPage implements OnInit {
 
     try {
       await this.flashcardService.updateFlashcard(flashcardAtualizado);
-      alert('Flashcard atualizado com sucesso!');
+
+      this.mostrarAlertSuccessEdicao = true;
+
+      await this.delay(3000);
+
+      this.mostrarAlertSuccessEdicao = false;
+
       this.navegarDeVolta();
     } catch (err) {
       console.error(err);

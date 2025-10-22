@@ -91,6 +91,27 @@
   </ion-button>
 </div>
 
+<div *ngIf="mostrarAlertCO" class="alert-erro">
+  <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Preencha todos os campos.
+</div>
+
+<div *ngIf="mostrarAlertSuccess" class="alert-success">
+  <ion-icon name="checkmark-outline" class="success-icon"></ion-icon> Flashcard criado com sucesso!
+</div>
+
+<div *ngIf="mostrarAlertFirestore" class="alert-erro2">
+  <ion-icon name="alert-circle-outline" class="error-icon2"></ion-icon> Erro ao salvar Flashcard.
+  O tamanho combinado da mídia é muito grande para o Firestore.
+</div>
+
+<div *ngIf="mostrarAlertID" class="alert-erro">
+  <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> ID do Flashcard não encontrado.
+</div>
+
+<div *ngIf="mostrarAlertSuccessEdicao" class="alert-success">
+  <ion-icon name="checkmark-outline" class="success-icon"></ion-icon> Flashcard atualizado com sucesso!
+</div>
+
 
 <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 

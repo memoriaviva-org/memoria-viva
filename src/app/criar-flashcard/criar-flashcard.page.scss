@@ -254,3 +254,76 @@ p {
   margin-right: 10px;
 }
 
+.error-icon2 {
+  margin-right: 10px;
+  color: #ff3b30;
+  font-size: 70px;
+}
+
+.alert-erro {
+  position: fixed;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffecec;
+  border-left: 6px solid #ff3b30;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+  color: #d00000;
+  gap: 2px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  z-index: 1;
+  width: 75%;
+  display: flex;
+  align-items: center;
+}
+
+.alert-erro2 {
+  position: fixed;
+    top: 39%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffecec;
+    border-left: 6px solid #ff3b30;
+    padding: 16px;
+    margin-top: 16px;
+    border-radius: 8px;
+    color: #d00000;
+    gap: 2px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    z-index: 1;
+    width: 89%;
+    display: flex;
+    align-items: center;
+}
+
+.alert-success {
+  position: fixed;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #daf9df;
+  border-left: 6px solid #00ff26;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+  color: #018f16;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.4;
+  gap: 8px;
+  z-index: 1;
+  width: 82%;
+  display: flex;
+  align-items: center;
+}
+
+.success-icon {
+  color: #017e14;
+  font-size: 24px;
+}
