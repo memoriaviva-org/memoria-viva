@@ -23,7 +23,7 @@ export class NotificacaoService {
           id: 1,
           title: 'Bem-vindo 💜',
           body: 'É ótimo ter você aqui!',
-          schedule: { at: new Date(Date.now() + 2000) } // em 2 segundos
+          schedule: { at: new Date(Date.now() + 2000) }
         }
       ]
     });
@@ -38,7 +38,7 @@ export class NotificacaoService {
       notifications: [
         {
           id: 2,
-          title: 'Volte para o Memória Viva 💭',
+          title: 'Volte para o Memória Viva ',
           body: 'Continue registrando suas memórias!',
           schedule: { at: doisDias }
         }
@@ -46,11 +46,10 @@ export class NotificacaoService {
     });
   }
 
-
   // Notificação se o usuário ficar 15 dias sem entrar
   async agendarNotificacaoInatividade() {
     const data = new Date();
-    data.setDate(data.getDate() + 15); // daqui a 15 dias
+    data.setDate(data.getDate() + 15);
     await LocalNotifications.schedule({
       notifications: [
         {
@@ -67,4 +66,39 @@ export class NotificacaoService {
   async cancelarInatividade() {
     await LocalNotifications.cancel({ notifications: [{ id: 3 }] });
   }
+
+  // 🔔 Nova notificação — alertar sobre exclusão de arquivos de "Meu Dia"
+  async agendarAvisoApagarMeuDia() {
+    const agora = new Date();
+    const hoje22h = new Date(
+      agora.getFullYear(),
+      agora.getMonth(),
+      agora.getDate(),
+      22, 0, 0 // 22:00h (10 da noite)
+    );
+
+    // Se já passou das 22h, agenda para o dia seguinte às 22h
+    if (hoje22h.getTime() <= agora.getTime()) {
+      hoje22h.setDate(hoje22h.getDate() + 1);
+    }
+
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          id: 4,
+          title: 'Atenção 🕒',
+          body: 'Suas memórias de hoje serão apagadas ao virar o dia. Quer guardar algo mais?',
+          schedule: { at: hoje22h }
+        }
+      ]
+    });
+
+    console.log('Notificação de aviso de exclusão agendada para:', hoje22h);
+  }
+
+  async jaTemAvisoAgendado(id: number): Promise<boolean> {
+    const pendentes = await LocalNotifications.getPending();
+    return pendentes.notifications.some(n => n.id === id);
+  }
+
 }

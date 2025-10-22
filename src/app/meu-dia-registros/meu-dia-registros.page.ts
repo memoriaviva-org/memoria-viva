@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RegistroService, MeuDia } from '../services/registro.service';
 import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router'; // ADICIONAR
+import { NotificacaoService} from '../services/notificacao.service';
 
 @Component({
   selector: 'app-meu-dia-registros',
@@ -19,12 +20,13 @@ export class MeuDiaRegistrosPage implements OnInit {
   // ADICIONAR Router no constructor
   constructor(
     private registroService: RegistroService,
-    private router: Router
+    private router: Router,
+    private notificacaoService: NotificacaoService
   ) {}
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
-  ngOnInit() {
+  async ngOnInit() {
     this.registrosAgrupados$ = this.registroService.verMeuDia().pipe(
       map(registros => {
         const grupos: { [dia: string]: MeuDia[] } = {};
@@ -40,7 +42,16 @@ export class MeuDiaRegistrosPage implements OnInit {
       this.carregando = false;
       this.temRegistros = Object.keys(registrosAgrupados).length > 0;
     });
+
+    // Notificações
+    await this.notificacaoService.solicitarPermissao();
+
+    const jaTemAviso = await this.notificacaoService.jaTemAvisoAgendado(4);
+    if (!jaTemAviso) {
+      await this.notificacaoService.agendarAvisoApagarMeuDia();
+    }
   }
+
 
   // NOVA FUNÇÃO: Navegar para edição
   editarRegistro(registroId: string | undefined) {
