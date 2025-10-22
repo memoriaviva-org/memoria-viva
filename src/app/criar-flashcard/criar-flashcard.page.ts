@@ -181,7 +181,13 @@ export class CriarFlashcardPage implements OnInit {
     }
 
     if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada || !this.midiaAuxiliar) {
-      alert('Preencha todos os campos obrigatórios (Título, Categoria, Áudio da Pergunta, Áudio da Resposta e Mídia Auxiliar)!');
+
+      this.mostrarAlertCO = true;
+
+      setTimeout(() => {
+        this.mostrarAlertCO = false;
+      }, 4000);
+      
       return;
     }
 
