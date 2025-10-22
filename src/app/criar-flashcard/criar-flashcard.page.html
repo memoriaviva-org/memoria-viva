@@ -91,6 +91,10 @@
   </ion-button>
 </div>
 
+<div *ngIf="mostrarAlertCO" class="alert-co">
+  <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Preencha todos os campos.
+</div>
+
 
 <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 

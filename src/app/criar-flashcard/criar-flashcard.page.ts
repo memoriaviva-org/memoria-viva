@@ -17,6 +17,8 @@ export class CriarFlashcardPage implements OnInit {
 
   mostrarJanela = false;
 
+  mostrarAlertCO =  false;
+
   // Variáveis do formulário
   tituloFlashcard = '';
   categoriaSelecionada = '';
@@ -118,8 +120,11 @@ export class CriarFlashcardPage implements OnInit {
 
   async criarNovoFlashcard() {
     if (!this.tituloFlashcard || !this.audioPergunta || !this.audioResposta || !this.categoriaSelecionada || !this.midiaAuxiliar) {
-      alert('Preencha todos os campos obrigatórios (Título, Categoria, Mídia Auxiliar, Áudio da Pergunta e Áudio da Resposta)!');
-      return;
+      this.mostrarAlertCO = true;
+      setTimeout(() => {
+        this.mostrarAlertCO = false;
+      }, 5000);
+      return
     }
 
     const flashcard: Flashcard = {
