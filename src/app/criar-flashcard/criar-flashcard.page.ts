@@ -18,6 +18,7 @@ export class CriarFlashcardPage implements OnInit {
   mostrarJanela = false;
 
   mostrarAlertCO =  false;
+  mostrarAlertSuccess = false;
 
   // Variáveis do formulário
   tituloFlashcard = '';
@@ -142,7 +143,11 @@ export class CriarFlashcardPage implements OnInit {
 
     try {
       await this.flashcardService.addFlashcard(flashcard);
-      alert('Flashcard salvo com sucesso!');
+      this.mostrarAlertSuccess = true;
+
+      await this.delay(3000);
+
+      this.mostrarAlertSuccess = false;
 
       // USAR O NOVO MÉTODO
       this.navegarDeVolta();
@@ -151,6 +156,11 @@ export class CriarFlashcardPage implements OnInit {
       alert('Erro ao salvar flashcard. O tamanho combinado da mídia é muito grande para o Firestore.');
     }
   }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 
   async atualizarFlashcard() {
     if (!this.flashcardId) {

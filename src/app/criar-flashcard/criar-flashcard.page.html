@@ -95,6 +95,10 @@
   <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Preencha todos os campos.
 </div>
 
+<div *ngIf="mostrarAlertSuccess" class="alert-success">
+  <ion-icon name="checkmark-outline" class="success-icon"></ion-icon> Flashcard criado com sucesso!
+</div>
+
 
 <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 
