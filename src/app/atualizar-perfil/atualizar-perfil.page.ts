@@ -19,7 +19,7 @@ export class AtualizarPerfilPage implements OnInit {
 
   nome = '';
   email = '';
-  idade = 0;
+  dataNasc: string = ''; // Alterado para string para compatibilidade com input date
   password = '';
 
   constructor(
@@ -41,7 +41,12 @@ export class AtualizarPerfilPage implements OnInit {
       // Busca dados adicionais no Firestore
       const userData = await this.authService.getUserData(user.uid);
       if (userData) {
-        this.idade = userData['idade'] ?? 0;
+        // Converte Timestamp para string no formato yyyy-mm-dd
+        if (userData['dataNasc']) {
+          const dataNascTimestamp = userData['dataNasc'];
+          const dataNascDate = dataNascTimestamp.toDate();
+          this.dataNasc = this.formatDateForInput(dataNascDate);
+        }
         this.nome = userData['nome'] ?? this.nome;
       }
     } catch (err) {
@@ -49,120 +54,112 @@ export class AtualizarPerfilPage implements OnInit {
     }
   }
 
+  // Método para formatar Date para string no formato yyyy-mm-dd
+  private formatDateForInput(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
   async atualizarDados() {
     try {
-      await this.authService.updateUserData(this.nome, this.idade);
-
-      if (this.email) {
-        const res = await this.authService.updateUserEmail(this.email, this.password);
-        if (!res.success) throw new Error(res.message);
+      // Validações básicas
+      if (!this.nome) {
+        throw new Error('O nome é obrigatório.');
       }
 
-      const toast = await this.toastController.create({
-        message: 'Dados atualizados com sucesso!',
-        duration: 2000,
-        color: 'success'
-      });
-      toast.present();
+      if (!this.dataNasc) {
+        throw new Error('A data de nascimento é obrigatória.');
+      }
 
-      const shadow = toast.shadowRoot;
-    if (!shadow) return;
+      // Converter string da data para Date
+      const dataNascDate = new Date(this.dataNasc);
 
-    const toastWrapper = shadow.querySelector('.toast-wrapper.toast-bottom.toast-layout-baseline') as HTMLElement | null;
-    const container = shadow.querySelector('.toast-container');
-    const content = shadow.querySelector('.toast-content');
-    const message = shadow.querySelector('.toast-message');
+      // Validar data (não pode ser no futuro)
+      const hoje = new Date();
+      if (dataNascDate > hoje) {
+        throw new Error('A data de nascimento não pode ser no futuro.');
+      }
 
-    container?.classList.add('custom-toast-container');
-    content?.classList.add('custom-toast-content');
-    message?.classList.add('custom-toast-message');
-    container?.setAttribute('style',
-      'font-size: 16px; color:#00d023'
-    );
+      // Atualizar dados do usuário
+      await this.authService.updateUserData(this.nome, dataNascDate);
 
-    if (toastWrapper) {
-      toastWrapper.style.top = '80%';
-      toastWrapper.style.borderRadius = '8px';
-      toastWrapper.style.height = '60px';
-      toastWrapper.style.marginTop = '0px'
-      toastWrapper.style.width = '75%';
-      toastWrapper.style.backgroundColor = 'white';
-      toastWrapper.style.borderLeft = '6px solid #00d023';
-    }
-    await toast.present();
+      // Se o email foi alterado, tentar atualizar
+      const currentUser = await firstValueFrom(this.authService.getCurrentUser());
+      if (currentUser && this.email !== currentUser.email) {
+        try {
+          await this.authService.updateUserEmail(this.email, this.password);
+        } catch (emailError: any) {
+          // Se falhar por senha incorreta, pedir para confirmar senha
+          if (emailError.code === 'auth/wrong-password' || emailError.code === 'auth/invalid-credential') {
+            throw new Error('Senha incorreta. Digite sua senha atual para alterar o e-mail.');
+          }
+          throw emailError;
+        }
+      }
+
+      await this.showToast('Dados atualizados com sucesso!', 'success');
 
     } catch (error: any) {
-      const toast = await this.toastController.create({
-        message: error.message || 'Erro ao atualizar dados.',
-        duration: 2000,
-        color: 'danger'
-      });
-      toast.present();
       console.error('Erro ao atualizar dados:', error);
-
-      const shadow = toast.shadowRoot;
-    if (!shadow) return;
-
-    const toastWrapper = shadow.querySelector('.toast-wrapper.toast-bottom.toast-layout-baseline') as HTMLElement | null;
-    const container = shadow.querySelector('.toast-container');
-    const content = shadow.querySelector('.toast-content');
-    const message = shadow.querySelector('.toast-message');
-
-    container?.classList.add('custom-toast-container');
-    content?.classList.add('custom-toast-content');
-    message?.classList.add('custom-toast-message');
-    container?.setAttribute('style',
-      'font-size: 16px; color: #d00000'
-    );
-
-    if (toastWrapper) {
-      toastWrapper.style.top = '80%';
-      toastWrapper.style.borderRadius = '8px';
-      toastWrapper.style.height = '60px';
-      toastWrapper.style.marginTop = '0px'
-      toastWrapper.style.width = '75%';
-      toastWrapper.style.backgroundColor = '#ffecec';
-      toastWrapper.style.borderLeft = '6px solid #ff3b30';
+      await this.showToast(error.message || 'Erro ao atualizar dados.', 'danger');
     }
+  }
+
+  private async showToast(message: string, color: 'success' | 'danger' | 'medium') {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color
+    });
+
+    // Estilização customizada do toast
+    const shadow = toast.shadowRoot;
+    if (shadow) {
+      const toastWrapper = shadow.querySelector('.toast-wrapper') as HTMLElement | null;
+
+      if (toastWrapper) {
+        toastWrapper.style.top = '80%';
+        toastWrapper.style.borderRadius = '8px';
+        toastWrapper.style.height = '60px';
+        toastWrapper.style.marginTop = '0px';
+        toastWrapper.style.width = '75%';
+
+        switch (color) {
+          case 'success':
+            toastWrapper.style.backgroundColor = 'white';
+            toastWrapper.style.borderLeft = '6px solid #00d023';
+            break;
+          case 'danger':
+            toastWrapper.style.backgroundColor = '#ffecec';
+            toastWrapper.style.borderLeft = '6px solid #ff3b30';
+            break;
+          case 'medium':
+            toastWrapper.style.backgroundColor = '#f0f0f0';
+            toastWrapper.style.borderLeft = '6px solid #666';
+            break;
+        }
+      }
+
+      const container = shadow.querySelector('.toast-container');
+      const content = shadow.querySelector('.toast-content');
+      const messageEl = shadow.querySelector('.toast-message');
+
+      container?.classList.add('custom-toast-container');
+      content?.classList.add('custom-toast-content');
+      messageEl?.classList.add('custom-toast-message');
+
+      container?.setAttribute('style', 'font-size: 16px;');
+    }
+
     await toast.present();
-    }
   }
 
   async logout() {
     await this.authService.logout();
-    const toast = await this.toastController.create({
-      message: 'Você saiu da conta.',
-      duration: 2000,
-      color: 'medium'
-    });
-    toast.present();
+    await this.showToast('Você saiu da conta.', 'medium');
     this.router.navigateByUrl('/home');
-
-    const shadow = toast.shadowRoot;
-    if (!shadow) return;
-
-    const toastWrapper = shadow.querySelector('.toast-wrapper.toast-bottom.toast-layout-baseline') as HTMLElement | null;
-    const container = shadow.querySelector('.toast-container');
-    const content = shadow.querySelector('.toast-content');
-    const message = shadow.querySelector('.toast-message');
-
-    container?.classList.add('custom-toast-container');
-    content?.classList.add('custom-toast-content');
-    message?.classList.add('custom-toast-message');
-    container?.setAttribute('style',
-      'font-size: 16px; color: #d00000'
-    );
-
-    if (toastWrapper) {
-      toastWrapper.style.top = '80%';
-      toastWrapper.style.borderRadius = '8px';
-      toastWrapper.style.height = '60px';
-      toastWrapper.style.marginTop = '0px'
-      toastWrapper.style.width = '75%';
-      toastWrapper.style.backgroundColor = '#ffecec';
-      toastWrapper.style.borderLeft = '6px solid #ff3b30';
-    }
-    await toast.present();
   }
 
   toggleAudio() {
@@ -170,18 +167,20 @@ export class AtualizarPerfilPage implements OnInit {
     const button = document.querySelector('.audio-btn') as HTMLElement;
 
     if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
+      // Esconde botão e mostra player
+      button.style.display = 'none';
+      audio.style.display = 'block';
+      audio.play();
+    } else {
+      audio.pause();
+      audio.style.display = 'none';
+      button.style.display = 'inline-flex';
     }
+
+    // Quando terminar, esconde player e volta botão
+    audio.onended = () => {
+      audio.style.display = 'none';
+      button.style.display = 'inline-flex';
+    };
+  }
 }

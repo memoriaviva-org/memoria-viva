@@ -12,15 +12,13 @@ import {
   EmailAuthProvider,
   updateEmail,
   User,
-  signInWithRedirect,
-  user as authUser,
   signInWithPopup
 } from '@angular/fire/auth';
 
 import { FacebookLogin } from '@capacitor-community/facebook-login';
-import { getAuth, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { environment } from 'src/environments/environment';
+import { FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
+
+import { Timestamp } from 'firebase/firestore';
 
 import {
   Firestore,
@@ -30,6 +28,7 @@ import {
 } from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
+import { user } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -57,9 +56,8 @@ export class AuthService {
     return cred;
   }
 
-
-  // Cadastro de usuário
-  async register(email: string, senha: string, nome: string) {
+  // Cadastro de usuário - CORRIGIDO
+  async register(email: string, senha: string, nome: string, dataNasc: Date) { // Alterado para Date
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, senha);
 
     if (userCredential.user) {
@@ -70,7 +68,8 @@ export class AuthService {
       const uid = userCredential.user.uid;
       await setDoc(doc(this.firestore, `users/${uid}`), {
         nome,
-        email
+        email,
+        dataNasc: Timestamp.fromDate(dataNasc)  // converte Date para Timestamp
       }, { merge: true });
     }
 
@@ -114,7 +113,7 @@ export class AuthService {
 
     // cria credencial e autentica no Firebase usando a instância injetada this.auth
     const credential = FacebookAuthProvider.credential(accessToken);
-    const userCredential = await signInWithCredential(this.auth as any, credential);
+    const userCredential = await signInWithCredential(this.auth, credential);
 
     // rotina de notificações (mesma que você usa nos outros logins)
     await this.notificacaoService.solicitarPermissao();
@@ -126,23 +125,21 @@ export class AuthService {
     return userCredential;
   }
 
-
   // Observable do usuário atual
   getCurrentUser(): Observable<User | null> {
-    return authUser(this.auth);
+    return user(this.auth);
   }
 
   // Buscar dados do usuário no Firestore
-async getUserData(uid: string) {
-  // userRef e getDoc agora usam this.firestore, que é injetado
-  const userRef = doc(this.firestore, `users/${uid}`);
-  const userSnap = await getDoc(userRef);
+  async getUserData(uid: string) {
+    const userRef = doc(this.firestore, `users/${uid}`);
+    const userSnap = await getDoc(userRef);
 
-  if (userSnap.exists()) {
-    return userSnap.data();
+    if (userSnap.exists()) {
+      return userSnap.data();
+    }
+    return null;
   }
-  return null;
-}
 
   // Resetar senha
   async resetPassword(email: string) {
@@ -172,8 +169,8 @@ async getUserData(uid: string) {
     }
   }
 
-  // Atualizar nome e idade do usuário
-  async updateUserData(nome: string, idade: number) {
+  // Atualizar nome e data de nascimento do usuário - CORRIGIDO
+  async updateUserData(nome: string, dataNasc: Date) {
     const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
 
@@ -182,7 +179,7 @@ async getUserData(uid: string) {
     const uid = currentUser.uid;
     return setDoc(doc(this.firestore, `users/${uid}`), {
       nome,
-      idade,
+      dataNasc: Timestamp.fromDate(dataNasc),
       email: currentUser.email
     }, { merge: true });
   }
@@ -198,11 +195,5 @@ async getUserData(uid: string) {
     }
 
     await updateEmail(currentUser, newEmail);
-
-    // Atualiza também no Firestore
-    const uid = currentUser.uid;
-    await setDoc(doc(this.firestore, `users/${uid}`), { email: newEmail }, { merge: true });
-
-    return { success: true, message: 'Email atualizado com sucesso!' };
   }
 }
