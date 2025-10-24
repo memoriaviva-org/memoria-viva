@@ -23,6 +23,8 @@ export class CriarFlashcardPage implements OnInit {
   mostrarAlertID = false;
   mostrarAlertSuccessEdicao = false;
   mostrarAlertEAF = false;
+  mostrarAlertArquivoGrande = false;
+  maxSizeInKB: number | undefined;
 
   // Variáveis do formulário
   tituloFlashcard = '';
@@ -243,13 +245,20 @@ export class CriarFlashcardPage implements OnInit {
     }
   }
 
-  onFileSelected(event: any) {
+  async onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (!file) return;
 
     const MAX_SIZE_BYTES = 150000;
+    this.maxSizeInKB = MAX_SIZE_BYTES / 1000;  // Variável para o limite em KB
+
     if (file.size > MAX_SIZE_BYTES) {
-      alert(`O arquivo é muito grande. O limite da Mídia Auxiliar é de ${MAX_SIZE_BYTES / 1000} KB.`);
+      this.mostrarAlertArquivoGrande = true;
+
+      await this.delay(5000);
+
+      this.mostrarAlertArquivoGrande = false;
+
       this.limparMidiaAuxiliar();
       event.target.value = null;
       return;

@@ -116,6 +116,10 @@
   <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Erro ao atualizar Flashcard.
 </div>
 
+<div *ngIf="mostrarAlertArquivoGrande" class="alert-erro2">
+  <ion-icon name="alert-circle-outline" class="error-icon2"></ion-icon> O arquivo é muito grande. O limite da Mídia Auxiliar é de {{ maxSizeInKB }} KB.
+</div>
+
 
 <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 
