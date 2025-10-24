@@ -24,7 +24,9 @@ export class CriarFlashcardPage implements OnInit {
   mostrarAlertSuccessEdicao = false;
   mostrarAlertEAF = false;
   mostrarAlertArquivoGrande = false;
+  mostrarAlertArquivoAudioGrande = false;
   maxSizeInKB: number | undefined;
+  maxSizeInKB2: number | undefined;
 
   // Variáveis do formulário
   tituloFlashcard = '';
@@ -280,8 +282,15 @@ export class CriarFlashcardPage implements OnInit {
     if (!file) return;
 
     const MAX_SIZE_BYTES = 120000;
+    this.maxSizeInKB2 = MAX_SIZE_BYTES / 1000;
     if (file.size > MAX_SIZE_BYTES) {
       alert(`O arquivo de áudio é muito grande. O limite máximo é de ${MAX_SIZE_BYTES / 1000} KB.`);
+
+      this.mostrarAlertArquivoAudioGrande = true;
+
+      setTimeout(() => {
+        this.mostrarAlertArquivoAudioGrande = false;
+      }, 5000);
 
       event.target.value = null;
 
