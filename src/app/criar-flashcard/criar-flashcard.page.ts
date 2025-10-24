@@ -22,6 +22,7 @@ export class CriarFlashcardPage implements OnInit {
   mostrarAlertFirestore = false;
   mostrarAlertID = false;
   mostrarAlertSuccessEdicao = false;
+  mostrarAlertEAF = false;
 
   // Variáveis do formulário
   tituloFlashcard = '';
@@ -214,7 +215,12 @@ export class CriarFlashcardPage implements OnInit {
       this.navegarDeVolta();
     } catch (err) {
       console.error(err);
-      alert('Erro ao atualizar flashcard.');
+
+      this.mostrarAlertEAF = true;
+
+      setTimeout(() => {
+        this.mostrarAlertEAF = false;
+      }, 4000);
     }
   }
 
