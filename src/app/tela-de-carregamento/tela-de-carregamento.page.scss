@@ -7,8 +7,10 @@ ion-content {
     height: 347.313px;
     display: flex;
     justify-content: center;
-    margin-top: 57.6719px;
-    margin-bottom: 41.1875px;
+    position: fixed;
+    top: 24%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     opacity: 0;
     transition: opacity 1s ease-in;
 }
@@ -34,7 +36,10 @@ ion-content {
     font-style: normal;
     font-weight: 200;
     line-height: normal;
-    margin-bottom: 300px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     opacity: 0;
     transition: opacity 1s ease-in;
 }
@@ -49,8 +54,10 @@ ion-content {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    display: flex;
-    justify-content: center;
+    position: fixed;
+    top: 88%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     opacity: 0;
     transition: opacity 1s ease-in;
 }
