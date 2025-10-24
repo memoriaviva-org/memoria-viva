@@ -93,6 +93,10 @@
 
   </div>
 
+  <div *ngIf="mostrarAlertErroRegistro" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Preencha todos os campos.
+  </div>
+
     <div class="secao-salvar-excluir">
       <ion-button class="btn-salvar" (click)="salvarRegistro()">
         <p class="salvar-text"> {{ modoEdicao ? 'Atualizar' : 'Salvar' }}</p>

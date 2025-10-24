@@ -329,3 +329,30 @@ margin-right: 40px;
   background-color: #E94AAB;
   filter: invert(1);
 }
+
+.alert-erro {
+  position: fixed;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffecec;
+  border-left: 6px solid #ff3b30;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+  color: #d00000;
+  gap: 2px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  z-index: 1;
+  width: 75%;
+  display: flex;
+  align-items: center;
+}
+
+.error-icon {
+  margin-right: 10px;
+}
+
+

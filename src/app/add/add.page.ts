@@ -18,6 +18,7 @@ export class AddPage implements OnInit {
   mostrarJanela = false;
   mostrarMensagemSucesso = false;
   mostrarConfirmacao = false;
+  mostrarAlertErroRegistro = false;
 
   titulo: string = '';
   diaSemana: string = '';
@@ -107,6 +108,12 @@ export class AddPage implements OnInit {
     } catch (error) {
       console.error('Erro ao adicionar item:', error);
       this.showToast('Erro ao salvar registro');
+
+      this.mostrarAlertErroRegistro = true;
+
+      setTimeout(() => {
+        this.mostrarAlertErroRegistro = false;
+      }, 3000);
     }
   }
 
