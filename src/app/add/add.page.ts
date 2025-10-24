@@ -19,6 +19,7 @@ export class AddPage implements OnInit {
   mostrarMensagemSucesso = false;
   mostrarConfirmacao = false;
   mostrarAlertErroRegistro = false;
+  mostrarAlertID = false;
 
   titulo: string = '';
   diaSemana: string = '';
@@ -107,7 +108,6 @@ export class AddPage implements OnInit {
       this.router.navigateByUrl('/meu-dia-registros');
     } catch (error) {
       console.error('Erro ao adicionar item:', error);
-      this.showToast('Erro ao salvar registro');
 
       this.mostrarAlertErroRegistro = true;
 
@@ -119,7 +119,12 @@ export class AddPage implements OnInit {
 
   async atualizarRegistro() {
     if (!this.registroId) {
-      this.showToast('ID do registro não encontrado');
+      this.mostrarAlertID = true;
+
+      setTimeout(() => {
+        this.mostrarAlertID = false;
+      }, 3000);
+
       return;
     }
 

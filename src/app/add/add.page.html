@@ -97,6 +97,10 @@
     <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Preencha todos os campos.
   </div>
 
+  <div *ngIf="mostrarAlertID" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> ID do Registro não encontrado.
+  </div>
+
     <div class="secao-salvar-excluir">
       <ion-button class="btn-salvar" (click)="salvarRegistro()">
         <p class="salvar-text"> {{ modoEdicao ? 'Atualizar' : 'Salvar' }}</p>
