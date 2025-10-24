@@ -21,6 +21,7 @@ export class AddPage implements OnInit {
   mostrarAlertErroRegistro = false;
   mostrarAlertID = false;
   mostrarAlertSucessoAtualizar = false;
+  mostrarAlertErroAtualizar = false;
 
   titulo: string = '';
   diaSemana: string = '';
@@ -160,7 +161,12 @@ export class AddPage implements OnInit {
 
     } catch (error) {
       console.error('Erro ao atualizar item:', error);
-      this.showToast('Erro ao atualizar registro');
+
+      this.mostrarAlertErroAtualizar = true;
+
+      setTimeout(() => {
+        this.mostrarAlertErroAtualizar = false;
+      }, 3000);
     }
   }
 
