@@ -20,6 +20,7 @@ export class AddPage implements OnInit {
   mostrarConfirmacao = false;
   mostrarAlertErroRegistro = false;
   mostrarAlertID = false;
+  mostrarAlertSucessoAtualizar = false;
 
   titulo: string = '';
   diaSemana: string = '';
@@ -148,12 +149,23 @@ export class AddPage implements OnInit {
 
     try {
       await this.registroService.updateItem(itemAtualizado);
-      this.showToast('Registro atualizado com sucesso!');
+
+      this.mostrarAlertSucessoAtualizar = true;
+
+      await this.delay(3000);
+
+      this.mostrarAlertSucessoAtualizar = false;
+
       this.router.navigateByUrl('/meu-dia-registros');
+
     } catch (error) {
       console.error('Erro ao atualizar item:', error);
       this.showToast('Erro ao atualizar registro');
     }
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   // NOVO: Função para determinar o tipo de mídia

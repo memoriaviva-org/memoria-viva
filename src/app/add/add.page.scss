@@ -355,4 +355,29 @@ margin-right: 40px;
   margin-right: 10px;
 }
 
+.alert-success {
+  position: fixed;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #daf9df;
+  border-left: 6px solid #00ff26;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+  color: #018f16;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.4;
+  gap: 8px;
+  z-index: 1;
+  width: 82%;
+  display: flex;
+  align-items: center;
+}
+
+.success-icon {
+  color: #017e14;
+  font-size: 24px;
+}
 
