@@ -22,6 +22,7 @@ export class AddPage implements OnInit {
   mostrarAlertID = false;
   mostrarAlertSucessoAtualizar = false;
   mostrarAlertErroAtualizar = false;
+  mostrarAlertErroExcluir = false;
 
   titulo: string = '';
   diaSemana: string = '';
@@ -205,7 +206,12 @@ export class AddPage implements OnInit {
       }, 2000);
     } catch (error) {
       console.error('Erro ao excluir registro:', error);
-      this.showToast('Erro ao excluir registro');
+
+      this.mostrarAlertErroExcluir = false;
+
+      setTimeout(() => {
+        this.mostrarAlertErroExcluir = false;
+      }, 3000);
     }
   }
 

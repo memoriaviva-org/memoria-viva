@@ -109,6 +109,10 @@
     <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Erro ao atualizar Registro.
   </div>
 
+  <div *ngIf="mostrarAlertErroExcluir" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Erro ao excluir Registro.
+  </div>
+
     <div class="secao-salvar-excluir">
       <ion-button class="btn-salvar" (click)="salvarRegistro()">
         <p class="salvar-text"> {{ modoEdicao ? 'Atualizar' : 'Salvar' }}</p>
