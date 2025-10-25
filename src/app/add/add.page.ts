@@ -86,13 +86,34 @@ export class AddPage implements OnInit {
     });
   }
 
+    private validarCampos(): boolean {
+    return (
+      this.titulo.trim() !== '' &&
+      this.diaSemana.trim() !== '' &&
+      this.horario.trim() !== '' &&
+      (this.fotoSelecionadaUrl !== null || this.arquivoSelecionado !== null)
+    );
+  }
+  private sanitizeInput(input: string): string {
+    const temp = document.createElement('div');
+    temp.textContent = input.trim();
+    return temp.innerHTML;
+  }
+
+
   async salvarRegistro() {
+    if (!this.validarCampos()) {
+      this.showToast('Preencha todos os campos obrigatórios.');
+      return;
+    }
+
     if (this.modoEdicao) {
       await this.atualizarRegistro();
     } else {
       await this.criarNovoRegistro();
     }
   }
+
 
   async criarNovoRegistro() {
     // Determinar tipo de mídia baseado no arquivo selecionado
@@ -217,18 +238,31 @@ export class AddPage implements OnInit {
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.arquivoSelecionado = input.files[0];
+    if (!input.files?.length) return;
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.fotoSelecionadaUrl = reader.result as string;
-        // Determinar tipo de mídia quando um novo arquivo é selecionado
-        this.determinarTipoMidia();
-      };
-      reader.readAsDataURL(this.arquivoSelecionado);
+    const file = input.files[0];
+    const maxSizeMB = 10;
+    const allowedTypes = ['image/', 'video/'];
+
+    if (!allowedTypes.some(type => file.type.startsWith(type))) {
+      this.showToast('Tipo de arquivo inválido.');
+      return;
     }
+
+    if (file.size > maxSizeMB * 1024 * 1024) {
+      this.showToast('Arquivo muito grande. Limite: 10MB.');
+      return;
+    }
+
+    this.arquivoSelecionado = file;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.fotoSelecionadaUrl = reader.result as string;
+      this.determinarTipoMidia();
+    };
+    reader.readAsDataURL(file);
   }
+
 
   limparFormulario() {
     this.titulo = '';

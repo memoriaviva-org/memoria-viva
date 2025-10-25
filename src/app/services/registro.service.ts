@@ -25,6 +25,12 @@ export class RegistroService {
 
   constructor() {}
 
+  private async getUserUid(): Promise<string> {
+  const currentUser = this.auth.currentUser;
+  if (!currentUser) throw new Error('Usuário não autenticado');
+  return currentUser.uid;
+}
+
   verMeuDia(): Observable<MeuDia[]> {
     return user(this.auth).pipe(
       switchMap(u => {
@@ -61,9 +67,8 @@ export class RegistroService {
   }
 
   async addItem(item: MeuDia) {
-    const currentUser = this.auth.currentUser;
-    if (!currentUser) throw new Error('Usuário não autenticado');
-    const colRef = collection(this.firestore, `users/${currentUser.uid}/meuDia`);
+    const uid = await this.getUserUid();
+    const colRef = collection(this.firestore, `users/${uid}/meuDia`);
     return addDoc(colRef, { ...item, createdAt: Date.now() });
   }
 

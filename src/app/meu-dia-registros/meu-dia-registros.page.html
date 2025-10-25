@@ -64,7 +64,8 @@
                   class="video-player"
                   controls
                   autoplay
-                  *ngIf="registro.tipoMidia === 'video' && registro.reproduzindo">
+                  *ngIf="registro.tipoMidia === 'video' && registro.reproduzindo"
+                  (click)="abrirMidia(registro)">
                 </video>
 
               </ion-button>
