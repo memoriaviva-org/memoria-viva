@@ -63,49 +63,56 @@ export class AtualizarPerfilPage implements OnInit {
   }
 
   async atualizarDados() {
-    try {
-      // Validações básicas
-      if (!this.nome) {
-        throw new Error('O nome é obrigatório.');
-      }
+  try {
+    // 1. Validação de campos obrigatórios
+    if (!this.nome.trim()) throw new Error('O nome é obrigatório.');
+    if (!this.dataNasc) throw new Error('A data de nascimento é obrigatória.');
 
-      if (!this.dataNasc) {
-        throw new Error('A data de nascimento é obrigatória.');
-      }
+    // 2. Sanitização do nome
+    this.nome = this.nome
+      .trim()
+      .replace(/[=\/?*$&'"@()#!+<>$%{}-]/g, ''); // remove caracteres potencialmente perigosos
+    if (this.nome.length > 50) throw new Error('O nome deve ter no máximo 50 caracteres.');
 
-      // Converter string da data para Date
-      const dataNascDate = new Date(this.dataNasc);
+    // 3. Validação de e-mail
+    if (this.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email))
+      throw new Error('E-mail inválido.');
+    if (this.email.length > 100) throw new Error('O e-mail deve ter no máximo 100 caracteres.');
 
-      // Validar data (não pode ser no futuro)
-      const hoje = new Date();
-      if (dataNascDate > hoje) {
-        throw new Error('A data de nascimento não pode ser no futuro.');
-      }
+    // 4. Validação e normalização da data
+    const [ano, mes, dia] = this.dataNasc.split('-').map(Number);
+    const dataNascDate = new Date(ano, mes - 1, dia, 12);
 
-      // Atualizar dados do usuário
-      await this.authService.updateUserData(this.nome, dataNascDate);
 
-      // Se o email foi alterado, tentar atualizar
-      const currentUser = await firstValueFrom(this.authService.getCurrentUser());
-      if (currentUser && this.email !== currentUser.email) {
-        try {
-          await this.authService.updateUserEmail(this.email, this.password);
-        } catch (emailError: any) {
-          // Se falhar por senha incorreta, pedir para confirmar senha
-          if (emailError.code === 'auth/wrong-password' || emailError.code === 'auth/invalid-credential') {
-            throw new Error('Senha incorreta. Digite sua senha atual para alterar o e-mail.');
-          }
-          throw emailError;
-        }
-      }
+    // 5. Validação de idade mínima (pelo menos 10 anos)
+    const idadeMinima = 10;
+    const hoje = new Date();
+    const diff = hoje.getFullYear() - dataNascDate.getFullYear();
+    const ajustaAniversario =
+      hoje.getMonth() < dataNascDate.getMonth() ||
+      (hoje.getMonth() === dataNascDate.getMonth() && hoje.getDate() < dataNascDate.getDate());
+    const idade = ajustaAniversario ? diff - 1 : diff;
 
-      await this.showToast('Dados atualizados com sucesso!', 'success');
-
-    } catch (error: any) {
-      console.error('Erro ao atualizar dados:', error);
-      await this.showToast(error.message || 'Erro ao atualizar dados.', 'danger');
+    if (idade < idadeMinima) {
+      throw new Error('Você precisa ter pelo menos 10 anos para usar o aplicativo.');
     }
+
+    // 5. Atualização segura no Firestore
+    await this.authService.updateUserData(this.nome, dataNascDate);
+
+    // 6. Atualizar e-mail se alterado
+    const currentUser = await firstValueFrom(this.authService.getCurrentUser());
+    if (currentUser && this.email !== currentUser.email) {
+      await this.authService.updateUserEmail(this.email, this.password);
+    }
+
+    await this.showToast('Dados atualizados com sucesso!', 'success');
+  } catch (error: any) {
+    console.error('Erro ao atualizar dados:', error);
+    await this.showToast(error.message || 'Erro ao atualizar dados.', 'danger');
   }
+}
+
 
   private async showToast(message: string, color: 'success' | 'danger' | 'medium') {
     const toast = await this.toastController.create({

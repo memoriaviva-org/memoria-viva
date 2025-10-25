@@ -27,7 +27,7 @@ import {
   getDoc
 } from '@angular/fire/firestore';
 
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom  } from 'rxjs';
 import { user } from '@angular/fire/auth';
 
 @Injectable({
@@ -171,18 +171,19 @@ export class AuthService {
 
   // Atualizar nome e data de nascimento do usuário - CORRIGIDO
   async updateUserData(nome: string, dataNasc: Date) {
-    const currentUser = this.auth.currentUser;
-    if (!currentUser) throw new Error('Usuário não autenticado');
+    const user = await firstValueFrom(this.getCurrentUser());
+    if (!user) throw new Error('Usuário não autenticado.');
 
-    await updateProfile(currentUser, { displayName: nome });
+    const userRef = doc(this.firestore, `users/${user.uid}`);
 
-    const uid = currentUser.uid;
-    return setDoc(doc(this.firestore, `users/${uid}`), {
+    await setDoc(userRef, {
       nome,
-      dataNasc: Timestamp.fromDate(dataNasc),
-      email: currentUser.email
+      dataNasc: Timestamp.fromDate(dataNasc)
     }, { merge: true });
+
+    await updateProfile(user, { displayName: nome });
   }
+
 
   // Atualizar email do usuário
   async updateUserEmail(newEmail: string, password?: string) {
