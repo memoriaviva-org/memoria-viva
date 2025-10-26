@@ -135,8 +135,6 @@ export class CriarFlashcardPage implements OnInit {
     );
   }
 
-
-
   async salvarFlashcard() {
     if (this.modoEdicao) {
       if (!this.validarCampos()) {
@@ -147,7 +145,7 @@ export class CriarFlashcardPage implements OnInit {
 
       await this.atualizarFlashcard();
     } else {
-      
+
       if (!this.validarCampos()) {
         this.mostrarAlertCO = true;
         setTimeout(() => this.mostrarAlertCO = false, 4000);

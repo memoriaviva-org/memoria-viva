@@ -99,6 +99,14 @@
     </div>
   </div>
 
+  <div *ngIf="mostrarAlertCamposObrigatorios" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon2"></ion-icon> Preencha todos os campos obrigatórios.
+  </div>
+
+  <div *ngIf="mostrarAlertSalvarErro" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Erro ao salvar contato.
+  </div>
+
 <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
       <div class="alerta-confirmacao-texto">
         Tem certeza que deseja excluir?

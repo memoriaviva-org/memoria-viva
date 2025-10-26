@@ -25,6 +25,9 @@ export class AddContatosPage implements OnInit {
   mostrarMensagemSucesso = false;
   mostrarConfirmacao = false;
 
+  mostrarAlertCamposObrigatorios = false;
+  mostrarAlertSalvarErro = false;
+
   contatoId: string | null = null;
   modoEdicao = false;
   mostrarJanela = false;
@@ -61,7 +64,12 @@ export class AddContatosPage implements OnInit {
 
   async salvarContato() {
     if (!this.validarCampos()) {
-      this.showToast('Preencha todos os campos obrigatórios.');
+      this.mostrarAlertCamposObrigatorios = true;
+
+      setTimeout(() => {
+        this.mostrarAlertCamposObrigatorios = false;
+      }, 3500);
+
       return;
     }
 
@@ -83,7 +91,11 @@ export class AddContatosPage implements OnInit {
       }
       this.router.navigateByUrl('/contatos');
     } catch {
-      this.showToast('Erro ao salvar contato');
+      this.mostrarAlertSalvarErro = true;
+
+      setTimeout(() => {
+        this.mostrarAlertCamposObrigatorios = false;
+      }, 4000);
     }
   }
 
