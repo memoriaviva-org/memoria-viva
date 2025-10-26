@@ -27,6 +27,7 @@ export class AddContatosPage implements OnInit {
 
   mostrarAlertCamposObrigatorios = false;
   mostrarAlertSalvarErro = false;
+  mostrarAlertContatoNaoEncontrado = false;
 
   contatoId: string | null = null;
   modoEdicao = false;
@@ -115,7 +116,12 @@ export class AddContatosPage implements OnInit {
 
   async deletarContato(): Promise<void> {
     if (!this.contatoId) {
-      this.showToast('Contato não encontrado.');
+      this.mostrarAlertContatoNaoEncontrado = true;
+
+      setTimeout(() => {
+        this.mostrarAlertCamposObrigatorios = false;
+      }, 4000);
+
       return;
     }
 

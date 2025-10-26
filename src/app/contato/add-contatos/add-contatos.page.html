@@ -107,6 +107,10 @@
     <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Erro ao salvar contato.
   </div>
 
+  <div *ngIf="mostrarAlertContatoNaoEncontrado" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Contato não encontrado.
+  </div>
+
 <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
       <div class="alerta-confirmacao-texto">
         Tem certeza que deseja excluir?
