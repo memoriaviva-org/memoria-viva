@@ -38,7 +38,53 @@ export class HomePage {
       color: cor,
       duration: 2000
     });
-    toast.present();
+
+    const shadow = toast.shadowRoot;
+    if (shadow) {
+      const toastWrapper = shadow.querySelector('.toast-wrapper') as HTMLElement | null;
+
+      if (toastWrapper) {
+        toastWrapper.style.top = '80%';
+        toastWrapper.style.borderRadius = '8px';
+        toastWrapper.style.height = '60px';
+        toastWrapper.style.marginTop = '0px';
+        toastWrapper.style.width = '75%';
+
+        switch (cor) {
+          case 'success':
+            toastWrapper.style.backgroundColor = '#e0f8e4';
+            toastWrapper.style.borderLeft = '6px solid #00ff26';
+            toastWrapper.style.color = '#018f16';
+            break;
+          case 'warning':
+            toastWrapper.style.backgroundColor = '#ffecec';
+            toastWrapper.style.borderLeft = '6px solid #ff3b30';
+            toastWrapper.style.color = '#d00000';
+            break;
+          case 'danger':
+            toastWrapper.style.backgroundColor = '#ffecec';
+            toastWrapper.style.borderLeft = '6px solid #ff3b30';
+            toastWrapper.style.color = '#d00000';
+            break;
+          case 'medium':
+            toastWrapper.style.backgroundColor = '#f0f0f0';
+            toastWrapper.style.borderLeft = '6px solid #666';
+            break;
+        }
+      }
+
+      const container = shadow.querySelector('.toast-container');
+      const content = shadow.querySelector('.toast-content');
+      const messageEl = shadow.querySelector('.toast-message');
+
+      container?.classList.add('custom-toast-container');
+      content?.classList.add('custom-toast-content');
+      messageEl?.classList.add('custom-toast-message');
+
+      container?.setAttribute('style', 'font-size: 16px;');
+    }
+
+    await toast.present();
   }
 
   async loginFacebook() {
