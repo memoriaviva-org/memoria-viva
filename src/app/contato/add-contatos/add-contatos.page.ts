@@ -28,6 +28,9 @@ export class AddContatosPage implements OnInit {
   mostrarAlertCamposObrigatorios = false;
   mostrarAlertSalvarErro = false;
   mostrarAlertContatoNaoEncontrado = false;
+  mostrarAlertDeletarErro = false;
+  mostrarAlertArquivoInvalido = false;
+  mostrarAlertAudioInvalido = false;
 
   contatoId: string | null = null;
   modoEdicao = false;
@@ -130,7 +133,11 @@ export class AddContatosPage implements OnInit {
       this.router.navigateByUrl('/contatos');
     } catch (err) {
       console.error('Erro ao deletar contato:', err);
-      this.showToast('Erro ao deletar contato.');
+      this.mostrarAlertDeletarErro = true;
+
+      setTimeout(() => {
+        this.mostrarAlertDeletarErro = false;
+      }, 3500);
     }
   }
 
@@ -142,7 +149,12 @@ export class AddContatosPage implements OnInit {
 
     const file = input.files[0];
     if (!this.validateFile(file, this.IMAGE_TYPES)) {
-      this.showToast('Arquivo inválido. Use imagem JPG ou PNG até 5MB.');
+      this.mostrarAlertArquivoInvalido = true;
+
+      setTimeout(() => {
+        this.mostrarAlertArquivoInvalido = false;
+      }, 4000);
+
       return;
     }
 
@@ -160,7 +172,12 @@ export class AddContatosPage implements OnInit {
 
     const file = input.files[0];
     if (!this.validateFile(file, this.AUDIO_TYPES)) {
-      this.showToast('Arquivo de áudio inválido. Use MP3 ou M4A até 5MB.');
+      this.mostrarAlertAudioInvalido = true;
+
+      setTimeout(() => {
+        this.mostrarAlertAudioInvalido = false;
+      }, 4000)
+
       return;
     }
 

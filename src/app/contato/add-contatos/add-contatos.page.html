@@ -111,6 +111,18 @@
     <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Contato não encontrado.
   </div>
 
+  <div *ngIf="mostrarAlertDeletarErro" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Erro ao deletar contato.
+  </div>
+
+  <div *ngIf="mostrarAlertArquivoInvalido" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon2"></ion-icon> Arquivo inválido. Use imagem JPG ou PNG até 5MB.
+  </div>
+
+  <div *ngIf="mostrarAlertAudioInvalido" class="alert-erro2">
+    <ion-icon name="alert-circle-outline" class="error-icon2"></ion-icon> Arquivo de áudio inválido. Use MP3 ou M4A até 5MB.
+  </div>
+
 <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
       <div class="alerta-confirmacao-texto">
         Tem certeza que deseja excluir?
