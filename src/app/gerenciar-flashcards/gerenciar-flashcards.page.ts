@@ -30,6 +30,9 @@ export class GerenciarFlashcardsPage implements OnInit {
   flashcardsGrouped$!: Observable<FlashcardGroup[]>;
   carregando = true;
   mostrarJanela: boolean = false;
+  mostrarConfirmacao = false;
+  mostrarMensagemSucesso = false;
+  mostrarAlertDeletarErro = false;
 
   categoria: string = '';
   categoriaImg: string = '';
@@ -228,17 +231,17 @@ export class GerenciarFlashcardsPage implements OnInit {
       console.error('ID do flashcard não fornecido');
       return;
     }
-  
-    const confirmacao = confirm('Tem certeza que deseja deletar este flashcard?');
-  
+
+    const confirmacao = confirm("Tem certeza que deseja deletar o Flashcard?");
+
     if (confirmacao) {
       try {
         await this.flashcardService.deleteFlashcard(id);
         console.log('Flashcard deletado com sucesso');
-  
+
         // Busca os flashcards atualizados
         let flashcardsAtualizados: Flashcard[];
-  
+
         if (this.categoria && this.categoria !== 'all') {
           flashcardsAtualizados = await firstValueFrom(
             this.flashcardService.verFlashcardsPorCategoria(this.categoria)
@@ -248,14 +251,14 @@ export class GerenciarFlashcardsPage implements OnInit {
             this.flashcardService.verTodosFlashcards()
           );
         }
-  
+
         if (!flashcardsAtualizados || flashcardsAtualizados.length === 0) {
           // Se não tem flashcards, redireciona para /categorias
           this.router.navigate(['/categorias']);
         } else {
           // Atualiza o Observable para atualizar a lista na UI
           this.flashcards$ = of(flashcardsAtualizados);
-  
+
           if (this.mostrarFaixaCategoria) {
             this.flashcardsGrouped$ = this.flashcards$.pipe(
               map(flashcards => this.agruparFlashcardsPorCategoria(flashcards))
@@ -272,9 +275,21 @@ export class GerenciarFlashcardsPage implements OnInit {
         }
       } catch (error) {
         console.error('Erro ao deletar flashcard:', error);
-        alert('Não foi possível deletar o flashcard.');
+        this.mostrarAlertDeletarErro = true;
+
+        setTimeout(() => {
+          this.mostrarAlertDeletarErro = false;
+        }, 3500);
       }
     }
+  }
+
+  naoExcluir() {
+    this.mostrarConfirmacao = false;
+  }
+
+  confirmarExclusao() {
+    this.mostrarConfirmacao = false;
   }
 
   voltar(): void {

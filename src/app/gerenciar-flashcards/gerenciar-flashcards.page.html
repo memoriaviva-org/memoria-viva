@@ -196,6 +196,28 @@
 
   </div>
 
+  <div *ngIf="mostrarAlertDeletarErro" class="alert-erro">
+    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon> Não foi possível deletar o Flashcard.
+  </div>
+
+  <div *ngIf="mostrarConfirmacao" class="alerta-confirmacao">
+      <div class="alerta-confirmacao-texto">
+        Tem certeza que deseja excluir?
+      </div>
+      <div class="alerta-confirmacao-btns">
+        <ion-button class="alerta-confirmacao-sim-btn" (click)="confirmarExclusao()">
+          SIM
+        </ion-button>
+        <ion-button (click)="naoExcluir()" class="alerta-confirmacao-nao-btn">
+          NÃO
+        </ion-button>
+      </div>
+  </div>
+
+  <div *ngIf="mostrarMensagemSucesso" class="alerta-confirmacao-sucesso">
+      Exclusão feita com sucesso
+  </div>
+
   <ion-footer class="func-categoria-footer">
     <ion-button class="voltar-btn" (click)="voltar()">
       <div class="voltar-btn-div">

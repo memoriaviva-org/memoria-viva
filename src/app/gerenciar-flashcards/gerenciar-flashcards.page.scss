@@ -560,3 +560,90 @@ h3 {
   font-weight: 300;
   font-size: 23px;
 }
+
+.alerta-confirmacao {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #9C3FC3;
+  width: 282.217px;
+  height: 82px;
+  border-radius: 38px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.alerta-confirmacao-texto {
+  font-size: 16px;
+  height: 18.5px;
+  margin-top: 12px;
+  color: white;
+}
+
+.alerta-confirmacao-btns {
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 8px;
+}
+
+.alerta-confirmacao-sim-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+  margin-right: 41px;
+  color: white;
+}
+
+.alerta-confirmacao-nao-btn {
+  all: unset;
+  --background: transparent;
+  --box-shadow: transparent;
+  color: white;
+}
+
+.alerta-confirmacao-sucesso {
+  width: 274.563px;
+  height: 67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  position: absolute;
+  top: 67%;
+  left: 61%;
+  transform: translate(-50%, -50%);
+  background-color: #9C3FC3;
+  border-radius: 38px;
+  z-index: 2;
+  visibility: hidden;
+}
+
+.alert-erro {
+  position: fixed;
+  top: 37%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffecec;
+  border-left: 6px solid #ff3b30;
+  padding: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+  color: #d00000;
+  gap: 2px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  z-index: 1;
+  width: 75%;
+  display: flex;
+  align-items: center;
+}
+
+.error-icon {
+  margin-right: 10px;
+}
