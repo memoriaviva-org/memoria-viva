@@ -119,10 +119,41 @@ export class CriarFlashcardPage implements OnInit {
     }
   }
 
+    private sanitizeInput(input: string): string {
+    const temp = document.createElement('div');
+    temp.textContent = input.trim();
+    return temp.innerHTML;
+  }
+
+  private validarCampos(): boolean {
+    return (
+      this.tituloFlashcard.trim() !== '' &&
+      this.categoriaSelecionada.trim() !== '' &&
+      !!this.audioPergunta?.trim() &&
+      !!this.audioResposta?.trim() &&
+      this.midiaAuxiliar.trim() !== ''
+    );
+  }
+
+
+
   async salvarFlashcard() {
     if (this.modoEdicao) {
+      if (!this.validarCampos()) {
+        this.mostrarAlertCO = true;
+        setTimeout(() => this.mostrarAlertCO = false, 4000);
+        return;
+      }
+
       await this.atualizarFlashcard();
     } else {
+      
+      if (!this.validarCampos()) {
+        this.mostrarAlertCO = true;
+        setTimeout(() => this.mostrarAlertCO = false, 4000);
+        return;
+      }
+
       await this.criarNovoFlashcard();
     }
   }
@@ -137,9 +168,9 @@ export class CriarFlashcardPage implements OnInit {
     }
 
     const flashcard: Flashcard = {
-      tituloFlashcard: this.tituloFlashcard,
-      categoriaFlashcard: this.categoriaSelecionada,
-      curiosidade: this.curiosidade || undefined,
+      tituloFlashcard: this.sanitizeInput(this.tituloFlashcard),
+      categoriaFlashcard: this.sanitizeInput(this.categoriaSelecionada),
+      curiosidade: this.curiosidade ? this.sanitizeInput(this.curiosidade) : undefined,
       audioPergunta: this.audioPergunta,
       audioResposta: this.audioResposta,
       midiaAuxiliar: this.midiaAuxiliar
@@ -199,12 +230,12 @@ export class CriarFlashcardPage implements OnInit {
 
     const flashcardAtualizado: Flashcard = {
       id: this.flashcardId,
-      tituloFlashcard: this.tituloFlashcard,
-      categoriaFlashcard: this.categoriaSelecionada,
-      curiosidade: this.curiosidade || undefined,
+      tituloFlashcard: this.sanitizeInput(this.tituloFlashcard),
+      categoriaFlashcard: this.sanitizeInput(this.categoriaSelecionada),
+      curiosidade: this.curiosidade ? this.sanitizeInput(this.curiosidade) : undefined,
       audioPergunta: this.audioPergunta,
       audioResposta: this.audioResposta,
-      midiaAuxiliar: this.midiaAuxiliar  // Agora obrigatória
+      midiaAuxiliar: this.midiaAuxiliar
     };
 
     try {
