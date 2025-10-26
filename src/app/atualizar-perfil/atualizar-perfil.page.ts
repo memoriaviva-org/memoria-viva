@@ -117,7 +117,7 @@ export class AtualizarPerfilPage implements OnInit {
   private async showToast(message: string, color: 'success' | 'danger' | 'medium') {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000,
+      duration: 3000,
       color: color
     });
 
@@ -135,12 +135,14 @@ export class AtualizarPerfilPage implements OnInit {
 
         switch (color) {
           case 'success':
-            toastWrapper.style.backgroundColor = 'white';
-            toastWrapper.style.borderLeft = '6px solid #00d023';
+            toastWrapper.style.backgroundColor = '#e0f8e4';
+            toastWrapper.style.borderLeft = '6px solid #00ff26';
+            toastWrapper.style.color = '#018f16';
             break;
           case 'danger':
             toastWrapper.style.backgroundColor = '#ffecec';
             toastWrapper.style.borderLeft = '6px solid #ff3b30';
+            toastWrapper.style.color = '#d00000';
             break;
           case 'medium':
             toastWrapper.style.backgroundColor = '#f0f0f0';

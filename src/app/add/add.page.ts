@@ -228,7 +228,7 @@ export class AddPage implements OnInit {
     } catch (error) {
       console.error('Erro ao excluir registro:', error);
 
-      this.mostrarAlertErroExcluir = false;
+      this.mostrarAlertErroExcluir = true;
 
       setTimeout(() => {
         this.mostrarAlertErroExcluir = false;
