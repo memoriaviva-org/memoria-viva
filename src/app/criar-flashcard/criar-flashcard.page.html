@@ -23,7 +23,7 @@
      <!-- Título -->
 <ion-item class="input-item">
   <ion-icon slot="start" name="add-circle" class="icon-input orange"></ion-icon>
-  <ion-input placeholder="Digite o título" [(ngModel)]="tituloFlashcard"></ion-input>
+  <ion-input placeholder="Digite o título" [(ngModel)]="tituloFlashcard" required></ion-input>
 </ion-item>
 
 <!-- Mídia auxiliar -->
@@ -32,17 +32,15 @@
   <ion-label>Adicionar mídia auxiliar</ion-label>
   <input
     type="file"
-    accept="image/*,video/*,audio/*"
     accept="image/*,video/*"
     (change)="onFileSelected($event)"
-    class="input-file"
+    class="input-file" required
   />
 
   <!-- Preview dentro do mesmo ion-item -->
   <ng-container *ngIf="arquivoPreview">
     <img *ngIf="tipoArquivo === 'image'" [src]="arquivoPreview" alt="Preview" style="max-width: 50px; max-height: 50px; margin-left: 10px;" />
     <video *ngIf="tipoArquivo === 'video'" [src]="arquivoPreview" controls style="max-width: 100px; max-height: 50px; margin-left: 10px;"></video>
-    <audio *ngIf="tipoArquivo === 'audio'" [src]="arquivoPreview" controls style="margin-left: 10px;"></audio>
   </ng-container>
 </ion-item>
 
@@ -50,7 +48,7 @@
 <ion-item class="input-item">
   <ion-icon slot="start" name="add-circle" class="icon-input blue"></ion-icon>
   <ion-label>Áudio da pergunta</ion-label>
-  <input type="file" accept="audio/*" (change)="onAudioSelected($event,'pergunta')" class="input-file" />
+  <input type="file" accept="audio/*" (change)="onAudioSelected($event,'pergunta')" class="input-file" required/>
 
   <audio *ngIf="audioPergunta" [src]="audioPergunta" controls style="margin-left: 10px;"></audio>
 </ion-item>
@@ -59,7 +57,7 @@
 <ion-item class="input-item">
   <ion-icon slot="start" name="add-circle" class="icon-input purple"></ion-icon>
   <ion-label>Áudio da resposta</ion-label>
-  <input type="file" accept="audio/*" (change)="onAudioSelected($event,'resposta')" class="input-file" />
+  <input type="file" accept="audio/*" (change)="onAudioSelected($event,'resposta')" class="input-file" required/>
 
   <audio *ngIf="audioResposta" [src]="audioResposta" controls style="margin-left: 10px;"></audio>
 </ion-item>
@@ -67,7 +65,7 @@
 <!-- Categoria -->
 <ion-item class="input-item">
   <ion-icon slot="start" name="add-circle" class="icon-input yellow"></ion-icon>
-  <ion-select placeholder="Selecione uma categoria" [(ngModel)]="categoriaSelecionada">
+  <ion-select placeholder="Selecione uma categoria" [(ngModel)]="categoriaSelecionada" required>
     <ion-select-option value="Família">Família</ion-select-option>
     <ion-select-option value="Amigos">Amigos</ion-select-option>
     <ion-select-option value="Passatempos">Passatempos</ion-select-option>
