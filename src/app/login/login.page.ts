@@ -86,15 +86,36 @@ export class LoginPage {
     container?.setAttribute('style',
       'font-size: 16px; color: #d00000'
     );
-    
+
     if (toastWrapper) {
       toastWrapper.style.top = '80%';
       toastWrapper.style.borderRadius = '8px';
       toastWrapper.style.height = '60px';
       toastWrapper.style.marginTop = '0px'
       toastWrapper.style.width = '75%';
-      toastWrapper.style.backgroundColor = '#ffecec';
-      toastWrapper.style.borderLeft = '6px solid #ff3b30';
+
+      switch (cor) {
+          case 'success':
+            toastWrapper.style.backgroundColor = '#e0f8e4';
+            toastWrapper.style.borderLeft = '6px solid #00ff26';
+            toastWrapper.style.color = '#018f16';
+            break;
+          case 'danger':
+            toastWrapper.style.backgroundColor = '#ffecec';
+            toastWrapper.style.borderLeft = '6px solid #ff3b30';
+            toastWrapper.style.color = '#d00000';
+            break;
+          case 'warning':
+            toastWrapper.style.backgroundColor = '#ffecec';
+            toastWrapper.style.borderLeft = '6px solid #ff3b30';
+            toastWrapper.style.color = '#d00000';
+            break;
+          case 'medium':
+            toastWrapper.style.backgroundColor = '#f0f0f0';
+            toastWrapper.style.borderLeft = '6px solid #666';
+            break;
+        }
+
     }
     await toast.present();
     this.activeToast = toast;
