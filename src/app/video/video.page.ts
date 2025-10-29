@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { AudioPreferenceService } from '../services/audio-preference.service';
 
 @Component({
   selector: 'app-video',
@@ -17,7 +19,14 @@ import { ElementRef } from '@angular/core';
   ],
 })
 
+
+
   export class VideoPage {
+
+  constructor(
+    private audioPref: AudioPreferenceService,
+    private router: Router
+  ) {}
   videoStarted = false;
 
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
@@ -25,7 +34,6 @@ import { ElementRef } from '@angular/core';
 
   showPlay = false;
 
-  constructor() {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -59,4 +67,11 @@ import { ElementRef } from '@angular/core';
         button.style.display = 'inline-flex'; // volta o ion-button
       };
     }
+
+  escolher(auto: boolean) {
+    this.audioPref.setAutoPlay(auto);
+    this.router.navigate(['/principal']); // ou rota desejada
+  }
+
 }
+
