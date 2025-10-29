@@ -129,7 +129,7 @@
       color: #FFF;
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #000;
-      font-family: "Open Sans";
+      font-family: "Open Sans", sans-serif;
       font-size: 25px;
       font-style: normal;
       font-weight: 700;
@@ -160,13 +160,14 @@
       width: 255px;
       height: 70px;
       background-color: #9C3FC3;
-      margin-top: 177px;
+      margin-top: 167px;
       border-radius: 20px;
   }
 
   .config-audio-text {
     margin-left: 31px;
     margin-right: 68px;
+    font-family: "Open Sans", sans-serif;
   }
 
   .config-perfil-btn {
@@ -177,7 +178,7 @@
       width: 255px;
       height: 70px;
       background-color: #9C3FC3;
-      margin-top: 45px;
+      margin-top: 40px;
       border-radius: 20px;
   }
 
@@ -225,6 +226,7 @@
   .config-perfil-text {
     margin-right: 46px;
     width: 106px;
+    font-family: "Open Sans", sans-serif;
   }
 
   .func-categoria-footer {
