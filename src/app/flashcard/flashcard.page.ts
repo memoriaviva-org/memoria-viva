@@ -201,7 +201,7 @@ export class FlashcardPage implements OnInit {
         editar: 'true',
         id: flashcard.id,
         categoria: flashcard.categoriaFlashcard,
-        origem: 'flashcards' 
+        origem: 'flashcards'
       }
     });
   }
@@ -212,7 +212,7 @@ export class FlashcardPage implements OnInit {
   }
 
   inicio() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/principal']);
   }
 
   // Curiosidade
