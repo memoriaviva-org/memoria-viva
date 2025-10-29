@@ -181,6 +181,18 @@
       border-radius: 20px;
   }
 
+  .deletar-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 255px;
+    height: 70px;
+    background-color: #DB6326;
+    margin-top: 45px;
+    border-radius: 20px;
+  }
+
   .bonequinho-img {
     width: 40px;
     height: 36px;
@@ -197,6 +209,13 @@
     margin-left: -1px;
     margin-right: 10px;
   }
+
+  .deletar-flashcards-svg {
+    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+  }
+
 
   ion-icon {
     width: 60px;

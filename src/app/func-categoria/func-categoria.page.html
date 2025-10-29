@@ -38,6 +38,12 @@
       <p class="config-perfil-text">Adicionar Flashcards</p>
     </button>
 
+        <!-- Deletar Flashcards deletarFlashcards() -->
+    <button class="deletar-btn" (click)="deletarFlashcardsDaCategoria()">
+      <ion-icon name="trash-outline" class="deletar-flashcards-svg"></ion-icon>
+      <p class="config-perfil-text">Deletar Flashcards</p>
+    </button>
+
   <div *ngIf="mostrarJanela"class="overlay" (click)="fecharJanelaMais()"></div>
 
   <div *ngIf="mostrarJanela" class="janela-mais-opcoes" (click)="$event.stopPropagation()">
