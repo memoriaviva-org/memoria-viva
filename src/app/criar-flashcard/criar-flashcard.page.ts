@@ -83,7 +83,7 @@ export class CriarFlashcardPage implements OnInit {
         this.flashcardOriginal = flashcard;
         this.tituloFlashcard = flashcard.tituloFlashcard;
         this.categoriaSelecionada = flashcard.categoriaFlashcard;
-        this.curiosidade = flashcard.curiosidade || '';
+        this.curiosidade = flashcard.curiosidade || 'uma curiosidade não foi adicionada';
         this.audioPergunta = flashcard.audioPergunta;
         this.audioResposta = flashcard.audioResposta;
         this.midiaAuxiliar = flashcard.midiaAuxiliar;
@@ -168,7 +168,7 @@ export class CriarFlashcardPage implements OnInit {
     const flashcard: Flashcard = {
       tituloFlashcard: this.sanitizeInput(this.tituloFlashcard),
       categoriaFlashcard: this.sanitizeInput(this.categoriaSelecionada),
-      curiosidade: this.curiosidade ? this.sanitizeInput(this.curiosidade) : undefined,
+      curiosidade: this.curiosidade ? this.sanitizeInput(this.curiosidade) : '',
       audioPergunta: this.audioPergunta,
       audioResposta: this.audioResposta,
       midiaAuxiliar: this.midiaAuxiliar
