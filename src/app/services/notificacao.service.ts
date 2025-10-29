@@ -83,16 +83,20 @@ export class NotificacaoService {
   }
 
   // 🔔 Nova notificação — alertar sobre exclusão de arquivos de "Meu Dia"
-  async agendarAvisoApagarMeuDia() {
+  async agendarAvisoApagarMeuDia(temRegistros: boolean) {
+    if (!temRegistros) {
+      console.log('Nenhum registro em "Meu Dia" — notificação não será agendada.');
+      return;
+    }
+
     const agora = new Date();
     const hoje22h = new Date(
       agora.getFullYear(),
       agora.getMonth(),
       agora.getDate(),
-      22, 0, 0 // 22:00h (10 da noite)
+      22, 0, 0 // 22h
     );
 
-    // Se já passou das 22h, agenda para o dia seguinte às 22h
     if (hoje22h.getTime() <= agora.getTime()) {
       hoje22h.setDate(hoje22h.getDate() + 1);
     }
@@ -102,13 +106,14 @@ export class NotificacaoService {
         {
           id: 4,
           title: 'Atenção 🕒',
-          body: 'Suas memórias de hoje serão apagadas ao virar o dia. Quer guardar algo mais?',
-          schedule: { at: hoje22h }
+          body: 'Suas memórias de hoje serão apagadas ao virar o dia. Quer olhar ela mais uma vez?',
+          schedule: { at: hoje22h },
+          channelId: 'memoria-viva-canal'
         }
       ]
     });
 
-    console.log('Notificação de aviso de exclusão agendada para:', hoje22h);
+    console.log('Notificação de aviso agendada para:', hoje22h);
   }
 
   async jaTemAvisoAgendado(id: number): Promise<boolean> {

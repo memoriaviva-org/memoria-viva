@@ -38,18 +38,24 @@ export class MeuDiaRegistrosPage implements OnInit {
       })
     );
 
-    this.registrosAgrupados$.subscribe(registrosAgrupados => {
+    this.registrosAgrupados$.subscribe(async registrosAgrupados => {
       this.carregando = false;
       this.temRegistros = Object.keys(registrosAgrupados).length > 0;
+
+      // Solicitar permissão para notificações
+      await this.notificacaoService.solicitarPermissao();
+
+      // Só agenda se houver registros no dia
+      if (this.temRegistros) {
+        const jaTemAviso = await this.notificacaoService.jaTemAvisoAgendado(4);
+        if (!jaTemAviso) {
+          await this.notificacaoService.agendarAvisoApagarMeuDia(this.temRegistros);
+        }
+      }
+      else {
+        console.log('Sem registros, notificação não será agendada.');
+      }
     });
-
-    // Notificações
-    await this.notificacaoService.solicitarPermissao();
-
-    const jaTemAviso = await this.notificacaoService.jaTemAvisoAgendado(4);
-    if (!jaTemAviso) {
-      await this.notificacaoService.agendarAvisoApagarMeuDia();
-    }
   }
 
 
