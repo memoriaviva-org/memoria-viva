@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FlashcardService, Flashcard } from '../services/flashcard.service';
+import { of, firstValueFrom, map } from 'rxjs';
 
 @Component({
   selector: 'app-func-categoria',
@@ -19,7 +21,16 @@ export class FuncCategoriaPage {
   categoria: string = '';
   categoriaImg: string = '';
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  mostrarConfirmacao = false;
+  mostrarMensagemSucesso = false;
+  mostrarAlertDeletarErro = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private flashcardService: FlashcardService
+  ) {}
+
 
   ngOnInit() {
     // Pega o parâmetro enviado pela rota via queryParams
@@ -69,6 +80,52 @@ export class FuncCategoriaPage {
   // Navegar para criar flashcard
   irParaAdicionar() {
     this.router.navigate(['/criar-flashcard'], { queryParams: { categoria: this.categoria } });
+  }
+
+  // deletar categoria
+  async deletarFlashcardsDaCategoria() {
+    if (!this.categoria) {
+      console.error('Categoria não definida');
+      return;
+    }
+
+    const confirmacao = confirm(
+      `Tem certeza que deseja excluir todos os flashcards da categoria "${this.categoria}"?`
+    );
+    if (!confirmacao) return;
+
+    try {
+      const flashcards = await firstValueFrom(
+        this.flashcardService.verFlashcardsPorCategoria(this.categoria)
+      );
+
+      if (!flashcards.length) {
+        alert('Nenhum flashcard encontrado nesta categoria.');
+        return;
+      }
+
+      // Apaga todos os flashcards encontrados
+      for (const flashcard of flashcards) {
+        if (flashcard.id) {
+          await this.flashcardService.deleteFlashcard(flashcard.id);
+        }
+      }
+
+      console.log('Todos os flashcards da categoria foram excluídos.');
+      alert('Flashcards excluídos com sucesso.');
+      this.router.navigate(['/categorias']);
+    } catch (error) {
+      console.error('Erro ao excluir flashcards da categoria:', error);
+      alert('Erro ao excluir flashcards.');
+    }
+  }
+
+  naoExcluir() {
+    this.mostrarConfirmacao = false;
+  }
+
+  confirmarExclusao() {
+    this.mostrarConfirmacao = false;
   }
 
   // Botão voltar
