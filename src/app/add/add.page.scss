@@ -9,7 +9,7 @@
   box-sizing: border-box;
 
   /* Distância do topo */
-  margin-top: 150px; /* ajusta para subir ou descer os inputs */
+  margin-top: 38%; /* ajusta para subir ou descer os inputs */
 }
 
 .add-container {
@@ -101,7 +101,7 @@ margin-right: 10px;
 }
 
 .secao-salvar-excluir {
-width: 412px;
+width: 100%;
 height: 134px;
 display: flex;
 justify-content: center;
@@ -223,7 +223,7 @@ justify-content: center;
 align-items: center;
 background-color: #D9D9D9;
 width: 100%;
-height: 91.3906px;
+height: 8.83%;
 }
 
 ion-button.voltar-btn {
@@ -317,11 +317,11 @@ margin-right: 40px;
 }
 
 .audio-scss {
-  position: fixed;
-  top: 29%;
-  left: 30%;
+  position: absolute;
+  top: 31%;
+  left: 31%;
   z-index: 1;
-  width: 272px;
+  width: 65%;
   display: none;
 }
 
