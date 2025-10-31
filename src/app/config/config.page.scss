@@ -15,10 +15,11 @@
     color: #FFF;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #000;
-    font-size: 25px;
+    font-size: 6.05vw;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    font-family: "Open Sans", sans-serif;
 }
 
 .config-container {
@@ -41,10 +42,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 255px;
-    height: 70px;
+    width: 61.594%;
+    height: 16.91vw;
     --background: #9C3FC3;
-    margin-top: 170px;
+    margin-top: 41vw;
     --border-radius: 20px;
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -59,8 +60,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 255px;
-    height: 70px;
+    width: 61.594%;
+    height: 16.91vw;
     --background: #9C3FC3;
     margin-top: 40px;
     --border-radius: 20px;
@@ -86,7 +87,7 @@
   align-items: center;
   background-color: #D9D9D9;
   width: 100%;
-  height: 91.3906px;
+  height: 8.83%;
 }
 
 ion-button.voltar-btn {
@@ -185,10 +186,10 @@ p {
 
 .audio-scss {
   position: absolute;
-  top: 29%;
-  left: 30%;
+  top: 30%;
+  left: 31%;
   z-index: 1;
-  width: 272px;
+  width: 65%;
   display: none;
 }
 
