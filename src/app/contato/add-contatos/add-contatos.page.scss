@@ -9,26 +9,26 @@
 
 .contatos-svg {
   position: absolute;
-  top: 55%;
+  top: 45%;
   left: 18%;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
 
 .contatos-text {
-  position: absolute;
-  top: 53%;
-  left: 44%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  color: #FFF;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #000;
-  font-family: "Open Sans", sans-serif;
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+    position: absolute;
+    top: 44%;
+    left: 44%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: #FFF;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 6.0386vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .form-page {
@@ -46,12 +46,13 @@
 }
 
 .add-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 130vw;
 }
 
 .input-item {
@@ -77,10 +78,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 86.5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: -161px;
   }
 
   .btn-excluir {
