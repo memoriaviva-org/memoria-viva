@@ -33,7 +33,7 @@
 <ion-content fullscreen>
   <div class="contatos-container">
 
-  <ion-list *ngIf="contatos$ | async as contatos; else carregando">
+  <ion-list *ngIf="contatos$ | async as contatos; else carregando" class="contatos-list">
     <ion-item *ngFor="let contato of contatos" class="vetor-contatos">
       <ion-avatar slot="start" class="fotoPerfil">
         <img [src]="contato.fotoUrl || 'assets/default-avatar.png'" alt="Foto">
