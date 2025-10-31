@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 24%;
+  margin-top: 23%;
   padding: 10%;
   align-content: center;
 
@@ -77,11 +77,11 @@
 }
 
 .audio-scss {
-  position: fixed;
-  top: 29%;
-  left: 30%;
+  position: absolute;
+  top: 30%;
+  left: 31%;
   z-index: 1;
-  width: 272px;
+  width: 65%;
   display: none;
 }
 
