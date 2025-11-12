@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
+import { AudioPreferenceService } from '../services/audio-preference.service';
 
 @Component({
   selector: 'app-atualizar-perfil',
@@ -25,8 +26,17 @@ export class AtualizarPerfilPage implements OnInit {
   constructor(
     private authService: AuthService,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private audioPref: AudioPreferenceService
   ) {}
+
+  async ngAfterViewInit() {
+    await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+  }
+
+  toggleAudio() {
+    this.audioPref.toggleAudio(this.audioPlayer);
+  }
 
   async ngOnInit() {
     try {
@@ -171,25 +181,4 @@ export class AtualizarPerfilPage implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-      // Esconde botão e mostra player
-      button.style.display = 'none';
-      audio.style.display = 'block';
-      audio.play();
-    } else {
-      audio.pause();
-      audio.style.display = 'none';
-      button.style.display = 'inline-flex';
-    }
-
-    // Quando terminar, esconde player e volta botão
-    audio.onended = () => {
-      audio.style.display = 'none';
-      button.style.display = 'inline-flex';
-    };
-  }
 }

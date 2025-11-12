@@ -36,25 +36,26 @@
 
   <div class="audio-config-container">
 
-    <ion-button class="btn-sim">
-      <svg xmlns="http://www.w3.org/2000/svg" width="47" height="100" viewBox="0 0 40 40" fill="none">
-        <circle cx="20" cy="20" r="20" fill="#127253"/>
-      </svg>
-      <p class="btn-sim-text">Gostaria que o áudio fosse<br>acionado automaticamente</p>
-    </ion-button>
+  <ion-button class="btn-sim" (click)="escolher(true)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="47" height="100" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="20" fill="#127253"/>
+    </svg>
+    <p class="btn-sim-text">
+      Gostaria que o áudio fosse<br>acionado automaticamente
+    </p>
+  </ion-button>
 
-    <ion-button class="btn-nao">
-      <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47" viewBox="0 0 36 30" fill="none">
-        <path d="M18 0L35.3205 30H0.679491L18 0Z" fill="#FF0303"/>
-      </svg>
-      <p class="btn-nao-text">Gostaria de acionar o áudio<br>manualmente</p>
-    </ion-button>
+  <ion-button class="btn-nao" (click)="escolher(false)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47" viewBox="0 0 36 30" fill="none">
+      <path d="M18 0L35.3205 30H0.679491L18 0Z" fill="#FF0303"/>
+    </svg>
+    <p class="btn-nao-text">
+      Gostaria de acionar o áudio<br>manualmente
+    </p>
+  </ion-button>
 
-    <ion-button class="btn-salvar">
-      <p class="salvar-text">Salvar</p>
-    </ion-button>
+</div>
 
-  </div>
 
   <ion-footer class="config-footer">
 

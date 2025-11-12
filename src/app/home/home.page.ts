@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../app/services/auth.service';
 import { ToastController, Platform } from '@ionic/angular';
 
+import { AudioPreferenceService } from '../services/audio-preference.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,9 @@ export class HomePage {
     private authService: AuthService,
     private router: Router,
     private toastController: ToastController,
-    private platform: Platform) {}
+    private platform: Platform,
+    private audioPref: AudioPreferenceService) {}
+
 
   async loginGoogle() {
   try {
@@ -103,23 +106,8 @@ export class HomePage {
     }
   }
 
+  
   toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
-   }
+    this.audioPref.toggleAudio(this.audioPlayer);
+  }
 }

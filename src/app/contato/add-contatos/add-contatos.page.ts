@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ContatoService, Contato } from '../../services/contato.service';
 import { ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AudioPreferenceService } from '../../services/audio-preference.service';
 
 @Component({
   selector: 'app-add-contatos',
@@ -44,7 +45,8 @@ export class AddContatosPage implements OnInit {
     private contatoService: ContatoService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private audioPref: AudioPreferenceService
   ) {}
 
   // === Segurança e validação ===
@@ -208,6 +210,9 @@ export class AddContatosPage implements OnInit {
     });
   }
 
+  async ngAfterViewInit() {
+    await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+  }
   // === UI auxiliares ===
 
   mostrarJanelaMais(): void {

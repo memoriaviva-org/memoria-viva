@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { AudioPreferenceService } from '../services/audio-preference.service';
 
 @Component({
   selector: 'app-perfil',
@@ -24,7 +25,8 @@ export class PerfilPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private audioPref: AudioPreferenceService
   ) {}
 
   ngOnInit() {
@@ -55,6 +57,10 @@ export class PerfilPage implements OnInit {
     });
   }
 
+    async ngAfterViewInit() {
+    await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+  }
+
   private calcularIdade(dataNasc: Date): number {
     const hoje = new Date();
     let idade = hoje.getFullYear() - dataNasc.getFullYear();
@@ -77,24 +83,8 @@ export class PerfilPage implements OnInit {
     this.navCtrl.back();
   }
 
+  
   toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
-    }
-
+    this.audioPref.toggleAudio(this.audioPlayer);
+  }
 }

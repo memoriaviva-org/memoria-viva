@@ -4,6 +4,8 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FlashcardService, Flashcard } from '../services/flashcard.service'
 import { Subscription } from 'rxjs';
+import { AudioPreferenceService } from '../services/audio-preference.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-categorias',
@@ -17,7 +19,8 @@ export class CategoriasPage implements OnInit, OnDestroy {
   carregando = true; // Flag de carregamento
   constructor(
     private router: Router,
-    private flashcardService: FlashcardService
+    private flashcardService: FlashcardService,
+    private audioPref: AudioPreferenceService
   ) {}
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
@@ -63,10 +66,12 @@ export class CategoriasPage implements OnInit, OnDestroy {
       imagem: '../../assets/img/categoria_momentos_marcantes.png'
     }
   ];
+ngOnInit() {}
 
-  ngOnInit() {
-    this.carregarFlashcardsECategorias();
-  }
+async ngAfterViewInit() {
+  await this.carregarFlashcardsECategorias();
+}
+
 
   ngOnDestroy() {
     if (this.flashcardsSubscription) {
@@ -75,19 +80,26 @@ export class CategoriasPage implements OnInit, OnDestroy {
   }
 
   // Método para carregar flashcards e atualizar categorias
-  carregarFlashcardsECategorias() {
-    this.flashcardsSubscription = this.flashcardService.verTodosFlashcards()
-      .subscribe({
-        next: (flashcards: Flashcard[]) => {
-          this.atualizarCategoriasComFlashcards(flashcards);
-          this.carregando = false; // DADOS CARREGADOS - DESATIVA LOADING
-        },
-        error: (error) => {
-          console.error('Erro ao carregar flashcards:', error);
-          this.carregando = false; // EM CASO DE ERRO TAMBÉM DESATIVA LOADING
-        }
-      });
+ async carregarFlashcardsECategorias() {
+  try {
+    const flashcards = await firstValueFrom(this.flashcardService.verTodosFlashcards());
+    this.atualizarCategoriasComFlashcards(flashcards);
+    this.carregando = false;
+
+    // garante que o elemento exista antes de chamar o serviço
+      if (this.audioPlayer?.nativeElement) {
+        const temFlashcards = this.existemCategoriasComFlashcards();
+        // escolhe a fonte do áudio antes de tentar autoplay
+        this.audioPlayer.nativeElement.src = temFlashcards
+          ? 'assets/audio/audio-teste.m4a'
+          : 'assets/audio/audio-pequeno.mp3';
+        await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+      }
+  } catch (error) {
+    console.error('Erro ao carregar flashcards:', error);
+    this.carregando = false;
   }
+}
 
   // Método para atualizar quais categorias possuem flashcards
   atualizarCategoriasComFlashcards(flashcards: Flashcard[]) {
@@ -130,35 +142,15 @@ export class CategoriasPage implements OnInit, OnDestroy {
   }
 
   toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    // Usa a função que já existe para decidir qual áudio tocar
-    const novoSrc = this.existemCategoriasComFlashcards()
-      ? 'assets/audio/audio-teste.m4a'      // quando existem categorias
-      : 'assets/audio/audio-pequeno.mp3';    // quando não existem categorias
-
-    // Atualiza o src e recarrega
-    audio.src = novoSrc;
-    audio.load();
-
-    if (audio.paused) {
-      button.style.display = 'none';
-      audio.style.display = 'block';
-      audio.play().catch(err => console.error('Erro ao reproduzir áudio:', err));
-    } else {
-      audio.pause();
-    }
-
-    // Quando o áudio termina, volta ao botão
-    audio.onended = () => {
-      audio.style.display = 'none';
-      button.style.display = 'inline-flex';
-    };
+    const audio = this.audioPlayer.nativeElement;
+    const temFlashcards = this.existemCategoriasComFlashcards();
+    audio.src = temFlashcards
+      ? 'assets/audio/audio-teste.m4a'
+      : 'assets/audio/audio-pequeno.mp3';
+    this.audioPref.toggleAudio(this.audioPlayer);
   }
 
-  // Método para verificar se existe pelo menos uma categoria com flashcards
   existemCategoriasComFlashcards(): boolean {
-    return this.categorias.some(categoria => categoria.possuiFlashcards);
+    return this.categorias.some(c => c.possuiFlashcards);
   }
 }
