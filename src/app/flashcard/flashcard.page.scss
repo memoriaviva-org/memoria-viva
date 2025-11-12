@@ -53,26 +53,28 @@
     transform: rotateY(180deg);
   }
 
-  .flashcard-front,
-  .flashcard-back {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 98%;
-    height: 91%;
-    border-radius: 12px;
-    backface-visibility: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    color: #fff;
-    background-color: #9C3FC3;
-  }
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+   width: 98%;
+  height: 91%;
+  top: 50%;
+  left: 50%;
+  top: 0;
+  left: 0;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  color: #fff;
+  background-color: #9C3FC3;
+}
+
 
   .flashcard-back {
     transform: rotateY(180deg);
