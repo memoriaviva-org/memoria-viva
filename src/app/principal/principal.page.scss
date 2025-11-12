@@ -4,10 +4,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  width: 300px;
+  width: 72.4637vw;
   color: #FFF;
   font-family: Inter;
-  font-size: 30px;
+  font-size: 7.2464vw;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -16,8 +16,8 @@
 .texto-principal {
   display: flex;
   justify-content: center;
-  font-size: 30px;
-  margin-bottom: 40px;
+  font-size: 7.2464vw;
+  margin-bottom: 9.662vw;
   font-weight: 700;
   width: 100%;
 }
@@ -25,30 +25,30 @@
 .principal-container {
   display: flex;
   flex-wrap: wrap;
-  height: 110px;
+  height: 26.57vw;
   width: 100%;
   justify-content: center;
-  margin-top: 130px;
+  margin-top: 31.401vw;
 }
 
 .minhas-memorias-btn-div {
   display: flex;
   flex-direction: column;
   background-color: transparent;
-  height: 113px;
-  width: 113px;
-  padding-top: 10px;
+  height: 27.2947vw;
+  width: 27.2947vw;
+  padding-top: 2.4155vw;
 }
 
 ion-button.minhas-memorias-btn {
     all: unset;
-    height: 113px;
-    width: 113px;
+    height: 27.2947vw;
+    width: 27.2947vw;
     --background: #9C3FC3;
     color: white;
-    --border-radius: 20px;
-    margin-right: 35px;
-    margin-bottom: 35px;
+    --border-radius: 4.831vw;
+    margin-right: 8.4542vw;
+    margin-bottom: 8.4542vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,18 +62,18 @@ ion-button.minhas-memorias-btn {
   align-items: center;
   flex-direction: column;
   background-color: transparent;
-  height: 113px;
-  width: 113px;
-  padding-top: 2px;
+  height: 27.2947vw;
+  width: 27.2947vw;
+  padding-top: 0.483vw;
 }
 
 ion-button.meu-dia-btn {
     all: unset;
-    height: 113px;
-    width: 113px;
+    height: 27.2947vw;
+    width: 27.2947vw;
     --background: #16b954;
     color: white;
-    --border-radius: 20px;
+    --border-radius: 4.831vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,18 +87,18 @@ ion-button.meu-dia-btn {
     align-items: center;
     flex-direction: column;
     background-color: transparent;
-    height: 113px;
-    width: 113px;
+    height: 27.2947vw;
+    width: 27.2947vw;
 }
 
 ion-button.contatos-btn {
     all: unset;
-    height: 113px;
-    width: 113px;
+    height: 27.2947vw;
+    width: 27.2947vw;
     --background: #DB6326;
     color: white;
-    --border-radius: 20px;
-    margin-right: 148.313px;
+    --border-radius: 4.831vw;
+    margin-right: 35.8244vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,33 +109,33 @@ ion-button.contatos-btn {
   color: #FFF;
   text-align: center;
   font-family: "Open Sans", sans-serif;
-  font-size: 16px;
+  font-size: 3.8647vw;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  -webkit-text-stroke-width: 0.32px;
+  -webkit-text-stroke-width: 0.0772vw;
   -webkit-text-stroke-color: #000;
 }
 
 .minhas-memorias, .meu-dia {
   margin: 0;
-  margin-bottom: 5px;
+  margin-bottom: 1.2077vw;
 }
 
 .meu-dia-texto {
-    font-size: 16px;
+    font-size: 3.8647vw;
     font-family: "Open Sans", sans-serif;
     font-weight: 700;
-    -webkit-text-stroke-width: 0.32px;
+    -webkit-text-stroke-width: 0.0772vw;
     -webkit-text-stroke-color: #000;
-    margin-top: 10px;
+    margin-top: 2.4155vw;
 }
 
 .contatos-texto {
-  font-size: 16px;
+  font-size: 3.8647vw;
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
-  -webkit-text-stroke-width: 0.32px;
+  -webkit-text-stroke-width: 0.0772vw;
   -webkit-text-stroke-color: #000;
 }
 
@@ -148,7 +148,7 @@ ion-button.contatos-btn {
   align-items: center;
   background-color: #D9D9D9;
   width: 100%;
-  height: 91.3906px;
+  height: 8.83%;
 }
 
 .perfil-btn-div {
@@ -203,10 +203,10 @@ p {
 
 .audio-scss {
   position: fixed;
-  top: 29%;
-  left: 30%;
+  top: 30%;
+  left: 31%;
   z-index: 1;
-  width: 272px;
+  width: 65%;
   display: none;
 }
 
