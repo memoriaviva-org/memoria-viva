@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AudioPreferenceService } from '../services/audio-preference.service';
 
 @Component({
   selector: 'app-esqueci-minha-senha',
@@ -26,7 +27,8 @@ export class EsqueciMinhaSenhaPage {
   constructor(
     private authService: AuthService,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private audioPref: AudioPreferenceService
   ) {}
 
   sanitize(input: string): string {
@@ -118,20 +120,6 @@ export class EsqueciMinhaSenhaPage {
   }
 
   toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-      button.style.display = 'none';
-      audio.style.display = 'block';
-      audio.play();
-    } else {
-      audio.pause();
-    }
-
-    audio.onended = () => {
-      audio.style.display = 'none';
-      button.style.display = 'inline-flex';
-    };
+    this.audioPref.toggleAudio(this.audioPlayer);
   }
 }

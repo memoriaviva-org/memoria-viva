@@ -3,6 +3,8 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { RegistroService, MeuDia } from '../services/registro.service';
 import { ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AudioPreferenceService } from '../services/audio-preference.service';
+
 
 @Component({
   selector: 'app-add',
@@ -42,7 +44,8 @@ export class AddPage implements OnInit {
     private registroService: RegistroService,
     private router: Router,
     private toastController: ToastController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private audioPref: AudioPreferenceService
   ) {
     const dias = [
       'Domingo',
@@ -65,6 +68,23 @@ export class AddPage implements OnInit {
         this.carregarRegistroParaEdicao();
       }
     });
+      this.route.queryParams.subscribe(params => {
+    if (params['editar'] === 'true' && params['id']) {
+      this.modoEdicao = true;
+      this.registroId = params['id'];
+      this.carregarRegistroParaEdicao();
+    }
+  });
+
+  setTimeout(async () => {
+    const auto = await this.audioPref.getAutoPlay();
+    if (auto && this.audioPlayer) {
+      const audio = this.audioPlayer.nativeElement;
+      audio.src = 'assets/audio/audio-teste.m4a';
+      audio.load();
+      audio.play().catch(err => console.warn('Autoplay bloqueado:', err));
+    }
+  }, 300);
   }
 
   carregarRegistroParaEdicao() {

@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardService, Flashcard } from '../services/flashcard.service';
 import { of, firstValueFrom, map } from 'rxjs';
+import { AudioPreferenceService } from '../services/audio-preference.service';
 
 @Component({
   selector: 'app-func-categoria',
@@ -28,7 +29,8 @@ export class FuncCategoriaPage {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private flashcardService: FlashcardService
+    private flashcardService: FlashcardService,
+    private audioPref: AudioPreferenceService
   ) {}
 
 
@@ -146,23 +148,11 @@ export class FuncCategoriaPage {
     this.mostrarJanela = false;
   }
 
+  async ngAfterViewInit() {
+    await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+  }
+
   toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-      // Quando terminar, esconde player e volta botão
-      audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
+    this.audioPref.toggleAudio(this.audioPlayer);
   }
 }

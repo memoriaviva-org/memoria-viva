@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Flashcard, FlashcardService } from '../services/flashcard.service';
 
+import { AudioPreferenceService } from '../services/audio-preference.service';
+
 @Component({
   selector: 'app-criar-flashcard',
   templateUrl: './criar-flashcard.page.html',
@@ -12,6 +14,9 @@ export class CriarFlashcardPage implements OnInit {
   private flashcardService = inject(FlashcardService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+
+  constructor(private audioPref: AudioPreferenceService) {}
+
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
@@ -74,6 +79,11 @@ export class CriarFlashcardPage implements OnInit {
       }
     });
   }
+
+  async ngAfterViewInit() {
+    await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+  }
+
 
   carregarFlashcardParaEdicao() {
     if (!this.flashcardId) return;
@@ -358,20 +368,6 @@ export class CriarFlashcardPage implements OnInit {
   fecharJanelaMais() { this.mostrarJanela = false; }
 
   toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-      button.style.display = 'none';
-      audio.style.display = 'block';
-      audio.play();
-    } else {
-      audio.pause();
-    }
-
-    audio.onended = () => {
-      audio.style.display = 'none';
-      button.style.display = 'inline-flex';
-    };
+    this.audioPref.toggleAudio(this.audioPlayer);
   }
 }

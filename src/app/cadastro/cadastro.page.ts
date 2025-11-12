@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
+import { AudioPreferenceService } from '../services/audio-preference.service';
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
@@ -30,7 +32,8 @@ export class CadastroPage {
   constructor(
     private authService: AuthService,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private audioPref: AudioPreferenceService
   ) {}
 
   // ver senha
@@ -148,25 +151,7 @@ export class CadastroPage {
     }
   }
 
-  toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-      // Esconde botão e mostra player
-      button.style.display = 'none';
-      audio.style.display = 'block';
-      audio.play();
-    } else {
-      audio.pause();
-      audio.style.display = 'none';
-      button.style.display = 'inline-flex';
-    }
-
-    // Quando terminar, esconde player e volta botão
-    audio.onended = () => {
-      audio.style.display = 'none';
-      button.style.display = 'inline-flex';
-    };
+    toggleAudio() {
+    this.audioPref.toggleAudio(this.audioPlayer);
   }
 }

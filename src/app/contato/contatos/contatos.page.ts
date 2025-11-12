@@ -3,6 +3,7 @@ import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContatoService, Contato } from '../../services/contato.service';
 import { Router } from '@angular/router';
+import { AudioPreferenceService } from '../../services/audio-preference.service';
 
 @Component({
   selector: 'app-contatos',
@@ -19,7 +20,10 @@ export class ContatosPage implements OnInit {
 
   mostrarJanela = false;
 
-  constructor(private contatoService: ContatoService, private router: Router) {}
+  constructor(
+    private contatoService: ContatoService,
+    private router: Router, 
+    private audioPref: AudioPreferenceService ) {}
 
   ngOnInit() {
     this.contatos$ = this.contatoService.verContatos();
@@ -43,6 +47,10 @@ export class ContatosPage implements OnInit {
         origem: 'gerenciar'
       }
     });
+  }
+
+  async ngAfterViewInit() {
+    await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
   }
 
   mostrarJanelaMais() {

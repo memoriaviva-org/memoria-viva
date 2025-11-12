@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 
+import { AudioPreferenceService } from '../services/audio-preference.service';
+
 @Component({
   selector: 'app-config',
   templateUrl: './config.page.html',
@@ -18,32 +20,22 @@ import { NavController } from '@ionic/angular';
 
   export class ConfigPage {
 
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    private navCtrl: NavController,
+    private audioPref: AudioPreferenceService
+  ) {}
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
-  voltar1() {
+  voltar() {
     this.navCtrl.back();
   }
 
+  async ngAfterViewInit() {
+    await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+  }
+
   toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
-    }
-
+    this.audioPref.toggleAudio(this.audioPlayer);
+  }
 }

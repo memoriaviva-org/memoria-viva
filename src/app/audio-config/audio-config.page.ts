@@ -1,31 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ViewChild } from '@angular/core';
-import { ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { AudioPreferenceService } from '../services/audio-preference.service';
 
 @Component({
   selector: 'app-audio-config',
   templateUrl: './audio-config.page.html',
   styleUrls: ['./audio-config.page.scss'],
   standalone: true,
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule
-  ],
+  imports: [IonicModule, CommonModule, FormsModule],
 })
-
-  export class AudioConfigPage {
+export class AudioConfigPage {
   videoStarted = false;
+  showPlay = false;
 
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
-  showPlay = false;
-
-  constructor() {}
+  constructor(
+    private audioPref: AudioPreferenceService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -33,30 +30,23 @@ import { ElementRef } from '@angular/core';
     }, 500);
   }
 
+  ngAfterViewInit() {
+    this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+  }
+
   playVideo() {
     this.videoStarted = true;
     setTimeout(() => {
       this.videoPlayer?.nativeElement.play();
-    }, 100); // pequeno delay p/ garantir renderização
+    }, 100);
+  }
+
+  escolher(auto: boolean) {
+    this.audioPref.setAutoPlay(auto);
+    this.router.navigate(['/principal']);
   }
 
   toggleAudio() {
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-        // Esconde botão e mostra player
-        button.style.display = 'none';
-        audio.style.display = 'block';
-        audio.play();
-      } else {
-        audio.pause();
-      }
-
-        // Quando terminar, esconde player e volta botão
-        audio.onended = () => {
-        audio.style.display = 'none';
-        button.style.display = 'inline-flex'; // volta o ion-button
-      };
-    }
+    this.audioPref.toggleAudio(this.audioPlayer);
+  }
 }

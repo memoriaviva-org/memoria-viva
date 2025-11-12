@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { FlashcardService, Flashcard } from '../services/flashcard.service';
 import { firstValueFrom, of } from 'rxjs';
+import { AudioPreferenceService } from '../services/audio-preference.service';
 
 interface DadosCategoria {
   caminhoDaImagem: string;
@@ -42,6 +43,8 @@ export class GerenciarFlashcardsPage implements OnInit {
   mostrarFaixaCategoria: boolean = false;
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+
+  constructor(private audioPref: AudioPreferenceService) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -307,24 +310,11 @@ export class GerenciarFlashcardsPage implements OnInit {
   fecharJanelaMais(): void {
     this.mostrarJanela = false;
   }
+  async ngAfterViewInit() {
+    await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
+  }
 
-  toggleAudio(): void {
-    if (!this.audioPlayer) return;
-
-    const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
-    const button = document.querySelector('.audio-btn') as HTMLElement;
-
-    if (audio.paused) {
-      if (button) button.style.display = 'none';
-      audio.style.display = 'block';
-      audio.play();
-    } else {
-      audio.pause();
-    }
-
-    audio.onended = () => {
-      audio.style.display = 'none';
-      if (button) button.style.display = 'inline-flex';
-    };
+  toggleAudio() {
+    this.audioPref.toggleAudio(this.audioPlayer);
   }
 }
