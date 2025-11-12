@@ -29,7 +29,7 @@
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #000;
   font-family: "Open Sans", sans-serif;
-  font-size: 25px;
+  font-size: 6.0386vw;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -70,7 +70,7 @@ p {
   display: flex;
   justify-content: center;
   margin-top: 145px;
-  font-size: 25px;
+  font-size: 6.0386vw;
 }
 
 .registros {
@@ -88,8 +88,8 @@ p {
 }
 
 .dia-registro {
-  width: 160px;
-  height: 200px;
+  width: 38.6474vw;
+  height: 48.3092vw;
   background-color: #16b954;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
   margin-top: 25px;
@@ -103,13 +103,13 @@ p {
   display: flex;
   justify-content: center;
   margin-top: 12px;
-  width: 150px;
-  height: 90px;
+  width: 36.232vw;
+  height: 21.739vw;
 }
 
 .video-foto-btn img {
-  width: 100px;   /* ou 80% do botão */
-  height: 100px;  /* mantém proporção, se quiser, use object-fit */
+  width: 24.1546vw;
+  height: 24.1546vw;
   border-radius: 15px; /* deixa arredondada igual ao card */
   object-fit: cover;   /* mantém proporção e corta se necessário */
 }
@@ -127,25 +127,27 @@ ion-button.video-foto-btn::part(native) {
 }
 
 .dia-registro-titulo {
-  margin-top: 10px;
-  margin-left: 13px;
-  width: 87px;
-  height: 32px;
+  margin-top: 2.415vw;
+  margin-left: 3.14vw;
+  width: 21.015vw;
+  height: 7.7295vw;
   color: white;
+  font-size: 4vw;
 }
 
 .dia-registro-horario {
-  width: 50px;
-  margin-left: 15px;
-  margin-top: 14px;
+  width: 12.0773vw;
+  margin-left: 3.623vw;
+  margin-top: 3.381vw;
   color: white;
+  font-size: 4vw;
 }
 
 .dia-registro-editar-btn-posicao {
-    width: 50px;
-    height: 50px;
-    margin-left: 94px;
-    margin-top: -46px;
+    width: 12.0773vw;
+    height: 12.0773vw;
+    margin-left: 22.705vw;
+    margin-top: -11.112vw;
 }
 
 ion-button.dia-registro-editar-btn {
@@ -153,8 +155,8 @@ ion-button.dia-registro-editar-btn {
   --background: transparent;
   --box-shadow: transparent;
   display: flex;
-  width: 50px;
-  height: 50px;
+  width: 12.0773vw;
+  height: 12.0773vw;
 }
 
 .dia-registro-editar-btn-div {
@@ -249,8 +251,8 @@ ion-button.inicio-btn {
 
 .audio-scss {
   position: absolute;
-  top: 27.5%;
-  left: 36%;
+  top: 28.5%;
+  left: 32%;
   z-index: 1;
   width: 63%;
   display: none;
