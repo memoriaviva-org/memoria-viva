@@ -44,7 +44,7 @@ body {
 /* header */
 .header-svg-container {
   position: relative;
-  height: 200px; /* altura do SVG */
+  height: 21.8102vh; /* altura do SVG */
   width: 100%;
   overflow: visible;
   z-index: 1;
@@ -55,7 +55,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 200px;
+  height: 21.8102vh;
   z-index: 0;
 }
 
@@ -63,7 +63,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  max-height: 120px;
+  max-height: 13.086vh;
   width: auto;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -72,7 +72,7 @@ body {
 
 .header-curve {
   position: relative;
-  height: 200px;
+  height: 21.8102vh;
   background-color: #9c3fc3;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="412" height="60" viewBox="0 0 412 60" fill="none"><path d="M-35 -18H621V365C433.901 115.251 174.347 172.943 -35 365V-18Z" fill="%239C3FC3"/></svg>');
   background-repeat: no-repeat;
@@ -234,19 +234,19 @@ ion-input {
 
 ion-button.mais-btn-1 {
     all: unset;
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 24.7188px;
+    margin-top: 2.6956vh;
     --background: transparent;
     --box-shadow: transparent;
 
 
   .mais-btn-div-1 {
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -255,12 +255,12 @@ ion-button.mais-btn-1 {
   }
 
   .mais-svg-1 {
-    height: 48px;
-    width: 82.375px;
+    height: 5.2344vh;
+    width: 19.897vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2px;
+    margin-bottom: 0.218vh;
   }
 
   .mais-texto-1 {
@@ -268,13 +268,13 @@ ion-button.mais-btn-1 {
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    width: 82.375px;
-    height: 91.375px;
-    font-size: 12px;
+    width: 19.897vw;
+    height: 9.96455vh;
+    font-size: 2.8985vw;
     display: flex;
     justify-content: center;
     color: #737373;
-    margin-top: 1.3px;
+    margin-top: 0.11vh;
   }
 }
 
