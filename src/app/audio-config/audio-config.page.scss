@@ -24,8 +24,8 @@
 }
 
 .play-img {
-  width: 35.713%;
-  height: 67.89%;
+  width: 26.57vw;
+  height: 11.995vh;
   opacity: 0;
   transition: opacity 1s ease-in;
 }
@@ -40,7 +40,7 @@
   align-items: center;
   background-color: #9C3FC3;
   position: fixed;
-  top: 47%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 74.40vw;
@@ -51,7 +51,7 @@
   display: block;
   border-radius: 8px;
   position: fixed;
-  top: 47%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -83,7 +83,7 @@
     font-family: "Barlow Semi Condensed", sans-serif;
     text-align: left;
     position: fixed;
-    top: 65%;
+    top: 66%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -108,23 +108,23 @@
     font-family: "Barlow Semi Condensed", sans-serif;
     text-align: left;
     position: fixed;
-    top: 78%;
+    top: 79%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .btn-nao-text {
-    margin-left: 10px;
-    margin-right: 4px;
-    margin-top: 4px;
+    margin-left: 2.415vw;
+    margin-right: 0.966vw;
+    margin-top: 0.4362vh;
     font-size: 3.5vw;
 }
 
 .btn-sim-text {
-  margin-left: 10px;
-  margin-right: 12.2px;
-  margin-top: 4px;
-  font-size: 3.5vw;
+    margin-left: 2.415vw;
+    margin-right: 2.9468vw;
+    margin-top: 0.436vh;
+    font-size: 3.5vw;
 }
 
 .btn-salvar {
@@ -152,7 +152,7 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #000;
     font-family: "Open Sans", sans-serif;
-    font-size: 25px;
+    font-size: 6.0386vw;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -268,9 +268,9 @@ p {
 .audio-scss {
   position: absolute;
   top: 29%;
-  left: 32%;
+  left: 27.5%;
   z-index: 1;
-  width: 65vw;
+  width: 68vw;
   display: none;
 }
 
