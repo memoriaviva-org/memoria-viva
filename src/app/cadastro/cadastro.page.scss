@@ -2,18 +2,18 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 23%;
-  padding: 10%;
+  margin-top: 12vh;
+  padding: 10vw;
   align-content: center;
 
   .floating-input {
     position: relative;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 1.6357vh;
 
     label {
       position: absolute;
-      left: 16px;
+      left: 3.8647vw;
       top: 50%;
       transform: translateY(-50%);
       color: #999;
@@ -21,37 +21,37 @@
       padding: 0 4px;
       transition: 0.3s ease all;
       pointer-events: none;
-      font-size: 16px;
+      font-size: 3.8647vw;
       z-index: 1;
     }
 
     label.active {
-      top: -10px;
-      font-size: 14px;
+      top: -1.09vh;
+      font-size: 3.381vw;
       color: #3679ff;
     }
 
     ion-input {
       width: 100%;
       --border-color: #9c3fc3;
-      height: 56px;
-      font-size: 18px;
+      height: 6.107vh !important;
+      font-size: 4.3478vw;
       font-weight: 400;
       border-radius: 10px;
       background: transparent;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-      --padding-end: 20px; // espaço para o ícone
+      --padding-end: 2.181vh; // espaço para o ícone
     }
 
     ion-icon {
       position: absolute;
-      right: 41px;
+      right: 9.90338vw;
       top: 50%;
       transform: translateY(-50%);
       z-index: 2;
       color: #333;
-      font-size: 20px;
-      margin-right: -42px;
+      font-size: 4.831vw;
+      margin-right: -10.145vw
     }
   }
 }
@@ -63,7 +63,7 @@
 .btn-cadastrar {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 1.09vh;
 }
 
 .link-login {
@@ -79,9 +79,9 @@
 .audio-scss {
   position: absolute;
   top: 30%;
-  left: 31%;
+  left: 26.5%;
   z-index: 1;
-  width: 65%;
+  width: 70vw;
   display: none;
 }
 
@@ -115,13 +115,13 @@ ion-input[type='date'] input::placeholder {
 .error-box {
   background-color: #ffecec;
   border-left: 6px solid #ff3b30;
-  padding: 16px;
+  padding: 3.8647vw;
   border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 12px;
   width: 90%;
-  max-width: 350px;
+  max-width: 84.541vw;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -134,12 +134,12 @@ ion-input[type='date'] input::placeholder {
 
 .error-icon {
   color: #ff3b30;
-  font-size: 24px;
+  font-size: 5.797vw;
 }
 
 .error-message {
   color: #d00000;
-  font-size: 16px;
+  font-size: 3.8647vw;
   font-weight: 500;
   line-height: 1.4;
 }
