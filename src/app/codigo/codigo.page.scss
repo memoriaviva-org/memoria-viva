@@ -2,56 +2,57 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 25%;
-  padding: 10%;
+  margin-top: 11.232vh;
+  padding: 10vw;
   align-content: center;
 
   .floating-input {
     position: relative;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 1.63577vh;
 
     label {
       position: absolute;
-      left: 16px;
+      left: 3.8647vw;
       top: 50%;
       transform: translateY(-50%);
       color: #999;
       background: white;
-      padding: 0 4px;
+      padding: 0 0.966vw;
       transition: 0.3s ease all;
       pointer-events: none;
-      font-size: 16px;
+      font-size: 3.8647vw;
       z-index: 1;
     }
 
     label.active {
-      top: -10px;
-      font-size: 14px;
+      top: -1.09vh;
+      font-size: 3.3816vw;
       color: #3679ff;
     }
 
     ion-input {
       width: 100%;
       --border-color: #9c3fc3;
-      height: 56px;
-      font-size: 18px;
+      height: 6.1068vh !important;
+      min-height: 6.1068vh;
+      font-size: 4.3478vw;
       font-weight: 400;
       border-radius: 10px;
       background: transparent;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-      --padding-end: 44px; // espaço para o ícone
+      --padding-end: 10.628vw; // espaço para o ícone
     }
 
     ion-icon {
       position: absolute;
-      right: 16px;
+      right: 3.8647vw;
       top: 50%;
       transform: translateY(-50%);
       z-index: 2;
       color: #333;
-      font-size: 20px;
-      margin-right: -42px;
+      font-size: 4.831vw;
+      margin-right: -10.145vw;
     }
   }
 }
@@ -64,15 +65,15 @@
 .btn-entrar {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 1.09vh;
 }
 
 .audio-scss {
   position: absolute;
   top: 30%;
-  left: 31%;
+  left: 26%;
   z-index: 1;
-  width: 65%;
+  width: 70vw;
   display: none;
 }
 
