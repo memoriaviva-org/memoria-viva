@@ -33,10 +33,10 @@ body {
 }
 
 .form-container {
-  padding: 20px;
+  padding: 4.831vw;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 3.6232vw;
   margin-top: 30%;
   align-items: center;
 }
@@ -90,8 +90,8 @@ body {
 
 /* botão audio */
 .audio-btn {
-  width: 70px;
-  height: 70px;
+  width: 16.9082vw;
+  height: 7.6336vh;
   padding: 0;
   min-width: 0;
   border-radius: 50%;
@@ -107,11 +107,11 @@ body {
 
   bottom: 65vh;
   position: absolute;
-  right: 30px;
+  right: 7.2464vw;
   z-index: 1000;
 }
 
-@media (max-height: 500px) {
+@media (max-height: 54.5256vh) {
   .audio-btn {
     bottom: 5vh;  /* para telas mais baixas, deixa o botão mais próximo do fundo */
   }
@@ -122,26 +122,26 @@ body {
 }
 
 .audio-btn ion-icon {
-  font-size: 30px;
-  width: 50px;
-  height: 50px;
+  font-size: 7.2464vw;
+  width: 12.0773vw;
+  height: 5.45256vh;
 }
 
 /* botões fixos */
 .btn-center-flex {
   display: flex;
   justify-content: center;
-  margin-top: 120px;
-  border-radius: 20px;
+  margin-top: 13.08615vh;
+  border-radius: 4.831vw;
 }
 
 .btn-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 3.8647vw;
   margin-top: 18vh;
-  border-radius: 10px;
+  border-radius: 2.4154vw;
 }
 
 button {
@@ -155,11 +155,11 @@ ion-input {
   --placeholder-opacity: 1;
   border-color: #9c3fc3;
   --highlight-color: #9c3fc3;
-  border-radius: 10px;
+  border-radius: 2.4154vw;
 }
 
 .custom-input {
-  border-radius: 10px;
+  border-radius: 2.4154vw;
   border-color: #9c3fc3;
   border: 1px solid #9c3fc3;
   padding: 0 7.73vw;
@@ -179,7 +179,7 @@ ion-input {
     height: 6.10687vh;
     font-size: 4.831vw;
     font-weight: 700;
-    border-radius: 10px;
+    border-radius: 2.4154vw;
     background: transparent;
     display: flex;
     align-items: center;
@@ -207,14 +207,14 @@ ion-input {
 .error-box {
   background-color: #ffecec;
   border-left: 6px solid #ff3b30;
-  padding: 16px;
-  margin-top: 16px;
-  border-radius: 8px;
+  padding: 3.8647vw;
+  margin-top: 1.7448vh;
+  border-radius: 1.93236vw;
   display: flex;
   align-items: center;
-  gap: 12px;
-  width: 90%;
-  max-width: 350px;
+  gap: 2.8985vw;
+  width: 90vw;
+  max-width: 84.541vw;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -222,12 +222,12 @@ ion-input {
 
 .error-icon {
   color: #ff3b30;
-  font-size: 24px;
+  font-size: 5.7971vw;
 }
 
 .error-message {
   color: #d00000;
-  font-size: 16px;
+  font-size: 3.8647vw;
   font-weight: 500;
   line-height: 1.4;
 }
@@ -283,9 +283,9 @@ ion-button.mais-btn-1 {
   justify-content: center;
   align-items: center;
   background-color: #9C3FC3;
-  width: 412px;
-  height: 130px;
-  border-radius: 20px;
+  width: 100vw;
+  height: 14.1767vh;
+  border-radius: 4.831vw;
   position: fixed;
   top: 89%;
   left: 50%;
@@ -296,7 +296,7 @@ ion-button.mais-btn-1 {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #000;
   font-family: Inter;
-  font-size: 25px;
+  font-size: 6.0386vw;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -312,7 +312,7 @@ ion-button.mais-btn-1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-left: 21.5px;
+    margin-left: 5.1932vw;
   }
 
   .janela-mais-site-btn {
@@ -326,15 +326,15 @@ ion-button.mais-btn-1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 11px;
+    margin-top: 1.2vh;
   }
 
   .janela-mais-config-btn-texto {
-    margin-top: 10px;
+    margin-top: 1.09vh;
   }
 
   .janela-mais-site-btn-texto {
-    margin-top: 16px;
+    margin-top: 1.7448vh;
   }
 }
 
@@ -351,16 +351,16 @@ ion-button.mais-btn-1 {
 .my-custom-toast {
   .custom-toast-container {
     background-color: #222;
-    border-radius: 10px;
-    padding: 12px;
+    border-radius: 2.4154vw;
+    padding: 2.8985vw;
   }
 
   .custom-toast-content {
-    height: 100px !important;
+    height: 10.9051vh !important;
   }
 
   .custom-toast-message {
-    font-size: 18px;
+    font-size: 4.3478vw;
     color: #fff;
   }
 }
