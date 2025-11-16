@@ -40,37 +40,37 @@
 
 .form-wrapper {
   width: 100%;
-  padding: 20px;
+  padding: 4.831vw;
   box-sizing: border-box;
 
   /* Distância do topo */
-  margin-top: 127px; /* ajusta para subir ou descer os inputs */
+  margin-top: 13.8495vh; /* ajusta para subir ou descer os inputs */
 }
 
 /* Conteúdo do formulário */
 .form-content {
   width: 100%;
-  max-width: 400px; /* largura máxima do formulário */
-  height: 620px;
+  max-width: 96.618vw; /* largura máxima do formulário */
+  height: 67.6118vh;
   margin: 0 auto;   /* centraliza horizontalmente */
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 3.8647vw;
 }
 
 /* Inputs */
 .input-item {
   border-radius: 12px;
   --background: #f7f7f7;
-  --padding-start: 12px;
+  --padding-start: 2.8985vw;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   width: 90.3382vw;
-  height: 13.52657vw;
+  height: 6.10687vh;
 }
 
 /* Ícones grandes */
 .icon-input {
-  font-size: 32px;
+  font-size: 7.73vw;
 }
 
 .icon-input.yellow { color: #FFD700; }
@@ -84,7 +84,7 @@
 .save-btn-wrapper {
   display: flex;
   justify-content: center; /* centraliza o botão */
-  margin-top: 20px;
+  margin-top: 2.181vh;
 }
 
 .btn-salvar {
@@ -93,7 +93,7 @@
   --border-radius: 6px;
   border-radius: 10px;
   width: 44.686vw;
-  height: 13.5266vw;
+  height: 6.10687vh;
   --border-color: black;
   border: 2.5px solid black;
   display: flex;
@@ -108,7 +108,7 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #000;
     font-family: "Open Sans", sans-serif;
-    font-size: 25px;
+    font-size: 6.0386vw;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -124,24 +124,24 @@
   align-items: center;
   background-color: #D9D9D9;
   width: 100%;
-  height: 8.83%;
-  }
+  height: 8.8331vh;
+}
 
   ion-button.voltar-btn {
   all: unset;
-  width: 82.3906px;
-  height: 91.375px;
+  width: 19.9012vw;
+  height: 9.9645vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24.7188px;
-  margin-right: 40px;
+  margin-top: 2.6956vh;
+  margin-right: 9.66vw;
   --background: transparent;
   --box-shadow: transparent;
 
   .voltar-btn-div {
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -150,8 +150,8 @@
   }
 
   .voltar-svg {
-    height: 48px;
-    width: 91.375px;
+    height: 5.2344vh;
+    width: 22.0712vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,31 +162,31 @@
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    width: 82.375px;
-    height: 91.375px;
-    font-size: 12px;
+    width: 19.897vw;
+    height: 9.9645vh;
+    font-size: 2.8985vw;
     display: flex;
     justify-content: center;
     color: #737373;
-    margin-top: 3px;
+    margin-top: 0.327vh;
   }
   }
 
   ion-button.inicio-btn {
-  all: unset;
-  width: 82.3906px;
-  height: 91.375px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 24.7188px;
-  margin-right: 40px;
-  --background: transparent;
-  --box-shadow: transparent;
+    all: unset;
+    width: 19.9012vw;
+    height: 9.9645vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.6956vh;
+    margin-right: 9.66vw;
+    --background: transparent;
+    --box-shadow: transparent;
 
   .inicio-btn-div {
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -195,8 +195,8 @@
   }
 
   .inicio-svg {
-    height: 48px;
-    width: 91.375px;
+    height: 5.2344vh;
+    width: 22.0712vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -207,13 +207,13 @@
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    width: 82.375px;
-    height: 91.375px;
-    font-size: 12px;
+    width: 19.897vw;
+    height: 9.9645vh;
+    font-size: 2.8985vw;
     display: flex;
     justify-content: center;
     color: #737373;
-    margin-top: 3px;
+    margin-top: 0.327vh;
   }
 }
 
@@ -224,9 +224,10 @@ p {
 .audio-scss {
   position: absolute;
   top: 30%;
-  left: 31%;
+  left: 26%;
   z-index: 1;
-  width: 65%;
+  width: 70vw;
+  height: 5.89vh;
   display: none;
 }
 
@@ -236,8 +237,8 @@ p {
 }
 
 .alert-campos-obrigatorios {
-    height: 100px;
-    width: 80%;
+    height: 10.905vh;
+    width: 80vw;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -253,13 +254,13 @@ p {
 }
 
 .error-icon {
-  margin-right: 10px;
+  margin-right: 2.4154vw;
 }
 
 .error-icon2 {
-  margin-right: 10px;
+  margin-right: 2.4154vw;
   color: #ff3b30;
-  font-size: 70px;
+  font-size: 16.908vw;
 }
 
 .alert-erro {
@@ -269,16 +270,16 @@ p {
   transform: translate(-50%, -50%);
   background-color: #ffecec;
   border-left: 6px solid #ff3b30;
-  padding: 16px;
-  margin-top: 16px;
+  padding: 3.8647vw;
+  margin-top: 1.7448vh;
   border-radius: 8px;
   color: #d00000;
-  gap: 2px;
-  font-size: 16px;
+  gap: 0.4831vw;
+  font-size: 3.8647vw;
   font-weight: 500;
   line-height: 1.4;
   z-index: 1;
-  width: 75%;
+  width: 75vw;
   display: flex;
   align-items: center;
 }
@@ -290,16 +291,16 @@ p {
     transform: translate(-50%, -50%);
     background-color: #ffecec;
     border-left: 6px solid #ff3b30;
-    padding: 16px;
-    margin-top: 16px;
+    padding: 3.8647vw;
+    margin-top: 1.7448vh;
     border-radius: 8px;
     color: #d00000;
-    gap: 2px;
-    font-size: 16px;
+    gap: 0.4831vw;
+    font-size: 3.8647vw;
     font-weight: 500;
     line-height: 1.4;
     z-index: 1;
-    width: 89%;
+    width: 89vw;
     display: flex;
     align-items: center;
 }
@@ -311,21 +312,21 @@ p {
   transform: translate(-50%, -50%);
   background-color: #e0f8e4;
   border-left: 6px solid #00ff26;
-  padding: 16px;
-  margin-top: 16px;
+  padding: 3.8647vw;
+  margin-top: 1.7448vh;
   border-radius: 8px;
   color: #018f16;
-  font-size: 17px;
+  font-size: 4.1063vw;
   font-weight: 500;
   line-height: 1.4;
-  gap: 8px;
+  gap: 1.93236vw;
   z-index: 1;
-  width: 82%;
+  width: 82vw;
   display: flex;
   align-items: center;
 }
 
 .success-icon {
   color: #017e14;
-  font-size: 24px;
+  font-size: 5.797vw;
 }
