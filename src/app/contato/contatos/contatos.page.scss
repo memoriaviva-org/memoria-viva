@@ -23,7 +23,7 @@
 }
 
 .contatos-container {
-  height: 220vw
+  height: 99.32388vh;
 }
 
 p {
@@ -31,7 +31,7 @@ p {
 }
 
 .menina-laranja {
-    margin-top: 158px
+    margin-top: 17.2301vh;
 }
 
 .adicionar-contato-btn {
@@ -42,6 +42,7 @@ p {
     top: 82%;
     left: 80%;
     transform: translate(-50%, -50%);
+
 }
 
 .icone-mais {
@@ -50,13 +51,13 @@ p {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    width: 45px;
-    height: 45px;
+    width: 10.8695vw;
+    height: 4.9073vh;
 }
 
 .contatos-texto-explicativo {
   color: white;
-  font-size: 16px;
+  font-size: 3.8647vw;
   font-style: normal;
   font-weight: 700;
   position: absolute;
@@ -64,7 +65,7 @@ p {
   left: 55%;
   transform: translate(-50%, -50%);
   text-align: center;
-  width: 246px;
+  width: 59.42vw;
 }
 
 .contatos-footer {
@@ -76,24 +77,24 @@ p {
   align-items: center;
   background-color: #D9D9D9;
   width: 100%;
-  height: 8.83%;
+  height: 8.8331vh;
 }
 
 ion-button.inicio-btn {
   all: unset;
-  width: 82.3906px;
-  height: 91.375px;
+  width: 19.9012vw;
+  height: 9.9645vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24.7188px;
-  margin-right: 130px;
+  margin-top: 2.6956vh;
+  margin-right: 31.401vw;
   --background: transparent;
   --box-shadow: transparent;
 
   .inicio-btn-div {
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -102,11 +103,11 @@ ion-button.inicio-btn {
   }
 
   .inicio-svg {
-  height: 48px;
-  width: 91.375px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 5.2344vh;
+    width: 22.0712vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .inicio-texto {
@@ -114,22 +115,23 @@ ion-button.inicio-btn {
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    width: 82.375px;
-    height: 91.375px;
-    font-size: 12px;
+    width: 19.9012vw;
+    height: 9.9645vh;
+    font-size: 2.8985vw;
     display: flex;
     justify-content: center;
     color: #737373;
-    margin-top: 3px;
+    margin-top: 0.327vh;
   }
 }
 
 .audio-scss {
   position: absolute;
   top: 30%;
-  left: 31%;
+  left: 26%;
   z-index: 1;
-  width: 65%;
+  width: 70vw;
+  height: 5.89vh;
   display: none;
 }
 
@@ -144,7 +146,7 @@ ion-button.inicio-btn {
   display: flex;
   justify-content: center;
   width: 74.157vw;
-  height: 55.556vw;
+  height: 25.0818vh;
   flex-shrink: 0;
   background-color: #FFF;
   border: 2px solid #EDB192;
@@ -161,7 +163,7 @@ ion-button.inicio-btn {
 
 .fotoPerfil {
   width: 17.876vw;
-  height: 17.876vw;
+  height: 8.0698vh;
   flex-shrink: 0;
   position: fixed;
   aspect-ratio: 1 / 1;
@@ -193,7 +195,7 @@ ion-button.inicio-btn {
 }
 
 .contato-telefone {
-    font-size: 17px;
+    font-size: 4.1063vw;
     color: black;
     font-weight: 700;
     position: fixed;
@@ -204,12 +206,12 @@ ion-button.inicio-btn {
 }
 
 .call-icon {
-  margin-right: 5px;
+  margin-right: 1.20773vw;
 }
 
 .contato-audio {
   width: 66.667vw;
-  height: 9.663vw;
+  height: 4.362vh;
   position: fixed;
   top: 55%;
   left: 5%;
@@ -227,14 +229,14 @@ ion-button.inicio-btn {
     top: 78%;
     left: 29%;
     width: 48.31vw;
-    height: 10.87vw;
+    height: 4.9073vh;
 }
 
 .location {
   position: fixed;
   top: 75%;
   left: 8%;
-  height: 12.803vw;
+  height: 5.78vh;
   width: 12.803vw;
 }
 
@@ -260,10 +262,10 @@ ion-button.inicio-btn {
 }
 
 .loading {
-  font-size: 20px;
+  font-size: 4.831vw;
   font-weight: 600;
   position: fixed;
   top: 40%;
   left: 24%;
-  width: 250px;
+  width: 60.386vw;
 }
