@@ -5,8 +5,8 @@
     left: 18%; /* ajusta a posição horizontal */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 60px; /* tamanho da imagem */
-    height: 60px;
+    width: 14.4927vw; /* tamanho da imagem */
+    height: 6.543vh;
   }
 
   .categoria-header-text {
@@ -19,26 +19,26 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #000;
     font-family: "Open Sans", sans-serif;
-    font-size: 25px;
+    font-size: 6.0386vw;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    width: 210px;
+    width: 50.3598vw;
   }
 
 
   .flashcard {
-    width: 308px;
-    height: 397px;
-    perspective: 1000px; /* efeito 3D */
+    width: 74.3961vw;
+    height: 45.8015vh;
+    perspective: 241.5459vw; /* efeito 3D */
     position: absolute;
-    top: 57%;
+    top: 59%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
 
   .flashcard-titulo{
-    margin-top: 35px;
+    margin-top: 3.8168vh;
   }
 
   .flashcard-inner {
@@ -56,8 +56,8 @@
 .flashcard-front,
 .flashcard-back {
   position: absolute;
-   width: 98%;
-  height: 91%;
+   width: 72.947vw;
+  height: 41.7667vh;
   top: 50%;
   left: 50%;
   top: 0;
@@ -70,7 +70,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 3.8647vw;
   color: #fff;
   background-color: #9C3FC3;
 }
@@ -81,38 +81,38 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 18px;
+    font-size: 4.3478vw;
     font-weight: 600;
   }
 
   /* botão editar dentro do flashcard */
   .flashcard .editar-btn {
     position: absolute;
-    top: 8px;
-    left: 8px;
+    top: 0.8724vh;
+    left: 1.9323vw;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 1.45vw;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
-    padding: 4px 8px;
+    padding: 0.4362vh 1.932vw;
     height: auto;
     z-index: 10;
   }
 
   .flashcard .editar-btn img {
-    width: 22px;
-    height: 22px;
+    width: 5.314vw;
+    height: 2.4vh;
   }
 
   .flashcard .editar-btn span {
-    font-size: 14px;
+    font-size: 3.3816vw;
     font-weight: 600;
     color: #fff;
   }
 
 .flashcard-sem-midia {
-  font-size: 20px;
+  font-size: 4.831vw;
 }
 
 .alerta-confirmacao {
@@ -121,9 +121,9 @@
   left: 61%;
   transform: translate(-50%, -50%);
   background-color: #9C3FC3;
-  width: 282.217px;
-  height: 82px;
-  border-radius: 38px;
+  width: 68.1683vw;
+  height: 8.9422vh;
+  border-radius: 9.1787vw;
   z-index: 2;
   display: flex;
   justify-content: center;
@@ -132,24 +132,24 @@
 }
 
 .alerta-confirmacao-texto {
-  font-size: 16px;
-  height: 18.5px;
-  margin-top: 12px;
+  font-size: 3.8647vw;
+  height: 2.0174vh;
+  margin-top: 1.3086vh;
   color: white;
 }
 
 .alerta-confirmacao-btns {
-  height: 30px;
+  height: 3.2715vh;
   display: flex;
   flex-direction: row;
-  margin-top: 8px;
+  margin-top: 0.8724vh;
 }
 
 .alerta-confirmacao-sim-btn {
   all: unset;
   --background: transparent;
   --box-shadow: transparent;
-  margin-right: 41px;
+  margin-right: 9.90338vw;
   color: white;
 }
 
@@ -161,18 +161,18 @@
 }
 
 .alerta-confirmacao-sucesso {
-  width: 274.563px;
-  height: 67px;
+  width: 66.32vw;
+  height: 7.3064vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
+  font-size: 3.8647vw;
   position: absolute;
   top: 67%;
   left: 61%;
   transform: translate(-50%, -50%);
   background-color: #9C3FC3;
-  border-radius: 38px;
+  border-radius: 9.1787vw;
   z-index: 2;
   visibility: hidden;
 }
@@ -183,7 +183,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-height: 70%;
+    max-height: 40.24vh;
     width: 100%;
     overflow: hidden;
     border-radius: 8px;
@@ -198,13 +198,13 @@
   }
 
   .flashcard-conteudo audio {
-    width: 90%;
+    width: 90vw;
   }
 
   /* áudio obrigatório embaixo */
   .flashcard-audio {
     width: 100%;
-    margin-top: 8px;
+    margin-top: 0.8724vh;
   }
 
   .flashcard-audio audio {
@@ -217,17 +217,17 @@
     flex-direction: column;   /* ícone em cima, texto embaixo */
     align-items: flex-end;    /* mantém no canto direito */
     width: 100%;
-    margin-bottom: 4px;       /* espaço antes do áudio */
+    margin-bottom: 0.4362vh;       /* espaço antes do áudio */
   }
 
   /* botão */
   .curiosidade-btn {
     --background: transparent;
     --box-shadow: none;
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    min-height: 28px;
+    width: 6.7633vw;
+    height: 3.0534vh;
+    min-width: 6.7633vw;
+    min-height: 3.0534vh;
     padding: 0;
     color: #FFF;
     display: flex;
@@ -237,10 +237,10 @@
 
   /* texto */
   .curiosidade-texto {
-    font-size: 12px;   /* pequeno */
+    font-size: 2.8985vw;   /* pequeno */
     font-weight: 500;
     color: #FFF;
-    margin-top: 2px;   /* espaço entre o botão e o texto */
+    margin-top: 0.2181vh;   /* espaço entre o botão e o texto */
     text-align: center;
   }
 
@@ -255,7 +255,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 16px;
+    padding: 3.8647vw;
     z-index: 20; /* acima de tudo */
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
@@ -264,16 +264,16 @@
 
   /* Conteúdo da curiosidade */
   .curiosidade-conteudo p {
-    font-size: 16px;
+    font-size: 3.8647vw;
     font-weight: 600;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 2.181vh;
   }
 
   /* Botão fechar curiosidade */
   .fechar-curiosidade-btn {
-    width: 120px;
-    height: 40px;
+    width: 28.9855vw;
+    height: 4.362vh;
     --border-radius: 12px;
     --background: #9C3FC3;
     --color: #fff;
@@ -282,13 +282,13 @@
   /* --- BOTÕES DEBAIXO DO FLASHCARD --- */
   .botoes-container {
     position: absolute;
-    top: calc(50% + 240px); /* acompanha o flashcard */
+    top: calc(50% + 26.1723vh); /* acompanha o flashcard */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 9.662vw;
     text-align: center;
   }
 
@@ -299,7 +299,7 @@
   }
 
   .botao-com-texto p {
-    font-size: 14px;
+    font-size: 3.3816vw;
     font-weight: 600;
     color: #000;
   }
@@ -312,7 +312,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 9.662vw;
     text-align: center;
   }
 
@@ -324,8 +324,8 @@
     --box-shadow: none;
     --border-width: 0;
     --border-style: none;
-    width: 70px;
-    height: 70px;
+    width: 16.908vw;
+    height: 7.6336vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -359,24 +359,24 @@
     align-items: center;
     background-color: #D9D9D9;
     width: 100%;
-    height: 81px;
-    }
+    height: 8.8331vh;
+  }
 
     ion-button.voltar-btn {
     all: unset;
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 24.7188px;
-    margin-right: 40px;
+    margin-top: 2.6956vh;
+    margin-right: 9.662vw;
     --background: transparent;
     --box-shadow: transparent;
 
     .voltar-btn-div {
-      width: 82.3906px;
-      height: 91.375px;
+      width: 19.9012vw;
+      height: 9.9645vh;
       background-color: transparent;
       display: flex;
       flex-direction: column;
@@ -385,8 +385,8 @@
     }
 
     .voltar-svg {
-      height: 48px;
-      width: 91.375px;
+      height: 5.2344vh;
+      width: 22.0712vw;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -397,31 +397,31 @@
       font-optical-sizing: auto;
       font-weight: 700;
       font-style: normal;
-      width: 82.375px;
-      height: 91.375px;
-      font-size: 12px;
+      width: 19.8973vw;
+      height: 9.9645vh;
+      font-size: 2.8985vw;
       display: flex;
       justify-content: center;
       color: #737373;
-      margin-top: 3px;
+      margin-top: 0.327vh;
     }
     }
 
     ion-button.inicio-btn {
     all: unset;
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 24.7188px;
-    margin-right: 40px;
+    margin-top: 2.6956vh;
+    margin-right: 9.662vw;
     --background: transparent;
     --box-shadow: transparent;
 
     .inicio-btn-div {
-      width: 82.3906px;
-      height: 91.375px;
+      width: 19.9012vw;
+      height: 9.9645vh;
       background-color: transparent;
       display: flex;
       flex-direction: column;
@@ -430,8 +430,8 @@
     }
 
     .inicio-svg {
-      height: 48px;
-      width: 91.375px;
+      height: 5.2344vh;
+      width: 22.0712vw;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -442,13 +442,13 @@
       font-optical-sizing: auto;
       font-weight: 700;
       font-style: normal;
-      width: 82.375px;
-      height: 91.375px;
-      font-size: 12px;
+      width: 19.8973vw;
+      height: 9.9645vh;
+      font-size: 2.8985vw;
       display: flex;
       justify-content: center;
       color: #737373;
-      margin-top: 3px;
+      margin-top: 0.327vh;
     }
   }
 
@@ -459,9 +459,10 @@
 .audio-scss {
   position: absolute;
   top: 28.3%;
-  left: 32.25%;
+  left: 27.8%;
   z-index: 1;
-  width: 65%;
+  width: 68.5vw;
+  height: 5.89vh;
   display: none;
 }
 
