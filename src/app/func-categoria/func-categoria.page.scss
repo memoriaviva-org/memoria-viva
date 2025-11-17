@@ -5,8 +5,8 @@
     left: 18%;      /* ajusta horizontalmente */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 80px;    /* largura da imagem da categoria */
-    height: 70px;   /* altura da imagem da categoria */
+    width: 19.3236vw;    /* largura da imagem da categoria */
+    height: 7.6336vh; /* altura da imagem da categoria */
     object-fit: cover;
     border-radius: 8px; /* opcional, arredonda cantos */
   }
@@ -17,8 +17,8 @@
     left: 18%;      /* ajusta horizontalmente */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 86px;    /* largura da imagem da categoria */
-    height: 82px;   /* altura da imagem da categoria */
+    width: 20.773vw;   /* largura da imagem da categoria */
+    height: 8.9422vh;  /* altura da imagem da categoria */
     // object-fit: cover;
     border-radius: 8px;
   }
@@ -29,8 +29,8 @@
     left: 18%;      /* ajusta horizontalmente */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 67px;    /* largura da imagem da categoria */
-    height: 82px;   /* altura da imagem da categoria */
+    width: 16.1835vw;    /* largura da imagem da categoria */
+    height: 8.9422vh;  /* altura da imagem da categoria */
     // object-fit: cover;
     border-radius: 8px;
   }
@@ -41,8 +41,8 @@
     left: 18%;      /* ajusta horizontalmente */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 82px;    /* largura da imagem da categoria */
-    height: 82px;   /* altura da imagem da categoria */
+    width: 19.80676vw;   /* largura da imagem da categoria */
+    height: 8.9422vh;  /* altura da imagem da categoria */
     // object-fit: cover;
     border-radius: 8px;
   }
@@ -53,8 +53,8 @@
     left: 18%;      /* ajusta horizontalmente */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 79px;    /* largura da imagem da categoria */
-    height: 82px;   /* altura da imagem da categoria */
+    width: 19.0821vw;    /* largura da imagem da categoria */
+    height: 8.9422vh;   /* altura da imagem da categoria */
     // object-fit: cover;
     border-radius: 8px;
   }
@@ -65,8 +65,8 @@
     left: 18%;      /* ajusta horizontalmente */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 82px;    /* largura da imagem da categoria */
-    height: 82px;   /* altura da imagem da categoria */
+    width: 19.80676vw;    /* largura da imagem da categoria */
+    height: 8.9422vh;   /* altura da imagem da categoria */
     // object-fit: cover;
     border-radius: 8px;
   }
@@ -77,8 +77,8 @@
     left: 18%;      /* ajusta horizontalmente */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 75px;    /* largura da imagem da categoria */
-    height: 82px;   /* altura da imagem da categoria */
+    width: 18.116vw;    /* largura da imagem da categoria */
+    height: 8.9422vh;   /* altura da imagem da categoria */
     // object-fit: cover;
     border-radius: 8px;
   }
@@ -89,8 +89,8 @@
     left: 18%;      /* ajusta horizontalmente */
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 82px;    /* largura da imagem da categoria */
-    height: 82px;   /* altura da imagem da categoria */
+    width: 19.80676vw;    /* largura da imagem da categoria */
+    height: 8.9422vh;   /* altura da imagem da categoria */
     // object-fit: cover;
     border-radius: 8px;
   }
@@ -130,7 +130,7 @@
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #000;
       font-family: "Open Sans", sans-serif;
-      font-size: 25px;
+      font-size: 6.0386vw;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
@@ -150,6 +150,7 @@
       font-style: normal;
       font-weight: 700;
       line-height: normal;
+      margin-top: 1vh;
   }
 
   .config-audio-btn {
@@ -158,15 +159,15 @@
       justify-content: center;
       align-items: center;
       width: 61.5944vw;
-      height: 16.909vw;
+      height: 7.6336vh;
       background-color: #9C3FC3;
-      margin-top: 38.3383vw;
-      border-radius: 20px;
+      margin-top: 17.3391vh;
+      border-radius: 4.831vw;
   }
 
   .config-audio-text {
-    margin-left: 31px;
-    margin-right: 68px;
+    margin-left: 7.488vw;
+    margin-right: 16.425vw;
     font-family: "Open Sans", sans-serif;
   }
 
@@ -176,10 +177,10 @@
       justify-content: center;
       align-items: center;
       width: 61.5944vw;
-      height: 16.909vw;
+      height: 7.6336vh;
       background-color: #9C3FC3;
-      margin-top: 9.662vw;
-      border-radius: 20px;
+      margin-top: 4.362vh;
+      border-radius: 4.831vw;
   }
 
   .deletar-btn{
@@ -188,44 +189,44 @@
     justify-content: center;
     align-items: center;
     width: 61.5944vw;
-    height: 16.909vw;
+    height: 7.6336vh;
     background-color: #DB6326;
-    margin-top: 10.87vw;
-    border-radius: 20px;
+    margin-top: 4.9073vh;
+    border-radius: 4.831vw;
   }
 
   .bonequinho-img {
-    width: 40px;
-    height: 36px;
-    margin-left: 11px;
-    margin-right: 18px;
+    width: 9.662vw;
+    height: 3.926vh;
+    margin-left: 2.657vw;
+    margin-right: 4.3478vw;
   }
 
   .fazer-flashcards-img {
-    margin-left: 32px;
-    margin-right: -8px;
+    margin-left: 7.7294vw;
+    margin-right: -1.93236vw;
   }
 
   .adicionar-flashcards-svg {
-    margin-left: -1px;
-    margin-right: 10px;
+    margin-left: -0.2415vw;
+    margin-right: 2.415vw;
   }
 
   .deletar-flashcards-svg {
-    margin-right: 10px;
-    width: 45px;
-    height: 45px;
+    margin-right: 2.415vw;
+    width: 10.87vw;
+    height: 4.9073vh;
   }
 
 
   ion-icon {
-    width: 60px;
-    height: 60px;
+    width: 14.4927vw;
+    height: 6.543vh;
   }
 
   .config-perfil-text {
-    margin-left: -22px;
-    margin-right: 13px;
+    margin-left: -5.314vw;
+    margin-right: 3.14vw;
     font-family: "Open Sans", sans-serif;
     width: 39vw;
   }
@@ -239,24 +240,24 @@
     align-items: center;
     background-color: #D9D9D9;
     width: 100%;
-    height: 8.83%;
-    }
+    height: 8.8331vh;
+  }
 
-    ion-button.voltar-btn {
+  ion-button.voltar-btn {
     all: unset;
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 24.7188px;
-    margin-right: 40px;
+    margin-top: 2.6956vh;
+    margin-right: 9.662vw;
     --background: transparent;
     --box-shadow: transparent;
 
     .voltar-btn-div {
-      width: 82.3906px;
-      height: 91.375px;
+      width: 19.9012vw;
+      height: 9.9645vh;
       background-color: transparent;
       display: flex;
       flex-direction: column;
@@ -265,8 +266,8 @@
     }
 
     .voltar-svg {
-      height: 48px;
-      width: 91.375px;
+      height: 5.2344vh;
+      width: 22.0712vw;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -277,31 +278,31 @@
       font-optical-sizing: auto;
       font-weight: 700;
       font-style: normal;
-      width: 82.375px;
-      height: 91.375px;
-      font-size: 12px;
+      width: 19.8973vw;
+      height: 9.9645vh;
+      font-size: 2.8985vw;
       display: flex;
       justify-content: center;
       color: #737373;
-      margin-top: 3px;
+      margin-top: 0.327vh;
     }
     }
 
     ion-button.inicio-btn {
     all: unset;
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 24.7188px;
-    margin-right: 40px;
+    margin-top: 2.6956vh;
+    margin-right: 9.662vw;
     --background: transparent;
     --box-shadow: transparent;
 
     .inicio-btn-div {
-      width: 82.3906px;
-      height: 91.375px;
+      width: 19.9012vw;
+      height: 9.9645vh;
       background-color: transparent;
       display: flex;
       flex-direction: column;
@@ -310,8 +311,8 @@
     }
 
     .inicio-svg {
-      height: 48px;
-      width: 91.375px;
+      height: 5.2344vh;
+      width: 22.0712vw;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -322,13 +323,13 @@
       font-optical-sizing: auto;
       font-weight: 700;
       font-style: normal;
-      width: 82.375px;
-      height: 91.375px;
-      font-size: 12px;
+      width: 19.8973vw;
+      height: 9.9645vh;
+      font-size: 2.8985vw;
       display: flex;
       justify-content: center;
       color: #737373;
-      margin-top: 3px;
+      margin-top: 0.327vh;
     }
   }
 
@@ -338,10 +339,11 @@
 
 .audio-scss {
   position: absolute;
-  top: 30%;
-  left: 31%;
+  top: 29%;
+  left: 26%;
   z-index: 1;
-  width: 65%;
+  width: 70vw;
+  height: 5.89vh;
   display: none;
 }
 
