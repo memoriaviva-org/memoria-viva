@@ -6,7 +6,10 @@ import { Auth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class AudioPreferenceService {
-  constructor(private firestore: Firestore, private auth: Auth) {}
+
+  constructor(
+    private firestore: Firestore, 
+    private auth: Auth) {}
 
   /** Define a preferência do usuário (true = auto, false = manual) */
   async setAutoPlay(value: boolean) {

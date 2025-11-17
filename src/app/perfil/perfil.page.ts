@@ -79,7 +79,7 @@ export class PerfilPage implements OnInit {
     this.mostrarJanela = false;
   }
 
-  voltar() {
+  voltar1() {
     this.navCtrl.back();
   }
 

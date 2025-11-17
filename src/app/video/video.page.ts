@@ -1,39 +1,28 @@
-import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ViewChild } from '@angular/core';
-import { ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AudioPreferenceService } from '../services/audio-preference.service';
+import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-video',
   templateUrl: './video.page.html',
   styleUrls: ['./video.page.scss'],
-  standalone: true,
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule
-  ],
+  standalone: false
 })
-
-
-
-  export class VideoPage {
-
-  constructor(
-    private audioPref: AudioPreferenceService,
-    private router: Router
-  ) {}
+export class VideoPage {
   videoStarted = false;
+  showPlay = false;
 
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
-  showPlay = false;
-
+  constructor(
+    private audioPref: AudioPreferenceService,
+    private router: Router,
+    private firestore: Firestore,
+    private auth: Auth
+  ) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -45,18 +34,22 @@ import { AudioPreferenceService } from '../services/audio-preference.service';
     this.videoStarted = true;
     setTimeout(() => {
       this.videoPlayer?.nativeElement.play();
-    }, 100); // pequeno delay p/ garantir renderização
+    }, 100);
   }
-
 
   toggleAudio() {
     this.audioPref.toggleAudio(this.audioPlayer);
   }
 
-  escolher(auto: boolean) {
-    this.audioPref.setAutoPlay(auto);
-    this.router.navigate(['/principal']); // ou rota desejada
+  async escolher(auto: boolean) {
+    await this.audioPref.setAutoPlay(auto);
+
+    const user = this.auth.currentUser;
+    if (user) {
+      const ref = doc(this.firestore, `users/${user.uid}`);
+      await updateDoc(ref, { audioConfigured: true });
+    }
+
+    this.router.navigate(['/principal']);
   }
-
 }
-
