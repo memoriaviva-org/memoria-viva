@@ -1,7 +1,7 @@
 
 .create-account-btn {
-  height: 13.527vw;
-  padding: 0 32px;
+  height: 6.10687vh;
+  padding: 0 7.73vw;
   font-size: 4.831vw;
   font-weight: 600;
   border-radius: 10px;
@@ -17,10 +17,10 @@
 
 .social-btn {
   width: 67.633vw;
-  height: 11.6vw;
+  height: 5.2344vh;
   font-weight: 600;
   justify-content: flex-start;
-  padding-left: 16px;
+  padding-left: 3.8647vw;
   border-radius: 1px;
   background: transparent;
   color: #000;
@@ -32,8 +32,8 @@
 }
 
 .social-btn ion-icon {
-  font-size: 24px;
-  margin-right: 12px;
+  font-size: 5.7971vw;
+  margin-right: 2.8985vw;
 }
 
 .facebook-icon {
@@ -45,25 +45,26 @@
 }
 
 .divider-container {
-  width: 280px;
+  width: 67.6328vw;
   text-align: center;
-  margin: 5px 0;
+  margin: 0.5452vw 0;
   position: relative;
 }
 
 .divider-text {
-  padding: 0 12px;
+  padding: 0 2.8985vw;
   position: relative;
-  top: 10px;
+  top: 1.09vh;
   font-weight: 600;
 }
 
 .audio-scss {
   position: absolute;
-  top: 30%;
-  left: 31%;
+  top: 29%;
+  left: 26.6%;
   z-index: 1;
-  width: 65%;
+  width: 70vw;
+  height: 5.89vh;
   display: none;
 }
 
