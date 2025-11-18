@@ -1,16 +1,16 @@
 .perfil-container {
     display: flex;
     flex-direction: column;
-    height: 120.773vw;
+    height: 54.5256vh;
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin-top: 12.0773vw;
+    margin-top: 5.4525vh;
 }
 
 .user-info {
     width: 74.3963vw;
-    height: 52.6571vw;
+    height: 23.773vh;
     --border-color: #9C3FC3;
     border: 0.5px solid var(--border-color);
     border-radius: 10px;
@@ -18,7 +18,7 @@
     stroke-width: 1px;
     stroke: #9C3FC3;
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
-    margin-top: 32.6087vw;
+    margin-top: 14.722vh;
     color: #000;
     font-family: Inter;
     font-style: normal;
@@ -29,44 +29,44 @@
 .secao-nome {
     display: flex;
     width: 74.3962vw;
-    height: 16.4252vw;
+    height: 7.4155vh;
     padding-left: 6.0386vw;
-    margin-top: 5.0724vw;
+    margin-top: 2.29vh;
 }
 
 .user-nome {
     font-size: 6.0386vw;
-    height: 7.2464vw;
-    width: 18.26vw;
+    height: 3.2715vh;
+    width: 18.37vw;
 }
 
 .nome {
     width: 42.996vw;
-    height: 13.2851vw;
+    height: 6vh;
     margin-left: 2.8986vw;
     font-size: 4.831vw;
     font-weight: 700;
-    margin-top: 0.845vw;
+    margin-top: 0.3816vh;
 }
 
 .secao-idade {
     display: flex;
     width: 74.3962vw;
-    height: 16.4252vw;
+    height: 7.4155vh;
     padding-left: 6.0386vw;
 }
 
 .user-idade {
     font-size: 6.0386vw;
-    height: 7.2464vw;
-    width: 18.116vw;
+    height: 3.2715vh;
+    width: 18.126vw;
 }
 
 .idade {
     width: 42.996vw;
-    height: 13.2851vw;
+    height: 6vh;
     margin-left: 2.8986vw;
-    margin-top: 1.0869vw;
+    margin-top: 0.49vh;
     font-size: 4.831vw;
     font-weight: 700;
 }
@@ -74,21 +74,21 @@
 .secao-email {
     display: flex;
     width: 74.3962vw;
-    height: 19.3237vw;
+    height: 8.7241vh;
     padding-left: 6.0386vw;
 }
 
 .user-email {
     font-size: 6.0386vw;
-    height: 7.2464vw;
-    width: 19.35vw;
+    height: 3.2715vh;
+    width: 19.46vw;
 }
 
 .email {
     width: 42.996vw;
-    height: 13.2851vw;
+    height: 6vh;
     margin-left: 2.4155vw;
-    margin-top: 0.9661vw;
+    margin-top: 0.4362vh;
     font-size: 4.831vw;
     font-weight: 700;
 }
@@ -96,10 +96,10 @@
 ion-button.premium-btn {
     all: unset;
     width: 59.4203vw;
-    height: 16.9083vw;
+    height: 7.6336vh;
     --border-radius: 4.831vw;
     --background: #DB6326;
-    margin-top: 10.869vw;
+    margin-top: 4.9073vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,21 +114,21 @@ ion-button.premium-btn {
 }
 
 .premium-svg {
-    margin-right: 16px;
+    margin-right: 3.8647vw;
 }
 
 .premium-text {
-    margin-right: 15px;
-    margin-top: 5px;
+    margin-right: 3.6232vw;
+    margin-top: 0.5452vh;
 }
 
 ion-button.atualizar-informacoes-btn {
   all: unset;
   width: 59.4203vw;
-  height: 16.9083vw;
+  height: 7.6336vh;
   --border-radius: 4.831vw;
   --background: #DB6326;
-  margin-top: 8.4541vw;
+  margin-top: 3.8168vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,12 +143,12 @@ ion-button.atualizar-informacoes-btn {
 }
 
 .atualizar-informacoes-svg {
-    margin-right: 27px;
+    margin-right: 6.5217vw;
 }
 
 .atualizar-informacoes-text {
-    margin-right: 19px;
-    margin-top: 5px;
+    margin-right: 4.59vw;
+    margin-top: 0.5452vh;
 }
 
 .perfil-footer {
@@ -160,24 +160,24 @@ ion-button.atualizar-informacoes-btn {
   align-items: center;
   background-color: #D9D9D9;
   width: 100%;
-  height: 8.83%;
+  height: 8.8331vh;
 }
 
 ion-button.voltar-btn {
   all: unset;
-  width: 82.3906px;
-  height: 91.375px;
+  width: 19.9012vw;
+  height: 9.9645vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24.7188px;
-  margin-right: 40px;
+  margin-top: 2.6956vh;
+  margin-right: 9.662vw;
   --background: transparent;
   --box-shadow: transparent;
 
   .voltar-btn-div {
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -186,8 +186,8 @@ ion-button.voltar-btn {
   }
 
   .voltar-svg {
-    height: 48px;
-    width: 91.375px;
+    height: 5.2344vh;
+    width: 22.0712vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -198,31 +198,31 @@ ion-button.voltar-btn {
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    width: 82.375px;
-    height: 91.375px;
-    font-size: 12px;
+    width: 19.897vw;
+    height: 9.9645vh;
+    font-size: 2.8985vw;
     display: flex;
     justify-content: center;
     color: #737373;
-    margin-top: 3px;
+    margin-top: 0.327vh;
   }
   }
 
   ion-button.inicio-btn {
   all: unset;
-  width: 82.3906px;
-  height: 91.375px;
+  width: 19.9012vw;
+  height: 9.9645vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24.7188px;
-  margin-right: 40px;
+  margin-top: 2.6956vh;
+  margin-right: 9.662vw;
   --background: transparent;
   --box-shadow: transparent;
 
   .inicio-btn-div {
-    width: 82.3906px;
-    height: 91.375px;
+    width: 19.9012vw;
+    height: 9.9645vh;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -231,8 +231,8 @@ ion-button.voltar-btn {
   }
 
   .inicio-svg {
-    height: 48px;
-    width: 91.375px;
+    height: 5.2344vh;
+    width: 22.0712vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -243,27 +243,28 @@ ion-button.voltar-btn {
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    width: 82.375px;
-    height: 91.375px;
-    font-size: 12px;
+    width: 19.897vw;
+    height: 9.9645vh;
+    font-size: 2.8985vw;
     display: flex;
     justify-content: center;
     color: #737373;
-    margin-top: 3px;
+    margin-top: 0.327vh;
   }
   }
 
 p {
   margin: 0;
-  margin-bottom: 5px;
+  margin-bottom: 0.5452vh;
 }
 
 .audio-scss {
   position: fixed;
-  top: 30%;
-  left: 31%;
+  top: 29%;
+  left: 26.6%;
   z-index: 1;
-  width: 65%;
+  width: 70vw;
+  height: 5.89vh;
   display: none;
 }
 
