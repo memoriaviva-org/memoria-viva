@@ -1,40 +1,41 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 20%;
-  padding: 10%;
+  gap: 3.6232vw;
+  margin-top: 8.051vh;
+  padding: 10vw;
   align-content: center;
 
   .floating-input {
     position: relative;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 1.6357vh;
 
     label {
       position: absolute;
-      left: 16px;
+      left: 3.8647vw;
       top: 50%;
       transform: translateY(-50%);
       color: #999;
       background: white;
-      padding: 0 4px;
+      padding: 0 0.9662vw;
       transition: 0.3s ease all;
       pointer-events: none;
-      font-size: 16px;
+      font-size: 3.8647vw;
       z-index: 1;
     }
 
     label.active {
-      top: -10px;
-      font-size: 14px;
+      top: -1.09vh;
+      font-size: 3.3816vw;
       color: #3679ff;
     }
 
     ion-input {
       width: 100%;
       --border-color: #9c3fc3;
-      height: 13.527vw;
+      height: 6.10687vh;
+      min-height: 6.10687vh;
       font-size: 4.348vw;
       font-weight: 400;
       border-radius: 10px;
@@ -45,27 +46,27 @@
 
     ion-icon {
       position: absolute;
-      right: 16px;
+      right: 3.8647vw;
       top: 50%;
       transform: translateY(-50%);
       z-index: 2;
       color: #333;
-      font-size: 20px;
-      margin-right: -42px;
+      font-size: 4.831vw;
+      margin-right: -10.145vw;
     }
   }
 
   .btn-entrar {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 1.09vh;
   }
 
   .custom-outline {
     color: black;
     --border-color: #9c3fc3;
     width: 45.894vw;
-    height: 13.527vw;
+    height: 6.10687vh;
     font-size: 4.831vw;
     font-weight: 700;
     border-radius: 10px;
@@ -80,10 +81,10 @@
   .link-senha,
   .link-cadastro {
     text-align: center;
-    font-size: 14px;
+    font-size: 3.7vw;
     color: #3679ff;
     text-decoration: none;
-    margin-top: 10px;
+    margin-top: 1.09vh;
   }
 }
 
@@ -93,7 +94,7 @@
 
 .app-footer {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 3.2715vh;
   font-weight: bold;
   color: #9c3fc3;
 }
@@ -102,7 +103,7 @@
 .btn-entrar {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 1.09vh;
 }
 
 .link-senha {
@@ -126,16 +127,17 @@
 }
 
 .mostrar-senha-icon {
-  margin-right: -25px;
+  margin-right: -6.0386vw;
   cursor: pointer;
 }
 
 .audio-scss {
   position: absolute;
-  top: 30%;
-  left: 31%;
+  top: 29%;
+  left: 26.6%;
   z-index: 1;
-  width: 65%;
+  width: 70vw;
+  height: 5.89vh;
   display: none;
 }
 
