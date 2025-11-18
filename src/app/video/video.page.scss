@@ -1,20 +1,20 @@
 .header-video {
   font-family: "Barlow Semi Condensed", sans-serif;
   font-weight: 700;
-  font-size: 35px;
+  font-size: 8.454vw;
   background-color: #9C3FC3;
   color: white;
   -webkit-text-stroke: 1px black;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 74px;
-  margin-bottom: 65px;
+  height: 8.07vh;
+  margin-bottom: 7.0883vh;
 }
 
 .play-img {
-  width: 110px;
-  height: 110px;
+  width: 26.57vw;
+  height: 12vh;
   opacity: 0;
   transition: opacity 1s ease-in;
 }
@@ -29,15 +29,17 @@
   align-items: center;
   background-color: #9C3FC3;
   margin: auto;
-  width: 308px;
-  height: 162px;
-  margin-bottom: 60px;
+  width: 74.3961vw;
+  height: 17.6663vh;
+  margin-bottom: 6.543vh;
 }
 
 .video-player {
   display: block;
   margin: auto;
-  border-radius: 8px;
+  border-radius: 1.93236vw;
+  width: 74.3961vw;
+  height: 17.6663vh;
 }
 
 .video-container {
@@ -45,15 +47,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 164.797px;
+  margin-top: 17.9713vh;
 }
 
 .btn-sim {
   all: unset;
   --background: transparent;
   --border-color: green;
-  width: 319px;
-  height: 85px;
+  width: 77.0531vw;
+  height: 9.27vh;
   font-family: "Barlow Semi Condensed", sans-serif;
   font-weight: 700;
   border: 0.5px solid var(--border-color);
@@ -62,15 +64,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 4.362vh;
 }
 
 .btn-nao {
   all: unset;
   --background: transparent;
   --border-color: red;
-  width: 319px;
-  height: 85px;
+  width: 77.0531vw;
+  height: 9.27vh;
   font-weight: 700;
   border: 0.5px solid var(--border-color);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -82,17 +84,18 @@
 
 p {
   color: #000;
-  font-size: 15px;
+  font-size: 3.6232vw;
   font-style: normal;
   font-weight: 700;
   font-family: "Barlow Semi Condensed", sans-serif;
-  margin-left: 10px;
+  margin-left: 2.2vw;
+  width: 59vw;
   text-align: left;
 }
 
 .audio-btn {
   bottom: 55%;
-  right: 30px;
+  right: 7.2463vw;
 }
 
 .audio-scss {
@@ -100,7 +103,8 @@ p {
   top: 38%;
   left: 30%;
   z-index: 1;
-  width: 272px;
+  width: 70vw;
+  height: 5.89vh;
   display: none;
 }
 
