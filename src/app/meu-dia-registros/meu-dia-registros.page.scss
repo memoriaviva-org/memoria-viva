@@ -1,7 +1,7 @@
 
 .video-preview,
 .video-player {
-  width: 70%;
+  width: 70vw;
   max-height: 32.715vh; /* ajuste conforme suas imagens */
   object-fit: cover;
   border-radius: 12px; /* mesmo arredondamento das imagens */
@@ -252,9 +252,10 @@ ion-button.inicio-btn {
 .audio-scss {
   position: absolute;
   top: 28.5%;
-  left: 28.65%;
+  left: 26.6%;
   z-index: 1;
-  width: 67vw;
+  width: 70vw;
+  height: 5.89vh;
   display: none;
 }
 
@@ -276,7 +277,7 @@ ion-button.inicio-btn {
 }
 
 .meu-dia-texto-explicativo {
-    width: 59%;
+    width: 59vw;
     color: white;
     font-size: 3.9vw;
     font-style: normal;
