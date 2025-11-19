@@ -5,6 +5,7 @@ import { AudioPreferenceService } from '../services/audio-preference.service';
 import { UserDataService } from '../services/user-data.service';
 import { BirthdateModalComponent } from '../components/birthdate-modal/birthdate-modal.component';
 import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
