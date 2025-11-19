@@ -323,8 +323,6 @@ export class CriarFlashcardPage implements OnInit {
     const MAX_SIZE_BYTES = 120000;
     this.maxSizeInKB2 = MAX_SIZE_BYTES / 1000;
     if (file.size > MAX_SIZE_BYTES) {
-      alert(`O arquivo de áudio é muito grande. O limite máximo é de ${MAX_SIZE_BYTES / 1000} KB.`);
-
       this.mostrarAlertArquivoAudioGrande = true;
 
       setTimeout(() => {
