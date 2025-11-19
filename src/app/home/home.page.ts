@@ -106,7 +106,7 @@ export class HomePage {
     }
   }
 
-  
+
   toggleAudio() {
     this.audioPref.toggleAudio(this.audioPlayer);
   }

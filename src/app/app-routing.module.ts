@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AudioSetupGuard } from './guards/audio-setup.guard';
+import { BirthdateGuard } from './guards/birthdate.guard';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
   {
     path: 'principal',
     loadChildren: () => import('./principal/principal.module').then(m => m.PrincipalPageModule),
-    canActivate: [AudioSetupGuard]
+    canActivate: [AudioSetupGuard, BirthdateGuard]
   },
   {
     path: 'tela-de-carregamento',

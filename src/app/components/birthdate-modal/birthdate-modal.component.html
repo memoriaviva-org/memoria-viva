@@ -1,0 +1,55 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    <!-- Cabeçalho -->
+    <div class="modal-header">
+      <div class="modal-icon">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+      <h2>Complete seu perfil</h2>
+      <p>Precisamos da sua data de nascimento para personalizar sua experiência</p>
+    </div>
+
+    <!-- Corpo -->
+    <div class="modal-body">
+      <ion-item class="custom-item">
+        <ion-label position="stacked" class="input-label">
+          Data de Nascimento *
+        </ion-label>
+        <ion-input
+          type="date"
+          [(ngModel)]="dataNascimento"
+          (ionInput)="onDateChange()"
+          [max]="maxDate"
+          [min]="minDate"
+          class="custom-input"
+          placeholder="Selecione sua data de nascimento"
+        ></ion-input>
+      </ion-item>
+
+      <div *ngIf="errorMessage" class="error-message">
+        <ion-icon name="warning-outline"></ion-icon>
+        <span>{{errorMessage}}</span>
+      </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="modal-footer">
+      <ion-button
+        expand="block"
+        (click)="saveBirthDate()"
+        [disabled]="!dataNascimento || isSaving"
+        class="save-button"
+        shape="round">
+        <ion-spinner *ngIf="isSaving" name="crescent"></ion-spinner>
+        <ion-icon *ngIf="!isSaving" name="checkmark-circle-outline" slot="start"></ion-icon>
+        {{ isSaving ? 'Salvando...' : 'Continuar para o App' }}
+      </ion-button>
+
+      <div class="security-note">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <span>Suas informações estão seguras conosco</span>
+      </div>
+    </div>
+  </div>
+</div>

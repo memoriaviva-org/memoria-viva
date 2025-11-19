@@ -1,0 +1,146 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 24px;
+
+  .modal-icon {
+    font-size: 48px;
+    color: var(--ion-color-primary);
+    margin-bottom: 16px;
+
+    ion-icon {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  h2 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.5em;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+}
+
+.modal-body {
+  margin-bottom: 24px;
+}
+
+.custom-item {
+  --background: #f8f9fa;
+  --border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  margin-bottom: 16px;
+
+  .input-label {
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+}
+
+.custom-input {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+.error-message {
+  background: #ffecec;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  padding: 12px;
+  color: #d00000;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  ion-icon {
+    font-size: 1.2em;
+    flex-shrink: 0;
+  }
+}
+
+.modal-footer {
+  text-align: center;
+
+  .save-button {
+    --border-radius: 12px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    margin-bottom: 16px;
+    font-weight: 600;
+
+    &:not([disabled]) {
+      --background: var(--ion-color-primary);
+    }
+  }
+
+  .security-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.8em;
+    color: #666;
+
+    ion-icon {
+      font-size: 0.9em;
+      color: #4caf50;
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 480px) {
+  .modal-content {
+    margin: 10px;
+    padding: 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.3em;
+  }
+}
