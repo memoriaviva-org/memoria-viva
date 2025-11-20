@@ -14,6 +14,7 @@ import {
   User,
   signInWithPopup
 } from '@angular/fire/auth';
+import { take } from 'rxjs/operators';
 
 import { FacebookLogin } from '@capacitor-community/facebook-login';
 import { FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
@@ -56,8 +57,8 @@ export class AuthService {
     return cred;
   }
 
-  // Cadastro de usuário - CORRIGIDO
-  async register(email: string, senha: string, nome: string, dataNasc: Date) { // Alterado para Date
+  // Cadastro de usuário
+  async register(email: string, senha: string, nome: string, dataNasc: Date) {
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, senha);
 
     if (userCredential.user) {
@@ -69,7 +70,7 @@ export class AuthService {
       await setDoc(doc(this.firestore, `users/${uid}`), {
         nome,
         email,
-        dataNasc: Timestamp.fromDate(dataNasc)  // converte Date para Timestamp
+        dataNasc: Timestamp.fromDate(dataNasc)
       }, { merge: true });
     }
 
@@ -87,6 +88,21 @@ export class AuthService {
     const cred = await signInWithPopup(this.auth, provider);
 
     if (cred.user) {
+      // VERIFICA SE JÁ TEM DADOS NO FIRESTORE
+      const userData = await this.getUserData(cred.user.uid);
+      
+      // SE NÃO TEM DADOS, CRIA DOCUMENTO BÁSICO SEM dataNasc
+      if (!userData) {
+        await setDoc(doc(this.firestore, `users/${cred.user.uid}`), {
+          nome: cred.user.displayName || '',
+          email: cred.user.email || '',
+          foto: cred.user.photoURL || '',
+          provider: 'google',
+          dataCriacao: Timestamp.fromDate(new Date())
+          // dataNasc NÃO é definido aqui - será preenchido no modal
+        }, { merge: true });
+      }
+
       await this.notificacaoService.solicitarPermissao();
       await this.notificacaoService.agendarBoasVindas();
       await this.notificacaoService.agendarNotificacaoPeriodica();
@@ -98,10 +114,8 @@ export class AuthService {
   }
 
   async loginWithFacebook() {
-    // tenta login via Capacitor plugin
     const result = await FacebookLogin.login({ permissions: ['email', 'public_profile'] });
 
-    // pega o token independentemente da estrutura retornada
     const accessToken =
       result?.accessToken?.token ||
       (result as any)?.accessToken ||
@@ -111,16 +125,31 @@ export class AuthService {
       throw new Error('Login cancelado ou falhou.');
     }
 
-    // cria credencial e autentica no Firebase usando a instância injetada this.auth
     const credential = FacebookAuthProvider.credential(accessToken);
     const userCredential = await signInWithCredential(this.auth, credential);
 
-    // rotina de notificações (mesma que você usa nos outros logins)
-    await this.notificacaoService.solicitarPermissao();
-    await this.notificacaoService.agendarBoasVindas();
-    await this.notificacaoService.agendarNotificacaoPeriodica();
-    await this.notificacaoService.cancelarInatividade();
-    await this.notificacaoService.agendarNotificacaoInatividade();
+    if (userCredential.user) {
+      // VERIFICA SE JÁ TEM DADOS NO FIRESTORE
+      const userData = await this.getUserData(userCredential.user.uid);
+      
+      // SE NÃO TEM DADOS, CRIA DOCUMENTO BÁSICO SEM dataNasc
+      if (!userData) {
+        await setDoc(doc(this.firestore, `users/${userCredential.user.uid}`), {
+          nome: userCredential.user.displayName || '',
+          email: userCredential.user.email || '',
+          foto: userCredential.user.photoURL || '',
+          provider: 'facebook',
+          dataCriacao: Timestamp.fromDate(new Date())
+          // dataNasc NÃO é definido aqui - será preenchido no modal
+        }, { merge: true });
+      }
+
+      await this.notificacaoService.solicitarPermissao();
+      await this.notificacaoService.agendarBoasVindas();
+      await this.notificacaoService.agendarNotificacaoPeriodica();
+      await this.notificacaoService.cancelarInatividade();
+      await this.notificacaoService.agendarNotificacaoInatividade();
+    }
 
     return userCredential;
   }
@@ -128,6 +157,16 @@ export class AuthService {
   // Observable do usuário atual
   getCurrentUser(): Observable<User | null> {
     return user(this.auth);
+  }
+
+  // NOVO MÉTODO: Para pegar o usuário atual uma vez (resolve o problema do toPromise)
+  getCurrentUserOnce(): Promise<User | null> {
+    return new Promise((resolve) => {
+      this.getCurrentUser().pipe(take(1)).subscribe({
+        next: (user) => resolve(user),
+        error: () => resolve(null)
+      });
+    });
   }
 
   // Buscar dados do usuário no Firestore
@@ -171,7 +210,8 @@ export class AuthService {
 
   // Atualizar nome e data de nascimento do usuário - CORRIGIDO
   async updateUserData(nome: string, dataNasc: Date) {
-    const user = await firstValueFrom(this.getCurrentUser());
+    // USE O NOVO MÉTODO AQUI TAMBÉM
+    const user = await this.getCurrentUserOnce();
     if (!user) throw new Error('Usuário não autenticado.');
 
     const userRef = doc(this.firestore, `users/${user.uid}`);
@@ -183,7 +223,6 @@ export class AuthService {
 
     await updateProfile(user, { displayName: nome });
   }
-
 
   // Atualizar email do usuário
   async updateUserEmail(newEmail: string, password?: string) {

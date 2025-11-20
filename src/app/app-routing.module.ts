@@ -107,9 +107,11 @@ const routes: Routes = [
   {
     path: 'gerenciar-flashcards',
     loadChildren: () => import('./gerenciar-flashcards/gerenciar-flashcards.module').then( m => m.GerenciarFlashcardsPageModule)
+  },
+  {
+    path: 'aniversario',
+    loadChildren: () => import('./aniversario/aniversario.module').then(m => m.AniversarioPageModule)
   }
-
-
 ];
 
 @NgModule({

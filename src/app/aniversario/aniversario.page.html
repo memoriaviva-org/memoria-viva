@@ -1,0 +1,71 @@
+<ion-content class="aniversario-container" fullscreen>
+  <div class="header-svg-container">
+    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="39.8037vh" viewBox="0 0 412 365" fill="none">
+      <path d="M-35 -18H621V365C433.901 115.251 174.347 172.943 -35 365V-18Z" fill="#9C3FC3"/>
+    </svg>
+    <img src="assets/img/bonequinho.png" alt="Logo" class="header-logo" />
+  </div>
+
+  <ion-button class="audio-btn" fill="solid" (click)="toggleAudio()">
+    <ion-icon name="volume-high" slot="icon-only"></ion-icon>
+  </ion-button>
+
+  <audio class="audio-scss" #audioPlayer src="assets/audio/audio-teste.m4a" controls></audio>
+
+   <div class="btn-container aniversario-content">
+    
+    <!-- Cabeçalho -->
+    <div class="header-section">
+      <div class="icon-container">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+      <h1>Qual seu aniversário?</h1>
+      <p>Nos conte quando você nasceu para personalizarmos sua experiência</p>
+    </div>
+
+    <!-- Formulário -->
+    <div class="form-section">
+      <ion-item class="custom-item">
+        <ion-label position="stacked">Data de Aniversário *</ion-label>
+        <ion-input
+          type="date"
+          [(ngModel)]="dataNascimento"
+          (ionInput)="onDateChange()"
+          [max]="maxDate"
+          [min]="minDate"
+          placeholder="Selecione sua data de aniversário"
+        ></ion-input>
+      </ion-item>
+
+      <div *ngIf="errorMessage" class="error-message">
+        <ion-icon name="warning-outline"></ion-icon>
+        <span>{{errorMessage}}</span>
+      </div>
+    </div>
+
+    <!-- Botão -->
+    <div class="button-section">
+      <ion-button
+        expand="block"
+        (click)="salvarAniversario()"
+        [disabled]="!dataNascimento || isSaving"
+        class="create-account-btn"
+        fill="clear">
+        <ion-spinner *ngIf="isSaving" name="crescent"></ion-spinner>
+        {{ isSaving ? 'Salvando...' : 'Continuar' }}
+      </ion-button>
+
+      <div class="security-note">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <span>Seus dados estão seguros conosco</span>
+      </div>
+    </div>
+
+  </div>
+
+  <br />
+
+  <footer class="app-footer">
+    Memória Viva
+  </footer>
+</ion-content>

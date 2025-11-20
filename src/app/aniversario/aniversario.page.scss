@@ -1,0 +1,161 @@
+.audio-scss {
+  position: absolute;
+  top: 29.4%;
+  left: 26.6%;
+  z-index: 1;
+  width: 70vw;
+  height: 5.89vh;
+  display: none;
+}
+
+.audio-scss::-webkit-media-controls-panel {
+  background-color: #00FFFF;
+  filter: invert(1);
+}
+.aniversario-container {
+  --background: #ffffff;
+}
+
+.aniversario-content {
+  margin-top: -5vh;
+  padding: 0 6vw;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 4vh;
+}
+
+.icon-container {
+  font-size: 15.464vw;
+  color: #9C3FC3;
+  margin-bottom: 2vh;
+}
+
+.header-section h1 {
+  font-size: 6.28vw;
+  font-weight: 700;
+  margin-bottom: 1vh;
+  color: #000000;
+}
+
+.header-section p {
+  color: #666666;
+  font-size: 3.865vw;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.form-section {
+  margin-bottom: 4vh;
+}
+
+.custom-item {
+  --background: #f8f8f8;
+  --border-radius: 10px;
+  --padding-start: 4vw;
+  --padding-end: 4vw;
+  --inner-padding-end: 0;
+  margin-bottom: 2vh;
+  border: 1px solid #e0e0e0;
+}
+
+.custom-item ion-label {
+  font-size: 4.348vw;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 1vh;
+}
+
+.custom-item ion-input {
+  --padding-top: 1.5vh;
+  --padding-bottom: 1.5vh;
+  font-size: 4.348vw;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+  color: #ff4444;
+  font-size: 3.865vw;
+  margin-top: 1vh;
+  padding: 0 2vw;
+}
+
+.error-message ion-icon {
+  font-size: 4.831vw;
+}
+
+.button-section {
+  width: 100%;
+}
+
+.create-account-btn {
+  height: 6.10687vh;
+  padding: 0 7.73vw;
+  font-size: 4.831vw;
+  font-weight: 600;
+  border-radius: 10px;
+  background: transparent;
+  color: black;
+  --border-color: orange;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2vh;
+}
+
+.create-account-btn:disabled {
+  opacity: 0.6;
+}
+
+.security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  color: #999999;
+  font-size: 3.382vw;
+  text-align: center;
+}
+
+.security-note ion-icon {
+  font-size: 4.348vw;
+}
+
+.app-footer {
+  text-align: center;
+  color: #9C3FC3;
+  font-size: 4.831vw;
+  font-weight: 600;
+  margin-top: 2vh;
+  padding-bottom: 2vh;
+}
+
+/* Header styles mantidos da home */
+.header-svg-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.header-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25vw;
+  height: auto;
+  z-index: 2;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5vh;
+  margin-top: 15%;
+}
