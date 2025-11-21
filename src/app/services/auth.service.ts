@@ -16,10 +16,11 @@ import {
 } from '@angular/fire/auth';
 import { take } from 'rxjs/operators';
 
-import { FacebookLogin } from '@capacitor-community/facebook-login';
-import { FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
+
+import { FacebookAuthProvider, signInWithCredential, OAuthProvider } from 'firebase/auth';
 
 import { Timestamp } from 'firebase/firestore';
+
 
 import {
   Firestore,
@@ -34,13 +35,15 @@ import { user } from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   constructor(
     private auth: Auth,
     private firestore: Firestore,
     private notificacaoService: NotificacaoService
-  ) {}
+  )  {
+  }
 
   // Login com email e senha
   async login(email: string, senha: string) {
@@ -113,45 +116,69 @@ export class AuthService {
     return cred;
   }
 
-  async loginWithFacebook() {
-    const result = await FacebookLogin.login({ permissions: ['email', 'public_profile'] });
 
-    const accessToken =
-      result?.accessToken?.token ||
-      (result as any)?.accessToken ||
-      (result as any)?.authResponse?.accessToken;
-
-    if (!accessToken) {
-      throw new Error('Login cancelado ou falhou.');
-    }
-
-    const credential = FacebookAuthProvider.credential(accessToken);
-    const userCredential = await signInWithCredential(this.auth, credential);
-
-    if (userCredential.user) {
-      // VERIFICA SE JÁ TEM DADOS NO FIRESTORE
-      const userData = await this.getUserData(userCredential.user.uid);
+  // Método alternativo mais simples usando signInWithPopup diretamente
+  async loginWithFacebookSimple(): Promise<any> {
+    try {
+      const provider = new FacebookAuthProvider();
+      provider.addScope('email');
+      provider.addScope('public_profile');
       
-      // SE NÃO TEM DADOS, CRIA DOCUMENTO BÁSICO SEM dataNasc
-      if (!userData) {
-        await setDoc(doc(this.firestore, `users/${userCredential.user.uid}`), {
-          nome: userCredential.user.displayName || '',
-          email: userCredential.user.email || '',
-          foto: userCredential.user.photoURL || '',
-          provider: 'facebook',
-          dataCriacao: Timestamp.fromDate(new Date())
-          // dataNasc NÃO é definido aqui - será preenchido no modal
-        }, { merge: true });
+      const userCredential = await signInWithPopup(this.auth, provider);
+
+      if (userCredential.user) {
+        // VERIFICA SE JÁ TEM DADOS NO FIRESTORE
+        const userData = await this.getUserData(userCredential.user.uid);
+        
+        // SE NÃO TEM DADOS, CRIA DOCUMENTO BÁSICO SEM dataNasc
+        if (!userData) {
+          await setDoc(doc(this.firestore, `users/${userCredential.user.uid}`), {
+            nome: userCredential.user.displayName || '',
+            email: userCredential.user.email || '',
+            foto: userCredential.user.photoURL || '',
+            provider: 'facebook',
+            dataCriacao: Timestamp.fromDate(new Date())
+            // dataNasc NÃO é definido aqui - será preenchido no modal
+          }, { merge: true });
+        }
+
+        await this.notificacaoService.solicitarPermissao();
+        await this.notificacaoService.agendarBoasVindas();
+        await this.notificacaoService.agendarNotificacaoPeriodica();
+        await this.notificacaoService.cancelarInatividade();
+        await this.notificacaoService.agendarNotificacaoInatividade();
       }
 
-      await this.notificacaoService.solicitarPermissao();
-      await this.notificacaoService.agendarBoasVindas();
-      await this.notificacaoService.agendarNotificacaoPeriodica();
-      await this.notificacaoService.cancelarInatividade();
-      await this.notificacaoService.agendarNotificacaoInatividade();
+      return userCredential;
+    } catch (error: any) {
+      console.error('Facebook login error:', error);
+      throw this.handleFirebaseAuthError(error);
     }
+  }
 
-    return userCredential;
+  // Handler para erros de autenticação
+  private handleFirebaseAuthError(error: any): Error {
+    let errorMessage = 'Erro ao fazer login. Tente novamente.';
+    
+    switch (error.code) {
+      case 'auth/account-exists-with-different-credential':
+        errorMessage = 'Já existe uma conta com o mesmo e-mail mas com método de login diferente.';
+        break;
+      case 'auth/popup-blocked':
+        errorMessage = 'Popup bloqueado pelo navegador. Permita popups para este site.';
+        break;
+      case 'auth/popup-closed-by-user':
+        errorMessage = 'Popup fechado pelo usuário.';
+        break;
+      case 'auth/unauthorized-domain':
+        errorMessage = 'Domínio não autorizado para login.';
+        break;
+      case 'auth/operation-not-allowed':
+        errorMessage = 'Operação não permitida. Verifique as configurações do Firebase.';
+        break;
+    }
+    
+    return new Error(errorMessage);
   }
 
   // Observable do usuário atual

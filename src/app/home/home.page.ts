@@ -90,21 +90,16 @@ export class HomePage {
     await toast.present();
   }
 
-  async loginFacebook() {
-    try {
-      // verifica se está em ambiente mobile (Capacitor)
-      if (this.platform.is('capacitor')) {
-        await this.authService.loginWithFacebook();
-      } else {
-        this.presentToast('O login com Facebook funciona apenas no app móvel.', 'warning');
-        return;
-      }
-
-      this.router.navigateByUrl('/principal');
-    } catch (error: any) {
-      this.presentToast('Erro ao logar com Facebook: ' + error.message, 'danger');
-    }
+  // Use o método simples que é mais confiável
+async loginFacebook() {
+  try {
+    const result = await this.authService.loginWithFacebookSimple(); 
+    this.router.navigateByUrl('/principal');
+    // Login bem-sucedido
+  } catch (error: any) {
+    this.presentToast('Erro ao logar com Facebook: ' + error.message, 'danger');  
   }
+}
 
 
   toggleAudio() {
