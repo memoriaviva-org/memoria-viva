@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AudioPreferenceService } from '../services/audio-preference.service';
-
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-audio-config',
   templateUrl: './audio-config.page.html',
@@ -21,7 +21,8 @@ export class AudioConfigPage {
 
   constructor(
     private audioPref: AudioPreferenceService,
-    private router: Router
+    private router: Router,
+    private loadingController: LoadingController
   ) {}
 
   ngOnInit() {
@@ -41,11 +42,23 @@ export class AudioConfigPage {
     }, 100);
   }
 
-  escolher(auto: boolean) {
-    this.audioPref.setAutoPlay(auto);
-    this.router.navigate(['/principal']);
-  }
+// audio-config.page.ts
+  async escolher(auto: boolean) {
+    // Mostra loading
+    const loading = await this.loadingController.create({
+      message: 'Salvando preferências...'
+    });
+    await loading.present();
 
+    try {
+      await this.audioPref.setAutoPlay(auto);
+      await loading.dismiss();
+      this.router.navigate(['/principal']);
+    } catch (error) {
+      await loading.dismiss();
+      console.error('Erro:', error);
+    }
+  }
   toggleAudio() {
     this.audioPref.toggleAudio(this.audioPlayer);
   }
