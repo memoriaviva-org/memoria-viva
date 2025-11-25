@@ -30,10 +30,6 @@ const routes: Routes = [
     loadChildren: () => import('./redefinir-senha/redefinir-senha.module').then(m => m.RedefinirSenhaPageModule)
   },
   {
-    path: 'codigo',
-    loadChildren: () => import('./codigo/codigo.module').then(m => m.CodigoPageModule)
-  },
-  {
     path: 'video',
     loadChildren: () => import('./video/video.module').then(m => m.VideoPageModule)
   },
