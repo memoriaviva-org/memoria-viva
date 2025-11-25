@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { AudioPreferenceService } from '../services/audio-preference.service';
-import { UserDataService } from '../services/user-data.service';
-
 
 @Component({
   selector: 'app-principal',
