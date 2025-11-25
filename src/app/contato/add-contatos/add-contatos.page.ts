@@ -264,8 +264,8 @@ export class AddContatosPage implements OnInit {
     const audio = this.audioPlayer.nativeElement;
 
     const src = this.modoEdicao
-      ? 'assets/audio/audio-teste.m4a'
-      : 'assets/audio/audio-pequeno.mp3';
+      ? '../../assets/audio/add-contatos.ogg'
+      : '../../assets/audio/add-contatos.ogg'; //falta o segundo audio
 
     audio.src = src;
     audio.load();

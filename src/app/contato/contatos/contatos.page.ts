@@ -67,8 +67,8 @@ export class ContatosPage implements OnInit {
 
     // 👇 Escolhe o áudio com base em ter contatos ou não
     const audioSrc = this.contatos.length > 0
-      ? 'assets/audio/audio-teste.m4a'
-      : 'assets/audio/audio-pequeno.mp3';
+      ? '../../assets/audio/contato-boneca.ogg'
+      : 'assets/audio/audio-pequeno.mp3'; //falta o segundo audio
 
     audio.src = audioSrc;
     audio.load();

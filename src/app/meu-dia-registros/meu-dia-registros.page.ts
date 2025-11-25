@@ -118,8 +118,8 @@ export class MeuDiaRegistrosPage implements OnInit {
     const button = document.querySelector('.audio-btn') as HTMLElement;
 
     const novoSrc = this.temRegistros
-      ? 'assets/audio/audio-teste.m4a'
-      : 'assets/audio/audio-pequeno.mp3';
+      ? '../../assets/audio/meu-dia-boneca.ogg'
+      : '../../assets/audio/meu-dia-boneca.ogg'; //falta o segundo audio
 
     audio.src = novoSrc;
     audio.load();
