@@ -35,12 +35,14 @@ export class AudioConfigPage {
     this.audioPref.autoPlayIfEnabled(this.audioPlayer);
   }
 
+
   playVideo() {
     this.videoStarted = true;
     setTimeout(() => {
       this.videoPlayer?.nativeElement.play();
     }, 100);
   }
+
 
 // audio-config.page.ts
   async escolher(auto: boolean) {

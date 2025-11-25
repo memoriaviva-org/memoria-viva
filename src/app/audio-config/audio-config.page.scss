@@ -39,21 +39,31 @@
   justify-content: center;
   align-items: center;
   background-color: #9C3FC3;
-  position: fixed;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 74.40vw;
-  height: 17.67vh;
+  margin: auto;
+  width: 74.3961vw;
+  height: 17.6663vh;
+  margin-bottom: 6.543vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
 }
 
 .video-player {
   display: block;
-  border-radius: 8px;
-  position: fixed;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: auto;
+  border-radius: 1.93236vw;
+  width: 74.3961vw;
+  height: 17.6663vh;
+  margin-top: 10vh;
+}
+
+.video-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 17.9713vh;
+  
 }
 
 .audio-config-container {
