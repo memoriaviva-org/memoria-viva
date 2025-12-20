@@ -35,14 +35,14 @@ export class AuthService {
     this.verificarResultadoRedirect();
   }
 
-  // ---------------- PLATAFORMA ----------------
+  // -------- PLATAFORMA --------
   private isIosPwa(): boolean {
     const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const isStandalone = (window.navigator as any).standalone === true;
     return isIos && isStandalone;
   }
 
-  // ---------------- PÓS LOGIN ----------------
+  // -------- PÓS LOGIN --------
   private async finalizarConfiguracaoLogin(user: User, provider: string = 'senha') {
     if (!user) return;
 
@@ -65,7 +65,7 @@ export class AuthService {
     await this.notificacaoService.agendarNotificacaoInatividade();
   }
 
-  // ---------------- REDIRECT ----------------
+  // -------- REDIRECT --------
   async verificarResultadoRedirect() {
     try {
       const result = await getRedirectResult(this.auth);
@@ -77,46 +77,45 @@ export class AuthService {
     }
   }
 
-  // ---------------- GOOGLE ----------------
+  // -------- GOOGLE --------
   async loginWithGoogle() {
     const provider = new GoogleAuthProvider();
 
     if (this.isIosPwa()) {
-      return await signInWithRedirect(this.auth, provider);
-    } else {
-      const cred = await signInWithPopup(this.auth, provider);
-      await this.finalizarConfiguracaoLogin(cred.user, 'google');
-      return cred;
+      return signInWithRedirect(this.auth, provider);
     }
+
+    const cred = await signInWithPopup(this.auth, provider);
+    await this.finalizarConfiguracaoLogin(cred.user, 'google');
+    return cred;
   }
 
-  // ---------------- FACEBOOK ----------------
+  // -------- FACEBOOK (mantendo nome esperado) --------
   async loginWithFacebookSimple() {
+    return this.loginWithFacebook();
+  }
+
+  async loginWithFacebook() {
     const provider = new FacebookAuthProvider();
     provider.addScope('email');
 
     if (this.isIosPwa()) {
-      return await signInWithRedirect(this.auth, provider);
-    } else {
-      const cred = await signInWithPopup(this.auth, provider);
-      await this.finalizarConfiguracaoLogin(cred.user, 'facebook');
-      return cred;
+      return signInWithRedirect(this.auth, provider);
     }
+
+    const cred = await signInWithPopup(this.auth, provider);
+    await this.finalizarConfiguracaoLogin(cred.user, 'facebook');
+    return cred;
   }
 
-  // ---------------- EMAIL LOGIN ----------------
+  // -------- EMAIL LOGIN --------
   async login(email: string, senha: string) {
-    if (this.isIosPwa()) {
-      const credential = EmailAuthProvider.credential(email, senha);
-      return await signInWithRedirect(this.auth, credential);
-    } else {
-      const cred = await signInWithEmailAndPassword(this.auth, email, senha);
-      await this.finalizarConfiguracaoLogin(cred.user);
-      return cred;
-    }
+    const cred = await signInWithEmailAndPassword(this.auth, email, senha);
+    await this.finalizarConfiguracaoLogin(cred.user);
+    return cred;
   }
 
-  // ---------------- EMAIL REGISTER ----------------
+  // -------- EMAIL REGISTER --------
   async register(email: string, senha: string, nome: string, dataNasc: Date) {
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, senha);
 
@@ -130,18 +129,13 @@ export class AuthService {
         dataCriacao: Timestamp.fromDate(new Date())
       }, { merge: true });
 
-      if (this.isIosPwa()) {
-        const credential = EmailAuthProvider.credential(email, senha);
-        return await signInWithRedirect(this.auth, credential);
-      } else {
-        await this.finalizarConfiguracaoLogin(userCredential.user);
-      }
+      await this.finalizarConfiguracaoLogin(userCredential.user);
     }
 
     return userCredential;
   }
 
-  // ---------------- PERFIL ----------------
+  // -------- PERFIL --------
   async updateUserEmail(newEmail: string, password?: string) {
     const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
@@ -166,13 +160,16 @@ export class AuthService {
     await updateProfile(user, { displayName: nome });
   }
 
-  // ---------------- RESET SENHA ----------------
-  async resetPassword(email: string) {
-    await sendPasswordResetEmail(this.auth, email);
-    return { success: true };
-  }
+  // -------- RESET SENHA --------
+ async resetPassword(email: string) {
+  await sendPasswordResetEmail(this.auth, email);
+  return {
+    success: true,
+    message: 'E-mail de redefinição enviado com sucesso'
+  };
+}
 
-  // ---------------- AUX ----------------
+  // -------- AUX --------
   logout() {
     return signOut(this.auth);
   }
@@ -187,6 +184,7 @@ export class AuthService {
     });
   }
 
+  // ✅ MÉTODO QUE AS TELAS ESPERAM
   async getUserData(uid: string) {
     const snap = await getDoc(doc(this.firestore, `users/${uid}`));
     return snap.exists() ? snap.data() : null;
