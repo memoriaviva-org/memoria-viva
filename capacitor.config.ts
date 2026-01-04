@@ -5,12 +5,12 @@ const config: CapacitorConfig = {
   appName: 'memoria-viva',
   webDir: 'www',
   plugins: {
-    GoogleAuth: {
-      scopes: ['profile', 'email'],
-      serverClientId: '186532293956-jcpen7sd2ov7vjnjgd2746damf80j0r5.apps.googleusercontent.com',
-      forceCodeForRefreshToken: true
-    }
+  GoogleAuth: {
+    scopes: ['profile', 'email'],
+    serverClientId: '186532293956-jcpen7sd2ov7vjnjgd2746damf80j0r5.apps.googleusercontent.com',
+    forceCodeForRefreshToken: true
   }
+}
 };
 
 

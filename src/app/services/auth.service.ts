@@ -1,26 +1,39 @@
 import { Injectable } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { NotificacaoService } from '../services/notificacao.service';
+
 import {
   Auth,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
   updateProfile,
+  updateEmail,
   reauthenticateWithCredential,
   EmailAuthProvider,
-  updateEmail,
   User,
-  signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
-  user
+  signInWithCredential
 } from '@angular/fire/auth';
-import { take } from 'rxjs/operators';
-import { Timestamp, Firestore, doc, setDoc, getDoc } from '@angular/fire/firestore';
+
+import {
+  GoogleAuthProvider,
+  FacebookAuthProvider
+} from '@angular/fire/auth';
+
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+
+import {
+  Firestore,
+  doc,
+  setDoc,
+  getDoc,
+  Timestamp
+} from '@angular/fire/firestore';
+
 import { Observable } from 'rxjs';
+import { user } from '@angular/fire/auth';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,22 +43,20 @@ export class AuthService {
   constructor(
     private auth: Auth,
     private firestore: Firestore,
-    private notificacaoService: NotificacaoService
+    private notificacaoService: NotificacaoService,
+    private platform: Platform
+  ) {}
+
+  // ---------- PLATAFORMA ----------
+  private isNative(): boolean {
+    return this.platform.is('capacitor');
+  }
+
+  // ---------- PÓS LOGIN ----------
+  private async finalizarConfiguracaoLogin(
+    user: User,
+    provider: string = 'senha'
   ) {
-    this.verificarResultadoRedirect();
-  }
-
-  // -------- PLATAFORMA --------
-  private isIosPwa(): boolean {
-    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isStandalone = (window.navigator as any).standalone === true;
-    return isIos && isStandalone;
-  }
-
-  // -------- PÓS LOGIN --------
-  private async finalizarConfiguracaoLogin(user: User, provider: string = 'senha') {
-    if (!user) return;
-
     const userData = await this.getUserData(user.uid);
 
     if (!userData) {
@@ -65,83 +76,88 @@ export class AuthService {
     await this.notificacaoService.agendarNotificacaoInatividade();
   }
 
-  // -------- REDIRECT --------
-  async verificarResultadoRedirect() {
-    try {
-      const result = await getRedirectResult(this.auth);
-      if (result?.user) {
-        await this.finalizarConfiguracaoLogin(result.user, result.providerId || 'social');
-      }
-    } catch (error) {
-      console.error('Erro no redirect:', error);
-    }
-  }
-
-  // -------- GOOGLE --------
+  // ---------- GOOGLE (APK) ----------
   async loginWithGoogle() {
-    const provider = new GoogleAuthProvider();
-
-    if (this.isIosPwa()) {
-      return signInWithRedirect(this.auth, provider);
+    if (!this.isNative()) {
+      throw new Error('Login Google disponível apenas no app');
     }
 
-    const cred = await signInWithPopup(this.auth, provider);
+    const result = await FirebaseAuthentication.signInWithGoogle();
+
+    const credential = GoogleAuthProvider.credential(
+      result.credential?.idToken
+    );
+
+    const cred = await signInWithCredential(this.auth, credential);
     await this.finalizarConfiguracaoLogin(cred.user, 'google');
+
     return cred;
   }
 
-  // -------- FACEBOOK (mantendo nome esperado) --------
-  async loginWithFacebookSimple() {
-    return this.loginWithFacebook();
-  }
-
+  // ---------- FACEBOOK (APK) ----------
   async loginWithFacebook() {
-    const provider = new FacebookAuthProvider();
-    provider.addScope('email');
-
-    if (this.isIosPwa()) {
-      return signInWithRedirect(this.auth, provider);
+    if (!this.isNative()) {
+      throw new Error('Login Facebook disponível apenas no app');
     }
 
-    const cred = await signInWithPopup(this.auth, provider);
+    const result = await FirebaseAuthentication.signInWithFacebook();
+
+    const accessToken = result.credential?.accessToken;
+    if (!accessToken) {
+      throw new Error('Token de acesso do Facebook não obtido');
+    }
+
+    const credential = FacebookAuthProvider.credential(accessToken);
+
+    const cred = await signInWithCredential(this.auth, credential);
     await this.finalizarConfiguracaoLogin(cred.user, 'facebook');
+
     return cred;
   }
 
-  // -------- EMAIL LOGIN --------
+  // ---------- EMAIL LOGIN ----------
   async login(email: string, senha: string) {
     const cred = await signInWithEmailAndPassword(this.auth, email, senha);
     await this.finalizarConfiguracaoLogin(cred.user);
     return cred;
   }
 
-  // -------- EMAIL REGISTER --------
-  async register(email: string, senha: string, nome: string, dataNasc: Date) {
-    const userCredential = await createUserWithEmailAndPassword(this.auth, email, senha);
+  // ---------- REGISTER ----------
+  async register(
+    email: string,
+    senha: string,
+    nome: string,
+    dataNasc: Date
+  ) {
+    const cred = await createUserWithEmailAndPassword(
+      this.auth,
+      email,
+      senha
+    );
 
-    if (userCredential.user) {
-      await updateProfile(userCredential.user, { displayName: nome });
+    await updateProfile(cred.user, { displayName: nome });
 
-      await setDoc(doc(this.firestore, `users/${userCredential.user.uid}`), {
-        nome,
-        email,
-        dataNasc: Timestamp.fromDate(dataNasc),
-        dataCriacao: Timestamp.fromDate(new Date())
-      }, { merge: true });
+    await setDoc(doc(this.firestore, `users/${cred.user.uid}`), {
+      nome,
+      email,
+      dataNasc: Timestamp.fromDate(dataNasc),
+      dataCriacao: Timestamp.fromDate(new Date())
+    }, { merge: true });
 
-      await this.finalizarConfiguracaoLogin(userCredential.user);
-    }
-
-    return userCredential;
+    await this.finalizarConfiguracaoLogin(cred.user);
+    return cred;
   }
 
-  // -------- PERFIL --------
+  // ---------- PERFIL ----------
   async updateUserEmail(newEmail: string, password?: string) {
     const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('Usuário não autenticado');
 
     if (password) {
-      const credential = EmailAuthProvider.credential(currentUser.email || '', password);
+      const credential = EmailAuthProvider.credential(
+        currentUser.email || '',
+        password
+      );
       await reauthenticateWithCredential(currentUser, credential);
     }
 
@@ -160,16 +176,17 @@ export class AuthService {
     await updateProfile(user, { displayName: nome });
   }
 
-  // -------- RESET SENHA --------
- async resetPassword(email: string) {
+  // ---------- RESET ----------
+async resetPassword(email: string) {
   await sendPasswordResetEmail(this.auth, email);
+
   return {
     success: true,
     message: 'E-mail de redefinição enviado com sucesso'
   };
 }
 
-  // -------- AUX --------
+  // ---------- AUX ----------
   logout() {
     return signOut(this.auth);
   }
@@ -184,7 +201,6 @@ export class AuthService {
     });
   }
 
-  // ✅ MÉTODO QUE AS TELAS ESPERAM
   async getUserData(uid: string) {
     const snap = await getDoc(doc(this.firestore, `users/${uid}`));
     return snap.exists() ? snap.data() : null;
