@@ -11,7 +11,15 @@ import { AudioPreferenceService } from '../services/audio-preference.service';
   styleUrls: ['./home.page.scss'],
   standalone: false
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  async ngOnInit() {
+    const user = await this.authService.getCurrentUserOnce();
+
+    if (user) {
+      this.router.navigateByUrl('/principal', { replaceUrl: true });
+    }
+  }
+
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
