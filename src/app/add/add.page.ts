@@ -350,9 +350,9 @@ export class AddPage implements OnInit {
     const audio = this.audioPlayer.nativeElement;
 
     const src = this.modoEdicao
-        ? '../../assets/audio/add-meu-dia.ogg'
-        : '../../assets/audio/add-meu-dia.ogg'; //falta o segundo audio
-
+        ? '../../assets/audio/AudioEditarMeuDia.mp3'
+        : '../../assets/audio/AudioAdicionarMeuDia.mp3'; 
+        
     audio.src = src;
     audio.load();
 

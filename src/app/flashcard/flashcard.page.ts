@@ -45,15 +45,25 @@ export class FlashcardPage implements OnInit {
   categoriaTexto: string = '';
   isMinhasMemorias: boolean = false;
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.categoriaSelecionada = params['categoria'] || '';
-      this.setCategoria(this.categoriaSelecionada);
+  // áudios
+  audioTodasCategorias = 'assets/audio/AudioFlashcardTdsAsCategorias.mp3';
+  audioCategoriaEspecifica = 'assets/audio/AudioFlashcardCategEspec.mp3';
+  audioAtual = '';
 
-      // Carrega flashcards
-      this.carregarFlashcards();
-    });
-  }
+
+ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    this.categoriaSelecionada = params['categoria'] || '';
+    this.setCategoria(this.categoriaSelecionada);
+
+    // define o áudio correto
+    this.audioAtual = this.isMinhasMemorias
+      ? this.audioTodasCategorias
+      : this.audioCategoriaEspecifica;
+
+    this.carregarFlashcards();
+  });
+}
 
   async ngAfterViewInit() {
     await this.audioPref.autoPlayIfEnabled(this.audioPlayer);

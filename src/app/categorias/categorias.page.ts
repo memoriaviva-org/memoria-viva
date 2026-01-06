@@ -91,8 +91,8 @@ async ngAfterViewInit() {
         const temFlashcards = this.existemCategoriasComFlashcards();
         // escolhe a fonte do áudio antes de tentar autoplay
         this.audioPlayer.nativeElement.src = temFlashcards
-          ? 'assets/audio/audio-teste.m4a'
-          : 'assets/audio/audio-pequeno.mp3';
+          ? 'assets/audio/AudioCategorias.mp3'
+          : 'assets/audio/AudioExplicacaoFlashcard.mp3';
         await this.audioPref.autoPlayIfEnabled(this.audioPlayer);
       }
   } catch (error) {
@@ -145,8 +145,8 @@ async ngAfterViewInit() {
     const audio = this.audioPlayer.nativeElement;
     const temFlashcards = this.existemCategoriasComFlashcards();
     audio.src = temFlashcards
-      ? 'assets/audio/audio-teste.m4a'
-      : 'assets/audio/audio-pequeno.mp3';
+      ? 'assets/audio/AudioCategorias.mp3'
+      : 'assets/audio/AudioExplicacaoFlashcard.mp3';
     this.audioPref.toggleAudio(this.audioPlayer);
   }
 

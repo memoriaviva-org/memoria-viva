@@ -39,6 +39,11 @@ export class GerenciarFlashcardsPage implements OnInit {
   categoriaImg: string = '';
   tituloCategoria: string = 'Meus Flashcards';
 
+  // audios por página
+  audioCategoriaEspecifica = 'assets/audio/AudioGerenciarFlashcardCategEspec.mp3';
+  audioTodasCategorias = 'assets/audio/AudioGerenciarTdsFlashcard.mp3';
+  audioAtual = '';
+
   // Nova propriedade para controlar quando mostrar a faixa
   mostrarFaixaCategoria: boolean = false;
 
@@ -61,6 +66,10 @@ export class GerenciarFlashcardsPage implements OnInit {
 
       this.carregarFlashcards();
     });
+    this.audioAtual = this.mostrarFaixaCategoria
+  ? this.audioTodasCategorias     // todos os flashcards
+  : this.audioCategoriaEspecifica; // dentro de uma categoria
+
   }
 
   private carregarFlashcards(): void {
